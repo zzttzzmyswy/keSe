@@ -241,6 +241,7 @@ void Touch_Button_Up(uint16_t x, uint16_t y) {
 		}
 	}
 	if (x > PALETTE_START_X) {
+		/* 触笔在画板区域释放 */
 		switch (brush.shape) { /*根据画刷参数描绘不同的轨迹*/
 		/* 描绘1像素宽度的轨迹线 */
 		case RECT:
@@ -727,11 +728,3 @@ static void LCD_DrawUniLineCircle(uint16_t x1, uint16_t y1, uint16_t x2,
 		y += yinc2;                 /* Change the y as appropriate */
 	}
 }
-
-
-
-
-/* ------------------------------------------end of file---------------------------------------- */
-
-
-

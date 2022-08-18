@@ -4,15 +4,15 @@
 #include "main.h"
 #include "bsp_lcd.h"
 
-#define COLOR_BLOCK_WIDTH   60
-#define COLOR_BLOCK_HEIGHT  30
+#define COLOR_BLOCK_WIDTH   60   /* 按钮宽度 */
+#define COLOR_BLOCK_HEIGHT  30   /* 按钮高度 */
 
-#define BUTTON_NUM 18
+#define BUTTON_NUM 18   /* 按钮数目 */
 
-#define PALETTE_START_X   COLOR_BLOCK_WIDTH*2+1
-#define PALETTE_START_Y   0
-#define PALETTE_END_X     LCD_PIXEL_WIDTH-1
-#define PALETTE_END_Y     LCD_PIXEL_HEIGHT-1
+#define PALETTE_START_X   COLOR_BLOCK_WIDTH*2+1   /* 画板左上角X坐标 */
+#define PALETTE_START_Y   0					      /* 画板左上角Y坐标 */
+#define PALETTE_END_X     LCD_PIXEL_WIDTH-1       /* 画板右下角X坐标 */
+#define PALETTE_END_Y     LCD_PIXEL_HEIGHT-1      /* 画板右下角Y坐标 */
 
 
 
@@ -114,7 +114,6 @@ typedef struct {
 
 /*brush全局变量在其它文件有使用到*/
 extern Brush_Style brush;
-
 
 void Palette_Init(void);
 void Touch_Button_Init(void);
