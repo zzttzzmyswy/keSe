@@ -108,16 +108,16 @@ int main(void) {
 	MX_ADC1_Init();
 	MX_TIM17_Init();
 	/* USER CODE BEGIN 2 */
-	LCD_DISPLAY_ENABLE();
-	Adc_Init();
-	HAL_ADC_Start(&hadc3);
-	HAL_TIM_Base_Start_IT(&htim6);
-	HAL_TIM_Base_Start_IT(&htim17);
-	LCD_Clear(LCD_COLOR565_RED);
-	LCD_SetFont(&Font8x8);
-	Palette_Init();
-	int32_t touchP[2];
-	int32_t touchF = 0;
+	LCD_DISPLAY_ENABLE(); /* 显示屏背光使能 */
+	Adc_Init(); /* 初始化电阻触摸屏ADC */
+	HAL_ADC_Start(&hadc3); /* 启动电阻触摸屏ADC */
+	HAL_TIM_Base_Start_IT(&htim6); /* 启动内部定时器6，用于获取触摸信息 */
+	HAL_TIM_Base_Start_IT(&htim17); /* 启动内部定时器17，用于闪烁led */
+	LCD_Clear(LCD_COLOR565_RED); /* 显示屏清空 */
+	LCD_SetFont(&Font8x8); /* 设置默认字体为8x8英文字体 */
+	Palette_Init(); /* 画板资源初始化，按钮绘制 */
+	int32_t touchP[2]; /* 触摸记录 */
+	int32_t touchF = 0; /* 触摸情况记录 */
 	/* USER CODE END 2 */
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
@@ -144,6 +144,7 @@ int main(void) {
 			snprintf(strTouch, 9, "%03d-%03d", port[0], port[1]);
 			LCD_DispString_EN(LCD_LINE_0, 420, (uint8_t *)strTouch);
 		}
+		/* 记录触摸信息 */
 		touchP[0] = port[0];
 		touchP[1] = port[1];
 	}
