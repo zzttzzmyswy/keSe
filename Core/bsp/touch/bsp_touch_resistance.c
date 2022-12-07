@@ -199,7 +199,7 @@ uint32_t touch_ad(void) {
 	// //判断是否为有效按下
 	value_touch = (float)((value_t[0]) * 1.0 * (value_t[2]) / (value_t[1])) -
 		(value_t[0]);
-	if ( /*value_touch < 46000 &&*/ value_t[0] > 0xD00 && value_t[3] > 0x1000) {
+	if ( value_touch < 50000 && value_t[0] > 0xD00 && value_t[3] > 0x1000) {
 		port[0] = (double)(value_t[0] - 0xE00) / (0xF300 - 0xE00) * 480;
 		port[0] = port[0] <= 0 ? -1 : port[0] >= 479 ? 479 : port[0];
 		port[1] = (double)(value_t[3] - 0x1C00) / (0xDF00 - 0x1C00) * 272;
