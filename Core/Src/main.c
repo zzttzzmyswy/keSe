@@ -108,16 +108,17 @@ int main(void) {
 	MX_ADC1_Init();
 	MX_TIM17_Init();
 	/* USER CODE BEGIN 2 */
-	LCD_DISPLAY_ENABLE(); /* ÏÔÊ¾ÆÁ±³¹âÊ¹ÄÜ */
-	Adc_Init(); /* ³õÊ¼»¯µç×è´¥ÃþÆÁADC */
-	HAL_ADC_Start(&hadc3); /* Æô¶¯µç×è´¥ÃþÆÁADC */
-	HAL_TIM_Base_Start_IT(&htim6); /* Æô¶¯ÄÚ²¿¶¨Ê±Æ÷6£¬ÓÃÓÚ»ñÈ¡´¥ÃþÐÅÏ¢ */
-	HAL_TIM_Base_Start_IT(&htim17); /* Æô¶¯ÄÚ²¿¶¨Ê±Æ÷17£¬ÓÃÓÚÉÁË¸led */
-	LCD_Clear(LCD_COLOR565_RED); /* ÏÔÊ¾ÆÁÇå¿Õ */
-	LCD_SetFont(&Font8x8); /* ÉèÖÃÄ¬ÈÏ×ÖÌåÎª8x8Ó¢ÎÄ×ÖÌå */
-	Palette_Init(); /* »­°å×ÊÔ´³õÊ¼»¯£¬°´Å¥»æÖÆ */
-	int32_t touchP[2]; /* ´¥Ãþ¼ÇÂ¼ */
-	int32_t touchF = 0; /* ´¥ÃþÇé¿ö¼ÇÂ¼ */
+	LCD_DISPLAY_ENABLE(); /* æ˜¾ç¤ºå±èƒŒå…‰ä½¿èƒ½ */
+	Adc_Init(); /* åˆå§‹åŒ–ç”µé˜»è§¦æ‘¸å±ADC */
+	HAL_ADC_Start(&hadc3); /* å¯åŠ¨ç”µé˜»è§¦æ‘¸å±ADC */
+	HAL_TIM_Base_Start_IT(&htim6); /* å¯åŠ¨å†…éƒ¨å®šæ—¶å™¨6ï¼Œç”¨äºŽèŽ·å–è§¦æ‘¸ä¿¡æ¯ */
+	HAL_TIM_Base_Start_IT(&htim17); /* å¯åŠ¨å†…éƒ¨å®šæ—¶å™¨17ï¼Œç”¨äºŽé—ªçƒled */
+	LCD_Clear(LCD_COLOR565_RED); /* æ˜¾ç¤ºå±æ¸…ç©º */
+	LCD_SetFont(&Font8x8); /* è®¾ç½®é»˜è®¤å­—ä½“ä¸º8x8è‹±æ–‡å­—ä½“ */
+	Palette_Init(); /* ç”»æ¿èµ„æºåˆå§‹åŒ–ï¼ŒæŒ‰é’®ç»˜åˆ¶ */
+	int32_t touchP[2]; /* è§¦æ‘¸è®°å½• */
+	int32_t touchF = 0; /* è§¦æ‘¸æƒ…å†µè®°å½• */
+	strTouch[9]='\n'; /* ä¸²å£å‘é€æ•°æ®æœ€åŽä¸€ä½æ˜¯æ¢è¡Œ */
 	/* USER CODE END 2 */
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
@@ -127,24 +128,22 @@ int main(void) {
 		HAL_Delay(20);
 		if (port[0] < 0) {
 			if (touchF == 1) {
-				/* ·¢Éú°´ÏÂµ½¶Ï¿ªµÄ¹ý³Ì */
+				/* å‘ç”ŸæŒ‰ä¸‹åˆ°æ–­å¼€çš„è¿‡ç¨‹ */
 				Touch_Button_Up(touchP[0], touchP[1]);
 			}
 			touchF = 0;
 		}
 		else {
 			if (touchF == 0) {
-				/* ·¢Éú¶Ï¿ªµ½°´ÏÂµÄ¹ý³Ì */
+				/* å‘ç”Ÿæ–­å¼€åˆ°æŒ‰ä¸‹çš„è¿‡ç¨‹ */
 			}
 			Touch_Button_Down(port[0], port[1]);
-			/*´¦ÀíÃè»æ¹ì¼££¬ÓÃÓÚ´¥Ãþ»­°å */
+			/*å¤„ç†æç»˜è½¨è¿¹ï¼Œç”¨äºŽè§¦æ‘¸ç”»æ¿ */
 			Draw_Trail(touchP[0] < 0 ? port[0] : touchP[0],
 				touchP[1] < 0 ? port[1] : touchP[1], port[0], port[1], &brush);
 			touchF = 1;
-			snprintf(strTouch, 9, "%03d-%03d", port[0], port[1]);
-			LCD_DispString_EN(LCD_LINE_0, 420, (uint8_t *)strTouch);
 		}
-		/* ¼ÇÂ¼´¥ÃþÐÅÏ¢ */
+		/* è®°å½•è§¦æ‘¸ä¿¡æ¯ */
 		touchP[0] = port[0];
 		touchP[1] = port[1];
 	}
@@ -234,7 +233,7 @@ void PeriphCommonClock_Config(void) {
 
 int stdout_putchar(int ch) {
 	HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1,
-		0xFFFF); //UARTÊä³öµ¥¸öµ¥Î»Êý¾ÝµÄº¯Êý
+		0xFFFF); //UARTè¾“å‡ºå•ä¸ªå•ä½æ•°æ®çš„å‡½æ•°
 	return ch;
 }
 

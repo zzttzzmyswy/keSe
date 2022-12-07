@@ -22,6 +22,9 @@
 #include "stm32h7xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "bsp_touch_resistance.h"
+#include "bsp_lcd.h"
+#include "usart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,7 +63,8 @@ extern LTDC_HandleTypeDef hltdc;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim17;
 /* USER CODE BEGIN EV */
-
+uint32_t count=0;
+extern char strTouch[10];
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -165,6 +169,18 @@ void SysTick_Handler(void) {
 	/* USER CODE END SysTick_IRQn 0 */
 	HAL_IncTick();
 	/* USER CODE BEGIN SysTick_IRQn 1 */
+	count+=1;
+	if(count==50)
+	{
+		if(port[0] > 0)
+		{
+			/* 显示屏显示当前触摸点 */
+			snprintf(strTouch, 9, "%03d-%03d", port[0], port[1]);
+			LCD_DispString_EN(LCD_LINE_0, 420, (uint8_t *)strTouch);
+			HAL_UART_Transmit(&huart1,(uint8_t *)strTouch,10,0xff);
+		}
+		count=0;
+	}
 	/* USER CODE END SysTick_IRQn 1 */
 }
 

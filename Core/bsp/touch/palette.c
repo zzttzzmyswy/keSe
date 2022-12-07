@@ -49,14 +49,14 @@ void Palette_Init(void) {
 */
 void Touch_Button_Init(void) {
 	/*第一列，主要为颜色按钮*/
-	button[0].start_x = 0;
-	button[0].start_y = 0;
-	button[0].end_x = COLOR_BLOCK_WIDTH ;
-	button[0].end_y = COLOR_BLOCK_HEIGHT;
-	button[0].para = CL_BLACK;
+	button[0].start_x = 0; /* 左上角开始x */
+	button[0].start_y = 0; /* 左上角开始y */
+	button[0].end_x = COLOR_BLOCK_WIDTH ; /* 右下角x */
+	button[0].end_y = COLOR_BLOCK_HEIGHT; /* 右下角y */
+	button[0].para = CL_BLACK; /* 色彩 */
 	button[0].touch_flag = 0;
-	button[0].draw_btn = Draw_Color_Button ;
-	button[0].btn_command = Command_Select_Color ;
+	button[0].draw_btn = Draw_Color_Button ; /* 按钮绘制函数 */
+	button[0].btn_command = Command_Select_Color ; /* 按钮回调函数 */
 	button[1].start_x = 0;
 	button[1].start_y = COLOR_BLOCK_HEIGHT;
 	button[1].end_x = COLOR_BLOCK_WIDTH ;
@@ -654,8 +654,8 @@ static void Command_Clear_Palette(void *btn) {
 	LCD_SetColors(CL_WHITE, CL_WHITE);
 	LCD_DrawFullRect(PALETTE_START_X,
 		PALETTE_START_Y,
-		PALETTE_END_X - (PALETTE_START_X + 1),
-		PALETTE_END_Y - PALETTE_START_Y);
+		PALETTE_END_X - (PALETTE_START_X) +1,
+		PALETTE_END_Y - PALETTE_START_Y +1);
 }
 
 
