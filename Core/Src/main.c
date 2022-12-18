@@ -70,7 +70,17 @@ char strTouch[10] = {0};
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void bsp_init()
+{
+	LCD_DISPLAY_ENABLE(); /* 显示屏背光使能 */
+	Adc_Init(); /* 初始化电阻触摸屏ADC */
+	HAL_ADC_Start(&hadc3); /* 启动电阻触摸屏ADC */
+	HAL_TIM_Base_Start_IT(&htim6); /* 启动内部定时器6，用于获取触摸信息 */
+	HAL_TIM_Base_Start_IT(&htim17); /* 启动内部定时器17，用于闪烁led */
+	LCD_Clear(LCD_COLOR565_RED); /* 显示屏清空 */
+	LCD_SetFont(&Font8x8); /* 设置默认字体为8x8英文字体 */
+	Palette_Init(); /* 画板资源初始化，按钮绘制 */
+}
 /* USER CODE END 0 */
 
 /**
@@ -108,14 +118,7 @@ int main(void) {
 	MX_ADC1_Init();
 	MX_TIM17_Init();
 	/* USER CODE BEGIN 2 */
-	LCD_DISPLAY_ENABLE(); /* 显示屏背光使能 */
-	Adc_Init(); /* 初始化电阻触摸屏ADC */
-	HAL_ADC_Start(&hadc3); /* 启动电阻触摸屏ADC */
-	HAL_TIM_Base_Start_IT(&htim6); /* 启动内部定时器6，用于获取触摸信息 */
-	HAL_TIM_Base_Start_IT(&htim17); /* 启动内部定时器17，用于闪烁led */
-	LCD_Clear(LCD_COLOR565_RED); /* 显示屏清空 */
-	LCD_SetFont(&Font8x8); /* 设置默认字体为8x8英文字体 */
-	Palette_Init(); /* 画板资源初始化，按钮绘制 */
+	bsp_init();	/* 板级初始化 */
 	int32_t touchP[2]; /* 触摸记录 */
 	int32_t touchF = 0; /* 触摸情况记录 */
 	strTouch[9]='\n'; /* 串口发送数据最后一位是换行 */
