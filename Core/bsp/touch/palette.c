@@ -7,16 +7,23 @@ Touch_Button button[BUTTON_NUM];
 /*画笔参数*/
 Brush_Style brush;
 
+/*颜色按钮的描绘函数*/
 static void Draw_Color_Button(void *btn);
+/*清屏按钮绘制函数*/
 static void Draw_Clear_Button(void *btn);
+/*画笔按钮绘制函数*/
 static void Draw_Shape_Button(void *btn);
+/*橡皮按钮的描绘函数*/
 static void Draw_Rubber_Button(void *btn);
+/*矩形按钮的描绘函数*/
 static void Draw_Rect_Button(void *btn);
-
+/*选择颜色*/
 static void Command_Select_Color(void *btn);
+/*选择笔刷类型*/
 static void Command_Select_Brush(void *btn);
+/*清屏*/
 static void Command_Clear_Palette(void *btn);
-
+/*描绘一定像素宽度的轨迹线*/
 static void LCD_DrawUniLineCircle(uint16_t x1, uint16_t y1, uint16_t x2,
 	uint16_t y2, uint8_t thick);
 
@@ -170,6 +177,7 @@ void Touch_Button_Init(void) {
 	button[14].touch_flag = 0;
 	button[14].draw_btn = Draw_Shape_Button ;
 	button[14].btn_command = Command_Select_Brush ;
+	/*带圆线*/
 	button[15].start_x = COLOR_BLOCK_WIDTH;
 	button[15].start_y = COLOR_BLOCK_HEIGHT * 6;
 	button[15].end_x = COLOR_BLOCK_WIDTH * 2 ;
@@ -178,6 +186,7 @@ void Touch_Button_Init(void) {
 	button[15].touch_flag = 0;
 	button[15].draw_btn = Draw_Shape_Button ;
 	button[15].btn_command = Command_Select_Brush ;
+	/*矩形*/
 	button[16].start_x = COLOR_BLOCK_WIDTH;
 	button[16].start_y = COLOR_BLOCK_HEIGHT * 7;
 	button[16].end_x = COLOR_BLOCK_WIDTH * 2 ;
@@ -186,6 +195,7 @@ void Touch_Button_Init(void) {
 	button[16].touch_flag = 0;
 	button[16].draw_btn = Draw_Rect_Button ;
 	button[16].btn_command = Command_Select_Brush ;
+	/*橡皮檫*/
 	button[17].start_x = COLOR_BLOCK_WIDTH;
 	button[17].start_y = COLOR_BLOCK_HEIGHT * 8;
 	button[17].end_x = COLOR_BLOCK_WIDTH * 2 ;
@@ -582,7 +592,7 @@ static void Draw_Shape_Button(void *btn) {
 			ptr->start_y + (ptr->end_y - ptr->start_y) / 2,
 			8);
 		break;
-	case RECT:
+	case RECT:/*绘制矩形按钮*/
 		LCD_SetColors(CL_WHITE, CL_BLACK);
 		LCD_DrawFullRect(ptr->start_x + ((ptr->end_x - ptr->start_x - 40) / 2),
 			ptr->start_y + ((ptr->end_y - ptr->start_y - 40 - 30) / 2),
@@ -595,7 +605,7 @@ static void Draw_Shape_Button(void *btn) {
 			(uint8_t *)"Rect");
 		break;
 		break;
-	case LINE_WITH_CIRCLE:
+	case LINE_WITH_CIRCLE:/*绘制带圆的线按钮*/
 		LCD_SetColors(CL_BLACK, CL_WHITE);
 		LCD_DrawUniLine(ptr->start_x + 5,
 			ptr->start_y + (ptr->end_y - ptr->start_y) / 2,
@@ -607,7 +617,7 @@ static void Draw_Shape_Button(void *btn) {
 				3);
 		}
 		break;
-	case RUBBER:
+	case RUBBER:/*绘制橡皮檫按钮*/
 		LCD_SetColors(CL_WHITE, CL_BLACK);
 		LCD_DrawFullRect(ptr->start_x + ((ptr->end_x - ptr->start_x - 40) / 2),
 			ptr->start_y + ((ptr->end_y - ptr->start_y - 40 - 30) / 2),

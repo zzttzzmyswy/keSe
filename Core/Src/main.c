@@ -63,8 +63,8 @@ static void MPU_Config(void);
 void LCD_DISPLAY_ENABLE(void);
 void LCD_DISPLAY_DISABLE(void);
 
-uint32_t fontFlag;
-char strTouch[10] = {0};
+uint32_t fontFlag=0;/*控制显示字符时是否写入背景颜色的变量*/
+char strTouch[10] = {0};/*当前触摸点字符串*/
 
 /* USER CODE END PFP */
 
@@ -228,12 +228,7 @@ void PeriphCommonClock_Config(void) {
 
 /* USER CODE BEGIN 4 */
 
-/**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  None
-  * @retval None
-  */
-
+/*重写printf底层字符串输出函数*/
 int stdout_putchar(int ch) {
 	HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1,
 		0xFFFF); //UART输出单个单位数据的函数
@@ -250,9 +245,9 @@ void LCD_DISPLAY_DISABLE(void) {
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == &htim6)
-		touch_ad();
+		touch_ad();/*调用电阻触摸点获取函数*/
 	else if (htim == &htim17)
-		HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+		HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);/*LED闪烁*/
 }
 
 /* USER CODE END 4 */

@@ -115,10 +115,15 @@ typedef struct {
 /*brush全局变量在其它文件有使用到*/
 extern Brush_Style brush;
 
+/*滑板资源初始化*/
 void Palette_Init(void);
+/*初始化按钮参数*/
 void Touch_Button_Init(void);
+/*发送按下*/
 void Touch_Button_Down(uint16_t x, uint16_t y);
+/*发送按下到抬起*/
 void Touch_Button_Up(uint16_t x, uint16_t y);
+/*处理描绘轨迹，用于触摸画板*/
 void Draw_Trail(int16_t pre_x, int16_t pre_y, int16_t x, int16_t y,
 	Brush_Style *brush);
 

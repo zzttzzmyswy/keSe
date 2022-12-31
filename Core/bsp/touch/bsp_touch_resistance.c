@@ -151,11 +151,9 @@ uint16_t Get_Adc_Average(uint8_t ch, uint8_t times) {
 //  PC4_X-_ADC1-4
 //  PC5_Y+_ADC1-8
 //  PA7_Y-_ADC1-7
-uint16_t value_t[4] = {0};
-uint32_t value_touch = 0;
-uint32_t value_flag[6] = {1};
-int32_t port[2] = {0};
-uint32_t touch_flag = 0;
+uint16_t value_t[4] = {0};/*ADC读取值*/
+uint32_t value_touch = 0;/*判断是否按下值（按下力度值）*/
+int32_t port[2] = {0};/*按下的坐标值，负数代表没有按下*/
 uint32_t touch_ad(void) {
 	// uint16_t value_t[4]={0};
 	uint16_t temp = 0;
