@@ -1,211 +1,213 @@
 #include "bsp_touch_resistance.h"
 
-//GPIOÂ§çÁî®ËÆæÁΩÆ
-//GPIOx:GPIOA~GPIOK.
-//BITx:0~15,‰ª£Ë°®IOÂºïËÑöÁºñÂè∑.
-//AFx:0~15,‰ª£Ë°®AF0~AF15.
-//AF0~15ËÆæÁΩÆÊÉÖÂÜµ(ËøôÈáå‰ªÖÊòØÂàóÂá∫Â∏∏Áî®ÁöÑ,ËØ¶ÁªÜÁöÑËØ∑ËßÅSTM32H743xxÊï∞ÊçÆÊâãÂÜå,Table 9~19):
-//AF0:MCO/SWD/SWCLK/RTC;        AF1:TIM1/2/TIM16/17/LPTIM1;     AF2:TIM3~5/TIM12/HRTIM1/SAI1;   AF3:TIM8/LPTIM2~5/HRTIM1/LPUART1;
-//AF4:I2C1~I2C4/TIM15/USART1;   AF5:SPI1~SPI6/CEC;              AF6:SPI3/SAI1~3/UART4/I2C4;     AF7:SPI2/3/6/USART1~3/6/UART7/SDIO1;
-//AF8:USART4/5/8/SPDIF/SAI2/4;  AF9;FDCAN1~2/TIM13/14/LCD/QSPI; AF10:USB_OTG1/2/SAI2/4/QSPI;    AF11:ETH/UART7/SDIO2/I2C4/COMP1/2;
-//AF12:FMC/SDIO1/OTG2/LCD;      AF13:DCIM/DSI/LCD/COMP1/2;      AF14:LCD/UART5;                 AF15:EVENTOUT;
+// GPIO∏¥”√…Ë÷√
+// GPIOx:GPIOA~GPIOK.
+// BITx:0~15,¥˙±ÌIO“˝Ω≈±‡∫≈.
+// AFx:0~15,¥˙±ÌAF0~AF15.
+// AF0~15…Ë÷√«Èøˆ(’‚¿ÔΩˆ «¡–≥ˆ≥£”√µƒ,œÍœ∏µƒ«Îº˚STM32H743xx ˝æ› ÷≤·,Table 9~19):
+// AF0:MCO/SWD/SWCLK/RTC;        AF1:TIM1/2/TIM16/17/LPTIM1;
+// AF2:TIM3~5/TIM12/HRTIM1/SAI1;   AF3:TIM8/LPTIM2~5/HRTIM1/LPUART1;
+// AF4:I2C1~I2C4/TIM15/USART1;   AF5:SPI1~SPI6/CEC; AF6:SPI3/SAI1~3/UART4/I2C4;
+// AF7:SPI2/3/6/USART1~3/6/UART7/SDIO1; AF8:USART4/5/8/SPDIF/SAI2/4;
+// AF9;FDCAN1~2/TIM13/14/LCD/QSPI; AF10:USB_OTG1/2/SAI2/4/QSPI;
+// AF11:ETH/UART7/SDIO2/I2C4/COMP1/2; AF12:FMC/SDIO1/OTG2/LCD;
+// AF13:DCIM/DSI/LCD/COMP1/2;      AF14:LCD/UART5; AF15:EVENTOUT;
 void GPIO_AF_Set(GPIO_TypeDef *GPIOx, uint8_t BITx, uint8_t AFx) {
-	GPIOx->AFR[BITx >> 3] &= ~(0X0F << ((BITx & 0X07) * 4));
-	GPIOx->AFR[BITx >> 3] |= (uint32_t)AFx << ((BITx & 0X07) * 4);
+  GPIOx->AFR[BITx >> 3] &= ~(0X0F << ((BITx & 0X07) * 4));
+  GPIOx->AFR[BITx >> 3] |= (uint32_t)AFx << ((BITx & 0X07) * 4);
 }
 
-//GPIOÈÄöÁî®ËÆæÁΩÆ
-//GPIOx:GPIOA~GPIOK.
-//BITx:0X0000~0XFFFF,‰ΩçËÆæÁΩÆ,ÊØè‰∏™‰Ωç‰ª£Ë°®‰∏Ä‰∏™IO,Á¨¨0‰Ωç‰ª£Ë°®Px0,Á¨¨1‰Ωç‰ª£Ë°®Px1,‰æùÊ¨°Á±ªÊé®.ÊØîÂ¶Ç0X0101,‰ª£Ë°®ÂêåÊó∂ËÆæÁΩÆPx0ÂíåPx8.
-//MODE:0~3;Ê®°ÂºèÈÄâÊã©,0,ËæìÂÖ•(Á≥ªÁªüÂ§ç‰ΩçÈªòËÆ§Áä∂ÊÄÅ);1,ÊôÆÈÄöËæìÂá∫;2,Â§çÁî®ÂäüËÉΩ;3,Ê®°ÊãüËæìÂÖ•.
-//OTYPE:0/1;ËæìÂá∫Á±ªÂûãÈÄâÊã©,0,Êé®ÊåΩËæìÂá∫;1,ÂºÄÊºèËæìÂá∫.
-//OSPEED:0~3;ËæìÂá∫ÈÄüÂ∫¶ËÆæÁΩÆ,0,‰ΩéÈÄü;1,‰∏≠ÈÄü;2,Âø´ÈÄü;3,È´òÈÄü.
-//PUPD:0~3:‰∏ä‰∏ãÊãâËÆæÁΩÆ,0,‰∏çÂ∏¶‰∏ä‰∏ãÊãâ;1,‰∏äÊãâ;2,‰∏ãÊãâ;3,‰øùÁïô.
-//Ê≥®ÊÑè:Âú®ËæìÂÖ•Ê®°Âºè(ÊôÆÈÄöËæìÂÖ•/Ê®°ÊãüËæìÂÖ•)‰∏ã,OTYPEÂíåOSPEEDÂèÇÊï∞Êó†Êïà!!
+// GPIOÕ®”√…Ë÷√
+// GPIOx:GPIOA~GPIOK.
+// BITx:0X0000~0XFFFF,Œª…Ë÷√,√ø∏ˆŒª¥˙±Ì“ª∏ˆIO,µ⁄0Œª¥˙±ÌPx0,µ⁄1Œª¥˙±ÌPx1,“¿¥Œ¿‡Õ∆.±»»Á0X0101,¥˙±ÌÕ¨ ±…Ë÷√Px0∫ÕPx8.
+// MODE:0~3;ƒ£ Ω—°‘Ò,0, ‰»Î(œµÕ≥∏¥Œªƒ¨»œ◊¥Ã¨);1,∆’Õ® ‰≥ˆ;2,∏¥”√π¶ƒ‹;3,ƒ£ƒ‚ ‰»Î.
+// OTYPE:0/1; ‰≥ˆ¿‡–Õ—°‘Ò,0,Õ∆ÕÏ ‰≥ˆ;1,ø™¬© ‰≥ˆ.
+// OSPEED:0~3; ‰≥ˆÀŸ∂»…Ë÷√,0,µÕÀŸ;1,÷–ÀŸ;2,øÏÀŸ;3,∏ﬂÀŸ.
+// PUPD:0~3:…œœ¬¿≠…Ë÷√,0,≤ª¥¯…œœ¬¿≠;1,…œ¿≠;2,œ¬¿≠;3,±£¡Ù.
+// ◊¢“‚:‘⁄ ‰»Îƒ£ Ω(∆’Õ® ‰»Î/ƒ£ƒ‚ ‰»Î)œ¬,OTYPE∫ÕOSPEED≤Œ ˝Œﬁ–ß!!
 void GPIO_Set(GPIO_TypeDef *GPIOx, uint32_t BITx, uint32_t MODE, uint32_t OTYPE,
-	uint32_t OSPEED, uint32_t PUPD) {
-	uint32_t pinpos = 0, pos = 0, curpin = 0;
-	for (pinpos = 0; pinpos < 16; pinpos++) {
-		pos = 1 << pinpos;   //‰∏Ä‰∏™‰∏™‰ΩçÊ£ÄÊü•
-		curpin = BITx & pos; //Ê£ÄÊü•ÂºïËÑöÊòØÂê¶Ë¶ÅËÆæÁΩÆ
-		if (curpin == pos) { //ÈúÄË¶ÅËÆæÁΩÆ
-			GPIOx->MODER &= ~(3 << (pinpos * 2)); //ÂÖàÊ∏ÖÈô§ÂéüÊù•ÁöÑËÆæÁΩÆ
-			GPIOx->MODER |= MODE << (pinpos * 2); //ËÆæÁΩÆÊñ∞ÁöÑÊ®°Âºè
-			if ((MODE == 0X01)
-				|| (MODE == 0X02)) { //Â¶ÇÊûúÊòØËæìÂá∫Ê®°Âºè/Â§çÁî®ÂäüËÉΩÊ®°Âºè
-				GPIOx->OSPEEDR &= ~(3 << (pinpos * 2));     //Ê∏ÖÈô§ÂéüÊù•ÁöÑËÆæÁΩÆ
-				GPIOx->OSPEEDR |= (OSPEED << (pinpos * 2)); //ËÆæÁΩÆÊñ∞ÁöÑÈÄüÂ∫¶ÂÄº
-				GPIOx->OTYPER &= ~(1 << pinpos);            //Ê∏ÖÈô§ÂéüÊù•ÁöÑËÆæÁΩÆ
-				GPIOx->OTYPER |= OTYPE << pinpos;           //ËÆæÁΩÆÊñ∞ÁöÑËæìÂá∫Ê®°Âºè
-			}
-			GPIOx->PUPDR &= ~(3 << (pinpos * 2)); //ÂÖàÊ∏ÖÈô§ÂéüÊù•ÁöÑËÆæÁΩÆ
-			GPIOx->PUPDR |= PUPD << (pinpos * 2); //ËÆæÁΩÆÊñ∞ÁöÑ‰∏ä‰∏ãÊãâ
-		}
-	}
+              uint32_t OSPEED, uint32_t PUPD) {
+  uint32_t pinpos = 0, pos = 0, curpin = 0;
+  for (pinpos = 0; pinpos < 16; pinpos++) {
+    pos = 1 << pinpos;                      // “ª∏ˆ∏ˆŒªºÏ≤È
+    curpin = BITx & pos;                    // ºÏ≤È“˝Ω≈ «∑Ò“™…Ë÷√
+    if (curpin == pos) {                    // –Ë“™…Ë÷√
+      GPIOx->MODER &= ~(3 << (pinpos * 2)); // œ»«Â≥˝‘≠¿¥µƒ…Ë÷√
+      GPIOx->MODER |= MODE << (pinpos * 2); // …Ë÷√–¬µƒƒ£ Ω
+      if ((MODE == 0X01) || (MODE == 0X02)) { // »Áπ˚ « ‰≥ˆƒ£ Ω/∏¥”√π¶ƒ‹ƒ£ Ω
+        GPIOx->OSPEEDR &= ~(3 << (pinpos * 2));     // «Â≥˝‘≠¿¥µƒ…Ë÷√
+        GPIOx->OSPEEDR |= (OSPEED << (pinpos * 2)); // …Ë÷√–¬µƒÀŸ∂»÷µ
+        GPIOx->OTYPER &= ~(1 << pinpos);            // «Â≥˝‘≠¿¥µƒ…Ë÷√
+        GPIOx->OTYPER |= OTYPE << pinpos;           // …Ë÷√–¬µƒ ‰≥ˆƒ£ Ω
+      }
+      GPIOx->PUPDR &= ~(3 << (pinpos * 2)); // œ»«Â≥˝‘≠¿¥µƒ…Ë÷√
+      GPIOx->PUPDR |= PUPD << (pinpos * 2); // …Ë÷√–¬µƒ…œœ¬¿≠
+    }
+  }
 }
 
-//ËÆæÁΩÆGPIOÊüê‰∏™ÂºïËÑöÁöÑËæìÂá∫Áä∂ÊÄÅ
-//GPIOx:GPIOA~GPIOK.
-//pinx:ÂºïËÑö‰ΩçÁΩÆ,ËåÉÂõ¥:1<<0 ~ 1<<15
-//status:ÂºïËÑöÁä∂ÊÄÅ(‰ªÖÊúÄ‰Ωé‰ΩçÊúâÊïà),0,ËæìÂá∫‰ΩéÁîµÂπ≥;1,ËæìÂá∫È´òÁîµÂπ≥
+// …Ë÷√GPIOƒ≥∏ˆ“˝Ω≈µƒ ‰≥ˆ◊¥Ã¨
+// GPIOx:GPIOA~GPIOK.
+// pinx:“˝Ω≈Œª÷√,∑∂Œß:1<<0 ~ 1<<15
+// status:“˝Ω≈◊¥Ã¨(Ωˆ◊ÓµÕŒª”––ß),0, ‰≥ˆµÕµÁ∆Ω;1, ‰≥ˆ∏ﬂµÁ∆Ω
 void GPIO_Pin_Set(GPIO_TypeDef *GPIOx, uint16_t pinx, uint8_t status) {
-	if (status & 0X01)
-		GPIOx->BSRR = pinx; //ËÆæÁΩÆGPIOxÁöÑpinx‰∏∫1
-	else
-		GPIOx->BSRR = pinx << 16; //ËÆæÁΩÆGPIOxÁöÑpinx‰∏∫0
+  if (status & 0X01)
+    GPIOx->BSRR = pinx; // …Ë÷√GPIOxµƒpinxŒ™1
+  else
+    GPIOx->BSRR = pinx << 16; // …Ë÷√GPIOxµƒpinxŒ™0
 }
-//ËØªÂèñGPIOÊüê‰∏™ÂºïËÑöÁöÑÁä∂ÊÄÅ
-//GPIOx:GPIOA~GPIOK.
-//pinx:ÂºïËÑö‰ΩçÁΩÆ,ËåÉÂõ¥:1<<0 ~ 1<<15
-//ËøîÂõûÂÄº:ÂºïËÑöÁä∂ÊÄÅ,0,ÂºïËÑö‰ΩéÁîµÂπ≥;1,ÂºïËÑöÈ´òÁîµÂπ≥
+// ∂¡»°GPIOƒ≥∏ˆ“˝Ω≈µƒ◊¥Ã¨
+// GPIOx:GPIOA~GPIOK.
+// pinx:“˝Ω≈Œª÷√,∑∂Œß:1<<0 ~ 1<<15
+// ∑µªÿ÷µ:“˝Ω≈◊¥Ã¨,0,“˝Ω≈µÕµÁ∆Ω;1,“˝Ω≈∏ﬂµÁ∆Ω
 uint8_t GPIO_Pin_Get(GPIO_TypeDef *GPIOx, uint16_t pinx) {
-	if (GPIOx->IDR & pinx)
-		return 1; //pinxÁöÑÁä∂ÊÄÅ‰∏∫1
-	else
-		return 0; //pinxÁöÑÁä∂ÊÄÅ‰∏∫0
+  if (GPIOx->IDR & pinx)
+    return 1; // pinxµƒ◊¥Ã¨Œ™1
+  else
+    return 0; // pinxµƒ◊¥Ã¨Œ™0
 }
 
-//ÂàùÂßãÂåñADC
-//ËøôÈáåÊàë‰ª¨‰ªÖ‰ª•ËßÑÂàôÈÄöÈÅì‰∏∫‰æã
-//Êàë‰ª¨ÈªòËÆ§‰ªÖÂºÄÂêØADC1_CH19P
-//16‰ΩçËΩ¨Êç¢Êó∂Èó¥‰Ωç:ÈááÊ†∑Âë®Êúü+8.5‰∏™ADCÂë®Êúü
+// ≥ı ºªØADC
+// ’‚¿ÔŒ“√«Ωˆ“‘πÊ‘ÚÕ®µ¿Œ™¿˝
+// Œ“√«ƒ¨»œΩˆø™∆ÙADC1_CH19P
+// 16Œª◊™ªª ±º‰Œª:≤…—˘÷‹∆⁄+8.5∏ˆADC÷‹∆⁄
 void Adc_Init(void) {
-	//ÂÖàÂàùÂßãÂåñIOÂè£
-	//  RCC->AHB1ENR|=1<<5;         //‰ΩøËÉΩADC1/2Êó∂Èíü
-	//  RCC->AHB4ENR|=1<<0;         //‰ΩøËÉΩPORTAÊó∂Èíü
-	//  GPIO_Set(GPIOA,PIN5,GPIO_MODE_AIN,0,0,GPIO_PUPD_NONE);//PA5,Ê®°ÊãüËæìÂÖ•,‰∏çÂ∏¶‰∏ä‰∏ãÊãâ
-	RCC->AHB1RSTR |= 1 << 5;      //ADC1/2Â§ç‰Ωç
-	RCC->AHB1RSTR &= ~(1 << 5);   //Â§ç‰ΩçÁªìÊùü
-	RCC->D3CCIPR &= ~(3 << 16);   //ADCSEL[1:0]Ê∏ÖÈõ∂
-	RCC->D3CCIPR |= 2 <<
-		16;      //ADCSEL[1:0]=2,per_ck‰Ωú‰∏∫ADCÊó∂ÈíüÊ∫ê,ÈªòËÆ§ÈÄâÊã©hsi_ker_ck‰Ωú‰∏∫per_ck,È¢ëÁéá:64Mhz
-	ADC12_COMMON->CCR |= 1 <<
-		18; //PRESC[3:0]=1,ËæìÂÖ•Êó∂Èíü2ÂàÜÈ¢ë,Âç≥adc_ker_ck=per_ck/2=64/2=32Mhz(‰∏çËÉΩË∂ÖËøá36Mhz)
-	ADC1->CR =
-		0;             //CRÂØÑÂ≠òÂô®Ê∏ÖÈõ∂,DEEPPWDÊ∏ÖÈõ∂,‰ªéÊ∑±Â∫¶Áù°Áú†Âî§ÈÜí.
-	ADC1->CR |= 1 << 28;      //ADVREGEN=1,‰ΩøËÉΩADCÁ®≥ÂéãÂô®
-	HAL_Delay(
-		1);             //Á≠âÂæÖÁ®≥ÂéãÂô®ÂêØÂä®ÂÆåÊàê,Á∫¶10us,ËøôÈáåÂª∂Êó∂Â§ß‰∏ÄÁÇπ,Ê≤°ÂÖ≥Á≥ª.
-	ADC1->CR |= 1 <<
-		8;       //BOOST=1,ADCÂ∑•‰ΩúÂú®boostÊ®°Âºè(ADCÈ¢ëÁéáÂ§ß‰∫é20MÁöÑÊó∂ÂÄô,ÂøÖÈ°ªËÆæÁΩÆboost‰Ωç)
-	ADC1->CFGR &= ~(1 << 13); //CONT=0,ÂçïÊ¨°ËΩ¨Êç¢Ê®°Âºè
-	ADC1->CFGR |= 1 << 12;    //OVRMOD=1,Â§çÂÜôÊ®°Âºè(DRÂØÑÂ≠òÂô®ÂèØË¢´Â§çÂÜô)
-	ADC1->CFGR &= ~(3 << 10); //EXTEN[1:0]=0,ËΩØ‰ª∂Ëß¶Âèë
-	ADC1->CFGR &= ~(7 << 2);  //RES[2:0]‰ΩçÊ∏ÖÈõ∂
-	ADC1->CFGR |= 0 <<
-		2;     //RES[2:0]=0,16‰ΩçÂàÜËæ®Áéá(0,16‰Ωç;1,14‰Ωç;2,12‰Ωç;3,10‰Ωç;4,8‰Ωç.)
-	ADC1->CFGR2 &= ~((uint32_t)15 <<
-			28);    //LSHIFT[3:0]=0,‰∏çÂ∑¶Áßª,Êï∞ÊçÆÂè≥ÂØπÈΩê.
-	ADC1->CFGR2 &= ~((uint32_t)0X3FF << 16); //OSR[9:0]=0,‰∏ç‰ΩøÁî®ËøáÈááÊ†∑
-	ADC1->CR &= ~((uint32_t)1 << 30); //ADCALDIF=0,Ê†°ÂáÜÂçïÁ´ØËΩ¨Êç¢ÈÄöÈÅì
-	ADC1->CR |= 1 << 16;              //ADCALLIN=1,Á∫øÊÄßÊ†°ÂáÜ
-	ADC1->CR |= (uint32_t)1 << 31;    //ÂºÄÂêØÊ†°ÂáÜ
-	while (ADC1->CR & ((uint32_t)1 << 31))
-		; //Á≠âÂæÖÊ†°ÂáÜÂÆåÊàê
-	ADC1->SQR1 &= ~(0XF << 0); //L[3:0]Ê∏ÖÈõ∂
-	ADC1->SQR1 |= 0 <<
-		0;      //L[3:0]=0,1‰∏™ËΩ¨Êç¢Âú®ËßÑÂàôÂ∫èÂàó‰∏≠ ‰πüÂ∞±ÊòØÂè™ËΩ¨Êç¢ËßÑÂàôÂ∫èÂàó1
-	//  //ËÆæÁΩÆÈÄöÈÅì19ÁöÑÈááÊ†∑Êó∂Èó¥
-	//  ADC1->SMPR2&=~(7<<(3*9));   //ÈÄöÈÅì19ÈááÊ†∑Êó∂Èó¥Ê∏ÖÁ©∫
-	//  ADC1->SMPR2|=7<<(3*9);      //ÈÄöÈÅì19 810.5‰∏™Âë®Êúü,ÊèêÈ´òÈááÊ†∑Êó∂Èó¥ÂèØ‰ª•ÊèêÈ´òÁ≤æÁ°ÆÂ∫¶
-	//ËÆæÁΩÆËß¶Êë∏ÈÄöÈÅì4,5,7,8ÁöÑÈááÊ†∑Êó∂Èó¥
-	ADC1->SMPR1 &= !(7 << (3 * 4));
-	ADC1->SMPR1 |= 7 << (3 * 4);
-	ADC1->SMPR1 &= !(7 << (3 * 5));
-	ADC1->SMPR1 |= 7 << (3 * 5);
-	ADC1->SMPR1 &= !(7 << (3 * 7));
-	ADC1->SMPR1 |= 7 << (3 * 7);
-	ADC1->SMPR1 &= !(7 << (3 * 8));
-	ADC1->SMPR1 |= 7 << (3 * 8);
-	ADC1->CR |= 1 << 0; //ÂºÄÂêØADËΩ¨Êç¢Âô®
+  // œ»≥ı ºªØIOø⁄
+  //   RCC->AHB1ENR|=1<<5;         // πƒ‹ADC1/2 ±÷”
+  //   RCC->AHB4ENR|=1<<0;         // πƒ‹PORTA ±÷”
+  //   GPIO_Set(GPIOA,PIN5,GPIO_MODE_AIN,0,0,GPIO_PUPD_NONE);//PA5,ƒ£ƒ‚ ‰»Î,≤ª¥¯…œœ¬¿≠
+  RCC->AHB1RSTR |= 1 << 5;    // ADC1/2∏¥Œª
+  RCC->AHB1RSTR &= ~(1 << 5); // ∏¥ŒªΩ· ¯
+  RCC->D3CCIPR &= ~(3 << 16); // ADCSEL[1:0]«Â¡„
+  RCC->D3CCIPR |=
+      2
+      << 16; // ADCSEL[1:0]=2,per_ck◊˜Œ™ADC ±÷”‘¥,ƒ¨»œ—°‘Òhsi_ker_ck◊˜Œ™per_ck,∆µ¬ :64Mhz
+  ADC12_COMMON->CCR |=
+      1
+      << 18; // PRESC[3:0]=1, ‰»Î ±÷”2∑÷∆µ,º¥adc_ker_ck=per_ck/2=64/2=32Mhz(≤ªƒ‹≥¨π˝36Mhz)
+  ADC1->CR = 0;        // CRºƒ¥Ê∆˜«Â¡„,DEEPPWD«Â¡„,¥”…Ó∂»ÀØ√ﬂªΩ–—.
+  ADC1->CR |= 1 << 28; // ADVREGEN=1, πƒ‹ADCŒ»—π∆˜
+  HAL_Delay(1); // µ»¥˝Œ»—π∆˜∆Ù∂ØÕÍ≥…,‘º10us,’‚¿Ô—” ±¥Û“ªµ„,√ªπÿœµ.
+  ADC1->CR |=
+      1
+      << 8; // BOOST=1,ADCπ§◊˜‘⁄boostƒ£ Ω(ADC∆µ¬ ¥Û”⁄20Mµƒ ±∫Ú,±ÿ–Î…Ë÷√boostŒª)
+  ADC1->CFGR &= ~(1 << 13); // CONT=0,µ•¥Œ◊™ªªƒ£ Ω
+  ADC1->CFGR |= 1 << 12;    // OVRMOD=1,∏¥–¥ƒ£ Ω(DRºƒ¥Ê∆˜ø…±ª∏¥–¥)
+  ADC1->CFGR &= ~(3 << 10); // EXTEN[1:0]=0,»Ìº˛¥•∑¢
+  ADC1->CFGR &= ~(7 << 2);  // RES[2:0]Œª«Â¡„
+  ADC1->CFGR |=
+      0 << 2; // RES[2:0]=0,16Œª∑÷±Ê¬ (0,16Œª;1,14Œª;2,12Œª;3,10Œª;4,8Œª.)
+  ADC1->CFGR2 &= ~((uint32_t)15 << 28); // LSHIFT[3:0]=0,≤ª◊Û“∆, ˝æ›”“∂‘∆Î.
+  ADC1->CFGR2 &= ~((uint32_t)0X3FF << 16); // OSR[9:0]=0,≤ª π”√π˝≤…—˘
+  ADC1->CR &= ~((uint32_t)1 << 30); // ADCALDIF=0,–£◊ºµ•∂À◊™ªªÕ®µ¿
+  ADC1->CR |= 1 << 16;              // ADCALLIN=1,œﬂ–‘–£◊º
+  ADC1->CR |= (uint32_t)1 << 31;    // ø™∆Ù–£◊º
+  while (ADC1->CR & ((uint32_t)1 << 31))
+    ;                        // µ»¥˝–£◊ºÕÍ≥…
+  ADC1->SQR1 &= ~(0XF << 0); // L[3:0]«Â¡„
+  ADC1->SQR1 |= 0 << 0; // L[3:0]=0,1∏ˆ◊™ªª‘⁄πÊ‘Ú–Ú¡–÷– “≤æÕ «÷ª◊™ªªπÊ‘Ú–Ú¡–1
+  //  //…Ë÷√Õ®µ¿19µƒ≤…—˘ ±º‰
+  //  ADC1->SMPR2&=~(7<<(3*9));   //Õ®µ¿19≤…—˘ ±º‰«Âø’
+  //  ADC1->SMPR2|=7<<(3*9);      //Õ®µ¿19
+  //  810.5∏ˆ÷‹∆⁄,Ã·∏ﬂ≤…—˘ ±º‰ø…“‘Ã·∏ﬂæ´»∑∂»
+  // …Ë÷√¥•√˛Õ®µ¿4,5,7,8µƒ≤…—˘ ±º‰
+  ADC1->SMPR1 &= !(7 << (3 * 4));
+  ADC1->SMPR1 |= 7 << (3 * 4);
+  ADC1->SMPR1 &= !(7 << (3 * 5));
+  ADC1->SMPR1 |= 7 << (3 * 5);
+  ADC1->SMPR1 &= !(7 << (3 * 7));
+  ADC1->SMPR1 |= 7 << (3 * 7);
+  ADC1->SMPR1 &= !(7 << (3 * 8));
+  ADC1->SMPR1 |= 7 << (3 * 8);
+  ADC1->CR |= 1 << 0; // ø™∆ÙAD◊™ªª∆˜
 }
-//Ëé∑ÂæóADCÂÄº
-//ch:ÈÄöÈÅìÂÄº 0~19
-//ËøîÂõûÂÄº:ËΩ¨Êç¢ÁªìÊûú
+// ªÒµ√ADC÷µ
+// ch:Õ®µ¿÷µ 0~19
+// ∑µªÿ÷µ:◊™ªªΩ·π˚
 uint16_t Get_Adc(uint8_t ch) {
-	ADC1->PCSEL |= 1 << ch; //ADCËΩ¨Êç¢ÈÄöÈÅìÈ¢ÑÈÄâÊã©
-	//ËÆæÁΩÆËΩ¨Êç¢Â∫èÂàó
-	ADC1->SQR1 &= ~(0X1F << 6 * 1); //ËßÑÂàôÂ∫èÂàó1ÈÄöÈÅìÊ∏ÖÈõ∂
-	ADC1->SQR1 |= ch << 6 * 1;      //ËÆæÁΩÆËßÑÂàôÂ∫èÂàó1ÁöÑËΩ¨Êç¢ÈÄöÈÅì‰∏∫ch
-	ADC1->CR |= 1 << 2;             //ÂêØÂä®ËßÑÂàôËΩ¨Êç¢ÈÄöÈÅì
-	while (!(ADC1->ISR & 1 << 2))
-		; //Á≠âÂæÖËΩ¨Êç¢ÁªìÊùü
-	return ADC1->DR; //ËøîÂõûadcÂÄº
+  ADC1->PCSEL |= 1 << ch; // ADC◊™ªªÕ®µ¿‘§—°‘Ò
+  // …Ë÷√◊™ªª–Ú¡–
+  ADC1->SQR1 &= ~(0X1F << 6 * 1); // πÊ‘Ú–Ú¡–1Õ®µ¿«Â¡„
+  ADC1->SQR1 |= ch << 6 * 1;      // …Ë÷√πÊ‘Ú–Ú¡–1µƒ◊™ªªÕ®µ¿Œ™ch
+  ADC1->CR |= 1 << 2;             // ∆Ù∂ØπÊ‘Ú◊™ªªÕ®µ¿
+  while (!(ADC1->ISR & 1 << 2))
+    ;              // µ»¥˝◊™ªªΩ· ¯
+  return ADC1->DR; // ∑µªÿadc÷µ
 }
-//Ëé∑ÂèñÈÄöÈÅìchÁöÑËΩ¨Êç¢ÂÄºÔºåÂèñtimesÊ¨°,ÁÑ∂ÂêéÂπ≥Âùá
-//ch:ÈÄöÈÅìÁºñÂè∑
-//times:Ëé∑ÂèñÊ¨°Êï∞
-//ËøîÂõûÂÄº:ÈÄöÈÅìchÁöÑtimesÊ¨°ËΩ¨Êç¢ÁªìÊûúÂπ≥ÂùáÂÄº
+// ªÒ»°Õ®µ¿chµƒ◊™ªª÷µ£¨»°times¥Œ,»ª∫Û∆Ωæ˘
+// ch:Õ®µ¿±‡∫≈
+// times:ªÒ»°¥Œ ˝
+// ∑µªÿ÷µ:Õ®µ¿chµƒtimes¥Œ◊™ªªΩ·π˚∆Ωæ˘÷µ
 uint16_t Get_Adc_Average(uint8_t ch, uint8_t times) {
-	uint32_t temp_val = 0;
-	uint8_t t;
-	for (t = 0; t < times; t++)
-		temp_val += Get_Adc(ch);
-	return temp_val / times;
+  uint32_t temp_val = 0;
+  uint8_t t;
+  for (t = 0; t < times; t++)
+    temp_val += Get_Adc(ch);
+  return temp_val / times;
 }
 
-//ËøõË°å‰∏ÄÊ¨°Ëß¶Êë∏ÊµãÈáè
-//ËøîÂõûÂÄº‰∏∫ÊòØÂê¶ÊúâÊúâÊïàËß¶Êë∏
-//ÂºïËÑöÂÆö‰πâÔºö
-//  PB1_X+_ADC1-5
-//  PC4_X-_ADC1-4
-//  PC5_Y+_ADC1-8
-//  PA7_Y-_ADC1-7
-uint16_t value_t[4] = {0};/*ADCËØªÂèñÂÄº*/
-uint32_t value_touch = 0;/*Âà§Êñ≠ÊòØÂê¶Êåâ‰∏ãÂÄºÔºàÊåâ‰∏ãÂäõÂ∫¶ÂÄºÔºâ*/
-int32_t port[2] = {0};/*Êåâ‰∏ãÁöÑÂùêÊ†áÂÄºÔºåË¥üÊï∞‰ª£Ë°®Ê≤°ÊúâÊåâ‰∏ã*/
+// Ω¯––“ª¥Œ¥•√˛≤‚¡ø
+// ∑µªÿ÷µŒ™ «∑Ò”–”––ß¥•√˛
+// “˝Ω≈∂®“Â£∫
+//   PB1_X+_ADC1-5
+//   PC4_X-_ADC1-4
+//   PC5_Y+_ADC1-8
+//   PA7_Y-_ADC1-7
+uint16_t value_t[4] = {0}; /*ADC∂¡»°÷µ*/
+uint32_t value_touch = 0;  /*≈–∂œ «∑Ò∞¥œ¬÷µ£®∞¥œ¬¡¶∂»÷µ£©*/
+int32_t port[2] = {0};     /*∞¥œ¬µƒ◊¯±Í÷µ£¨∏∫ ˝¥˙±Ì√ª”–∞¥œ¬*/
 uint32_t touch_ad(void) {
-	// uint16_t value_t[4]={0};
-	uint16_t temp = 0;
-	//ÊµãÈáèÁ¨¨‰∏ÄÊ≠•
-	//ËÆæÁΩÆPC4-GND PB1-3V3 PC5-ADC PA7-INPUT
-	GPIO_Set(GPIOC, PIN4, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PD);
-	GPIO_Set(GPIOB, PIN1, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PU);
-	GPIO_Set(GPIOC, PIN5, GPIO_MODE_AIN, 0, 0, GPIO_PUPD_NONE);
-	GPIO_Set(GPIOA, PIN7, GPIO_MODE_IN, 0, 0, GPIO_PUPD_NONE);
-	GPIO_Pin_Set(GPIOC, PIN4, 0);
-	GPIO_Pin_Set(GPIOB, PIN1, 1);
-	value_t[0] = Get_Adc_Average(8, 5);
-	//ÊµãÈáèÁ¨¨‰∫åÊ≠•
-	//ËÆæÁΩÆPC4-GND PC5-3V3 PB1-ADC PA7-INPUT
-	GPIO_Set(GPIOC, PIN4, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PD);
-	GPIO_Set(GPIOC, PIN5, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PU);
-	GPIO_Set(GPIOB, PIN1, GPIO_MODE_AIN, 0, 0, GPIO_PUPD_NONE);
-	GPIO_Set(GPIOA, PIN7, GPIO_MODE_IN, 0, 0, GPIO_PUPD_NONE);
-	GPIO_Pin_Set(GPIOC, PIN4, 0);
-	GPIO_Pin_Set(GPIOC, PIN5, 1);
-	temp = Get_Adc_Average(5, 5);
-	value_t[1] = temp < 0x100 ? 0X100 : temp;
-	//ÊµãÈáèÁ¨¨‰∏âÊ≠•
-	//ËÆæÁΩÆPC4-GND PC5-3V3 PA7-ADC PB1-INPUT
-	GPIO_Set(GPIOC, PIN4, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PD);
-	GPIO_Set(GPIOC, PIN5, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PU);
-	GPIO_Set(GPIOA, PIN7, GPIO_MODE_AIN, 0, 0, GPIO_PUPD_NONE);
-	GPIO_Set(GPIOB, PIN1, GPIO_MODE_IN, 0, 0, GPIO_PUPD_NONE);
-	GPIO_Pin_Set(GPIOC, PIN4, 0);
-	GPIO_Pin_Set(GPIOC, PIN5, 1);
-	value_t[2] = Get_Adc_Average(7, 5);
-	//ÊµãÈáèÁ¨¨ÂõõÊ≠•
-	//ËÆæÁΩÆPA7-GND PC5-3V3 PB1-ADC PC4-INPUT
-	GPIO_Set(GPIOA, PIN7, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PD);
-	GPIO_Set(GPIOC, PIN5, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PU);
-	GPIO_Set(GPIOB, PIN1, GPIO_MODE_AIN, 0, 0, GPIO_PUPD_NONE);
-	GPIO_Set(GPIOC, PIN4, GPIO_MODE_IN, 0, 0, GPIO_PUPD_NONE);
-	GPIO_Pin_Set(GPIOA, PIN7, 0);
-	GPIO_Pin_Set(GPIOC, PIN5, 1);
-	value_t[3] = Get_Adc_Average(5, 5);
-	//Âà§Êñ≠ÊòØÂê¶‰∏∫ÊúâÊïàÊåâ‰∏ã value_t[2]‰ª£Ë°®‰∫ÜËß¶Áîµ3.3VÊñπÁöÑÁîµÂéã value_t[1]‰ª£Ë°®‰∫ÜËß¶ÁîµGNDÊñπÁöÑÁîµÂéãÔºåÂΩìÊé•Ëß¶Êó∂‰∏§ÂÄºÂ∫îËØ•Áõ∏Ëøë
-	value_touch = value_t[2] / value_t[1];
-	if ( value_touch < 20 && value_t[0] > 0xD00 && value_t[3] > 0x1000) {
-		port[0] = (double)(value_t[0] - 0xE00) / (0xF300 - 0xE00) * 480;
-		port[0] = port[0] <= 0 ? 1 : port[0] >= 479 ? 479 : port[0];
-		port[1] = (double)(value_t[3] - 0x1B00) / (0xD600 - 0x1B00) * 272;
-		port[1] = port[1] <= 0 ? 1 : port[1] >= 271 ? 271 : port[1];
-		return 1;
-	}
-	else {
-		port[0] = -1;
-		port[1] = -1;
-		return 0;
-	}
+  // uint16_t value_t[4]={0};
+  uint16_t temp = 0;
+  // ≤‚¡øµ⁄“ª≤Ω
+  // …Ë÷√PC4-GND PB1-3V3 PC5-ADC PA7-INPUT
+  GPIO_Set(GPIOC, PIN4, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PD);
+  GPIO_Set(GPIOB, PIN1, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PU);
+  GPIO_Set(GPIOC, PIN5, GPIO_MODE_AIN, 0, 0, GPIO_PUPD_NONE);
+  GPIO_Set(GPIOA, PIN7, GPIO_MODE_IN, 0, 0, GPIO_PUPD_NONE);
+  GPIO_Pin_Set(GPIOC, PIN4, 0);
+  GPIO_Pin_Set(GPIOB, PIN1, 1);
+  value_t[0] = Get_Adc_Average(8, 5);
+  // ≤‚¡øµ⁄∂˛≤Ω
+  // …Ë÷√PC4-GND PC5-3V3 PB1-ADC PA7-INPUT
+  GPIO_Set(GPIOC, PIN4, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PD);
+  GPIO_Set(GPIOC, PIN5, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PU);
+  GPIO_Set(GPIOB, PIN1, GPIO_MODE_AIN, 0, 0, GPIO_PUPD_NONE);
+  GPIO_Set(GPIOA, PIN7, GPIO_MODE_IN, 0, 0, GPIO_PUPD_NONE);
+  GPIO_Pin_Set(GPIOC, PIN4, 0);
+  GPIO_Pin_Set(GPIOC, PIN5, 1);
+  temp = Get_Adc_Average(5, 5);
+  value_t[1] = temp < 0x100 ? 0X100 : temp;
+  // ≤‚¡øµ⁄»˝≤Ω
+  // …Ë÷√PC4-GND PC5-3V3 PA7-ADC PB1-INPUT
+  GPIO_Set(GPIOC, PIN4, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PD);
+  GPIO_Set(GPIOC, PIN5, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PU);
+  GPIO_Set(GPIOA, PIN7, GPIO_MODE_AIN, 0, 0, GPIO_PUPD_NONE);
+  GPIO_Set(GPIOB, PIN1, GPIO_MODE_IN, 0, 0, GPIO_PUPD_NONE);
+  GPIO_Pin_Set(GPIOC, PIN4, 0);
+  GPIO_Pin_Set(GPIOC, PIN5, 1);
+  value_t[2] = Get_Adc_Average(7, 5);
+  // ≤‚¡øµ⁄Àƒ≤Ω
+  // …Ë÷√PA7-GND PC5-3V3 PB1-ADC PC4-INPUT
+  GPIO_Set(GPIOA, PIN7, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PD);
+  GPIO_Set(GPIOC, PIN5, GPIO_MODE_OUT, 0, 2, GPIO_PUPD_PU);
+  GPIO_Set(GPIOB, PIN1, GPIO_MODE_AIN, 0, 0, GPIO_PUPD_NONE);
+  GPIO_Set(GPIOC, PIN4, GPIO_MODE_IN, 0, 0, GPIO_PUPD_NONE);
+  GPIO_Pin_Set(GPIOA, PIN7, 0);
+  GPIO_Pin_Set(GPIOC, PIN5, 1);
+  value_t[3] = Get_Adc_Average(5, 5);
+  // ≈–∂œ «∑ÒŒ™”––ß∞¥œ¬ value_t[2]¥˙±Ì¡À¥•µÁ3.3V∑ΩµƒµÁ—π
+  // value_t[1]¥˙±Ì¡À¥•µÁGND∑ΩµƒµÁ—π£¨µ±Ω”¥• ±¡Ω÷µ”¶∏√œ‡Ω¸
+  value_touch = value_t[2] / value_t[1];
+  if (value_touch < 20 && value_t[0] > 0xD00 && value_t[3] > 0x1000) {
+    port[0] = (double)(value_t[0] - 0xE00) / (0xF300 - 0xE00) * 480;
+    port[0] = port[0] <= 0 ? 1 : port[0] >= 479 ? 479 : port[0];
+    port[1] = (double)(value_t[3] - 0x1B00) / (0xD600 - 0x1B00) * 272;
+    port[1] = port[1] <= 0 ? 1 : port[1] >= 271 ? 271 : port[1];
+    return 1;
+  } else {
+    port[0] = -1;
+    port[1] = -1;
+    return 0;
+  }
 }
