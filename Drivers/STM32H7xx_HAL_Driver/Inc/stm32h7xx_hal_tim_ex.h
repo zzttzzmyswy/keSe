@@ -44,18 +44,17 @@ extern "C" {
   * @brief  TIM Hall sensor Configuration Structure definition
   */
 
-typedef struct
-{
-  uint32_t IC1Polarity;         /*!< Specifies the active edge of the input signal.
+typedef struct {
+	uint32_t IC1Polarity;         /*!< Specifies the active edge of the input signal.
                                      This parameter can be a value of @ref TIM_Input_Capture_Polarity */
 
-  uint32_t IC1Prescaler;        /*!< Specifies the Input Capture Prescaler.
+	uint32_t IC1Prescaler;        /*!< Specifies the Input Capture Prescaler.
                                      This parameter can be a value of @ref TIM_Input_Capture_Prescaler */
 
-  uint32_t IC1Filter;           /*!< Specifies the input capture filter.
+	uint32_t IC1Filter;           /*!< Specifies the input capture filter.
                                      This parameter can be a number between Min_Data = 0x0 and Max_Data = 0xF */
 
-  uint32_t Commutation_Delay;   /*!< Specifies the pulse value to be loaded into the Capture Compare Register.
+	uint32_t Commutation_Delay;   /*!< Specifies the pulse value to be loaded into the Capture Compare Register.
                                      This parameter can be a number between Min_Data = 0x0000 and Max_Data = 0xFFFF */
 } TIM_HallSensor_InitTypeDef;
 #if defined(TIM_BREAK_INPUT_SUPPORT)
@@ -63,13 +62,12 @@ typedef struct
 /**
   * @brief  TIM Break/Break2 input configuration
   */
-typedef struct
-{
-  uint32_t Source;         /*!< Specifies the source of the timer break input.
+typedef struct {
+	uint32_t Source;         /*!< Specifies the source of the timer break input.
                                 This parameter can be a value of @ref TIMEx_Break_Input_Source */
-  uint32_t Enable;         /*!< Specifies whether or not the break input source is enabled.
+	uint32_t Enable;         /*!< Specifies whether or not the break input source is enabled.
                                 This parameter can be a value of @ref TIMEx_Break_Input_Source_Enable */
-  uint32_t Polarity;       /*!< Specifies the break input source polarity.
+	uint32_t Polarity;       /*!< Specifies the break input source polarity.
                                 This parameter can be a value of @ref TIMEx_Break_Input_Source_Polarity
                                 Not relevant when analog watchdog output of the DFSDM1 used as break input source */
 } TIMEx_BreakInputConfigTypeDef;
@@ -259,101 +257,101 @@ typedef struct
   * @{
   */
 #define IS_TIM_BREAKINPUT(__BREAKINPUT__)  (((__BREAKINPUT__) == TIM_BREAKINPUT_BRK)  || \
-                                            ((__BREAKINPUT__) == TIM_BREAKINPUT_BRK2))
+	((__BREAKINPUT__) == TIM_BREAKINPUT_BRK2))
 
 #define IS_TIM_BREAKINPUTSOURCE(__SOURCE__)  (((__SOURCE__) == TIM_BREAKINPUTSOURCE_BKIN)  || \
-                                              ((__SOURCE__) == TIM_BREAKINPUTSOURCE_COMP1) || \
-                                              ((__SOURCE__) == TIM_BREAKINPUTSOURCE_COMP2) || \
-                                              ((__SOURCE__) == TIM_BREAKINPUTSOURCE_DFSDM1))
+	((__SOURCE__) == TIM_BREAKINPUTSOURCE_COMP1) || \
+	((__SOURCE__) == TIM_BREAKINPUTSOURCE_COMP2) || \
+	((__SOURCE__) == TIM_BREAKINPUTSOURCE_DFSDM1))
 
 #define IS_TIM_BREAKINPUTSOURCE_STATE(__STATE__)  (((__STATE__) == TIM_BREAKINPUTSOURCE_DISABLE)  || \
-                                                   ((__STATE__) == TIM_BREAKINPUTSOURCE_ENABLE))
+	((__STATE__) == TIM_BREAKINPUTSOURCE_ENABLE))
 
 #define IS_TIM_BREAKINPUTSOURCE_POLARITY(__POLARITY__)  (((__POLARITY__) == TIM_BREAKINPUTSOURCE_POLARITY_LOW)  || \
-                                                         ((__POLARITY__) == TIM_BREAKINPUTSOURCE_POLARITY_HIGH))
+	((__POLARITY__) == TIM_BREAKINPUTSOURCE_POLARITY_HIGH))
 
 #define IS_TIM_TISEL(__TISEL__)  (((__TISEL__) == TIM_TIM1_TI1_GPIO)         ||\
-                                  ((__TISEL__) == TIM_TIM1_TI1_COMP1)        ||\
-                                  ((__TISEL__) == TIM_TIM8_TI1_GPIO)         ||\
-                                  ((__TISEL__) == TIM_TIM8_TI1_COMP2)        ||\
-                                  ((__TISEL__) == TIM_TIM2_TI4_GPIO)         ||\
-                                  ((__TISEL__) == TIM_TIM2_TI4_COMP1)        ||\
-                                  ((__TISEL__) == TIM_TIM2_TI4_COMP2)        ||\
-                                  ((__TISEL__) == TIM_TIM2_TI4_COMP1_COMP2)  ||\
-                                  ((__TISEL__) == TIM_TIM3_TI1_GPIO)         ||\
-                                  ((__TISEL__) == TIM_TIM3_TI1_COMP1)        ||\
-                                  ((__TISEL__) == TIM_TIM3_TI1_COMP2)        ||\
-                                  ((__TISEL__) == TIM_TIM3_TI1_COMP1_COMP2)  ||\
-                                  ((__TISEL__) == TIM_TIM5_TI1_GPIO)         ||\
-                                  ((__TISEL__) == TIM_TIM5_TI1_CAN_TMP)      ||\
-                                  ((__TISEL__) == TIM_TIM5_TI1_CAN_RTP)      ||\
-                                  ((__TISEL__) == TIM_TIM12_TI1_SPDIF_FS)    ||\
-                                  ((__TISEL__) == TIM_TIM12_TI1_GPIO)        ||\
-                                  ((__TISEL__) == TIM_TIM15_TI1_GPIO)        ||\
-                                  ((__TISEL__) == TIM_TIM15_TI1_TIM2_CH1)    ||\
-                                  ((__TISEL__) == TIM_TIM15_TI1_TIM3_CH1)    ||\
-                                  ((__TISEL__) == TIM_TIM15_TI1_TIM4_CH1)    ||\
-                                  ((__TISEL__) == TIM_TIM15_TI1_RCC_LSE)     ||\
-                                  ((__TISEL__) == TIM_TIM15_TI1_RCC_CSI)     ||\
-                                  ((__TISEL__) == TIM_TIM15_TI1_RCC_MCO2)    ||\
-                                  ((__TISEL__) == TIM_TIM15_TI2_GPIO)        ||\
-                                  ((__TISEL__) == TIM_TIM15_TI2_TIM2_CH2)    ||\
-                                  ((__TISEL__) == TIM_TIM15_TI2_TIM3_CH2)    ||\
-                                  ((__TISEL__) == TIM_TIM15_TI2_TIM4_CH2)    ||\
-                                  ((__TISEL__) == TIM_TIM16_TI1_GPIO)        ||\
-                                  ((__TISEL__) == TIM_TIM16_TI1_RCC_LSI)     ||\
-                                  ((__TISEL__) == TIM_TIM16_TI1_RCC_LSE)     ||\
-                                  ((__TISEL__) == TIM_TIM16_TI1_WKUP_IT)     ||\
-                                  ((__TISEL__) == TIM_TIM17_TI1_GPIO)        ||\
-                                  ((__TISEL__) == TIM_TIM17_TI1_SPDIF_FS)    ||\
-                                  ((__TISEL__) == TIM_TIM17_TI1_RCC_HSE1MHZ) ||\
-                                  ((__TISEL__) == TIM_TIM17_TI1_RCC_MCO1)    ||\
-                                  ((__TISEL__) == TIM_TIM23_TI4_GPIO)        ||\
-                                  ((__TISEL__) == TIM_TIM23_TI4_COMP1)       ||\
-                                  ((__TISEL__) == TIM_TIM23_TI4_COMP2)       ||\
-                                  ((__TISEL__) == TIM_TIM23_TI4_COMP1_COMP2) ||\
-                                  ((__TISEL__) == TIM_TIM24_TI1_GPIO)        ||\
-                                  ((__TISEL__) == TIM_TIM24_TI1_CAN_TMP)     ||\
-                                  ((__TISEL__) == TIM_TIM24_TI1_CAN_RTP)     ||\
-                                  ((__TISEL__) == TIM_TIM24_TI1_CAN_SOC))
+	((__TISEL__) == TIM_TIM1_TI1_COMP1)        ||\
+	((__TISEL__) == TIM_TIM8_TI1_GPIO)         ||\
+	((__TISEL__) == TIM_TIM8_TI1_COMP2)        ||\
+	((__TISEL__) == TIM_TIM2_TI4_GPIO)         ||\
+	((__TISEL__) == TIM_TIM2_TI4_COMP1)        ||\
+	((__TISEL__) == TIM_TIM2_TI4_COMP2)        ||\
+	((__TISEL__) == TIM_TIM2_TI4_COMP1_COMP2)  ||\
+	((__TISEL__) == TIM_TIM3_TI1_GPIO)         ||\
+	((__TISEL__) == TIM_TIM3_TI1_COMP1)        ||\
+	((__TISEL__) == TIM_TIM3_TI1_COMP2)        ||\
+	((__TISEL__) == TIM_TIM3_TI1_COMP1_COMP2)  ||\
+	((__TISEL__) == TIM_TIM5_TI1_GPIO)         ||\
+	((__TISEL__) == TIM_TIM5_TI1_CAN_TMP)      ||\
+	((__TISEL__) == TIM_TIM5_TI1_CAN_RTP)      ||\
+	((__TISEL__) == TIM_TIM12_TI1_SPDIF_FS)    ||\
+	((__TISEL__) == TIM_TIM12_TI1_GPIO)        ||\
+	((__TISEL__) == TIM_TIM15_TI1_GPIO)        ||\
+	((__TISEL__) == TIM_TIM15_TI1_TIM2_CH1)    ||\
+	((__TISEL__) == TIM_TIM15_TI1_TIM3_CH1)    ||\
+	((__TISEL__) == TIM_TIM15_TI1_TIM4_CH1)    ||\
+	((__TISEL__) == TIM_TIM15_TI1_RCC_LSE)     ||\
+	((__TISEL__) == TIM_TIM15_TI1_RCC_CSI)     ||\
+	((__TISEL__) == TIM_TIM15_TI1_RCC_MCO2)    ||\
+	((__TISEL__) == TIM_TIM15_TI2_GPIO)        ||\
+	((__TISEL__) == TIM_TIM15_TI2_TIM2_CH2)    ||\
+	((__TISEL__) == TIM_TIM15_TI2_TIM3_CH2)    ||\
+	((__TISEL__) == TIM_TIM15_TI2_TIM4_CH2)    ||\
+	((__TISEL__) == TIM_TIM16_TI1_GPIO)        ||\
+	((__TISEL__) == TIM_TIM16_TI1_RCC_LSI)     ||\
+	((__TISEL__) == TIM_TIM16_TI1_RCC_LSE)     ||\
+	((__TISEL__) == TIM_TIM16_TI1_WKUP_IT)     ||\
+	((__TISEL__) == TIM_TIM17_TI1_GPIO)        ||\
+	((__TISEL__) == TIM_TIM17_TI1_SPDIF_FS)    ||\
+	((__TISEL__) == TIM_TIM17_TI1_RCC_HSE1MHZ) ||\
+	((__TISEL__) == TIM_TIM17_TI1_RCC_MCO1)    ||\
+	((__TISEL__) == TIM_TIM23_TI4_GPIO)        ||\
+	((__TISEL__) == TIM_TIM23_TI4_COMP1)       ||\
+	((__TISEL__) == TIM_TIM23_TI4_COMP2)       ||\
+	((__TISEL__) == TIM_TIM23_TI4_COMP1_COMP2) ||\
+	((__TISEL__) == TIM_TIM24_TI1_GPIO)        ||\
+	((__TISEL__) == TIM_TIM24_TI1_CAN_TMP)     ||\
+	((__TISEL__) == TIM_TIM24_TI1_CAN_RTP)     ||\
+	((__TISEL__) == TIM_TIM24_TI1_CAN_SOC))
 
 #define IS_TIM_REMAP(__RREMAP__)     (((__RREMAP__) == TIM_TIM1_ETR_GPIO)      ||\
-                                      ((__RREMAP__) == TIM_TIM1_ETR_ADC1_AWD1) ||\
-                                      ((__RREMAP__) == TIM_TIM1_ETR_ADC1_AWD2) ||\
-                                      ((__RREMAP__) == TIM_TIM1_ETR_ADC1_AWD3) ||\
-                                      ((__RREMAP__) == TIM_TIM1_ETR_ADC3_AWD1) ||\
-                                      ((__RREMAP__) == TIM_TIM1_ETR_ADC3_AWD2) ||\
-                                      ((__RREMAP__) == TIM_TIM1_ETR_ADC3_AWD3) ||\
-                                      ((__RREMAP__) == TIM_TIM1_ETR_COMP1)     ||\
-                                      ((__RREMAP__) == TIM_TIM1_ETR_COMP2)     ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_GPIO)      ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_ADC2_AWD1) ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_ADC2_AWD2) ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_ADC2_AWD3) ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_ADC3_AWD1) ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_ADC3_AWD2) ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_ADC3_AWD3) ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_COMP1)     ||\
-                                      ((__RREMAP__) == TIM_TIM8_ETR_COMP2)     ||\
-                                      ((__RREMAP__) == TIM_TIM2_ETR_GPIO)      ||\
-                                      ((__RREMAP__) == TIM_TIM2_ETR_COMP1)     ||\
-                                      ((__RREMAP__) == TIM_TIM2_ETR_COMP2)     ||\
-                                      ((__RREMAP__) == TIM_TIM2_ETR_RCC_LSE)   ||\
-                                      ((__RREMAP__) == TIM_TIM2_ETR_SAI1_FSA)  ||\
-                                      ((__RREMAP__) == TIM_TIM2_ETR_SAI1_FSB)  ||\
-                                      ((__RREMAP__) == TIM_TIM3_ETR_GPIO)      ||\
-                                      ((__RREMAP__) == TIM_TIM3_ETR_COMP1)     ||\
-                                      ((__RREMAP__) == TIM_TIM5_ETR_GPIO)      ||\
-                                      ((__RREMAP__) == TIM_TIM5_ETR_SAI2_FSA)  ||\
-                                      ((__RREMAP__) == TIM_TIM5_ETR_SAI2_FSB)  ||\
-                                      ((__RREMAP__) == TIM_TIM23_ETR_GPIO)     ||\
-                                      ((__RREMAP__) == TIM_TIM23_ETR_COMP1)    ||\
-                                      ((__RREMAP__) == TIM_TIM23_ETR_COMP2)    ||\
-                                      ((__RREMAP__) == TIM_TIM24_ETR_GPIO)     ||\
-                                      ((__RREMAP__) == TIM_TIM24_ETR_SAI4_FSA) ||\
-                                      ((__RREMAP__) == TIM_TIM24_ETR_SAI4_FSB) ||\
-                                      ((__RREMAP__) == TIM_TIM24_ETR_SAI1_FSA) ||\
-                                      ((__RREMAP__) == TIM_TIM24_ETR_SAI1_FSB))
+	((__RREMAP__) == TIM_TIM1_ETR_ADC1_AWD1) ||\
+	((__RREMAP__) == TIM_TIM1_ETR_ADC1_AWD2) ||\
+	((__RREMAP__) == TIM_TIM1_ETR_ADC1_AWD3) ||\
+	((__RREMAP__) == TIM_TIM1_ETR_ADC3_AWD1) ||\
+	((__RREMAP__) == TIM_TIM1_ETR_ADC3_AWD2) ||\
+	((__RREMAP__) == TIM_TIM1_ETR_ADC3_AWD3) ||\
+	((__RREMAP__) == TIM_TIM1_ETR_COMP1)     ||\
+	((__RREMAP__) == TIM_TIM1_ETR_COMP2)     ||\
+	((__RREMAP__) == TIM_TIM8_ETR_GPIO)      ||\
+	((__RREMAP__) == TIM_TIM8_ETR_ADC2_AWD1) ||\
+	((__RREMAP__) == TIM_TIM8_ETR_ADC2_AWD2) ||\
+	((__RREMAP__) == TIM_TIM8_ETR_ADC2_AWD3) ||\
+	((__RREMAP__) == TIM_TIM8_ETR_ADC3_AWD1) ||\
+	((__RREMAP__) == TIM_TIM8_ETR_ADC3_AWD2) ||\
+	((__RREMAP__) == TIM_TIM8_ETR_ADC3_AWD3) ||\
+	((__RREMAP__) == TIM_TIM8_ETR_COMP1)     ||\
+	((__RREMAP__) == TIM_TIM8_ETR_COMP2)     ||\
+	((__RREMAP__) == TIM_TIM2_ETR_GPIO)      ||\
+	((__RREMAP__) == TIM_TIM2_ETR_COMP1)     ||\
+	((__RREMAP__) == TIM_TIM2_ETR_COMP2)     ||\
+	((__RREMAP__) == TIM_TIM2_ETR_RCC_LSE)   ||\
+	((__RREMAP__) == TIM_TIM2_ETR_SAI1_FSA)  ||\
+	((__RREMAP__) == TIM_TIM2_ETR_SAI1_FSB)  ||\
+	((__RREMAP__) == TIM_TIM3_ETR_GPIO)      ||\
+	((__RREMAP__) == TIM_TIM3_ETR_COMP1)     ||\
+	((__RREMAP__) == TIM_TIM5_ETR_GPIO)      ||\
+	((__RREMAP__) == TIM_TIM5_ETR_SAI2_FSA)  ||\
+	((__RREMAP__) == TIM_TIM5_ETR_SAI2_FSB)  ||\
+	((__RREMAP__) == TIM_TIM23_ETR_GPIO)     ||\
+	((__RREMAP__) == TIM_TIM23_ETR_COMP1)    ||\
+	((__RREMAP__) == TIM_TIM23_ETR_COMP2)    ||\
+	((__RREMAP__) == TIM_TIM24_ETR_GPIO)     ||\
+	((__RREMAP__) == TIM_TIM24_ETR_SAI4_FSA) ||\
+	((__RREMAP__) == TIM_TIM24_ETR_SAI4_FSB) ||\
+	((__RREMAP__) == TIM_TIM24_ETR_SAI1_FSA) ||\
+	((__RREMAP__) == TIM_TIM24_ETR_SAI1_FSB))
 
 /**
   * @}
@@ -450,18 +448,18 @@ HAL_StatusTypeDef HAL_TIMEx_OnePulseN_Stop_IT(TIM_HandleTypeDef *htim, uint32_t 
   */
 /* Extended Control functions  ************************************************/
 HAL_StatusTypeDef HAL_TIMEx_ConfigCommutEvent(TIM_HandleTypeDef *htim, uint32_t  InputTrigger,
-                                              uint32_t  CommutationSource);
+	uint32_t  CommutationSource);
 HAL_StatusTypeDef HAL_TIMEx_ConfigCommutEvent_IT(TIM_HandleTypeDef *htim, uint32_t  InputTrigger,
-                                                 uint32_t  CommutationSource);
+	uint32_t  CommutationSource);
 HAL_StatusTypeDef HAL_TIMEx_ConfigCommutEvent_DMA(TIM_HandleTypeDef *htim, uint32_t  InputTrigger,
-                                                  uint32_t  CommutationSource);
+	uint32_t  CommutationSource);
 HAL_StatusTypeDef HAL_TIMEx_MasterConfigSynchronization(TIM_HandleTypeDef *htim,
-                                                        TIM_MasterConfigTypeDef *sMasterConfig);
+	TIM_MasterConfigTypeDef *sMasterConfig);
 HAL_StatusTypeDef HAL_TIMEx_ConfigBreakDeadTime(TIM_HandleTypeDef *htim,
-                                                TIM_BreakDeadTimeConfigTypeDef *sBreakDeadTimeConfig);
+	TIM_BreakDeadTimeConfigTypeDef *sBreakDeadTimeConfig);
 #if defined(TIM_BREAK_INPUT_SUPPORT)
 HAL_StatusTypeDef HAL_TIMEx_ConfigBreakInput(TIM_HandleTypeDef *htim, uint32_t BreakInput,
-                                             TIMEx_BreakInputConfigTypeDef *sBreakInputConfig);
+	TIMEx_BreakInputConfigTypeDef *sBreakInputConfig);
 #endif /* TIM_BREAK_INPUT_SUPPORT */
 HAL_StatusTypeDef HAL_TIMEx_GroupChannel5(TIM_HandleTypeDef *htim, uint32_t Channels);
 HAL_StatusTypeDef HAL_TIMEx_RemapConfig(TIM_HandleTypeDef *htim, uint32_t Remap);

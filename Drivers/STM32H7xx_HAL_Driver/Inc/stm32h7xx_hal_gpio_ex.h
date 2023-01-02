@@ -408,7 +408,7 @@ extern "C" {
 #define GPIOH_PIN_AVAILABLE  GPIO_PIN_All
 #if defined(GPIOI)
 #define GPIOK_PIN_AVAILABLE  (GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | \
-                              GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7)
+	GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7)
 #else
 #define GPIOK_PIN_AVAILABLE  (GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 )
 #endif /* GPIOI */
@@ -426,25 +426,25 @@ extern "C" {
   */
 #if defined(GPIOI)
 #define GPIO_GET_INDEX(__GPIOx__)  (((__GPIOx__) == (GPIOA))? 0UL :\
-                                    ((__GPIOx__) == (GPIOB))? 1UL :\
-                                    ((__GPIOx__) == (GPIOC))? 2UL :\
-                                    ((__GPIOx__) == (GPIOD))? 3UL :\
-                                    ((__GPIOx__) == (GPIOE))? 4UL :\
-                                    ((__GPIOx__) == (GPIOF))? 5UL :\
-                                    ((__GPIOx__) == (GPIOG))? 6UL :\
-                                    ((__GPIOx__) == (GPIOH))? 7UL :\
-                                    ((__GPIOx__) == (GPIOI))? 8UL :\
-                                    ((__GPIOx__) == (GPIOJ))? 9UL : 10UL)
+	((__GPIOx__) == (GPIOB))? 1UL :\
+	((__GPIOx__) == (GPIOC))? 2UL :\
+	((__GPIOx__) == (GPIOD))? 3UL :\
+	((__GPIOx__) == (GPIOE))? 4UL :\
+	((__GPIOx__) == (GPIOF))? 5UL :\
+	((__GPIOx__) == (GPIOG))? 6UL :\
+	((__GPIOx__) == (GPIOH))? 7UL :\
+	((__GPIOx__) == (GPIOI))? 8UL :\
+	((__GPIOx__) == (GPIOJ))? 9UL : 10UL)
 #else
 #define GPIO_GET_INDEX(__GPIOx__)  (((__GPIOx__) == (GPIOA))? 0UL :\
-                                    ((__GPIOx__) == (GPIOB))? 1UL :\
-                                    ((__GPIOx__) == (GPIOC))? 2UL :\
-                                    ((__GPIOx__) == (GPIOD))? 3UL :\
-                                    ((__GPIOx__) == (GPIOE))? 4UL :\
-                                    ((__GPIOx__) == (GPIOF))? 5UL :\
-                                    ((__GPIOx__) == (GPIOG))? 6UL :\
-                                    ((__GPIOx__) == (GPIOH))? 7UL :\
-                                    ((__GPIOx__) == (GPIOJ))? 9UL : 10UL)
+	((__GPIOx__) == (GPIOB))? 1UL :\
+	((__GPIOx__) == (GPIOC))? 2UL :\
+	((__GPIOx__) == (GPIOD))? 3UL :\
+	((__GPIOx__) == (GPIOE))? 4UL :\
+	((__GPIOx__) == (GPIOF))? 5UL :\
+	((__GPIOx__) == (GPIOG))? 6UL :\
+	((__GPIOx__) == (GPIOH))? 7UL :\
+	((__GPIOx__) == (GPIOJ))? 9UL : 10UL)
 #endif /* GPIOI */
 
 /**

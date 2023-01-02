@@ -20,7 +20,7 @@
 #define STM32H7xx_HAL_FLASH_EX_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -42,21 +42,20 @@
 /**
   * @brief  FLASH Erase structure definition
   */
-typedef struct
-{
-  uint32_t TypeErase;   /*!< Mass erase or sector Erase.
+typedef struct {
+	uint32_t TypeErase;   /*!< Mass erase or sector Erase.
                              This parameter can be a value of @ref FLASHEx_Type_Erase */
 
-  uint32_t Banks;       /*!< Select banks to erase when Mass erase is enabled.
+	uint32_t Banks;       /*!< Select banks to erase when Mass erase is enabled.
                              This parameter must be a value of @ref FLASHEx_Banks */
 
-  uint32_t Sector;      /*!< Initial FLASH sector to erase when Mass erase is disabled
+	uint32_t Sector;      /*!< Initial FLASH sector to erase when Mass erase is disabled
                              This parameter must be a value of @ref FLASH_Sectors */
 
-  uint32_t NbSectors;   /*!< Number of sectors to be erased.
+	uint32_t NbSectors;   /*!< Number of sectors to be erased.
                              This parameter must be a value between 1 and (max number of sectors - value of Initial sector)*/
 
-  uint32_t VoltageRange;/*!< The device voltage range which defines the erase parallelism
+	uint32_t VoltageRange;/*!< The device voltage range which defines the erase parallelism
                              This parameter must be a value of @ref FLASHEx_Voltage_Range */
 
 } FLASH_EraseInitTypeDef;
@@ -65,84 +64,83 @@ typedef struct
 /**
   * @brief  FLASH Option Bytes Program structure definition
   */
-typedef struct
-{
-  uint32_t OptionType;     /*!< Option byte to be configured.
+typedef struct {
+	uint32_t OptionType;     /*!< Option byte to be configured.
                                 This parameter can be a value of @ref FLASHEx_Option_Type */
 
-  uint32_t WRPState;       /*!< Write protection activation or deactivation.
+	uint32_t WRPState;       /*!< Write protection activation or deactivation.
                                 This parameter can be a value of @ref FLASHEx_WRP_State */
 
-  uint32_t WRPSector;      /*!< Specifies the sector(s) to be write protected.
+	uint32_t WRPSector;      /*!< Specifies the sector(s) to be write protected.
                                 The value of this parameter depend on device used within the same series */
 
-  uint32_t RDPLevel;       /*!< Set the read protection level.
+	uint32_t RDPLevel;       /*!< Set the read protection level.
                                 This parameter can be a value of @ref FLASHEx_Option_Bytes_Read_Protection */
 
-  uint32_t BORLevel;       /*!< Set the BOR Level.
+	uint32_t BORLevel;       /*!< Set the BOR Level.
                                 This parameter can be a value of @ref FLASHEx_BOR_Reset_Level */
 
-  uint32_t USERType;       /*!< User option byte(s) to be configured (used for OPTIONBYTE_USER).
+	uint32_t USERType;       /*!< User option byte(s) to be configured (used for OPTIONBYTE_USER).
                                 This parameter can be a combination of @ref FLASHEx_OB_USER_Type */
 
-  uint32_t USERConfig;     /*!< Program the FLASH User Option Byte: IWDG_SW / RST_STOP / RST_STDBY /
+	uint32_t USERConfig;     /*!< Program the FLASH User Option Byte: IWDG_SW / RST_STOP / RST_STDBY /
                                 IWDG_FREEZE_STOP / IWDG_FREEZE_SANDBY / IO_HSLV / SWAP_BANK_OPT */
 
-  uint32_t Banks;          /*!< Select banks for WRP , PCROP and secure area config .
+	uint32_t Banks;          /*!< Select banks for WRP , PCROP and secure area config .
                                 This parameter must be a value of @ref FLASHEx_Banks */
 
-  uint32_t PCROPConfig;    /*!< specifies if the PCROP area shall be erased or not
+	uint32_t PCROPConfig;    /*!< specifies if the PCROP area shall be erased or not
                                 when RDP level decreased from Level 1 to Level 0 or during a mass erase.
                                 This parameter must be a value of @ref FLASHEx_OB_PCROP_RDP enumeration */
 
-  uint32_t PCROPStartAddr; /*!< PCROP Start address (used for OPTIONBYTE_PCROP).
+	uint32_t PCROPStartAddr; /*!< PCROP Start address (used for OPTIONBYTE_PCROP).
                                 This parameter must be a value between begin and end of a bank */
 
-  uint32_t PCROPEndAddr;   /*!< PCROP End address (used for OPTIONBYTE_PCROP).
+	uint32_t PCROPEndAddr;   /*!< PCROP End address (used for OPTIONBYTE_PCROP).
                                 This parameter must be a value between PCROP Start address and end of a bank */
 
-  uint32_t BootConfig;     /*!< Specifies if the Boot Address to be configured BOOT_ADD0, BOOT_ADD1
+	uint32_t BootConfig;     /*!< Specifies if the Boot Address to be configured BOOT_ADD0, BOOT_ADD1
                                 or both. This parameter must be a value of @ref FLASHEx_OB_BOOT_OPTION enumeration */
 
-  uint32_t BootAddr0;      /*!< Boot Address 0.
+	uint32_t BootAddr0;      /*!< Boot Address 0.
                                 This parameter must be a value between begin and end of a bank */
 
-  uint32_t BootAddr1;      /*!< Boot Address 1.
+	uint32_t BootAddr1;      /*!< Boot Address 1.
                                 This parameter must be a value between begin and end of a bank */
 #if defined(DUAL_CORE)
-  uint32_t CM4BootConfig;  /*!< specifies if the CM4 boot Address to be configured BOOT_ADD0, BOOT_ADD1
+	uint32_t CM4BootConfig;  /*!< specifies if the CM4 boot Address to be configured BOOT_ADD0, BOOT_ADD1
                                 or both.
                                 This parameter must be a value of @ref FLASHEx_OB_BOOT_OPTION enumeration */
 
-  uint32_t CM4BootAddr0;   /*!< CM4 Boot Address 0.
+	uint32_t CM4BootAddr0;   /*!< CM4 Boot Address 0.
                                 This parameter must be a value between begin and end of a bank */
 
-  uint32_t CM4BootAddr1;   /*!< CM4 Boot Address 1.
+	uint32_t CM4BootAddr1;   /*!< CM4 Boot Address 1.
                                 This parameter must be a value between begin and end of a bank */
 #endif /*DUAL_CORE*/
 
-  uint32_t SecureAreaConfig;    /*!< specifies if the bank secured area shall be erased or not
+	uint32_t SecureAreaConfig;    /*!< specifies if the bank secured area shall be erased or not
                                      when RDP level decreased from Level 1 to Level 0 or during a mass erase.
                                      This parameter must be a value of @ref FLASHEx_OB_SECURE_RDP enumeration */
 
-  uint32_t SecureAreaStartAddr; /*!< Bank Secure area Start address.
+	uint32_t SecureAreaStartAddr; /*!< Bank Secure area Start address.
                                      This parameter must be a value between begin address and end address of bank1 */
 
-  uint32_t SecureAreaEndAddr;   /*!< Bank Secure area End address.
+	uint32_t SecureAreaEndAddr;   /*!< Bank Secure area End address.
                                      This parameter must be a value between Secure Area Start address and end address of a bank1 */
 
 #if defined (FLASH_OTPBL_LOCKBL)
-  uint32_t OTPBlockLock;   /*!< Specifies the OTP block(s) to be locked.
+	uint32_t OTPBlockLock;   /*!< Specifies the OTP block(s) to be locked.
                                 This parameter must be a value of @ref FLASHEx_OTP_Blocks */
 #endif /* FLASH_OTPBL_LOCKBL */
 
 #if defined (FLASH_OPTSR2_TCM_AXI_SHARED)
-  uint32_t SharedRamConfig; /*!< Specifies the configuration of TCM / AXI shared RAM.
+	uint32_t SharedRamConfig; /*!< Specifies the configuration of TCM / AXI shared RAM.
                                  This parameter must be a value of @ref FLASHEx_OB_TCM_AXI_SHARED */
 #endif /* FLASH_OPTSR2_TCM_AXI_SHARED */
 
 #if defined (FLASH_OPTSR2_CPUFREQ_BOOST)
-  uint32_t FreqBoostState;  /*!< Specifies the state of CPU Frequency Boost.
+	uint32_t FreqBoostState;  /*!< Specifies the state of CPU Frequency Boost.
                                  This parameter must be a value of @ref FLASHEx_OB_CPUFREQ_BOOST */
 #endif /* FLASH_OPTSR2_CPUFREQ_BOOST */
 
@@ -151,27 +149,26 @@ typedef struct
 /**
   * @brief  FLASH Erase structure definition
   */
-typedef struct
-{
-  uint32_t TypeCRC;      /*!< CRC Selection Type.
+typedef struct {
+	uint32_t TypeCRC;      /*!< CRC Selection Type.
                               This parameter can be a value of @ref FLASHEx_CRC_Selection_Type */
 
-  uint32_t BurstSize;    /*!< CRC Burst Size.
+	uint32_t BurstSize;    /*!< CRC Burst Size.
                               This parameter can be a value of @ref FLASHEx_CRC_Burst_Size */
 
-  uint32_t Bank;         /*!< Select bank where CRC computation is enabled.
+	uint32_t Bank;         /*!< Select bank where CRC computation is enabled.
                               This parameter must be FLASH_BANK_1 or FLASH_BANK_2 */
 
-  uint32_t Sector;       /*!< Initial FLASH sector from which starts the CRC computation
+	uint32_t Sector;       /*!< Initial FLASH sector from which starts the CRC computation
                               This parameter must be a value of @ref FLASH_Sectors */
 
-  uint32_t NbSectors;    /*!< Number of sectors to be computed.
+	uint32_t NbSectors;    /*!< Number of sectors to be computed.
                               This parameter must be a value between 1 and (max number of sectors - value of Initial sector)*/
 
-  uint32_t CRCStartAddr; /*!< CRC Start address.
+	uint32_t CRCStartAddr; /*!< CRC Start address.
                               This parameter must be a value between begin address and end address of a bank */
 
-  uint32_t CRCEndAddr;   /*!< CRC End address.
+	uint32_t CRCEndAddr;   /*!< CRC End address.
                               This parameter must be a value between CRC Start address and end address of a bank */
 
 } FLASH_CRCInitTypeDef;
@@ -244,20 +241,20 @@ typedef struct
 
 #if defined (DUAL_CORE)
 #define OPTIONBYTE_ALL           (OPTIONBYTE_WRP         | OPTIONBYTE_RDP        | OPTIONBYTE_USER        |\
-                                  OPTIONBYTE_PCROP       | OPTIONBYTE_BOR        | OPTIONBYTE_SECURE_AREA |\
-                                  OPTIONBYTE_CM7_BOOTADD | OPTIONBYTE_CM4_BOOTADD) /*!< All option byte configuration */
+	OPTIONBYTE_PCROP       | OPTIONBYTE_BOR        | OPTIONBYTE_SECURE_AREA |\
+	OPTIONBYTE_CM7_BOOTADD | OPTIONBYTE_CM4_BOOTADD) /*!< All option byte configuration */
 #elif defined (FLASH_OTPBL_LOCKBL)
 #define OPTIONBYTE_ALL           (OPTIONBYTE_WRP         | OPTIONBYTE_RDP        | OPTIONBYTE_USER        |\
-                                  OPTIONBYTE_PCROP       | OPTIONBYTE_BOR        | OPTIONBYTE_SECURE_AREA |\
-                                  OPTIONBYTE_BOOTADD     | OPTIONBYTE_OTP_LOCK)    /*!< All option byte configuration */
+	OPTIONBYTE_PCROP       | OPTIONBYTE_BOR        | OPTIONBYTE_SECURE_AREA |\
+	OPTIONBYTE_BOOTADD     | OPTIONBYTE_OTP_LOCK)    /*!< All option byte configuration */
 #elif defined (FLASH_OPTSR2_TCM_AXI_SHARED)
 #define OPTIONBYTE_ALL           (OPTIONBYTE_WRP         | OPTIONBYTE_RDP        | OPTIONBYTE_USER        |\
-                                  OPTIONBYTE_PCROP       | OPTIONBYTE_BOR        | OPTIONBYTE_SECURE_AREA |\
-                                  OPTIONBYTE_BOOTADD     | OPTIONBYTE_SHARED_RAM | OPTIONBYTE_FREQ_BOOST) /*!< All option byte configuration */
+	OPTIONBYTE_PCROP       | OPTIONBYTE_BOR        | OPTIONBYTE_SECURE_AREA |\
+	OPTIONBYTE_BOOTADD     | OPTIONBYTE_SHARED_RAM | OPTIONBYTE_FREQ_BOOST) /*!< All option byte configuration */
 #else
 #define OPTIONBYTE_ALL           (OPTIONBYTE_WRP         | OPTIONBYTE_RDP        | OPTIONBYTE_USER        |\
-                                  OPTIONBYTE_PCROP       | OPTIONBYTE_BOR        | OPTIONBYTE_SECURE_AREA |\
-                                  OPTIONBYTE_BOOTADD)                              /*!< All option byte configuration */
+	OPTIONBYTE_PCROP       | OPTIONBYTE_BOR        | OPTIONBYTE_SECURE_AREA |\
+	OPTIONBYTE_BOOTADD)                              /*!< All option byte configuration */
 #endif /* DUAL_CORE */
 /**
   * @}
@@ -601,9 +598,9 @@ typedef struct
   */
 #endif /* FLASH_OPTSR2_TCM_AXI_SHARED */
 
- /** @defgroup FLASHEx_OB_USER_Type  FLASHEx OB USER Type
-  * @{
-  */
+/** @defgroup FLASHEx_OB_USER_Type  FLASHEx OB USER Type
+ * @{
+ */
 #define OB_USER_IWDG1_SW          0x0001U /*!< Independent watchdog selection */
 #define OB_USER_NRST_STOP_D1      0x0002U /*!< Reset when entering Stop mode selection*/
 #define OB_USER_NRST_STDBY_D1     0x0004U /*!< Reset when entering standby mode selection*/
@@ -630,36 +627,36 @@ typedef struct
 
 #if defined (DUAL_CORE)
 #define OB_USER_ALL (OB_USER_IWDG1_SW     | OB_USER_NRST_STOP_D1 | OB_USER_NRST_STDBY_D1 |\
-                     OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
-                     OB_USER_SECURITY     | OB_USER_IOHSLV       | OB_USER_SWAP_BANK     |\
-                     OB_USER_IWDG2_SW     | OB_USER_BCM4         | OB_USER_BCM7          |\
-                     OB_USER_NRST_STOP_D2 | OB_USER_NRST_STDBY_D2)
+	OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
+	OB_USER_SECURITY     | OB_USER_IOHSLV       | OB_USER_SWAP_BANK     |\
+	OB_USER_IWDG2_SW     | OB_USER_BCM4         | OB_USER_BCM7          |\
+	OB_USER_NRST_STOP_D2 | OB_USER_NRST_STDBY_D2)
 #elif defined (FLASH_OPTSR_VDDMMC_HSLV)
 #if defined (DUAL_BANK)
 #define OB_USER_ALL (OB_USER_IWDG1_SW     | OB_USER_NRST_STOP_D1 | OB_USER_NRST_STDBY_D1 |\
-                     OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
-                     OB_USER_SECURITY     | OB_USER_IOHSLV       | OB_USER_SWAP_BANK     |\
-                     OB_USER_VDDMMC_HSLV)
+	OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
+	OB_USER_SECURITY     | OB_USER_IOHSLV       | OB_USER_SWAP_BANK     |\
+	OB_USER_VDDMMC_HSLV)
 #else
 #define OB_USER_ALL (OB_USER_IWDG1_SW     | OB_USER_NRST_STOP_D1 | OB_USER_NRST_STDBY_D1 |\
-                     OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
-                     OB_USER_SECURITY     | OB_USER_IOHSLV                               |\
-                     OB_USER_VDDMMC_HSLV)
+	OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
+	OB_USER_SECURITY     | OB_USER_IOHSLV                               |\
+	OB_USER_VDDMMC_HSLV)
 #endif /* DUAL_BANK */
 #elif defined (FLASH_OPTSR2_TCM_AXI_SHARED)
 #define OB_USER_ALL (OB_USER_IWDG1_SW     | OB_USER_NRST_STOP_D1 | OB_USER_NRST_STDBY_D1 |\
-                     OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
-                     OB_USER_SECURITY     | OB_USER_IOHSLV                               |\
-                     OB_USER_NRST_STOP_D2 | OB_USER_NRST_STDBY_D2)
+	OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
+	OB_USER_SECURITY     | OB_USER_IOHSLV                               |\
+	OB_USER_NRST_STOP_D2 | OB_USER_NRST_STDBY_D2)
 #else /* Single core */
 #if defined (DUAL_BANK)
 #define OB_USER_ALL (OB_USER_IWDG1_SW     | OB_USER_NRST_STOP_D1 | OB_USER_NRST_STDBY_D1 |\
-                     OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
-                     OB_USER_SECURITY     | OB_USER_IOHSLV       | OB_USER_SWAP_BANK     )
+	OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
+	OB_USER_SECURITY     | OB_USER_IOHSLV       | OB_USER_SWAP_BANK     )
 #else
 #define OB_USER_ALL (OB_USER_IWDG1_SW     | OB_USER_NRST_STOP_D1 | OB_USER_NRST_STDBY_D1 |\
-                     OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
-                     OB_USER_SECURITY     | OB_USER_IOHSLV                               )
+	OB_USER_IWDG_STOP    | OB_USER_IWDG_STDBY   | OB_USER_ST_RAM_SIZE   |\
+	OB_USER_SECURITY     | OB_USER_IOHSLV                               )
 #endif /* DUAL_BANK */
 #endif /* DUAL_CORE */
 /**
@@ -756,9 +753,9 @@ typedef struct
   * @retval The FLASH Boot Base Address
   */
 #define __HAL_FLASH_CALC_BOOT_BASE_ADR(__ADDRESS__) ((__ADDRESS__) >> 14U)
- /**
-  * @}
-  */
+/**
+ * @}
+ */
 
 #if defined (FLASH_CR_PSIZE)
 /**
@@ -770,8 +767,8 @@ typedef struct
   */
 #if defined (DUAL_BANK)
 #define __HAL_FLASH_SET_PSIZE(__PSIZE__, __BANK__) (((__BANK__) == FLASH_BANK_1)  ? \
-                              MODIFY_REG(FLASH->CR1, FLASH_CR_PSIZE, (__PSIZE__)) : \
-                              MODIFY_REG(FLASH->CR2, FLASH_CR_PSIZE, (__PSIZE__)))
+	MODIFY_REG(FLASH->CR1, FLASH_CR_PSIZE, (__PSIZE__)) : \
+	MODIFY_REG(FLASH->CR2, FLASH_CR_PSIZE, (__PSIZE__)))
 #else
 #define __HAL_FLASH_SET_PSIZE(__PSIZE__, __BANK__)  MODIFY_REG(FLASH->CR1, FLASH_CR_PSIZE, (__PSIZE__))
 #endif /* DUAL_BANK */
@@ -784,8 +781,8 @@ typedef struct
   */
 #if defined (DUAL_BANK)
 #define __HAL_FLASH_GET_PSIZE(__BANK__) (((__BANK__) == FLASH_BANK_1) ? \
-                              READ_BIT((FLASH->CR1), FLASH_CR_PSIZE)  : \
-                              READ_BIT((FLASH->CR2), FLASH_CR_PSIZE))
+	READ_BIT((FLASH->CR1), FLASH_CR_PSIZE)  : \
+	READ_BIT((FLASH->CR2), FLASH_CR_PSIZE))
 #else
 #define __HAL_FLASH_GET_PSIZE(__BANK__)  READ_BIT((FLASH->CR1), FLASH_CR_PSIZE)
 #endif /* DUAL_BANK */
@@ -850,26 +847,26 @@ HAL_StatusTypeDef HAL_FLASHEx_ComputeCRC(FLASH_CRCInitTypeDef *pCRCInit, uint32_
   */
 
 #define IS_FLASH_TYPEERASE(VALUE)        (((VALUE) == FLASH_TYPEERASE_SECTORS) || \
-                                          ((VALUE) == FLASH_TYPEERASE_MASSERASE))
+	((VALUE) == FLASH_TYPEERASE_MASSERASE))
 
 #if defined (FLASH_CR_PSIZE)
 #define IS_VOLTAGERANGE(RANGE)           (((RANGE) == FLASH_VOLTAGE_RANGE_1) || \
-                                          ((RANGE) == FLASH_VOLTAGE_RANGE_2) || \
-                                          ((RANGE) == FLASH_VOLTAGE_RANGE_3) || \
-                                          ((RANGE) == FLASH_VOLTAGE_RANGE_4))
+	((RANGE) == FLASH_VOLTAGE_RANGE_2) || \
+	((RANGE) == FLASH_VOLTAGE_RANGE_3) || \
+	((RANGE) == FLASH_VOLTAGE_RANGE_4))
 #endif /* FLASH_CR_PSIZE */
 
 #define IS_WRPSTATE(VALUE)               (((VALUE) == OB_WRPSTATE_DISABLE) || \
-                                          ((VALUE) == OB_WRPSTATE_ENABLE))
+	((VALUE) == OB_WRPSTATE_ENABLE))
 
 #define IS_OPTIONBYTE(VALUE)             ((((VALUE) & OPTIONBYTE_ALL) != 0U) && \
-                                          (((VALUE) & ~OPTIONBYTE_ALL) == 0U))
+	(((VALUE) & ~OPTIONBYTE_ALL) == 0U))
 
 #define IS_OB_BOOT_ADDRESS(ADDRESS)      ((ADDRESS) <= 0x8013U)
 
 #define IS_OB_RDP_LEVEL(LEVEL)           (((LEVEL) == OB_RDP_LEVEL_0)   ||\
-                                          ((LEVEL) == OB_RDP_LEVEL_1)   ||\
-                                          ((LEVEL) == OB_RDP_LEVEL_2))
+	((LEVEL) == OB_RDP_LEVEL_1)   ||\
+	((LEVEL) == OB_RDP_LEVEL_2))
 
 #define IS_OB_IWDG_SOURCE(SOURCE)        (((SOURCE) == OB_IWDG_SW) || ((SOURCE) == OB_IWDG_HW))
 
@@ -882,24 +879,24 @@ HAL_StatusTypeDef HAL_FLASHEx_ComputeCRC(FLASH_CRCInitTypeDef *pCRCInit, uint32_
 #define IS_OB_IWDG_STDBY_FREEZE(FREEZE)  (((FREEZE) == OB_IWDG_STDBY_FREEZE) || ((FREEZE) == OB_IWDG_STDBY_ACTIVE))
 
 #define IS_OB_BOR_LEVEL(LEVEL)           (((LEVEL) == OB_BOR_LEVEL0) || ((LEVEL) == OB_BOR_LEVEL1) || \
-                                          ((LEVEL) == OB_BOR_LEVEL2) || ((LEVEL) == OB_BOR_LEVEL3))
+	((LEVEL) == OB_BOR_LEVEL2) || ((LEVEL) == OB_BOR_LEVEL3))
 
 #define IS_FLASH_LATENCY(LATENCY)        (((LATENCY) == FLASH_LATENCY_0)  || \
-                                          ((LATENCY) == FLASH_LATENCY_1)  || \
-                                          ((LATENCY) == FLASH_LATENCY_2)  || \
-                                          ((LATENCY) == FLASH_LATENCY_3)  || \
-                                          ((LATENCY) == FLASH_LATENCY_4)  || \
-                                          ((LATENCY) == FLASH_LATENCY_5)  || \
-                                          ((LATENCY) == FLASH_LATENCY_6)  || \
-                                          ((LATENCY) == FLASH_LATENCY_7)  || \
-                                          ((LATENCY) == FLASH_LATENCY_8)  || \
-                                          ((LATENCY) == FLASH_LATENCY_9)  || \
-                                          ((LATENCY) == FLASH_LATENCY_10) || \
-                                          ((LATENCY) == FLASH_LATENCY_11) || \
-                                          ((LATENCY) == FLASH_LATENCY_12) || \
-                                          ((LATENCY) == FLASH_LATENCY_13) || \
-                                          ((LATENCY) == FLASH_LATENCY_14) || \
-                                          ((LATENCY) == FLASH_LATENCY_15))
+	((LATENCY) == FLASH_LATENCY_1)  || \
+	((LATENCY) == FLASH_LATENCY_2)  || \
+	((LATENCY) == FLASH_LATENCY_3)  || \
+	((LATENCY) == FLASH_LATENCY_4)  || \
+	((LATENCY) == FLASH_LATENCY_5)  || \
+	((LATENCY) == FLASH_LATENCY_6)  || \
+	((LATENCY) == FLASH_LATENCY_7)  || \
+	((LATENCY) == FLASH_LATENCY_8)  || \
+	((LATENCY) == FLASH_LATENCY_9)  || \
+	((LATENCY) == FLASH_LATENCY_10) || \
+	((LATENCY) == FLASH_LATENCY_11) || \
+	((LATENCY) == FLASH_LATENCY_12) || \
+	((LATENCY) == FLASH_LATENCY_13) || \
+	((LATENCY) == FLASH_LATENCY_14) || \
+	((LATENCY) == FLASH_LATENCY_15))
 
 #define IS_FLASH_SECTOR(SECTOR)          ((SECTOR) < FLASH_SECTOR_TOTAL)
 
@@ -910,10 +907,10 @@ HAL_StatusTypeDef HAL_FLASHEx_ComputeCRC(FLASH_CRCInitTypeDef *pCRCInit, uint32_
 #endif /* FLASH_SECTOR_TOTAL == 8U */
 
 #define IS_OB_PCROP_RDP(CONFIG)          (((CONFIG) == OB_PCROP_RDP_NOT_ERASE) || \
-                                          ((CONFIG) == OB_PCROP_RDP_ERASE))
+	((CONFIG) == OB_PCROP_RDP_ERASE))
 
 #define IS_OB_SECURE_RDP(CONFIG)         (((CONFIG) == OB_SECURE_RDP_NOT_ERASE) || \
-                                          ((CONFIG) == OB_SECURE_RDP_ERASE))
+	((CONFIG) == OB_SECURE_RDP_ERASE))
 
 #if defined (DUAL_BANK)
 #define IS_OB_USER_SWAP_BANK(VALUE)      (((VALUE) == OB_SWAP_BANK_DISABLE) || ((VALUE) == OB_SWAP_BANK_ENABLE))
@@ -938,7 +935,7 @@ HAL_StatusTypeDef HAL_FLASHEx_ComputeCRC(FLASH_CRCInitTypeDef *pCRCInit, uint32_
 #define IS_OB_USER_IWDG_STDBY(VALUE)     (((VALUE) == OB_IWDG_STDBY_FREEZE) || ((VALUE) == OB_IWDG_STDBY_ACTIVE))
 
 #define IS_OB_USER_ST_RAM_SIZE(VALUE)    (((VALUE) == OB_ST_RAM_SIZE_2KB) || ((VALUE) == OB_ST_RAM_SIZE_4KB) || \
-                                          ((VALUE) == OB_ST_RAM_SIZE_8KB) || ((VALUE) == OB_ST_RAM_SIZE_16KB))
+	((VALUE) == OB_ST_RAM_SIZE_8KB) || ((VALUE) == OB_ST_RAM_SIZE_16KB))
 
 #define IS_OB_USER_SECURITY(VALUE)       (((VALUE) == OB_SECURITY_ENABLE) || ((VALUE) == OB_SECURITY_DISABLE))
 
@@ -956,7 +953,7 @@ HAL_StatusTypeDef HAL_FLASHEx_ComputeCRC(FLASH_CRCInitTypeDef *pCRCInit, uint32_
 
 #if defined (FLASH_OPTSR2_TCM_AXI_SHARED)
 #define IS_OB_USER_TCM_AXI_SHARED(VALUE) (((VALUE) == OB_TCM_AXI_SHARED_ITCM64KB) || ((VALUE) == OB_TCM_AXI_SHARED_ITCM128KB) || \
-                                          ((VALUE) == OB_TCM_AXI_SHARED_ITCM192KB) || ((VALUE) == OB_TCM_AXI_SHARED_ITCM256KB))
+	((VALUE) == OB_TCM_AXI_SHARED_ITCM192KB) || ((VALUE) == OB_TCM_AXI_SHARED_ITCM256KB))
 #endif /* FLASH_OPTSR2_TCM_AXI_SHARED */
 
 #if defined (FLASH_OPTSR2_CPUFREQ_BOOST)
@@ -964,15 +961,15 @@ HAL_StatusTypeDef HAL_FLASHEx_ComputeCRC(FLASH_CRCInitTypeDef *pCRCInit, uint32_
 #endif /* FLASH_OPTSR2_CPUFREQ_BOOST */
 
 #define IS_OB_USER_TYPE(TYPE)            ((((TYPE) & OB_USER_ALL) != 0U) && \
-                                          (((TYPE) & ~OB_USER_ALL) == 0U))
+	(((TYPE) & ~OB_USER_ALL) == 0U))
 
 #define IS_OB_BOOT_ADD_OPTION(VALUE)     (((VALUE) == OB_BOOT_ADD0)  || \
-                                          ((VALUE) == OB_BOOT_ADD1)  || \
-                                          ((VALUE) == OB_BOOT_ADD_BOTH))
+	((VALUE) == OB_BOOT_ADD1)  || \
+	((VALUE) == OB_BOOT_ADD_BOTH))
 
 #define IS_FLASH_TYPECRC(VALUE)          (((VALUE) == FLASH_CRC_ADDR)    || \
-                                          ((VALUE) == FLASH_CRC_SECTORS) || \
-                                          ((VALUE) == FLASH_CRC_BANK))
+	((VALUE) == FLASH_CRC_SECTORS) || \
+	((VALUE) == FLASH_CRC_BANK))
 
 #if defined (FLASH_OTPBL_LOCKBL)
 #define IS_OTP_BLOCK(VALUE)              ((((VALUE) & 0xFFFF0000U) == 0x00000000U) && ((VALUE) != 0x00000000U))

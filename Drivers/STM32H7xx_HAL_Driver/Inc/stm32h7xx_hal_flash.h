@@ -20,7 +20,7 @@
 #define STM32H7xx_HAL_FLASH_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -42,39 +42,44 @@
 /**
   * @brief  FLASH Procedure structure definition
   */
-typedef enum
-{
-  FLASH_PROC_NONE = 0U,
-  FLASH_PROC_SECTERASE_BANK1,
-  FLASH_PROC_MASSERASE_BANK1,
-  FLASH_PROC_PROGRAM_BANK1,
-  FLASH_PROC_SECTERASE_BANK2,
-  FLASH_PROC_MASSERASE_BANK2,
-  FLASH_PROC_PROGRAM_BANK2,
-  FLASH_PROC_ALLBANK_MASSERASE
+typedef enum {
+	FLASH_PROC_NONE = 0U,
+	FLASH_PROC_SECTERASE_BANK1,
+	FLASH_PROC_MASSERASE_BANK1,
+	FLASH_PROC_PROGRAM_BANK1,
+	FLASH_PROC_SECTERASE_BANK2,
+	FLASH_PROC_MASSERASE_BANK2,
+	FLASH_PROC_PROGRAM_BANK2,
+	FLASH_PROC_ALLBANK_MASSERASE
 } FLASH_ProcedureTypeDef;
 
 
 /**
   * @brief  FLASH handle Structure definition
   */
-typedef struct
-{
-  __IO FLASH_ProcedureTypeDef ProcedureOnGoing;   /*!< Internal variable to indicate which procedure is ongoing or not in IT context */
+typedef struct {
+	__IO FLASH_ProcedureTypeDef
+	ProcedureOnGoing;   /*!< Internal variable to indicate which procedure is ongoing or not in IT context */
 
-  __IO uint32_t               NbSectorsToErase;   /*!< Internal variable to save the remaining sectors to erase in IT context        */
+	__IO uint32_t
+	NbSectorsToErase;   /*!< Internal variable to save the remaining sectors to erase in IT context        */
 
-  __IO uint32_t               VoltageForErase;    /*!< Internal variable to provide voltage range selected by user in IT context     */
+	__IO uint32_t
+	VoltageForErase;    /*!< Internal variable to provide voltage range selected by user in IT context     */
 
-  __IO uint32_t               Sector;             /*!< Internal variable to define the current sector which is erasing               */
+	__IO uint32_t
+	Sector;             /*!< Internal variable to define the current sector which is erasing               */
 
-  __IO uint32_t               Address;            /*!< Internal variable to save address selected for program                        */
+	__IO uint32_t
+	Address;            /*!< Internal variable to save address selected for program                        */
 
-  HAL_LockTypeDef             Lock;               /*!< FLASH locking object                                                          */
+	HAL_LockTypeDef
+	Lock;               /*!< FLASH locking object                                                          */
 
-  __IO uint32_t               ErrorCode;          /*!< FLASH error code                                                              */
+	__IO uint32_t
+	ErrorCode;          /*!< FLASH error code                                                              */
 
-}FLASH_ProcessTypeDef;
+} FLASH_ProcessTypeDef;
 
 /**
   * @}
@@ -190,22 +195,22 @@ typedef struct
 
 #if defined (FLASH_SR_OPERR)
 #define FLASH_FLAG_ALL_ERRORS_BANK1       (FLASH_FLAG_WRPERR_BANK1   | FLASH_FLAG_PGSERR_BANK1   | \
-                                           FLASH_FLAG_STRBERR_BANK1  | FLASH_FLAG_INCERR_BANK1   | \
-                                           FLASH_FLAG_OPERR_BANK1    | FLASH_FLAG_RDPERR_BANK1   | \
-                                           FLASH_FLAG_RDSERR_BANK1   | FLASH_FLAG_SNECCERR_BANK1 | \
-                                           FLASH_FLAG_DBECCERR_BANK1 | FLASH_FLAG_CRCRDERR_BANK1) /*!< All Bank 1 error flags */
+	FLASH_FLAG_STRBERR_BANK1  | FLASH_FLAG_INCERR_BANK1   | \
+	FLASH_FLAG_OPERR_BANK1    | FLASH_FLAG_RDPERR_BANK1   | \
+	FLASH_FLAG_RDSERR_BANK1   | FLASH_FLAG_SNECCERR_BANK1 | \
+	FLASH_FLAG_DBECCERR_BANK1 | FLASH_FLAG_CRCRDERR_BANK1) /*!< All Bank 1 error flags */
 #else
 #define FLASH_FLAG_ALL_ERRORS_BANK1       (FLASH_FLAG_WRPERR_BANK1   | FLASH_FLAG_PGSERR_BANK1   | \
-                                           FLASH_FLAG_STRBERR_BANK1  | FLASH_FLAG_INCERR_BANK1   | \
-                                           FLASH_FLAG_RDPERR_BANK1   | FLASH_FLAG_RDSERR_BANK1   | \
-                                           FLASH_FLAG_SNECCERR_BANK1 | FLASH_FLAG_DBECCERR_BANK1 | \
-                                           FLASH_FLAG_CRCRDERR_BANK1) /*!< All Bank 1 error flags */
+	FLASH_FLAG_STRBERR_BANK1  | FLASH_FLAG_INCERR_BANK1   | \
+	FLASH_FLAG_RDPERR_BANK1   | FLASH_FLAG_RDSERR_BANK1   | \
+	FLASH_FLAG_SNECCERR_BANK1 | FLASH_FLAG_DBECCERR_BANK1 | \
+	FLASH_FLAG_CRCRDERR_BANK1) /*!< All Bank 1 error flags */
 #endif /* FLASH_SR_OPERR */
 
 #define FLASH_FLAG_ALL_BANK1              (FLASH_FLAG_BSY_BANK1      | FLASH_FLAG_WBNE_BANK1     | \
-                                           FLASH_FLAG_QW_BANK1       | FLASH_FLAG_CRC_BUSY_BANK1 | \
-                                           FLASH_FLAG_EOP_BANK1      | FLASH_FLAG_CRCEND_BANK1   | \
-                                           FLASH_FLAG_ALL_ERRORS_BANK1) /*!< All Bank 1 flags */
+	FLASH_FLAG_QW_BANK1       | FLASH_FLAG_CRC_BUSY_BANK1 | \
+	FLASH_FLAG_EOP_BANK1      | FLASH_FLAG_CRCEND_BANK1   | \
+	FLASH_FLAG_ALL_ERRORS_BANK1) /*!< All Bank 1 flags */
 
 #define FLASH_FLAG_BSY_BANK2               (FLASH_SR_BSY      | 0x80000000U)        /*!< FLASH Bank 2 Busy flag */
 #define FLASH_FLAG_WBNE_BANK2              (FLASH_SR_WBNE     | 0x80000000U)        /*!< Write Buffer Not Empty on Bank 2 flag */
@@ -228,22 +233,22 @@ typedef struct
 
 #if defined (FLASH_SR_OPERR)
 #define FLASH_FLAG_ALL_ERRORS_BANK2       (FLASH_FLAG_WRPERR_BANK2   | FLASH_FLAG_PGSERR_BANK2   | \
-                                           FLASH_FLAG_STRBERR_BANK2  | FLASH_FLAG_INCERR_BANK2   | \
-                                           FLASH_FLAG_OPERR_BANK2    | FLASH_FLAG_RDPERR_BANK2   | \
-                                           FLASH_FLAG_RDSERR_BANK2   | FLASH_FLAG_SNECCERR_BANK2 | \
-                                           FLASH_FLAG_DBECCERR_BANK2 | FLASH_FLAG_CRCRDERR_BANK2) /*!< All Bank 2 error flags */
+	FLASH_FLAG_STRBERR_BANK2  | FLASH_FLAG_INCERR_BANK2   | \
+	FLASH_FLAG_OPERR_BANK2    | FLASH_FLAG_RDPERR_BANK2   | \
+	FLASH_FLAG_RDSERR_BANK2   | FLASH_FLAG_SNECCERR_BANK2 | \
+	FLASH_FLAG_DBECCERR_BANK2 | FLASH_FLAG_CRCRDERR_BANK2) /*!< All Bank 2 error flags */
 #else
 #define FLASH_FLAG_ALL_ERRORS_BANK2       (FLASH_FLAG_WRPERR_BANK2   | FLASH_FLAG_PGSERR_BANK2   | \
-                                           FLASH_FLAG_STRBERR_BANK2  | FLASH_FLAG_INCERR_BANK2   | \
-                                           FLASH_FLAG_RDPERR_BANK2   | FLASH_FLAG_RDSERR_BANK2   | \
-                                           FLASH_FLAG_SNECCERR_BANK2 | FLASH_FLAG_DBECCERR_BANK2 | \
-                                           FLASH_FLAG_CRCRDERR_BANK2) /*!< All Bank 2 error flags */
+	FLASH_FLAG_STRBERR_BANK2  | FLASH_FLAG_INCERR_BANK2   | \
+	FLASH_FLAG_RDPERR_BANK2   | FLASH_FLAG_RDSERR_BANK2   | \
+	FLASH_FLAG_SNECCERR_BANK2 | FLASH_FLAG_DBECCERR_BANK2 | \
+	FLASH_FLAG_CRCRDERR_BANK2) /*!< All Bank 2 error flags */
 #endif /* FLASH_SR_OPERR */
 
 #define FLASH_FLAG_ALL_BANK2              (FLASH_FLAG_BSY_BANK2      | FLASH_FLAG_WBNE_BANK2     | \
-                                           FLASH_FLAG_QW_BANK2       | FLASH_FLAG_CRC_BUSY_BANK2 | \
-                                           FLASH_FLAG_EOP_BANK2      | FLASH_FLAG_CRCEND_BANK2   | \
-                                           FLASH_FLAG_ALL_ERRORS_BANK2) /*!< All Bank 2 flags */
+	FLASH_FLAG_QW_BANK2       | FLASH_FLAG_CRC_BUSY_BANK2 | \
+	FLASH_FLAG_EOP_BANK2      | FLASH_FLAG_CRCEND_BANK2   | \
+	FLASH_FLAG_ALL_ERRORS_BANK2) /*!< All Bank 2 flags */
 /**
   * @}
   */
@@ -269,18 +274,18 @@ typedef struct
 
 #if defined (FLASH_CR_OPERRIE)
 #define FLASH_IT_ALL_BANK1                 (FLASH_IT_EOP_BANK1       | FLASH_IT_WRPERR_BANK1    | \
-                                            FLASH_IT_PGSERR_BANK1    | FLASH_IT_STRBERR_BANK1   | \
-                                            FLASH_IT_INCERR_BANK1    | FLASH_IT_OPERR_BANK1     | \
-                                            FLASH_IT_RDPERR_BANK1    | FLASH_IT_RDSERR_BANK1    | \
-                                            FLASH_IT_SNECCERR_BANK1  | FLASH_IT_DBECCERR_BANK1  | \
-                                            FLASH_IT_CRCEND_BANK1    | FLASH_IT_CRCRDERR_BANK1) /*!< All Bank 1 Interrupt sources */
+	FLASH_IT_PGSERR_BANK1    | FLASH_IT_STRBERR_BANK1   | \
+	FLASH_IT_INCERR_BANK1    | FLASH_IT_OPERR_BANK1     | \
+	FLASH_IT_RDPERR_BANK1    | FLASH_IT_RDSERR_BANK1    | \
+	FLASH_IT_SNECCERR_BANK1  | FLASH_IT_DBECCERR_BANK1  | \
+	FLASH_IT_CRCEND_BANK1    | FLASH_IT_CRCRDERR_BANK1) /*!< All Bank 1 Interrupt sources */
 #else
 #define FLASH_IT_ALL_BANK1                 (FLASH_IT_EOP_BANK1       | FLASH_IT_WRPERR_BANK1    | \
-                                            FLASH_IT_PGSERR_BANK1    | FLASH_IT_STRBERR_BANK1   | \
-                                            FLASH_IT_INCERR_BANK1    | FLASH_IT_RDPERR_BANK1    | \
-                                            FLASH_IT_RDSERR_BANK1    | FLASH_IT_SNECCERR_BANK1  | \
-                                            FLASH_IT_DBECCERR_BANK1  | FLASH_IT_CRCEND_BANK1    | \
-                                            FLASH_IT_CRCRDERR_BANK1) /*!< All Bank 1 Interrupt sources */
+	FLASH_IT_PGSERR_BANK1    | FLASH_IT_STRBERR_BANK1   | \
+	FLASH_IT_INCERR_BANK1    | FLASH_IT_RDPERR_BANK1    | \
+	FLASH_IT_RDSERR_BANK1    | FLASH_IT_SNECCERR_BANK1  | \
+	FLASH_IT_DBECCERR_BANK1  | FLASH_IT_CRCEND_BANK1    | \
+	FLASH_IT_CRCRDERR_BANK1) /*!< All Bank 1 Interrupt sources */
 #endif /* FLASH_CR_OPERRIE */
 
 #define FLASH_IT_EOP_BANK2                 (FLASH_CR_EOPIE      | 0x80000000U)  /*!< End of FLASH Bank 2 Operation Interrupt source */
@@ -300,18 +305,18 @@ typedef struct
 
 #if defined (FLASH_CR_OPERRIE)
 #define FLASH_IT_ALL_BANK2                 (FLASH_IT_EOP_BANK2       | FLASH_IT_WRPERR_BANK2    | \
-                                            FLASH_IT_PGSERR_BANK2    | FLASH_IT_STRBERR_BANK2   | \
-                                            FLASH_IT_INCERR_BANK2    | FLASH_IT_OPERR_BANK2     | \
-                                            FLASH_IT_RDPERR_BANK2    | FLASH_IT_RDSERR_BANK2    | \
-                                            FLASH_IT_SNECCERR_BANK2  | FLASH_IT_DBECCERR_BANK2  | \
-                                            FLASH_IT_CRCEND_BANK2    | FLASH_IT_CRCRDERR_BANK2) /*!< All Bank 2 Interrupt sources */
+	FLASH_IT_PGSERR_BANK2    | FLASH_IT_STRBERR_BANK2   | \
+	FLASH_IT_INCERR_BANK2    | FLASH_IT_OPERR_BANK2     | \
+	FLASH_IT_RDPERR_BANK2    | FLASH_IT_RDSERR_BANK2    | \
+	FLASH_IT_SNECCERR_BANK2  | FLASH_IT_DBECCERR_BANK2  | \
+	FLASH_IT_CRCEND_BANK2    | FLASH_IT_CRCRDERR_BANK2) /*!< All Bank 2 Interrupt sources */
 #else
 #define FLASH_IT_ALL_BANK2                 (FLASH_IT_EOP_BANK2       | FLASH_IT_WRPERR_BANK2    | \
-                                            FLASH_IT_PGSERR_BANK2    | FLASH_IT_STRBERR_BANK2   | \
-                                            FLASH_IT_INCERR_BANK2    | FLASH_IT_RDPERR_BANK2    | \
-                                            FLASH_IT_RDSERR_BANK2    | FLASH_IT_SNECCERR_BANK2  | \
-                                            FLASH_IT_DBECCERR_BANK2  | FLASH_IT_CRCEND_BANK2    | \
-                                            FLASH_IT_CRCRDERR_BANK2) /*!< All Bank 2 Interrupt sources */
+	FLASH_IT_PGSERR_BANK2    | FLASH_IT_STRBERR_BANK2   | \
+	FLASH_IT_INCERR_BANK2    | FLASH_IT_RDPERR_BANK2    | \
+	FLASH_IT_RDSERR_BANK2    | FLASH_IT_SNECCERR_BANK2  | \
+	FLASH_IT_DBECCERR_BANK2  | FLASH_IT_CRCEND_BANK2    | \
+	FLASH_IT_CRCRDERR_BANK2) /*!< All Bank 2 Interrupt sources */
 #endif /* FLASH_CR_OPERRIE */
 /**
   * @}
@@ -494,7 +499,7 @@ typedef struct
   * @retval none
   */
 #define __HAL_FLASH_SET_LATENCY(__LATENCY__) \
-                  MODIFY_REG(FLASH->ACR, FLASH_ACR_LATENCY, (uint32_t)(__LATENCY__))
+	MODIFY_REG(FLASH->ACR, FLASH_ACR_LATENCY, (uint32_t)(__LATENCY__))
 
 /**
   * @brief  Get the FLASH Latency.
@@ -544,8 +549,8 @@ typedef struct
 
 #if defined (DUAL_BANK)
 #define __HAL_FLASH_ENABLE_IT(__INTERRUPT__)    (IS_FLASH_IT_BANK1(__INTERRUPT__) ? \
-                                                 __HAL_FLASH_ENABLE_IT_BANK1(__INTERRUPT__) : \
-                                                 __HAL_FLASH_ENABLE_IT_BANK2(__INTERRUPT__))
+	__HAL_FLASH_ENABLE_IT_BANK1(__INTERRUPT__) : \
+	__HAL_FLASH_ENABLE_IT_BANK2(__INTERRUPT__))
 #else
 #define __HAL_FLASH_ENABLE_IT(__INTERRUPT__)    __HAL_FLASH_ENABLE_IT_BANK1(__INTERRUPT__)
 #endif /* DUAL_BANK */
@@ -592,8 +597,8 @@ typedef struct
 
 #if defined (DUAL_BANK)
 #define __HAL_FLASH_DISABLE_IT(__INTERRUPT__)  (IS_FLASH_IT_BANK1(__INTERRUPT__) ? \
-                                                __HAL_FLASH_DISABLE_IT_BANK1(__INTERRUPT__) : \
-                                                __HAL_FLASH_DISABLE_IT_BANK2(__INTERRUPT__))
+	__HAL_FLASH_DISABLE_IT_BANK1(__INTERRUPT__) : \
+	__HAL_FLASH_DISABLE_IT_BANK2(__INTERRUPT__))
 #else
 #define __HAL_FLASH_DISABLE_IT(__INTERRUPT__)  __HAL_FLASH_DISABLE_IT_BANK1(__INTERRUPT__)
 #endif /* DUAL_BANK */
@@ -645,7 +650,7 @@ typedef struct
 
 #if defined (DUAL_BANK)
 #define __HAL_FLASH_GET_FLAG(__FLAG__)           (IS_FLASH_FLAG_BANK1(__FLAG__) ?  __HAL_FLASH_GET_FLAG_BANK1(__FLAG__) : \
-                                                  __HAL_FLASH_GET_FLAG_BANK2(__FLAG__))
+	__HAL_FLASH_GET_FLAG_BANK2(__FLAG__))
 #else
 #define __HAL_FLASH_GET_FLAG(__FLAG__)           __HAL_FLASH_GET_FLAG_BANK1(__FLAG__)
 #endif /* DUAL_BANK */
@@ -694,7 +699,7 @@ typedef struct
 
 #if defined (DUAL_BANK)
 #define __HAL_FLASH_CLEAR_FLAG(__FLAG__)         (IS_FLASH_FLAG_BANK1(__FLAG__) ?  __HAL_FLASH_CLEAR_FLAG_BANK1(__FLAG__) : \
-                                                  __HAL_FLASH_CLEAR_FLAG_BANK2(__FLAG__))
+	__HAL_FLASH_CLEAR_FLAG_BANK2(__FLAG__))
 #else
 #define __HAL_FLASH_CLEAR_FLAG(__FLAG__)         __HAL_FLASH_CLEAR_FLAG_BANK1(__FLAG__)
 #endif /* DUAL_BANK */
@@ -776,7 +781,7 @@ extern FLASH_ProcessTypeDef pFlash;
 
 #if defined (FLASH_OPTCR_PG_OTP)
 #define IS_FLASH_TYPEPROGRAM(VALUE)      (((VALUE) == FLASH_TYPEPROGRAM_FLASHWORD) || \
-                                          ((VALUE) == FLASH_TYPEPROGRAM_OTPWORD))
+	((VALUE) == FLASH_TYPEPROGRAM_OTPWORD))
 #else
 #define IS_FLASH_TYPEPROGRAM(VALUE)      ((VALUE) == FLASH_TYPEPROGRAM_FLASHWORD)
 #endif /* FLASH_OPTCR_PG_OTP */
@@ -802,17 +807,17 @@ extern FLASH_ProcessTypeDef pFlash;
 #if defined (FLASH_OPTCR_PG_OTP)
 #define IS_FLASH_PROGRAM_ADDRESS_OTP(ADDRESS)   (((ADDRESS) >= 0x08FFF000U) && ((ADDRESS) <= 0x08FFF3FFU))
 #define IS_FLASH_PROGRAM_ADDRESS(ADDRESS)       (IS_FLASH_PROGRAM_ADDRESS_BANK1(ADDRESS) || \
-                                                 IS_FLASH_PROGRAM_ADDRESS_BANK2(ADDRESS) || \
-                                                 IS_FLASH_PROGRAM_ADDRESS_OTP(ADDRESS))
+	IS_FLASH_PROGRAM_ADDRESS_BANK2(ADDRESS) || \
+	IS_FLASH_PROGRAM_ADDRESS_OTP(ADDRESS))
 #else
 #define IS_FLASH_PROGRAM_ADDRESS(ADDRESS)       (IS_FLASH_PROGRAM_ADDRESS_BANK1(ADDRESS) || \
-                                                 IS_FLASH_PROGRAM_ADDRESS_BANK2(ADDRESS))
+	IS_FLASH_PROGRAM_ADDRESS_BANK2(ADDRESS))
 #endif /* FLASH_OPTCR_PG_OTP */
 #else
 #if defined (FLASH_OPTCR_PG_OTP)
 #define IS_FLASH_PROGRAM_ADDRESS_OTP(ADDRESS)   (((ADDRESS) >= 0x08FFF000U) && ((ADDRESS) <= 0x08FFF3FFU))
 #define IS_FLASH_PROGRAM_ADDRESS(ADDRESS)       (IS_FLASH_PROGRAM_ADDRESS_BANK1(ADDRESS) || \
-                                                 IS_FLASH_PROGRAM_ADDRESS_OTP(ADDRESS))
+	IS_FLASH_PROGRAM_ADDRESS_OTP(ADDRESS))
 #else
 #define IS_FLASH_PROGRAM_ADDRESS(ADDRESS)       (IS_FLASH_PROGRAM_ADDRESS_BANK1(ADDRESS))
 #endif /* FLASH_OPTCR_PG_OTP */
@@ -822,10 +827,10 @@ extern FLASH_ProcessTypeDef pFlash;
 
 #if defined (DUAL_BANK)
 #define IS_FLASH_BANK(BANK)              (((BANK) == FLASH_BANK_1)  || \
-                                          ((BANK) == FLASH_BANK_2)  || \
-                                          ((BANK) == FLASH_BANK_BOTH))
+	((BANK) == FLASH_BANK_2)  || \
+	((BANK) == FLASH_BANK_BOTH))
 #define IS_FLASH_BANK_EXCLUSIVE(BANK)    (((BANK) == FLASH_BANK_1)  || \
-                                          ((BANK) == FLASH_BANK_2))
+	((BANK) == FLASH_BANK_2))
 #else
 #define IS_FLASH_BANK(BANK)              ((BANK) == FLASH_BANK_1)
 #define IS_FLASH_BANK_EXCLUSIVE(BANK)    ((BANK) == FLASH_BANK_1)

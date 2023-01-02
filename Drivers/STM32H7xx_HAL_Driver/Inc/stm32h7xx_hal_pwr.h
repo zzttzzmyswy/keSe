@@ -21,7 +21,7 @@
 #define STM32H7xx_HAL_PWR_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif /* __cplusplus */
 
 /* Includes ------------------------------------------------------------------*/
@@ -44,18 +44,17 @@
 /**
   * @brief  PWR PVD configuration structure definition
   */
-typedef struct
-{
-  uint32_t PVDLevel; /*!< PVDLevel: Specifies the PVD detection level. This
+typedef struct {
+	uint32_t PVDLevel; /*!< PVDLevel: Specifies the PVD detection level. This
                                     parameter can be a value of @ref
                                     PWR_PVD_detection_level.
                      */
 
-  uint32_t Mode;     /*!< Mode: Specifies the EXTI operating mode for the PVD
+	uint32_t Mode;     /*!< Mode: Specifies the EXTI operating mode for the PVD
                                 event. This parameter can be a value of @ref
                                 PWR_PVD_Mode.
                      */
-}PWR_PVDTypeDef;
+} PWR_PVDTypeDef;
 
 /**
   * @}
@@ -246,54 +245,54 @@ typedef struct
   */
 #if defined (PWR_SRDCR_VOS) /* STM32H7Axxx and STM32H7Bxxx lines */
 #define __HAL_PWR_VOLTAGESCALING_CONFIG(__REGULATOR__)                         \
-do {                                                                           \
-      __IO uint32_t tmpreg = 0x00;                                             \
-      /* Configure the Voltage Scaling */                                      \
-      MODIFY_REG(PWR->SRDCR, PWR_SRDCR_VOS, (__REGULATOR__));                  \
-      /* Delay after setting the voltage scaling */                            \
-      tmpreg = READ_BIT(PWR->SRDCR, PWR_SRDCR_VOS);                            \
-      UNUSED(tmpreg);                                                          \
-} while(0)
+	do {                                                                           \
+		__IO uint32_t tmpreg = 0x00;                                             \
+		/* Configure the Voltage Scaling */                                      \
+		MODIFY_REG(PWR->SRDCR, PWR_SRDCR_VOS, (__REGULATOR__));                  \
+		/* Delay after setting the voltage scaling */                            \
+		tmpreg = READ_BIT(PWR->SRDCR, PWR_SRDCR_VOS);                            \
+		UNUSED(tmpreg);                                                          \
+	} while(0)
 #else /* 3 power domains devices */
 #if defined(SYSCFG_PWRCR_ODEN) /* STM32H74xxx and STM32H75xxx lines */
 #define __HAL_PWR_VOLTAGESCALING_CONFIG(__REGULATOR__)                         \
-do {                                                                           \
-      __IO uint32_t tmpreg = 0x00;                                             \
-      /* Check the voltage scaling to be configured */                         \
-      if((__REGULATOR__) == PWR_REGULATOR_VOLTAGE_SCALE0)                      \
-      {                                                                        \
-        /* Configure the Voltage Scaling 1 */                                  \
-        MODIFY_REG(PWR->D3CR, PWR_D3CR_VOS, PWR_REGULATOR_VOLTAGE_SCALE1);     \
-        /* Delay after setting the voltage scaling */                          \
-        tmpreg = READ_BIT(PWR->D3CR, PWR_D3CR_VOS);                            \
-        /* Enable the PWR overdrive */                                         \
-        SET_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN);                             \
-        /* Delay after setting the syscfg boost setting */                     \
-        tmpreg = READ_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN);                   \
-      }                                                                        \
-      else                                                                     \
-      {                                                                        \
-        /* Disable the PWR overdrive */                                        \
-        CLEAR_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN);                           \
-        /* Delay after setting the syscfg boost setting */                     \
-        tmpreg = READ_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN);                   \
-        /* Configure the Voltage Scaling x */                                  \
-        MODIFY_REG(PWR->D3CR, PWR_D3CR_VOS, (__REGULATOR__));                  \
-        /* Delay after setting the voltage scaling */                          \
-        tmpreg = READ_BIT(PWR->D3CR, PWR_D3CR_VOS);                            \
-      }                                                                        \
-      UNUSED(tmpreg);                                                          \
-} while(0)
+	do {                                                                           \
+		__IO uint32_t tmpreg = 0x00;                                             \
+		/* Check the voltage scaling to be configured */                         \
+		if((__REGULATOR__) == PWR_REGULATOR_VOLTAGE_SCALE0)                      \
+		{                                                                        \
+			/* Configure the Voltage Scaling 1 */                                  \
+			MODIFY_REG(PWR->D3CR, PWR_D3CR_VOS, PWR_REGULATOR_VOLTAGE_SCALE1);     \
+			/* Delay after setting the voltage scaling */                          \
+			tmpreg = READ_BIT(PWR->D3CR, PWR_D3CR_VOS);                            \
+			/* Enable the PWR overdrive */                                         \
+			SET_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN);                             \
+			/* Delay after setting the syscfg boost setting */                     \
+			tmpreg = READ_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN);                   \
+		}                                                                        \
+		else                                                                     \
+		{                                                                        \
+			/* Disable the PWR overdrive */                                        \
+			CLEAR_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN);                           \
+			/* Delay after setting the syscfg boost setting */                     \
+			tmpreg = READ_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN);                   \
+			/* Configure the Voltage Scaling x */                                  \
+			MODIFY_REG(PWR->D3CR, PWR_D3CR_VOS, (__REGULATOR__));                  \
+			/* Delay after setting the voltage scaling */                          \
+			tmpreg = READ_BIT(PWR->D3CR, PWR_D3CR_VOS);                            \
+		}                                                                        \
+		UNUSED(tmpreg);                                                          \
+	} while(0)
 #else /* STM32H72xxx and STM32H73xxx lines */
 #define __HAL_PWR_VOLTAGESCALING_CONFIG(__REGULATOR__)                         \
-do {                                                                           \
-      __IO uint32_t tmpreg = 0x00;                                             \
-      /* Configure the Voltage Scaling */                                      \
-      MODIFY_REG (PWR->D3CR, PWR_D3CR_VOS, (__REGULATOR__));                   \
-      /* Delay after setting the voltage scaling */                            \
-      tmpreg = READ_BIT(PWR->D3CR, PWR_D3CR_VOS);                              \
-      UNUSED(tmpreg);                                                          \
-} while(0)
+	do {                                                                           \
+		__IO uint32_t tmpreg = 0x00;                                             \
+		/* Configure the Voltage Scaling */                                      \
+		MODIFY_REG (PWR->D3CR, PWR_D3CR_VOS, (__REGULATOR__));                   \
+		/* Delay after setting the voltage scaling */                            \
+		tmpreg = READ_BIT(PWR->D3CR, PWR_D3CR_VOS);                              \
+		UNUSED(tmpreg);                                                          \
+	} while(0)
 #endif /* defined(SYSCFG_PWRCR_ODEN) */
 #endif /* defined (PWR_SRDCR_VOS) */
 
@@ -376,97 +375,97 @@ do {                                                                           \
   */
 #if defined (DUAL_CORE) /* Dual core lines */
 #define __HAL_PWR_GET_FLAG(__FLAG__)                                                              \
-(((__FLAG__) == PWR_FLAG_PVDO)       ? ((PWR->CSR1 & PWR_CSR1_PVDO)       == PWR_CSR1_PVDO)      :\
- ((__FLAG__) == PWR_FLAG_AVDO)       ? ((PWR->CSR1 & PWR_CSR1_AVDO)       == PWR_CSR1_AVDO)      :\
- ((__FLAG__) == PWR_FLAG_ACTVOSRDY)  ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY)  == PWR_CSR1_ACTVOSRDY) :\
- ((__FLAG__) == PWR_FLAG_VOSRDY)     ? ((PWR->D3CR & PWR_D3CR_VOSRDY)     == PWR_D3CR_VOSRDY)    :\
- ((__FLAG__) == PWR_FLAG_SMPSEXTRDY) ? ((PWR->CR3 & PWR_CR3_SMPSEXTRDY)   == PWR_CR3_SMPSEXTRDY) :\
- ((__FLAG__) == PWR_FLAG_BRR)        ? ((PWR->CR2 & PWR_CR2_BRRDY)        == PWR_CR2_BRRDY)      :\
- ((__FLAG__) == PWR_FLAG_CPU_HOLD)   ? ((PWR->CPU2CR & PWR_CPU2CR_HOLD1F) == PWR_CPU2CR_HOLD1F)  :\
- ((__FLAG__) == PWR_FLAG_CPU2_HOLD)  ? ((PWR->CPUCR & PWR_CPUCR_HOLD2F)   == PWR_CPUCR_HOLD2F)   :\
- ((__FLAG__) == PWR_FLAG_SB)         ? ((PWR->CPUCR & PWR_CPUCR_SBF)      == PWR_CPUCR_SBF)      :\
- ((__FLAG__) == PWR_FLAG2_SB)        ? ((PWR->CPU2CR & PWR_CPU2CR_SBF)    == PWR_CPU2CR_SBF)     :\
- ((__FLAG__) == PWR_FLAG_STOP)       ? ((PWR->CPUCR & PWR_CPUCR_STOPF)    == PWR_CPUCR_STOPF)    :\
- ((__FLAG__) == PWR_FLAG2_STOP)      ? ((PWR->CPU2CR & PWR_CPU2CR_STOPF)  == PWR_CPU2CR_STOPF)   :\
- ((__FLAG__) == PWR_FLAG_SB_D1)      ? ((PWR->CPUCR & PWR_CPUCR_SBF_D1)   == PWR_CPUCR_SBF_D1)   :\
- ((__FLAG__) == PWR_FLAG2_SB_D1)     ? ((PWR->CPU2CR & PWR_CPU2CR_SBF_D1) == PWR_CPU2CR_SBF_D1)  :\
- ((__FLAG__) == PWR_FLAG_SB_D2)      ? ((PWR->CPUCR & PWR_CPUCR_SBF_D2)   == PWR_CPUCR_SBF_D2)   :\
- ((__FLAG__) == PWR_FLAG2_SB_D2)     ? ((PWR->CPU2CR & PWR_CPU2CR_SBF_D2) == PWR_CPU2CR_SBF_D2)  :\
- ((__FLAG__) == PWR_FLAG_USB33RDY)   ? ((PWR->CR3 & PWR_CR3_USB33RDY)     == PWR_CR3_USB33RDY)   :\
- ((__FLAG__) == PWR_FLAG_TEMPH)      ? ((PWR->CR2 & PWR_CR2_TEMPH)        == PWR_CR2_TEMPH)      :\
- ((__FLAG__) == PWR_FLAG_TEMPL)      ? ((PWR->CR2 & PWR_CR2_TEMPL)        == PWR_CR2_TEMPL)      :\
- ((__FLAG__) == PWR_FLAG_VBATH)      ? ((PWR->CR2 & PWR_CR2_VBATH)        == PWR_CR2_VBATH)      :\
- ((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
+	(((__FLAG__) == PWR_FLAG_PVDO)       ? ((PWR->CSR1 & PWR_CSR1_PVDO)       == PWR_CSR1_PVDO)      :\
+		((__FLAG__) == PWR_FLAG_AVDO)       ? ((PWR->CSR1 & PWR_CSR1_AVDO)       == PWR_CSR1_AVDO)      :\
+		((__FLAG__) == PWR_FLAG_ACTVOSRDY)  ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY)  == PWR_CSR1_ACTVOSRDY) :\
+		((__FLAG__) == PWR_FLAG_VOSRDY)     ? ((PWR->D3CR & PWR_D3CR_VOSRDY)     == PWR_D3CR_VOSRDY)    :\
+		((__FLAG__) == PWR_FLAG_SMPSEXTRDY) ? ((PWR->CR3 & PWR_CR3_SMPSEXTRDY)   == PWR_CR3_SMPSEXTRDY) :\
+		((__FLAG__) == PWR_FLAG_BRR)        ? ((PWR->CR2 & PWR_CR2_BRRDY)        == PWR_CR2_BRRDY)      :\
+		((__FLAG__) == PWR_FLAG_CPU_HOLD)   ? ((PWR->CPU2CR & PWR_CPU2CR_HOLD1F) == PWR_CPU2CR_HOLD1F)  :\
+		((__FLAG__) == PWR_FLAG_CPU2_HOLD)  ? ((PWR->CPUCR & PWR_CPUCR_HOLD2F)   == PWR_CPUCR_HOLD2F)   :\
+		((__FLAG__) == PWR_FLAG_SB)         ? ((PWR->CPUCR & PWR_CPUCR_SBF)      == PWR_CPUCR_SBF)      :\
+		((__FLAG__) == PWR_FLAG2_SB)        ? ((PWR->CPU2CR & PWR_CPU2CR_SBF)    == PWR_CPU2CR_SBF)     :\
+		((__FLAG__) == PWR_FLAG_STOP)       ? ((PWR->CPUCR & PWR_CPUCR_STOPF)    == PWR_CPUCR_STOPF)    :\
+		((__FLAG__) == PWR_FLAG2_STOP)      ? ((PWR->CPU2CR & PWR_CPU2CR_STOPF)  == PWR_CPU2CR_STOPF)   :\
+		((__FLAG__) == PWR_FLAG_SB_D1)      ? ((PWR->CPUCR & PWR_CPUCR_SBF_D1)   == PWR_CPUCR_SBF_D1)   :\
+		((__FLAG__) == PWR_FLAG2_SB_D1)     ? ((PWR->CPU2CR & PWR_CPU2CR_SBF_D1) == PWR_CPU2CR_SBF_D1)  :\
+		((__FLAG__) == PWR_FLAG_SB_D2)      ? ((PWR->CPUCR & PWR_CPUCR_SBF_D2)   == PWR_CPUCR_SBF_D2)   :\
+		((__FLAG__) == PWR_FLAG2_SB_D2)     ? ((PWR->CPU2CR & PWR_CPU2CR_SBF_D2) == PWR_CPU2CR_SBF_D2)  :\
+		((__FLAG__) == PWR_FLAG_USB33RDY)   ? ((PWR->CR3 & PWR_CR3_USB33RDY)     == PWR_CR3_USB33RDY)   :\
+		((__FLAG__) == PWR_FLAG_TEMPH)      ? ((PWR->CR2 & PWR_CR2_TEMPH)        == PWR_CR2_TEMPH)      :\
+		((__FLAG__) == PWR_FLAG_TEMPL)      ? ((PWR->CR2 & PWR_CR2_TEMPL)        == PWR_CR2_TEMPL)      :\
+		((__FLAG__) == PWR_FLAG_VBATH)      ? ((PWR->CR2 & PWR_CR2_VBATH)        == PWR_CR2_VBATH)      :\
+		((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
 #else /* Single core lines */
 #if defined (PWR_CPUCR_SBF_D2) /* STM32H72x, STM32H73x, STM32H74x and STM32H75x lines */
 #if defined (SMPS) /* STM32H725 and STM32H735 lines */
 #define __HAL_PWR_GET_FLAG(__FLAG__)                                                              \
-(((__FLAG__) == PWR_FLAG_PVDO)       ? ((PWR->CSR1 & PWR_CSR1_PVDO)      == PWR_CSR1_PVDO)       :\
- ((__FLAG__) == PWR_FLAG_AVDO)       ? ((PWR->CSR1 & PWR_CSR1_AVDO)      == PWR_CSR1_AVDO)       :\
- ((__FLAG__) == PWR_FLAG_ACTVOSRDY)  ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY) == PWR_CSR1_ACTVOSRDY)  :\
- ((__FLAG__) == PWR_FLAG_VOSRDY)     ? ((PWR->D3CR & PWR_D3CR_VOSRDY)    == PWR_D3CR_VOSRDY)     :\
- ((__FLAG__) == PWR_FLAG_SMPSEXTRDY) ? ((PWR->CR3 & PWR_FLAG_SMPSEXTRDY) == PWR_FLAG_SMPSEXTRDY) :\
- ((__FLAG__) == PWR_FLAG_BRR)        ? ((PWR->CR2 & PWR_CR2_BRRDY)       == PWR_CR2_BRRDY)       :\
- ((__FLAG__) == PWR_FLAG_SB)         ? ((PWR->CPUCR & PWR_CPUCR_SBF)     == PWR_CPUCR_SBF)       :\
- ((__FLAG__) == PWR_FLAG_STOP)       ? ((PWR->CPUCR & PWR_CPUCR_STOPF)   == PWR_CPUCR_STOPF)     :\
- ((__FLAG__) == PWR_FLAG_SB_D1)      ? ((PWR->CPUCR & PWR_CPUCR_SBF_D1)  == PWR_CPUCR_SBF_D1)    :\
- ((__FLAG__) == PWR_FLAG_SB_D2)      ? ((PWR->CPUCR & PWR_CPUCR_SBF_D2)  == PWR_CPUCR_SBF_D2)    :\
- ((__FLAG__) == PWR_FLAG_USB33RDY)   ? ((PWR->CR3 & PWR_CR3_USB33RDY)    == PWR_CR3_USB33RDY)    :\
- ((__FLAG__) == PWR_FLAG_TEMPH)      ? ((PWR->CR2 & PWR_CR2_TEMPH)       == PWR_CR2_TEMPH)       :\
- ((__FLAG__) == PWR_FLAG_TEMPL)      ? ((PWR->CR2 & PWR_CR2_TEMPL)       == PWR_CR2_TEMPL)       :\
- ((__FLAG__) == PWR_FLAG_VBATH)      ? ((PWR->CR2 & PWR_CR2_VBATH)       == PWR_CR2_VBATH)       :\
- ((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
+	(((__FLAG__) == PWR_FLAG_PVDO)       ? ((PWR->CSR1 & PWR_CSR1_PVDO)      == PWR_CSR1_PVDO)       :\
+		((__FLAG__) == PWR_FLAG_AVDO)       ? ((PWR->CSR1 & PWR_CSR1_AVDO)      == PWR_CSR1_AVDO)       :\
+		((__FLAG__) == PWR_FLAG_ACTVOSRDY)  ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY) == PWR_CSR1_ACTVOSRDY)  :\
+		((__FLAG__) == PWR_FLAG_VOSRDY)     ? ((PWR->D3CR & PWR_D3CR_VOSRDY)    == PWR_D3CR_VOSRDY)     :\
+		((__FLAG__) == PWR_FLAG_SMPSEXTRDY) ? ((PWR->CR3 & PWR_FLAG_SMPSEXTRDY) == PWR_FLAG_SMPSEXTRDY) :\
+		((__FLAG__) == PWR_FLAG_BRR)        ? ((PWR->CR2 & PWR_CR2_BRRDY)       == PWR_CR2_BRRDY)       :\
+		((__FLAG__) == PWR_FLAG_SB)         ? ((PWR->CPUCR & PWR_CPUCR_SBF)     == PWR_CPUCR_SBF)       :\
+		((__FLAG__) == PWR_FLAG_STOP)       ? ((PWR->CPUCR & PWR_CPUCR_STOPF)   == PWR_CPUCR_STOPF)     :\
+		((__FLAG__) == PWR_FLAG_SB_D1)      ? ((PWR->CPUCR & PWR_CPUCR_SBF_D1)  == PWR_CPUCR_SBF_D1)    :\
+		((__FLAG__) == PWR_FLAG_SB_D2)      ? ((PWR->CPUCR & PWR_CPUCR_SBF_D2)  == PWR_CPUCR_SBF_D2)    :\
+		((__FLAG__) == PWR_FLAG_USB33RDY)   ? ((PWR->CR3 & PWR_CR3_USB33RDY)    == PWR_CR3_USB33RDY)    :\
+		((__FLAG__) == PWR_FLAG_TEMPH)      ? ((PWR->CR2 & PWR_CR2_TEMPH)       == PWR_CR2_TEMPH)       :\
+		((__FLAG__) == PWR_FLAG_TEMPL)      ? ((PWR->CR2 & PWR_CR2_TEMPL)       == PWR_CR2_TEMPL)       :\
+		((__FLAG__) == PWR_FLAG_VBATH)      ? ((PWR->CR2 & PWR_CR2_VBATH)       == PWR_CR2_VBATH)       :\
+		((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
 #else /* STM32H723, STM32H733, STM32H742, STM32H743, STM32H750 and STM32H753 lines */
 #define __HAL_PWR_GET_FLAG(__FLAG__)                                                            \
-(((__FLAG__) == PWR_FLAG_PVDO)      ? ((PWR->CSR1 & PWR_CSR1_PVDO)      == PWR_CSR1_PVDO)      :\
- ((__FLAG__) == PWR_FLAG_AVDO)      ? ((PWR->CSR1 & PWR_CSR1_AVDO)      == PWR_CSR1_AVDO)      :\
- ((__FLAG__) == PWR_FLAG_ACTVOSRDY) ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY) == PWR_CSR1_ACTVOSRDY) :\
- ((__FLAG__) == PWR_FLAG_VOSRDY)    ? ((PWR->D3CR & PWR_D3CR_VOSRDY)    == PWR_D3CR_VOSRDY)    :\
- ((__FLAG__) == PWR_FLAG_SCUEN)     ? ((PWR->CR3 & PWR_CR3_SCUEN)       == PWR_CR3_SCUEN)      :\
- ((__FLAG__) == PWR_FLAG_BRR)       ? ((PWR->CR2 & PWR_CR2_BRRDY)       == PWR_CR2_BRRDY)      :\
- ((__FLAG__) == PWR_FLAG_SB)        ? ((PWR->CPUCR & PWR_CPUCR_SBF)     == PWR_CPUCR_SBF)      :\
- ((__FLAG__) == PWR_FLAG_STOP)      ? ((PWR->CPUCR & PWR_CPUCR_STOPF)   == PWR_CPUCR_STOPF)    :\
- ((__FLAG__) == PWR_FLAG_SB_D1)     ? ((PWR->CPUCR & PWR_CPUCR_SBF_D1)  == PWR_CPUCR_SBF_D1)   :\
- ((__FLAG__) == PWR_FLAG_SB_D2)     ? ((PWR->CPUCR & PWR_CPUCR_SBF_D2)  == PWR_CPUCR_SBF_D2)   :\
- ((__FLAG__) == PWR_FLAG_USB33RDY)  ? ((PWR->CR3 & PWR_CR3_USB33RDY)    == PWR_CR3_USB33RDY)   :\
- ((__FLAG__) == PWR_FLAG_TEMPH)     ? ((PWR->CR2 & PWR_CR2_TEMPH)       == PWR_CR2_TEMPH)      :\
- ((__FLAG__) == PWR_FLAG_TEMPL)     ? ((PWR->CR2 & PWR_CR2_TEMPL)       == PWR_CR2_TEMPL)      :\
- ((__FLAG__) == PWR_FLAG_VBATH)     ? ((PWR->CR2 & PWR_CR2_VBATH)       == PWR_CR2_VBATH)      :\
- ((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
+	(((__FLAG__) == PWR_FLAG_PVDO)      ? ((PWR->CSR1 & PWR_CSR1_PVDO)      == PWR_CSR1_PVDO)      :\
+		((__FLAG__) == PWR_FLAG_AVDO)      ? ((PWR->CSR1 & PWR_CSR1_AVDO)      == PWR_CSR1_AVDO)      :\
+		((__FLAG__) == PWR_FLAG_ACTVOSRDY) ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY) == PWR_CSR1_ACTVOSRDY) :\
+		((__FLAG__) == PWR_FLAG_VOSRDY)    ? ((PWR->D3CR & PWR_D3CR_VOSRDY)    == PWR_D3CR_VOSRDY)    :\
+		((__FLAG__) == PWR_FLAG_SCUEN)     ? ((PWR->CR3 & PWR_CR3_SCUEN)       == PWR_CR3_SCUEN)      :\
+		((__FLAG__) == PWR_FLAG_BRR)       ? ((PWR->CR2 & PWR_CR2_BRRDY)       == PWR_CR2_BRRDY)      :\
+		((__FLAG__) == PWR_FLAG_SB)        ? ((PWR->CPUCR & PWR_CPUCR_SBF)     == PWR_CPUCR_SBF)      :\
+		((__FLAG__) == PWR_FLAG_STOP)      ? ((PWR->CPUCR & PWR_CPUCR_STOPF)   == PWR_CPUCR_STOPF)    :\
+		((__FLAG__) == PWR_FLAG_SB_D1)     ? ((PWR->CPUCR & PWR_CPUCR_SBF_D1)  == PWR_CPUCR_SBF_D1)   :\
+		((__FLAG__) == PWR_FLAG_SB_D2)     ? ((PWR->CPUCR & PWR_CPUCR_SBF_D2)  == PWR_CPUCR_SBF_D2)   :\
+		((__FLAG__) == PWR_FLAG_USB33RDY)  ? ((PWR->CR3 & PWR_CR3_USB33RDY)    == PWR_CR3_USB33RDY)   :\
+		((__FLAG__) == PWR_FLAG_TEMPH)     ? ((PWR->CR2 & PWR_CR2_TEMPH)       == PWR_CR2_TEMPH)      :\
+		((__FLAG__) == PWR_FLAG_TEMPL)     ? ((PWR->CR2 & PWR_CR2_TEMPL)       == PWR_CR2_TEMPL)      :\
+		((__FLAG__) == PWR_FLAG_VBATH)     ? ((PWR->CR2 & PWR_CR2_VBATH)       == PWR_CR2_VBATH)      :\
+		((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
 #endif /* defined (SMPS) */
 #else /* STM32H7Axxx and STM32H7Bxxx lines */
 #if defined (SMPS) /* STM32H7AxxQ and STM32H7BxxQ lines */
 #define __HAL_PWR_GET_FLAG(__FLAG__)                                                             \
-(((__FLAG__) == PWR_FLAG_PVDO)       ? ((PWR->CSR1 & PWR_CSR1_PVDO)      == PWR_CSR1_PVDO)      :\
- ((__FLAG__) == PWR_FLAG_AVDO)       ? ((PWR->CSR1 & PWR_CSR1_AVDO)      == PWR_CSR1_AVDO)      :\
- ((__FLAG__) == PWR_FLAG_ACTVOSRDY)  ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY) == PWR_CSR1_ACTVOSRDY) :\
- ((__FLAG__) == PWR_FLAG_BRR)        ? ((PWR->CR2 & PWR_CR2_BRRDY)       == PWR_CR2_BRRDY)      :\
- ((__FLAG__) == PWR_FLAG_VOSRDY)     ? ((PWR->SRDCR & PWR_SRDCR_VOSRDY)  == PWR_SRDCR_VOSRDY)   :\
- ((__FLAG__) == PWR_FLAG_STOP)       ? ((PWR->CPUCR & PWR_CPUCR_STOPF)   == PWR_CPUCR_STOPF)    :\
- ((__FLAG__) == PWR_FLAG_SB)         ? ((PWR->CPUCR & PWR_CPUCR_SBF)     == PWR_CPUCR_SBF)      :\
- ((__FLAG__) == PWR_FLAG_MMCVDO)     ? ((PWR->CSR1 & PWR_CSR1_MMCVDO)    == PWR_CSR1_MMCVDO)    :\
- ((__FLAG__) == PWR_FLAG_SMPSEXTRDY) ? ((PWR->CR3 & PWR_CR3_SMPSEXTRDY)  == PWR_CR3_SMPSEXTRDY) :\
- ((__FLAG__) == PWR_FLAG_USB33RDY)   ? ((PWR->CR3 & PWR_CR3_USB33RDY)    == PWR_CR3_USB33RDY)   :\
- ((__FLAG__) == PWR_FLAG_TEMPH)      ? ((PWR->CR2 & PWR_CR2_TEMPH)       == PWR_CR2_TEMPH)      :\
- ((__FLAG__) == PWR_FLAG_TEMPL)      ? ((PWR->CR2 & PWR_CR2_TEMPL)       == PWR_CR2_TEMPL)      :\
- ((__FLAG__) == PWR_FLAG_VBATH)      ? ((PWR->CR2 & PWR_CR2_VBATH)       == PWR_CR2_VBATH)      :\
- ((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
+	(((__FLAG__) == PWR_FLAG_PVDO)       ? ((PWR->CSR1 & PWR_CSR1_PVDO)      == PWR_CSR1_PVDO)      :\
+		((__FLAG__) == PWR_FLAG_AVDO)       ? ((PWR->CSR1 & PWR_CSR1_AVDO)      == PWR_CSR1_AVDO)      :\
+		((__FLAG__) == PWR_FLAG_ACTVOSRDY)  ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY) == PWR_CSR1_ACTVOSRDY) :\
+		((__FLAG__) == PWR_FLAG_BRR)        ? ((PWR->CR2 & PWR_CR2_BRRDY)       == PWR_CR2_BRRDY)      :\
+		((__FLAG__) == PWR_FLAG_VOSRDY)     ? ((PWR->SRDCR & PWR_SRDCR_VOSRDY)  == PWR_SRDCR_VOSRDY)   :\
+		((__FLAG__) == PWR_FLAG_STOP)       ? ((PWR->CPUCR & PWR_CPUCR_STOPF)   == PWR_CPUCR_STOPF)    :\
+		((__FLAG__) == PWR_FLAG_SB)         ? ((PWR->CPUCR & PWR_CPUCR_SBF)     == PWR_CPUCR_SBF)      :\
+		((__FLAG__) == PWR_FLAG_MMCVDO)     ? ((PWR->CSR1 & PWR_CSR1_MMCVDO)    == PWR_CSR1_MMCVDO)    :\
+		((__FLAG__) == PWR_FLAG_SMPSEXTRDY) ? ((PWR->CR3 & PWR_CR3_SMPSEXTRDY)  == PWR_CR3_SMPSEXTRDY) :\
+		((__FLAG__) == PWR_FLAG_USB33RDY)   ? ((PWR->CR3 & PWR_CR3_USB33RDY)    == PWR_CR3_USB33RDY)   :\
+		((__FLAG__) == PWR_FLAG_TEMPH)      ? ((PWR->CR2 & PWR_CR2_TEMPH)       == PWR_CR2_TEMPH)      :\
+		((__FLAG__) == PWR_FLAG_TEMPL)      ? ((PWR->CR2 & PWR_CR2_TEMPL)       == PWR_CR2_TEMPL)      :\
+		((__FLAG__) == PWR_FLAG_VBATH)      ? ((PWR->CR2 & PWR_CR2_VBATH)       == PWR_CR2_VBATH)      :\
+		((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
 #else /* STM32H7Axx and STM32H7Bxx lines */
 #define __HAL_PWR_GET_FLAG(__FLAG__)                                                            \
-(((__FLAG__) == PWR_FLAG_PVDO)      ? ((PWR->CSR1 & PWR_CSR1_PVDO)      == PWR_CSR1_PVDO)      :\
- ((__FLAG__) == PWR_FLAG_AVDO)      ? ((PWR->CSR1 & PWR_CSR1_AVDO)      == PWR_CSR1_AVDO)      :\
- ((__FLAG__) == PWR_FLAG_ACTVOSRDY) ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY) == PWR_CSR1_ACTVOSRDY) :\
- ((__FLAG__) == PWR_FLAG_BRR)       ? ((PWR->CR2 & PWR_CR2_BRRDY)       == PWR_CR2_BRRDY)      :\
- ((__FLAG__) == PWR_FLAG_VOSRDY)    ? ((PWR->SRDCR & PWR_SRDCR_VOSRDY)  == PWR_SRDCR_VOSRDY)   :\
- ((__FLAG__) == PWR_FLAG_SCUEN)     ? ((PWR->CR3 & PWR_CR3_SCUEN)       == PWR_CR3_SCUEN)      :\
- ((__FLAG__) == PWR_FLAG_STOP)      ? ((PWR->CPUCR & PWR_CPUCR_STOPF)   == PWR_CPUCR_STOPF)    :\
- ((__FLAG__) == PWR_FLAG_SB)        ? ((PWR->CPUCR & PWR_CPUCR_SBF)     == PWR_CPUCR_SBF)      :\
- ((__FLAG__) == PWR_FLAG_MMCVDO)    ? ((PWR->CSR1 & PWR_CSR1_MMCVDO)    == PWR_CSR1_MMCVDO)    :\
- ((__FLAG__) == PWR_FLAG_USB33RDY)  ? ((PWR->CR3 & PWR_CR3_USB33RDY)    == PWR_CR3_USB33RDY)   :\
- ((__FLAG__) == PWR_FLAG_TEMPH)     ? ((PWR->CR2 & PWR_CR2_TEMPH)       == PWR_CR2_TEMPH)      :\
- ((__FLAG__) == PWR_FLAG_TEMPL)     ? ((PWR->CR2 & PWR_CR2_TEMPL)       == PWR_CR2_TEMPL)      :\
- ((__FLAG__) == PWR_FLAG_VBATH)     ? ((PWR->CR2 & PWR_CR2_VBATH)       == PWR_CR2_VBATH)      :\
- ((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
+	(((__FLAG__) == PWR_FLAG_PVDO)      ? ((PWR->CSR1 & PWR_CSR1_PVDO)      == PWR_CSR1_PVDO)      :\
+		((__FLAG__) == PWR_FLAG_AVDO)      ? ((PWR->CSR1 & PWR_CSR1_AVDO)      == PWR_CSR1_AVDO)      :\
+		((__FLAG__) == PWR_FLAG_ACTVOSRDY) ? ((PWR->CSR1 & PWR_CSR1_ACTVOSRDY) == PWR_CSR1_ACTVOSRDY) :\
+		((__FLAG__) == PWR_FLAG_BRR)       ? ((PWR->CR2 & PWR_CR2_BRRDY)       == PWR_CR2_BRRDY)      :\
+		((__FLAG__) == PWR_FLAG_VOSRDY)    ? ((PWR->SRDCR & PWR_SRDCR_VOSRDY)  == PWR_SRDCR_VOSRDY)   :\
+		((__FLAG__) == PWR_FLAG_SCUEN)     ? ((PWR->CR3 & PWR_CR3_SCUEN)       == PWR_CR3_SCUEN)      :\
+		((__FLAG__) == PWR_FLAG_STOP)      ? ((PWR->CPUCR & PWR_CPUCR_STOPF)   == PWR_CPUCR_STOPF)    :\
+		((__FLAG__) == PWR_FLAG_SB)        ? ((PWR->CPUCR & PWR_CPUCR_SBF)     == PWR_CPUCR_SBF)      :\
+		((__FLAG__) == PWR_FLAG_MMCVDO)    ? ((PWR->CSR1 & PWR_CSR1_MMCVDO)    == PWR_CSR1_MMCVDO)    :\
+		((__FLAG__) == PWR_FLAG_USB33RDY)  ? ((PWR->CR3 & PWR_CR3_USB33RDY)    == PWR_CR3_USB33RDY)   :\
+		((__FLAG__) == PWR_FLAG_TEMPH)     ? ((PWR->CR2 & PWR_CR2_TEMPH)       == PWR_CR2_TEMPH)      :\
+		((__FLAG__) == PWR_FLAG_TEMPL)     ? ((PWR->CR2 & PWR_CR2_TEMPL)       == PWR_CR2_TEMPL)      :\
+		((__FLAG__) == PWR_FLAG_VBATH)     ? ((PWR->CR2 & PWR_CR2_VBATH)       == PWR_CR2_VBATH)      :\
+		((PWR->CR2 & PWR_CR2_VBATL) == PWR_CR2_VBATL))
 #endif /* SMPS */
 #endif /* PWR_CPUCR_SBF_D2 */
 #endif /* DUAL_CORE */
@@ -498,10 +497,10 @@ do {                                                                           \
   * @retval None.
   */
 #define __HAL_PWR_CLEAR_FLAG(__FLAG__)      \
-do {                                        \
-     SET_BIT(PWR->CPUCR, PWR_CPUCR_CSSF);   \
-     SET_BIT(PWR->CPU2CR, PWR_CPU2CR_CSSF); \
-} while(0)
+	do {                                        \
+		SET_BIT(PWR->CPUCR, PWR_CPUCR_CSSF);   \
+		SET_BIT(PWR->CPU2CR, PWR_CPU2CR_CSSF); \
+	} while(0)
 #else
 /** @brief  Clear CPU PWR flags.
   * @param  __FLAG__ : Specifies the flag to clear.
@@ -616,20 +615,20 @@ do {                                        \
   * @retval None.
   */
 #define __HAL_PWR_PVD_EXTI_ENABLE_RISING_FALLING_EDGE() \
-do {                                                    \
-      __HAL_PWR_PVD_EXTI_ENABLE_RISING_EDGE();          \
-      __HAL_PWR_PVD_EXTI_ENABLE_FALLING_EDGE();         \
-} while(0);
+	do {                                                    \
+		__HAL_PWR_PVD_EXTI_ENABLE_RISING_EDGE();          \
+		__HAL_PWR_PVD_EXTI_ENABLE_FALLING_EDGE();         \
+	} while(0);
 
 /**
   * @brief Disable the PVD Rising & Falling Interrupt Trigger.
   * @retval None.
   */
 #define __HAL_PWR_PVD_EXTI_DISABLE_RISING_FALLING_EDGE() \
-do {                                                     \
-      __HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();          \
-      __HAL_PWR_PVD_EXTI_DISABLE_FALLING_EDGE();         \
-} while(0);
+	do {                                                     \
+		__HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();          \
+		__HAL_PWR_PVD_EXTI_DISABLE_FALLING_EDGE();         \
+	} while(0);
 
 /**
   * @brief Check whether the specified PVD EXTI interrupt flag is set or not.
@@ -680,9 +679,9 @@ do {                                                     \
   * @{
   */
 /* Initialization and de-initialization functions *****************************/
-void HAL_PWR_DeInit            (void);
-void HAL_PWR_EnableBkUpAccess  (void);
-void HAL_PWR_DisableBkUpAccess (void);
+void HAL_PWR_DeInit(void);
+void HAL_PWR_EnableBkUpAccess(void);
+void HAL_PWR_DisableBkUpAccess(void);
 /**
   * @}
   */
@@ -692,28 +691,28 @@ void HAL_PWR_DisableBkUpAccess (void);
   */
 /* Peripheral Control functions  **********************************************/
 /* PVD configuration */
-void HAL_PWR_ConfigPVD  (PWR_PVDTypeDef *sConfigPVD);
-void HAL_PWR_EnablePVD  (void);
-void HAL_PWR_DisablePVD (void);
+void HAL_PWR_ConfigPVD(PWR_PVDTypeDef *sConfigPVD);
+void HAL_PWR_EnablePVD(void);
+void HAL_PWR_DisablePVD(void);
 
 /* WakeUp pins configuration */
-void HAL_PWR_EnableWakeUpPin  (uint32_t WakeUpPinPolarity);
-void HAL_PWR_DisableWakeUpPin (uint32_t WakeUpPinx);
+void HAL_PWR_EnableWakeUpPin(uint32_t WakeUpPinPolarity);
+void HAL_PWR_DisableWakeUpPin(uint32_t WakeUpPinx);
 
 /* Low Power modes entry */
-void HAL_PWR_EnterSTOPMode    (uint32_t Regulator, uint8_t STOPEntry);
-void HAL_PWR_EnterSLEEPMode   (uint32_t Regulator, uint8_t SLEEPEntry);
-void HAL_PWR_EnterSTANDBYMode (void);
+void HAL_PWR_EnterSTOPMode(uint32_t Regulator, uint8_t STOPEntry);
+void HAL_PWR_EnterSLEEPMode(uint32_t Regulator, uint8_t SLEEPEntry);
+void HAL_PWR_EnterSTANDBYMode(void);
 
 /* Power PVD IRQ Handler */
-void HAL_PWR_PVD_IRQHandler (void);
-void HAL_PWR_PVDCallback    (void);
+void HAL_PWR_PVD_IRQHandler(void);
+void HAL_PWR_PVDCallback(void);
 
 /* Cortex System Control functions  *******************************************/
-void HAL_PWR_EnableSleepOnExit  (void);
-void HAL_PWR_DisableSleepOnExit (void);
-void HAL_PWR_EnableSEVOnPend    (void);
-void HAL_PWR_DisableSEVOnPend   (void);
+void HAL_PWR_EnableSleepOnExit(void);
+void HAL_PWR_DisableSleepOnExit(void);
+void HAL_PWR_EnableSEVOnPend(void);
+void HAL_PWR_DisableSEVOnPend(void);
 /**
   * @}
   */
@@ -751,40 +750,40 @@ void HAL_PWR_DisableSEVOnPend   (void);
   */
 /* Check PVD level parameter */
 #define IS_PWR_PVD_LEVEL(LEVEL) (((LEVEL) == PWR_PVDLEVEL_0) ||\
-                                 ((LEVEL) == PWR_PVDLEVEL_1) ||\
-                                 ((LEVEL) == PWR_PVDLEVEL_2) ||\
-                                 ((LEVEL) == PWR_PVDLEVEL_3) ||\
-                                 ((LEVEL) == PWR_PVDLEVEL_4) ||\
-                                 ((LEVEL) == PWR_PVDLEVEL_5) ||\
-                                 ((LEVEL) == PWR_PVDLEVEL_6) ||\
-                                 ((LEVEL) == PWR_PVDLEVEL_7))
+	((LEVEL) == PWR_PVDLEVEL_1) ||\
+	((LEVEL) == PWR_PVDLEVEL_2) ||\
+	((LEVEL) == PWR_PVDLEVEL_3) ||\
+	((LEVEL) == PWR_PVDLEVEL_4) ||\
+	((LEVEL) == PWR_PVDLEVEL_5) ||\
+	((LEVEL) == PWR_PVDLEVEL_6) ||\
+	((LEVEL) == PWR_PVDLEVEL_7))
 
 /* Check PVD mode parameter */
 #define IS_PWR_PVD_MODE(MODE) (((MODE) == PWR_PVD_MODE_IT_RISING)            ||\
-                               ((MODE) == PWR_PVD_MODE_IT_FALLING)           ||\
-                               ((MODE) == PWR_PVD_MODE_IT_RISING_FALLING)    ||\
-                               ((MODE) == PWR_PVD_MODE_EVENT_RISING)         ||\
-                               ((MODE) == PWR_PVD_MODE_EVENT_FALLING)        ||\
-                               ((MODE) == PWR_PVD_MODE_EVENT_RISING_FALLING) ||\
-                               ((MODE) == PWR_PVD_MODE_NORMAL))
+	((MODE) == PWR_PVD_MODE_IT_FALLING)           ||\
+	((MODE) == PWR_PVD_MODE_IT_RISING_FALLING)    ||\
+	((MODE) == PWR_PVD_MODE_EVENT_RISING)         ||\
+	((MODE) == PWR_PVD_MODE_EVENT_FALLING)        ||\
+	((MODE) == PWR_PVD_MODE_EVENT_RISING_FALLING) ||\
+	((MODE) == PWR_PVD_MODE_NORMAL))
 
 /* Check low power regulator parameter */
 #define IS_PWR_REGULATOR(REGULATOR) (((REGULATOR) == PWR_MAINREGULATOR_ON)   ||\
-                                     ((REGULATOR) == PWR_LOWPOWERREGULATOR_ON))
+	((REGULATOR) == PWR_LOWPOWERREGULATOR_ON))
 
 /* Check low power mode entry parameter */
 #define IS_PWR_SLEEP_ENTRY(ENTRY) (((ENTRY) == PWR_SLEEPENTRY_WFI) ||\
-                                   ((ENTRY) == PWR_SLEEPENTRY_WFE))
+	((ENTRY) == PWR_SLEEPENTRY_WFE))
 
 /* Check low power mode entry parameter */
 #define IS_PWR_STOP_ENTRY(ENTRY) (((ENTRY) == PWR_STOPENTRY_WFI) ||\
-                                  ((ENTRY) == PWR_STOPENTRY_WFE))
+	((ENTRY) == PWR_STOPENTRY_WFE))
 
 /* Check voltage scale level parameter */
 #define IS_PWR_REGULATOR_VOLTAGE(VOLTAGE) (((VOLTAGE) == PWR_REGULATOR_VOLTAGE_SCALE0) || \
-                                           ((VOLTAGE) == PWR_REGULATOR_VOLTAGE_SCALE1) || \
-                                           ((VOLTAGE) == PWR_REGULATOR_VOLTAGE_SCALE2) || \
-                                           ((VOLTAGE) == PWR_REGULATOR_VOLTAGE_SCALE3))
+	((VOLTAGE) == PWR_REGULATOR_VOLTAGE_SCALE1) || \
+	((VOLTAGE) == PWR_REGULATOR_VOLTAGE_SCALE2) || \
+	((VOLTAGE) == PWR_REGULATOR_VOLTAGE_SCALE3))
 /**
   * @}
   */

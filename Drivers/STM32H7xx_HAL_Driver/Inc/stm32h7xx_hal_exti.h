@@ -41,37 +41,34 @@ extern "C" {
 /** @defgroup EXTI_Exported_Types EXTI Exported Types
   * @{
   */
-typedef enum
-{
-  HAL_EXTI_COMMON_CB_ID          = 0x00U,
+typedef enum {
+	HAL_EXTI_COMMON_CB_ID          = 0x00U,
 } EXTI_CallbackIDTypeDef;
 
 
 /**
   * @brief  EXTI Handle structure definition
   */
-typedef struct
-{
-  uint32_t Line;                    /*!<  Exti line number */
-  void (* PendingCallback)(void);   /*!<  Exti pending callback */
+typedef struct {
+	uint32_t Line;                    /*!<  Exti line number */
+	void (* PendingCallback)(void);   /*!<  Exti pending callback */
 } EXTI_HandleTypeDef;
 
 /**
   * @brief  EXTI Configuration structure definition
   */
-typedef struct
-{
-  uint32_t Line;           /*!< The Exti line to be configured. This parameter
+typedef struct {
+	uint32_t Line;           /*!< The Exti line to be configured. This parameter
                                 can be a value of @ref EXTI_Line */
-  uint32_t Mode;           /*!< The Exit Mode to be configured for a core.
+	uint32_t Mode;           /*!< The Exit Mode to be configured for a core.
                                 This parameter can be a combination of @ref EXTI_Mode */
-  uint32_t Trigger;        /*!< The Exti Trigger to be configured. This parameter
+	uint32_t Trigger;        /*!< The Exti Trigger to be configured. This parameter
                                 can be a value of @ref EXTI_Trigger */
-  uint32_t GPIOSel;        /*!< The Exti GPIO multiplexer selection to be configured.
+	uint32_t GPIOSel;        /*!< The Exti GPIO multiplexer selection to be configured.
                                 This parameter is only possible for line 0 to 15. It
                                 can be a value of @ref EXTI_GPIOSel */
 
-  uint32_t PendClearSource; /*!< Specifies the event pending clear source for D3/SRD
+	uint32_t PendClearSource; /*!< Specifies the event pending clear source for D3/SRD
                                  domain. This parameter can be a value of @ref
                                  EXTI_PendClear_Source */
 
@@ -410,72 +407,72 @@ typedef struct
   * @{
   */
 #define IS_EXTI_PROPERTY(__EXTI_LINE__)      ((((__EXTI_LINE__) & EXTI_PROPERTY_MASK) == EXTI_DIRECT) || \
-                                             (((__EXTI_LINE__) & EXTI_PROPERTY_MASK) == EXTI_CONFIG)          || \
-                                             (((__EXTI_LINE__) & EXTI_PROPERTY_MASK) == EXTI_GPIO))
+	(((__EXTI_LINE__) & EXTI_PROPERTY_MASK) == EXTI_CONFIG)          || \
+	(((__EXTI_LINE__) & EXTI_PROPERTY_MASK) == EXTI_GPIO))
 #if defined (DUAL_CORE)
 #define IS_EXTI_TARGET(__EXTI_LINE__)        ((((__EXTI_LINE__) & EXTI_TARGET_MASK)   == EXTI_TARGET_MSK_CPU1)      || \
-                                             (((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_CPU2)    || \
-                                             (((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_ALL_CPU) || \
-                                             (((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_ALL))
+	(((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_CPU2)    || \
+	(((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_ALL_CPU) || \
+	(((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_ALL))
 #else
 #define IS_EXTI_TARGET(__EXTI_LINE__)        ((((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_CPU1)   || \
-                                             (((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_ALL))
+	(((__EXTI_LINE__) & EXTI_TARGET_MASK) == EXTI_TARGET_MSK_ALL))
 #endif
 
 #define IS_EXTI_LINE(__EXTI_LINE__)          ((((__EXTI_LINE__) & ~(EXTI_PROPERTY_MASK | EXTI_EVENT_PRESENCE_MASK |\
-                                              EXTI_REG_MASK | EXTI_PIN_MASK | EXTI_TARGET_MASK)) == 0x00UL) && \
-                                              IS_EXTI_PROPERTY(__EXTI_LINE__) && IS_EXTI_TARGET(__EXTI_LINE__) && \
-                                             (((__EXTI_LINE__) & (EXTI_REG_MASK | EXTI_PIN_MASK))      < \
-                                             (((EXTI_LINE_NB / 32UL) << EXTI_REG_SHIFT) | (EXTI_LINE_NB % 32UL))))
+				EXTI_REG_MASK | EXTI_PIN_MASK | EXTI_TARGET_MASK)) == 0x00UL) && \
+	IS_EXTI_PROPERTY(__EXTI_LINE__) && IS_EXTI_TARGET(__EXTI_LINE__) && \
+	(((__EXTI_LINE__) & (EXTI_REG_MASK | EXTI_PIN_MASK))      < \
+		(((EXTI_LINE_NB / 32UL) << EXTI_REG_SHIFT) | (EXTI_LINE_NB % 32UL))))
 
 #define IS_EXTI_MODE(__MODE__)               (((__MODE__) & ~EXTI_MODE_MASK) == 0x00UL)
 
 #define IS_EXTI_TRIGGER(__EXTI_LINE__)       (((__EXTI_LINE__) & ~EXTI_TRIGGER_MASK) == 0x00UL)
 
 #define IS_EXTI_PENDING_EDGE(__EXTI_LINE__)  (((__EXTI_LINE__) == EXTI_TRIGGER_RISING) || \
-                                             ((__EXTI_LINE__) == EXTI_TRIGGER_FALLING)|| \
-                                             ((__EXTI_LINE__) == EXTI_TRIGGER_RISING_FALLING))
+	((__EXTI_LINE__) == EXTI_TRIGGER_FALLING)|| \
+	((__EXTI_LINE__) == EXTI_TRIGGER_RISING_FALLING))
 
 #define IS_EXTI_CONFIG_LINE(__EXTI_LINE__)   (((__EXTI_LINE__) & EXTI_CONFIG) != 0x00UL)
 
 #if defined(GPIOI)
 #define IS_EXTI_GPIO_PORT(__PORT__)     (((__PORT__) == EXTI_GPIOA) || \
-                                         ((__PORT__) == EXTI_GPIOB) || \
-                                         ((__PORT__) == EXTI_GPIOC) || \
-                                         ((__PORT__) == EXTI_GPIOD) || \
-                                         ((__PORT__) == EXTI_GPIOE) || \
-                                         ((__PORT__) == EXTI_GPIOF) || \
-                                         ((__PORT__) == EXTI_GPIOG) || \
-                                         ((__PORT__) == EXTI_GPIOH) || \
-                                         ((__PORT__) == EXTI_GPIOI) || \
-                                         ((__PORT__) == EXTI_GPIOJ) || \
-                                         ((__PORT__) == EXTI_GPIOK))
+	((__PORT__) == EXTI_GPIOB) || \
+	((__PORT__) == EXTI_GPIOC) || \
+	((__PORT__) == EXTI_GPIOD) || \
+	((__PORT__) == EXTI_GPIOE) || \
+	((__PORT__) == EXTI_GPIOF) || \
+	((__PORT__) == EXTI_GPIOG) || \
+	((__PORT__) == EXTI_GPIOH) || \
+	((__PORT__) == EXTI_GPIOI) || \
+	((__PORT__) == EXTI_GPIOJ) || \
+	((__PORT__) == EXTI_GPIOK))
 #else
 #define IS_EXTI_GPIO_PORT(__PORT__)     (((__PORT__) == EXTI_GPIOA) || \
-                                         ((__PORT__) == EXTI_GPIOB) || \
-                                         ((__PORT__) == EXTI_GPIOC) || \
-                                         ((__PORT__) == EXTI_GPIOD) || \
-                                         ((__PORT__) == EXTI_GPIOE) || \
-                                         ((__PORT__) == EXTI_GPIOF) || \
-                                         ((__PORT__) == EXTI_GPIOG) || \
-                                         ((__PORT__) == EXTI_GPIOH) || \
-                                         ((__PORT__) == EXTI_GPIOJ) || \
-                                         ((__PORT__) == EXTI_GPIOK))
+	((__PORT__) == EXTI_GPIOB) || \
+	((__PORT__) == EXTI_GPIOC) || \
+	((__PORT__) == EXTI_GPIOD) || \
+	((__PORT__) == EXTI_GPIOE) || \
+	((__PORT__) == EXTI_GPIOF) || \
+	((__PORT__) == EXTI_GPIOG) || \
+	((__PORT__) == EXTI_GPIOH) || \
+	((__PORT__) == EXTI_GPIOJ) || \
+	((__PORT__) == EXTI_GPIOK))
 #endif /*GPIOI*/
 
 #define IS_EXTI_GPIO_PIN(__PIN__)       ((__PIN__) < 16UL)
 #if defined (LPTIM4) && defined (LPTIM5)
 #define IS_EXTI_D3_PENDCLR_SRC(__SRC__) (((__SRC__) == EXTI_D3_PENDCLR_SRC_NONE) || \
-                                         ((__SRC__) == EXTI_D3_PENDCLR_SRC_DMACH6) || \
-                                         ((__SRC__) == EXTI_D3_PENDCLR_SRC_DMACH7) || \
-                                         ((__SRC__) == EXTI_D3_PENDCLR_SRC_LPTIM4) || \
-                                         ((__SRC__) == EXTI_D3_PENDCLR_SRC_LPTIM5))
+	((__SRC__) == EXTI_D3_PENDCLR_SRC_DMACH6) || \
+	((__SRC__) == EXTI_D3_PENDCLR_SRC_DMACH7) || \
+	((__SRC__) == EXTI_D3_PENDCLR_SRC_LPTIM4) || \
+	((__SRC__) == EXTI_D3_PENDCLR_SRC_LPTIM5))
 #else
 #define IS_EXTI_D3_PENDCLR_SRC(__SRC__) (((__SRC__) == EXTI_D3_PENDCLR_SRC_NONE) || \
-                                         ((__SRC__) == EXTI_D3_PENDCLR_SRC_DMACH6) || \
-                                         ((__SRC__) == EXTI_D3_PENDCLR_SRC_DMACH7) || \
-                                         ((__SRC__) == EXTI_D3_PENDCLR_SRC_LPTIM2) || \
-                                         ((__SRC__) == EXTI_D3_PENDCLR_SRC_LPTIM3))
+	((__SRC__) == EXTI_D3_PENDCLR_SRC_DMACH6) || \
+	((__SRC__) == EXTI_D3_PENDCLR_SRC_DMACH7) || \
+	((__SRC__) == EXTI_D3_PENDCLR_SRC_LPTIM2) || \
+	((__SRC__) == EXTI_D3_PENDCLR_SRC_LPTIM3))
 #endif /* LPTIM4 && LPTIM5 */
 
 /**
@@ -497,7 +494,8 @@ typedef struct
 HAL_StatusTypeDef HAL_EXTI_SetConfigLine(EXTI_HandleTypeDef *hexti, EXTI_ConfigTypeDef *pExtiConfig);
 HAL_StatusTypeDef HAL_EXTI_GetConfigLine(EXTI_HandleTypeDef *hexti, EXTI_ConfigTypeDef *pExtiConfig);
 HAL_StatusTypeDef HAL_EXTI_ClearConfigLine(EXTI_HandleTypeDef *hexti);
-HAL_StatusTypeDef HAL_EXTI_RegisterCallback(EXTI_HandleTypeDef *hexti, EXTI_CallbackIDTypeDef CallbackID, void (*pPendingCbfn)(void));
+HAL_StatusTypeDef HAL_EXTI_RegisterCallback(EXTI_HandleTypeDef *hexti, EXTI_CallbackIDTypeDef CallbackID,
+	void (*pPendingCbfn)(void));
 HAL_StatusTypeDef HAL_EXTI_GetHandle(EXTI_HandleTypeDef *hexti, uint32_t ExtiLine);
 /**
   * @}

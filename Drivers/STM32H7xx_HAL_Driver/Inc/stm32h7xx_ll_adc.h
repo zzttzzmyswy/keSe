@@ -132,17 +132,17 @@ extern "C" {
 /* trigger edge selection duplicated with shifts [0; 4; 8; 12]                */
 /* corresponding to {SW start; ext trigger; ext trigger; ext trigger}.        */
 #define ADC_REG_TRIG_SOURCE_MASK            (((LL_ADC_REG_TRIG_SOFTWARE & ADC_CFGR_EXTSEL) << (4U * 0UL)) | \
-                                             ((ADC_CFGR_EXTSEL)                            << (4U * 1UL)) | \
-                                             ((ADC_CFGR_EXTSEL)                            << (4U * 2UL)) | \
-                                             ((ADC_CFGR_EXTSEL)                            << (4U * 3UL))  )
+	((ADC_CFGR_EXTSEL)                            << (4U * 1UL)) | \
+	((ADC_CFGR_EXTSEL)                            << (4U * 2UL)) | \
+	((ADC_CFGR_EXTSEL)                            << (4U * 3UL))  )
 
 /* Mask containing trigger edge masks for each of possible                    */
 /* trigger edge selection duplicated with shifts [0; 4; 8; 12]                */
 /* corresponding to {SW start; ext trigger; ext trigger; ext trigger}.        */
 #define ADC_REG_TRIG_EDGE_MASK              (((LL_ADC_REG_TRIG_SOFTWARE & ADC_CFGR_EXTEN) << (4U * 0UL)) | \
-                                             ((ADC_REG_TRIG_EXT_EDGE_DEFAULT)             << (4U * 1UL)) | \
-                                             ((ADC_REG_TRIG_EXT_EDGE_DEFAULT)             << (4U * 2UL)) | \
-                                             ((ADC_REG_TRIG_EXT_EDGE_DEFAULT)             << (4U * 3UL))  )
+	((ADC_REG_TRIG_EXT_EDGE_DEFAULT)             << (4U * 1UL)) | \
+	((ADC_REG_TRIG_EXT_EDGE_DEFAULT)             << (4U * 2UL)) | \
+	((ADC_REG_TRIG_EXT_EDGE_DEFAULT)             << (4U * 3UL))  )
 
 /* Definition of ADC group regular trigger bits information.                  */
 #define ADC_REG_TRIG_EXTSEL_BITOFFSET_POS  ( 6UL) /* Value equivalent to bitfield "ADC_CFGR_EXTSEL" position in register */
@@ -160,17 +160,17 @@ extern "C" {
 /* trigger edge selection duplicated with shifts [0; 4; 8; 12]                */
 /* corresponding to {SW start; ext trigger; ext trigger; ext trigger}.        */
 #define ADC_INJ_TRIG_SOURCE_MASK            (((LL_ADC_INJ_TRIG_SOFTWARE & ADC_JSQR_JEXTSEL) << (4U * 0UL)) | \
-                                            ((ADC_JSQR_JEXTSEL)                             << (4U * 1UL)) | \
-                                            ((ADC_JSQR_JEXTSEL)                             << (4U * 2UL)) | \
-                                            ((ADC_JSQR_JEXTSEL)                             << (4U * 3UL))  )
+	((ADC_JSQR_JEXTSEL)                             << (4U * 1UL)) | \
+	((ADC_JSQR_JEXTSEL)                             << (4U * 2UL)) | \
+	((ADC_JSQR_JEXTSEL)                             << (4U * 3UL))  )
 
 /* Mask containing trigger edge masks for each of possible                    */
 /* trigger edge selection duplicated with shifts [0; 4; 8; 12]                */
 /* corresponding to {SW start; ext trigger; ext trigger; ext trigger}.        */
 #define ADC_INJ_TRIG_EDGE_MASK              (((LL_ADC_INJ_TRIG_SOFTWARE & ADC_JSQR_JEXTEN) << (4U * 0UL)) | \
-                                             ((ADC_INJ_TRIG_EXT_EDGE_DEFAULT)              << (4U * 1UL)) | \
-                                             ((ADC_INJ_TRIG_EXT_EDGE_DEFAULT)              << (4U * 2UL)) | \
-                                             ((ADC_INJ_TRIG_EXT_EDGE_DEFAULT)              << (4U * 3UL))  )
+	((ADC_INJ_TRIG_EXT_EDGE_DEFAULT)              << (4U * 1UL)) | \
+	((ADC_INJ_TRIG_EXT_EDGE_DEFAULT)              << (4U * 2UL)) | \
+	((ADC_INJ_TRIG_EXT_EDGE_DEFAULT)              << (4U * 3UL))  )
 
 /* Definition of ADC group injected trigger bits information.                 */
 #define ADC_INJ_TRIG_EXTSEL_BITOFFSET_POS  ( 2UL) /* Value equivalent to bitfield "ADC_JSQR_JEXTSEL" position in register */
@@ -370,7 +370,7 @@ extern "C" {
 /* Internal voltage reference VrefInt */
 #if defined(ADC_VER_V5_3)
 #define VREFINT_CAL_ADDR                   ((uint16_t*) (0x8fff810UL))  /* Internal voltage reference, address of parameter VREFINT_CAL: VrefInt ADC raw data acquired at temperature 30 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
-                                                                        /* Address related to STM32H7A3 */
+/* Address related to STM32H7A3 */
 #else /* ADC_VER_V5_90 || ADC_VER_V5_X */
 #define VREFINT_CAL_ADDR                   ((uint16_t*) (0x1FF1E860UL)) /* Internal voltage reference, address of parameter VREFINT_CAL: VrefInt ADC raw data acquired at temperature 30 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
 #endif /* ADC_VER_V5_3 */
@@ -379,7 +379,7 @@ extern "C" {
 #if defined(ADC_VER_V5_3)
 #define TEMPSENSOR_CAL1_ADDR               ((uint16_t*) (0x8fff814UL))  /* Internal temperature sensor, address of parameter TS_CAL1: On STM32H7, temperature sensor ADC raw data acquired at temperature  30 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
 #define TEMPSENSOR_CAL2_ADDR               ((uint16_t*) (0x8fff818UL))  /* Internal temperature sensor, address of parameter TS_CAL2: On STM32H7, temperature sensor ADC raw data acquired at temperature 110 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
-                                                                        /* Addresses related to STM32H7A3 */
+/* Addresses related to STM32H7A3 */
 #else /* ADC_VER_V5_90 || ADC_VER_V5_X */
 #define TEMPSENSOR_CAL1_ADDR               ((uint16_t*) (0x1FF1E820UL)) /* Internal temperature sensor, address of parameter TS_CAL1: On STM32H7, temperature sensor ADC raw data acquired at temperature  30 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
 #define TEMPSENSOR_CAL2_ADDR               ((uint16_t*) (0x1FF1E840UL)) /* Internal temperature sensor, address of parameter TS_CAL2: On STM32H7, temperature sensor ADC raw data acquired at temperature 110 DegC (tolerance: +-5 DegC), Vref+ = 3.3 V (tolerance: +-10 mV). */
@@ -416,7 +416,7 @@ extern "C" {
   * @retval Pointer to register address
   */
 #define __ADC_PTR_REG_OFFSET(__REG__, __REG_OFFFSET__)                         \
- ((__IO uint32_t *)((uint32_t) ((uint32_t)(&(__REG__)) + ((__REG_OFFFSET__) << 2UL))))
+	((__IO uint32_t *)((uint32_t) ((uint32_t)(&(__REG__)) + ((__REG_OFFFSET__) << 2UL))))
 
 /**
   * @}
@@ -439,9 +439,8 @@ extern "C" {
   *         All ADC instances sharing the same ADC common instance must be
   *         disabled.
   */
-typedef struct
-{
-  uint32_t CommonClock;                 /*!< Set parameter common to several ADC: Clock source and prescaler.
+typedef struct {
+	uint32_t CommonClock;                 /*!< Set parameter common to several ADC: Clock source and prescaler.
                                              This parameter can be a value of @ref ADC_LL_EC_COMMON_CLOCK_SOURCE
                                              @note On this STM32 series, if ADC group injected is used, some
                                                    clock ratio constraints between ADC clock and AHB clock
@@ -449,17 +448,17 @@ typedef struct
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_SetCommonClock(). */
 
-  uint32_t Multimode;                   /*!< Set ADC multimode configuration to operate in independent mode or multimode (for devices with several ADC instances).
+	uint32_t Multimode;                   /*!< Set ADC multimode configuration to operate in independent mode or multimode (for devices with several ADC instances).
                                              This parameter can be a value of @ref ADC_LL_EC_MULTI_MODE
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_SetMultimode(). */
 
-  uint32_t MultiDMATransfer;            /*!< Set ADC dual ADC mode DMA transfer data format: Each DMA, 32 down to 10-bits or 8-bits resolution.
+	uint32_t MultiDMATransfer;            /*!< Set ADC dual ADC mode DMA transfer data format: Each DMA, 32 down to 10-bits or 8-bits resolution.
                                              This parameter can be a value of @ref ADC_LL_EC_MULTI_DMA_TRANSFER
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_SetMultiDMATransfer(). */
 
-  uint32_t MultiTwoSamplingDelay;       /*!< Set ADC multimode delay between 2 sampling phases.
+	uint32_t MultiTwoSamplingDelay;       /*!< Set ADC multimode delay between 2 sampling phases.
                                              This parameter can be a value of @ref ADC_LL_EC_MULTI_TWOSMP_DELAY
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_SetMultiTwoSamplingDelay(). */
@@ -486,17 +485,16 @@ typedef struct
   *         refer to description of each function for setting
   *         conditioned to ADC state.
   */
-typedef struct
-{
-  uint32_t Resolution;                  /*!< Set ADC resolution.
+typedef struct {
+	uint32_t Resolution;                  /*!< Set ADC resolution.
                                              This parameter can be a value of @ref ADC_LL_EC_RESOLUTION
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_SetResolution(). */
 
-  uint32_t LeftBitShift;                /*!< Configures the left shifting applied to the final result with or without oversampling.
+	uint32_t LeftBitShift;                /*!< Configures the left shifting applied to the final result with or without oversampling.
                                              This parameter can be a value of @ref ADC_LL_EC_LEFT_BIT_SHIFT. */
 
-  uint32_t LowPowerMode;                /*!< Set ADC low power mode.
+	uint32_t LowPowerMode;                /*!< Set ADC low power mode.
                                              This parameter can be a value of @ref ADC_LL_EC_LP_MODE
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_SetLowPowerMode(). */
@@ -522,9 +520,8 @@ typedef struct
   *         refer to description of each function for setting
   *         conditioned to ADC state.
   */
-typedef struct
-{
-  uint32_t TriggerSource;               /*!< Set ADC group regular conversion trigger source: internal (SW start) or from external peripheral (timer event, external interrupt line).
+typedef struct {
+	uint32_t TriggerSource;               /*!< Set ADC group regular conversion trigger source: internal (SW start) or from external peripheral (timer event, external interrupt line).
                                              This parameter can be a value of @ref ADC_LL_EC_REG_TRIGGER_SOURCE
                                              @note On this STM32 series, setting trigger source to external trigger also set trigger polarity to rising edge
                                                    (default setting for compatibility with some ADC on other STM32 families having this setting set by HW default value).
@@ -532,30 +529,30 @@ typedef struct
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_REG_SetTriggerSource(). */
 
-  uint32_t SequencerLength;             /*!< Set ADC group regular sequencer length.
+	uint32_t SequencerLength;             /*!< Set ADC group regular sequencer length.
                                              This parameter can be a value of @ref ADC_LL_EC_REG_SEQ_SCAN_LENGTH
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_REG_SetSequencerLength(). */
 
-  uint32_t SequencerDiscont;            /*!< Set ADC group regular sequencer discontinuous mode: sequence subdivided and scan conversions interrupted every selected number of ranks.
+	uint32_t SequencerDiscont;            /*!< Set ADC group regular sequencer discontinuous mode: sequence subdivided and scan conversions interrupted every selected number of ranks.
                                              This parameter can be a value of @ref ADC_LL_EC_REG_SEQ_DISCONT_MODE
                                              @note This parameter has an effect only if group regular sequencer is enabled
                                                    (scan length of 2 ranks or more).
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_REG_SetSequencerDiscont(). */
 
-  uint32_t ContinuousMode;              /*!< Set ADC continuous conversion mode on ADC group regular, whether ADC conversions are performed in single mode (one conversion per trigger) or in continuous mode (after the first trigger, following conversions launched successively automatically).
+	uint32_t ContinuousMode;              /*!< Set ADC continuous conversion mode on ADC group regular, whether ADC conversions are performed in single mode (one conversion per trigger) or in continuous mode (after the first trigger, following conversions launched successively automatically).
                                              This parameter can be a value of @ref ADC_LL_EC_REG_CONTINUOUS_MODE
                                              Note: It is not possible to enable both ADC group regular continuous mode and discontinuous mode.
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_REG_SetContinuousMode(). */
 
-  uint32_t DataTransferMode;            /*!< Set ADC group regular conversion data transfer mode: no transfer, transfer by DMA (Limited/Unlimited) or DFSDM.
+	uint32_t DataTransferMode;            /*!< Set ADC group regular conversion data transfer mode: no transfer, transfer by DMA (Limited/Unlimited) or DFSDM.
                                              This parameter can be a value of @ref ADC_LL_EC_REG_DATA_TRANSFER_MODE
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_REG_SetDataTransferMode(). */
 
-  uint32_t Overrun;                     /*!< Set ADC group regular behavior in case of overrun:
+	uint32_t Overrun;                     /*!< Set ADC group regular behavior in case of overrun:
                                              data preserved or overwritten.
                                              This parameter can be a value of @ref ADC_LL_EC_REG_OVR_DATA_BEHAVIOR
 
@@ -582,9 +579,8 @@ typedef struct
   *         refer to description of each function for setting
   *         conditioned to ADC state.
   */
-typedef struct
-{
-  uint32_t TriggerSource;               /*!< Set ADC group injected conversion trigger source: internal (SW start) or from external peripheral (timer event, external interrupt line).
+typedef struct {
+	uint32_t TriggerSource;               /*!< Set ADC group injected conversion trigger source: internal (SW start) or from external peripheral (timer event, external interrupt line).
                                              This parameter can be a value of @ref ADC_LL_EC_INJ_TRIGGER_SOURCE
                                              @note On this STM32 series, setting trigger source to external trigger also set trigger polarity to rising edge
                                                    (default setting for compatibility with some ADC on other STM32 families having this setting set by HW default value).
@@ -592,19 +588,19 @@ typedef struct
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_INJ_SetTriggerSource(). */
 
-  uint32_t SequencerLength;             /*!< Set ADC group injected sequencer length.
+	uint32_t SequencerLength;             /*!< Set ADC group injected sequencer length.
                                              This parameter can be a value of @ref ADC_LL_EC_INJ_SEQ_SCAN_LENGTH
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_INJ_SetSequencerLength(). */
 
-  uint32_t SequencerDiscont;            /*!< Set ADC group injected sequencer discontinuous mode: sequence subdivided and scan conversions interrupted every selected number of ranks.
+	uint32_t SequencerDiscont;            /*!< Set ADC group injected sequencer discontinuous mode: sequence subdivided and scan conversions interrupted every selected number of ranks.
                                              This parameter can be a value of @ref ADC_LL_EC_INJ_SEQ_DISCONT_MODE
                                              @note This parameter has an effect only if group injected sequencer is enabled
                                                    (scan length of 2 ranks or more).
 
                                              This feature can be modified afterwards using unitary function @ref LL_ADC_INJ_SetSequencerDiscont(). */
 
-  uint32_t TrigAuto;                    /*!< Set ADC group injected conversion trigger: independent or from ADC group regular.
+	uint32_t TrigAuto;                    /*!< Set ADC group injected conversion trigger: independent or from ADC group regular.
                                              This parameter can be a value of @ref ADC_LL_EC_INJ_TRIG_AUTO
                                              Note: This parameter must be set to set to independent trigger if injected trigger source is set to an external trigger.
 
@@ -784,9 +780,9 @@ typedef struct
 #define LL_ADC_RESOLUTION_8B               (ADC_CFGR_RES_2|ADC_CFGR_RES_1 | ADC_CFGR_RES_0) /*!< ADC resolution  8 bits */
 #else
 #define LL_ADC_RESOLUTION_8B               (ADC_CFGR_RES_2                                ) /*!< ADC resolution  8 bits */
-                                                                                            /*!< The resolution setting is managed internally in the driver:
-                                                                                                    "LL_ADC_RESOLUTION_8B" definition: keep using the "100b" value (corresponding to STM32H74x/5x rev Y).
-                                                                                                    Rev.V value "111b" is handled through functions "LL_ADC_SetResolution/LL_ADC_GetResolution"  with a dedicated check on DBGMCU IDCODE register */
+/*!< The resolution setting is managed internally in the driver:
+        "LL_ADC_RESOLUTION_8B" definition: keep using the "100b" value (corresponding to STM32H74x/5x rev Y).
+        Rev.V value "111b" is handled through functions "LL_ADC_SetResolution/LL_ADC_GetResolution"  with a dedicated check on DBGMCU IDCODE register */
 #endif
 #if defined(ADC_VER_V5_V90)
 #define LL_ADC_RESOLUTION_6B               (ADC3_CFGR_RES_1 | ADC3_CFGR_RES_0)   /*!< ADC resolution  6 bits. Value available for ADC3 on STM32H72xx/3xx devices only*/
@@ -1002,9 +998,9 @@ typedef struct
   * @}
   */
 #if defined(ADC_VER_V5_V90)
- /** @defgroup ADC_LL_EC_REG_SAMPLING_MODE  ADC group regular - Sampling mode
-  * @{
-  */
+/** @defgroup ADC_LL_EC_REG_SAMPLING_MODE  ADC group regular - Sampling mode
+ * @{
+ */
 #define LL_ADC_REG_SAMPLING_MODE_NORMAL               (0x00000000UL)        /*!< ADC conversions sampling phase duration is defined using  @ref ADC_LL_EC_CHANNEL_SAMPLINGTIME. On devices STM32H72xx and STM32H73xx */
 #define LL_ADC_REG_SAMPLING_MODE_BULB                 (ADC3_CFGR2_BULB)     /*!< ADC conversions sampling phase starts immediately after end of conversion, and stops upon trigger event.
                                                                                  Note: First conversion is using minimal sampling time (see @ref ADC_LL_EC_CHANNEL_SAMPLINGTIME). On devices STM32H72xx and STM32H73xx */
@@ -1013,7 +1009,7 @@ typedef struct
                                                                                  Trigger falling edge = stop sampling and start conversion. On devices STM32H72xx and STM32H73xx */
 /**
   * @}
-  */ 
+  */
 #endif /* ADC_VER_V5_V90 */
 
 /** @defgroup ADC_LL_EC_REG_CONTINUOUS_MODE  ADC group regular - Continuous mode
@@ -1611,20 +1607,20 @@ typedef struct
   * @note   This helper macro is applicable for STM32H73x/2x devices only
   */
 #define __LL_ADC12_RESOLUTION_TO_ADC3(__ADC_RESOLUTION__)                      \
-         (                                                                     \
-           ((__ADC_RESOLUTION__) == LL_ADC_RESOLUTION_12B)                     \
-            ?(0x00000000UL)                                                    \
-             :                                                                 \
-             ((__ADC_RESOLUTION__) == LL_ADC_RESOLUTION_10B)                   \
-               ?(ADC_CFGR_RES_0)                                               \
-                :                                                              \
-                ((__ADC_RESOLUTION__) == LL_ADC_RESOLUTION_8B)                 \
-                  ?(ADC_CFGR_RES_1)                                            \
-                   :                                                           \
-                   ((__ADC_RESOLUTION__) == LL_ADC_RESOLUTION_6B)              \
-                     ?((ADC_CFGR_RES_2|ADC_CFGR_RES_1 | ADC_CFGR_RES_0))       \
-                       :(0x00000000UL)                                         \
-         )
+	(                                                                     \
+		((__ADC_RESOLUTION__) == LL_ADC_RESOLUTION_12B)                     \
+		?(0x00000000UL)                                                    \
+		:                                                                 \
+		((__ADC_RESOLUTION__) == LL_ADC_RESOLUTION_10B)                   \
+		?(ADC_CFGR_RES_0)                                               \
+		:                                                              \
+		((__ADC_RESOLUTION__) == LL_ADC_RESOLUTION_8B)                 \
+		?(ADC_CFGR_RES_1)                                            \
+		:                                                           \
+		((__ADC_RESOLUTION__) == LL_ADC_RESOLUTION_6B)              \
+		?((ADC_CFGR_RES_2|ADC_CFGR_RES_1 | ADC_CFGR_RES_0))       \
+		:(0x00000000UL)                                         \
+	)
 
 #endif /* ADC_VER_V5_V90 */
 
@@ -1671,15 +1667,15 @@ typedef struct
   * @retval Value between Min_Data=0 and Max_Data=18
   */
 #define __LL_ADC_CHANNEL_TO_DECIMAL_NB(__CHANNEL__)                                        \
-  ((((__CHANNEL__) & ADC_CHANNEL_ID_BITFIELD_MASK) == 0UL)                                 \
-    ? (                                                                                    \
-       ((__CHANNEL__) & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS \
-      )                                                                                    \
-      :                                                                                    \
-      (                                                                                    \
-       (uint32_t)POSITION_VAL((__CHANNEL__))                                               \
-      )                                                                                    \
-  )
+	((((__CHANNEL__) & ADC_CHANNEL_ID_BITFIELD_MASK) == 0UL)                                 \
+		? (                                                                                    \
+			((__CHANNEL__) & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS \
+		)                                                                                    \
+		:                                                                                    \
+		(                                                                                    \
+			(uint32_t)POSITION_VAL((__CHANNEL__))                                               \
+		)                                                                                    \
+	)
 
 /**
   * @brief  Helper macro to get ADC channel in literal format LL_ADC_CHANNEL_x
@@ -1724,19 +1720,19 @@ typedef struct
   *                using helper macro @ref __LL_ADC_CHANNEL_INTERNAL_TO_EXTERNAL().
   */
 #define __LL_ADC_DECIMAL_NB_TO_CHANNEL(__DECIMAL_NB__)                                                  \
-  (((__DECIMAL_NB__) <= 9UL)                                                                            \
-    ? (                                                                                                 \
-       ((__DECIMAL_NB__) << ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS)                             |          \
-       (ADC_AWD2CR_AWD2CH_0 << (__DECIMAL_NB__))                                             |          \
-       (ADC_SMPR1_REGOFFSET | (((3UL * (__DECIMAL_NB__))) << ADC_CHANNEL_SMPx_BITOFFSET_POS))           \
-      )                                                                                                 \
-      :                                                                                                 \
-      (                                                                                                 \
-       ((__DECIMAL_NB__) << ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS)                                      | \
-       (ADC_AWD2CR_AWD2CH_0 << (__DECIMAL_NB__))                                                      | \
-       (ADC_SMPR2_REGOFFSET | (((3UL * ((__DECIMAL_NB__) - 10UL))) << ADC_CHANNEL_SMPx_BITOFFSET_POS))  \
-      )                                                                                                 \
-  )
+	(((__DECIMAL_NB__) <= 9UL)                                                                            \
+		? (                                                                                                 \
+			((__DECIMAL_NB__) << ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS)                             |          \
+			(ADC_AWD2CR_AWD2CH_0 << (__DECIMAL_NB__))                                             |          \
+			(ADC_SMPR1_REGOFFSET | (((3UL * (__DECIMAL_NB__))) << ADC_CHANNEL_SMPx_BITOFFSET_POS))           \
+		)                                                                                                 \
+		:                                                                                                 \
+		(                                                                                                 \
+			((__DECIMAL_NB__) << ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS)                                      | \
+			(ADC_AWD2CR_AWD2CH_0 << (__DECIMAL_NB__))                                                      | \
+			(ADC_SMPR2_REGOFFSET | (((3UL * ((__DECIMAL_NB__) - 10UL))) << ADC_CHANNEL_SMPx_BITOFFSET_POS))  \
+		)                                                                                                 \
+	)
 
 /**
   * @brief  Helper macro to determine whether the selected channel
@@ -1790,7 +1786,7 @@ typedef struct
   *         Value "1" if the channel corresponds to a parameter definition of a ADC internal channel.
   */
 #define __LL_ADC_IS_CHANNEL_INTERNAL(__CHANNEL__)                              \
-  (((__CHANNEL__) & ADC_CHANNEL_ID_INTERNAL_CH_MASK) != 0UL)
+	(((__CHANNEL__) & ADC_CHANNEL_ID_INTERNAL_CH_MASK) != 0UL)
 
 /**
   * @brief  Helper macro to convert a channel defined from parameter
@@ -1859,7 +1855,7 @@ typedef struct
   *         @arg @ref LL_ADC_CHANNEL_19
   */
 #define __LL_ADC_CHANNEL_INTERNAL_TO_EXTERNAL(__CHANNEL__)                     \
-  ((__CHANNEL__) & ~ADC_CHANNEL_ID_INTERNAL_CH_MASK)
+	((__CHANNEL__) & ~ADC_CHANNEL_ID_INTERNAL_CH_MASK)
 
 /**
   * @brief  Helper macro to determine whether the internal channel
@@ -1889,33 +1885,33 @@ typedef struct
   */
 #if defined(ADC3)
 #define __LL_ADC_IS_CHANNEL_INTERNAL_AVAILABLE(__ADC_INSTANCE__, __CHANNEL__)  \
-  ((((__ADC_INSTANCE__) == ADC2)                                               \
-    &&(                                                                        \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_DAC1CH1_ADC2) ||                       \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_DAC1CH2_ADC2)                          \
-      )                                                                        \
-   )                                                                           \
-   ||                                                                          \
-   (((__ADC_INSTANCE__) == ADC3)                                               \
-    &&(                                                                        \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_TEMPSENSOR)   ||                       \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_VBAT)         ||                       \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_VREFINT)                               \
-      )                                                                        \
-   )                                                                           \
-  )
+	((((__ADC_INSTANCE__) == ADC2)                                               \
+			&&(                                                                        \
+				((__CHANNEL__) == LL_ADC_CHANNEL_DAC1CH1_ADC2) ||                       \
+				((__CHANNEL__) == LL_ADC_CHANNEL_DAC1CH2_ADC2)                          \
+			)                                                                        \
+		)                                                                           \
+		||                                                                          \
+		(((__ADC_INSTANCE__) == ADC3)                                               \
+			&&(                                                                        \
+				((__CHANNEL__) == LL_ADC_CHANNEL_TEMPSENSOR)   ||                       \
+				((__CHANNEL__) == LL_ADC_CHANNEL_VBAT)         ||                       \
+				((__CHANNEL__) == LL_ADC_CHANNEL_VREFINT)                               \
+			)                                                                        \
+		)                                                                           \
+	)
 #else
 #define __LL_ADC_IS_CHANNEL_INTERNAL_AVAILABLE(__ADC_INSTANCE__, __CHANNEL__)  \
-  ((((__ADC_INSTANCE__) == ADC2)                                               \
-    &&(                                                                        \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_DAC1CH1_ADC2) ||                       \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_DAC1CH2_ADC2) ||                       \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_TEMPSENSOR)   ||                       \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_VBAT)         ||                       \
-       ((__CHANNEL__) == LL_ADC_CHANNEL_VREFINT)                               \
-      )                                                                        \
-   )                                                                           \
-  )
+	((((__ADC_INSTANCE__) == ADC2)                                               \
+			&&(                                                                        \
+				((__CHANNEL__) == LL_ADC_CHANNEL_DAC1CH1_ADC2) ||                       \
+				((__CHANNEL__) == LL_ADC_CHANNEL_DAC1CH2_ADC2) ||                       \
+				((__CHANNEL__) == LL_ADC_CHANNEL_TEMPSENSOR)   ||                       \
+				((__CHANNEL__) == LL_ADC_CHANNEL_VBAT)         ||                       \
+				((__CHANNEL__) == LL_ADC_CHANNEL_VREFINT)                               \
+			)                                                                        \
+		)                                                                           \
+	)
 #endif
 
 /**
@@ -2051,14 +2047,14 @@ typedef struct
   *         (2) On STM32H7, parameter available only on ADC instance: ADC2.
   */
 #define __LL_ADC_ANALOGWD_CHANNEL_GROUP(__CHANNEL__, __GROUP__)                                           \
-  (((__GROUP__) == LL_ADC_GROUP_REGULAR)                                                                  \
-    ? (((__CHANNEL__) & ADC_CHANNEL_ID_MASK) | ADC_CFGR_AWD1EN | ADC_CFGR_AWD1SGL)                        \
-      :                                                                                                   \
-      ((__GROUP__) == LL_ADC_GROUP_INJECTED)                                                              \
-       ? (((__CHANNEL__) & ADC_CHANNEL_ID_MASK) | ADC_CFGR_JAWD1EN | ADC_CFGR_AWD1SGL)                    \
-         :                                                                                                \
-         (((__CHANNEL__) & ADC_CHANNEL_ID_MASK) | ADC_CFGR_JAWD1EN | ADC_CFGR_AWD1EN | ADC_CFGR_AWD1SGL)  \
-  )
+	(((__GROUP__) == LL_ADC_GROUP_REGULAR)                                                                  \
+		? (((__CHANNEL__) & ADC_CHANNEL_ID_MASK) | ADC_CFGR_AWD1EN | ADC_CFGR_AWD1SGL)                        \
+		:                                                                                                   \
+		((__GROUP__) == LL_ADC_GROUP_INJECTED)                                                              \
+		? (((__CHANNEL__) & ADC_CHANNEL_ID_MASK) | ADC_CFGR_JAWD1EN | ADC_CFGR_AWD1SGL)                    \
+		:                                                                                                \
+		(((__CHANNEL__) & ADC_CHANNEL_ID_MASK) | ADC_CFGR_JAWD1EN | ADC_CFGR_AWD1EN | ADC_CFGR_AWD1SGL)  \
+	)
 
 /**
   * @brief  Helper macro to set the value of ADC analog watchdog threshold high
@@ -2081,7 +2077,7 @@ typedef struct
   * @retval Value between Min_Data=0x000000 and Max_Data=0xFFFFFF
   */
 #define __LL_ADC_ANALOGWD_SET_THRESHOLD_RESOLUTION(__ADC_RESOLUTION__, __AWD_THRESHOLD__) \
-  ((__AWD_THRESHOLD__) << ((__ADC_RESOLUTION__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1U )))
+	((__AWD_THRESHOLD__) << ((__ADC_RESOLUTION__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1U )))
 
 /**
   * @brief  Helper macro to get the value of ADC analog watchdog threshold high
@@ -2104,7 +2100,7 @@ typedef struct
   * @retval Value between Min_Data=0x000000 and Max_Data=0xFFFFFF
   */
 #define __LL_ADC_ANALOGWD_GET_THRESHOLD_RESOLUTION(__ADC_RESOLUTION__, __AWD_THRESHOLD_16_BITS__) \
-  ((__AWD_THRESHOLD_16_BITS__) >> ((__ADC_RESOLUTION__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1U )))
+	((__AWD_THRESHOLD_16_BITS__) >> ((__ADC_RESOLUTION__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1U )))
 
 /**
   * @brief  Helper macro to set the ADC calibration value with both single ended
@@ -2120,7 +2116,7 @@ typedef struct
   * @retval Value between Min_Data=0x00000000 and Max_Data=0xFFFFFFFF
   */
 #define __LL_ADC_CALIB_FACTOR_SINGLE_DIFF(__CALIB_FACTOR_SINGLE_ENDED__, __CALIB_FACTOR_DIFFERENTIAL__)        \
-  (((__CALIB_FACTOR_DIFFERENTIAL__) << ADC_CALFACT_CALFACT_D_Pos) | (__CALIB_FACTOR_SINGLE_ENDED__))
+	(((__CALIB_FACTOR_DIFFERENTIAL__) << ADC_CALFACT_CALFACT_D_Pos) | (__CALIB_FACTOR_SINGLE_ENDED__))
 
 /**
   * @brief  Helper macro to get the ADC multimode conversion data of ADC master
@@ -2136,7 +2132,7 @@ typedef struct
   * @retval Value between Min_Data=0x000 and Max_Data=0xFFF
   */
 #define __LL_ADC_MULTI_CONV_DATA_MASTER_SLAVE(__ADC_MULTI_MASTER_SLAVE__, __ADC_MULTI_CONV_DATA__) \
-  (((__ADC_MULTI_CONV_DATA__) >> ((ADC_CDR_RDATA_SLV_Pos) & ~(__ADC_MULTI_MASTER_SLAVE__))) & ADC_CDR_RDATA_MST)
+	(((__ADC_MULTI_CONV_DATA__) >> ((ADC_CDR_RDATA_SLV_Pos) & ~(__ADC_MULTI_MASTER_SLAVE__))) & ADC_CDR_RDATA_MST)
 
 /**
   * @brief  Helper macro to select, from a ADC instance, to which ADC instance
@@ -2151,12 +2147,12 @@ typedef struct
   * @retval __ADCx__ ADC instance master of the corresponding ADC common instance
   */
 #define __LL_ADC_MULTI_INSTANCE_MASTER(__ADCx__) \
-  ( ( ((__ADCx__) == ADC2)                                                     \
-    )?                                                                         \
-     (ADC1)                                                                    \
-     :                                                                         \
-     (__ADCx__)                                                                \
-  )
+	( ( ((__ADCx__) == ADC2)                                                     \
+		)?                                                                         \
+		(ADC1)                                                                    \
+		:                                                                         \
+		(__ADCx__)                                                                \
+	)
 
 /**
   * @brief  Helper macro to select the ADC common instance
@@ -2170,15 +2166,15 @@ typedef struct
   */
 #if defined(ADC3_COMMON)
 #define __LL_ADC_COMMON_INSTANCE(__ADCx__)                                     \
-  ((((__ADCx__) == ADC1) || ((__ADCx__) == ADC2))                              \
-    ? (                                                                        \
-       (ADC12_COMMON)                                                          \
-      )                                                                        \
-      :                                                                        \
-      (                                                                        \
-       (ADC3_COMMON)                                                           \
-      )                                                                        \
-  )
+	((((__ADCx__) == ADC1) || ((__ADCx__) == ADC2))                              \
+		? (                                                                        \
+			(ADC12_COMMON)                                                          \
+		)                                                                        \
+		:                                                                        \
+		(                                                                        \
+			(ADC3_COMMON)                                                           \
+		)                                                                        \
+	)
 #else
 #define __LL_ADC_COMMON_INSTANCE(__ADCx__)   (ADC12_COMMON)
 #endif
@@ -2202,19 +2198,19 @@ typedef struct
   */
 #if defined(ADC3_COMMON)
 #define __LL_ADC_IS_ENABLED_ALL_COMMON_INSTANCE(__ADCXY_COMMON__)              \
-  (((__ADCXY_COMMON__) == ADC12_COMMON)                                        \
-    ? (                                                                        \
-       (LL_ADC_IsEnabled(ADC1) |                                               \
-        LL_ADC_IsEnabled(ADC2)  )                                              \
-      )                                                                        \
-      :                                                                        \
-      (                                                                        \
-       (LL_ADC_IsEnabled(ADC3))                                                \
-      )                                                                        \
-  )
+	(((__ADCXY_COMMON__) == ADC12_COMMON)                                        \
+		? (                                                                        \
+			(LL_ADC_IsEnabled(ADC1) |                                               \
+				LL_ADC_IsEnabled(ADC2)  )                                              \
+		)                                                                        \
+		:                                                                        \
+		(                                                                        \
+			(LL_ADC_IsEnabled(ADC3))                                                \
+		)                                                                        \
+	)
 #else
 #define __LL_ADC_IS_ENABLED_ALL_COMMON_INSTANCE(__ADCXY_COMMON__)              \
-                        (LL_ADC_IsEnabled(ADC1) | LL_ADC_IsEnabled(ADC2))
+	(LL_ADC_IsEnabled(ADC1) | LL_ADC_IsEnabled(ADC2))
 #endif
 
 /**
@@ -2232,7 +2228,7 @@ typedef struct
   * @retval ADC conversion data full-scale digital value (unit: digital value of ADC conversion data)
   */
 #define __LL_ADC_DIGITAL_SCALE(__ADC_RESOLUTION__)                             \
-  (0xFFFFUL >> ((__ADC_RESOLUTION__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))
+	(0xFFFFUL >> ((__ADC_RESOLUTION__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))
 
 #if defined(ADC_VER_V5_V90)
 /**
@@ -2249,7 +2245,7 @@ typedef struct
   * @retval ADC conversion data equivalent voltage value (unit: digital value of ADC conversion bitfield)
   */
 #define __LL_ADC3_DIGITAL_SCALE(__ADC_RESOLUTION__)                             \
-    (0xFFFUL >> ((__ADC_RESOLUTION__) >> (ADC_CFGR_RES_BITOFFSET_POS_ADC3 - 1UL)))
+	(0xFFFUL >> ((__ADC_RESOLUTION__) >> (ADC_CFGR_RES_BITOFFSET_POS_ADC3 - 1UL)))
 #endif  /* ADC_VER_V5_V90 */
 /**
   * @brief  Helper macro to convert the ADC conversion data from
@@ -2273,58 +2269,58 @@ typedef struct
   */
 #if defined(ADC_VER_V5_X) || defined(ADC_VER_V5_V90)
 #define __LL_ADC_CONVERT_DATA_RESOLUTION(__DATA__,\
-                                         __ADC_RESOLUTION_CURRENT__,\
-                                         __ADC_RESOLUTION_TARGET__) \
+	__ADC_RESOLUTION_CURRENT__,\
+	__ADC_RESOLUTION_TARGET__) \
 ( (__ADC_RESOLUTION_CURRENT__ == LL_ADC_RESOLUTION_8B)                                                               \
-  ?(                                                                                                                 \
-    ((__DATA__)                                                                                                      \
-    << (((__ADC_RESOLUTION_CURRENT__) & ~(ADC_CFGR_RES_1 | ADC_CFGR_RES_0) ) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))  \
-   >> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
-   )                                                                                                                 \
-  :                                                                                                                  \
-   (                                                                                                                 \
-     (__ADC_RESOLUTION_TARGET__ == LL_ADC_RESOLUTION_8B) \
-       ? ( \
-           ((__DATA__)                                                                                                      \
-            << ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))                                         \
-           >> (((__ADC_RESOLUTION_TARGET__) & ~(ADC_CFGR_RES_1 | ADC_CFGR_RES_0) ) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))    \
-           )                                                                                                                 \
-         :\
-          (\
-    ((__DATA__)                                                                                                      \
-    << ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))                                         \
-    >> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
-     )                                                                                                                 \
-   )\
- )
+	?(                                                                                                                 \
+		((__DATA__)                                                                                                      \
+			<< (((__ADC_RESOLUTION_CURRENT__) & ~(ADC_CFGR_RES_1 | ADC_CFGR_RES_0) ) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))  \
+		>> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
+	)                                                                                                                 \
+	:                                                                                                                  \
+	(                                                                                                                 \
+		(__ADC_RESOLUTION_TARGET__ == LL_ADC_RESOLUTION_8B) \
+		? ( \
+			((__DATA__)                                                                                                      \
+				<< ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))                                         \
+			>> (((__ADC_RESOLUTION_TARGET__) & ~(ADC_CFGR_RES_1 | ADC_CFGR_RES_0) ) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))    \
+		)                                                                                                                 \
+		:\
+		(\
+			((__DATA__)                                                                                                      \
+				<< ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))                                         \
+			>> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
+		)                                                                                                                 \
+	)\
+)
 
 
 #else /* defined(ADC_VER_V5_3) */
 #define __LL_ADC_CONVERT_DATA_RESOLUTION(__DATA__,\
-                                         __ADC_RESOLUTION_CURRENT__,\
-                                         __ADC_RESOLUTION_TARGET__) \
+	__ADC_RESOLUTION_CURRENT__,\
+	__ADC_RESOLUTION_TARGET__) \
 ( (__ADC_RESOLUTION_CURRENT__ == LL_ADC_RESOLUTION_8B)                                                               \
-  ?(                                                                                                                 \
-    ((__DATA__)                                                                                                      \
-    << (((__ADC_RESOLUTION_CURRENT__) & ~(ADC_CFGR_RES_1 | ADC_CFGR_RES_0) ) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))  \
-   >> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
-   )                                                                                                                 \
-  :                                                                                                                  \
-   (                                                                                                                 \
-     (__ADC_RESOLUTION_TARGET__ == LL_ADC_RESOLUTION_8B) \
-       ? ( \
-           ((__DATA__)                                                                                                      \
-            << ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))                                         \
-           >> (((__ADC_RESOLUTION_TARGET__) & ~(ADC_CFGR_RES_1 | ADC_CFGR_RES_0) ) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
-           )                                                                                                                 \
-         :\
-          (\
-    ((__DATA__)                                                                                                      \
-    << ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))                                         \
-    >> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
-     )                                                                                                                 \
-   )\
- )
+	?(                                                                                                                 \
+		((__DATA__)                                                                                                      \
+			<< (((__ADC_RESOLUTION_CURRENT__) & ~(ADC_CFGR_RES_1 | ADC_CFGR_RES_0) ) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))  \
+		>> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
+	)                                                                                                                 \
+	:                                                                                                                  \
+	(                                                                                                                 \
+		(__ADC_RESOLUTION_TARGET__ == LL_ADC_RESOLUTION_8B) \
+		? ( \
+			((__DATA__)                                                                                                      \
+				<< ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))                                         \
+			>> (((__ADC_RESOLUTION_TARGET__) & ~(ADC_CFGR_RES_1 | ADC_CFGR_RES_0) ) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
+		)                                                                                                                 \
+		:\
+		(\
+			((__DATA__)                                                                                                      \
+				<< ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL)))                                         \
+			>> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS - 1UL))                                            \
+		)                                                                                                                 \
+	)\
+)
 
 #endif
 
@@ -2348,12 +2344,12 @@ typedef struct
 * @retval ADC conversion data to the requested resolution
 */
 #define __LL_ADC_CONVERT_DATA_RESOLUTION_ADC3(__DATA__,\
-                                         __ADC_RESOLUTION_CURRENT__,\
-                                         __ADC_RESOLUTION_TARGET__)            \
-  (((__DATA__)                                                                 \
-    << ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS_ADC3 - 1UL)))  \
-   >> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS_ADC3 - 1UL))     \
-  )
+	__ADC_RESOLUTION_CURRENT__,\
+	__ADC_RESOLUTION_TARGET__)            \
+(((__DATA__)                                                                 \
+		<< ((__ADC_RESOLUTION_CURRENT__) >> (ADC_CFGR_RES_BITOFFSET_POS_ADC3 - 1UL)))  \
+	>> ((__ADC_RESOLUTION_TARGET__) >> (ADC_CFGR_RES_BITOFFSET_POS_ADC3 - 1UL))     \
+)
 #endif  /* ADC_VER_V5_V90 */
 /**
   * @brief  Helper macro to calculate the voltage (unit: mVolt)
@@ -2373,11 +2369,11 @@ typedef struct
   * @retval ADC conversion data equivalent voltage value (unit: mVolt)
   */
 #define __LL_ADC_CALC_DATA_TO_VOLTAGE(__VREFANALOG_VOLTAGE__,\
-                                      __ADC_DATA__,\
-                                      __ADC_RESOLUTION__)                      \
-  ((__ADC_DATA__) * (__VREFANALOG_VOLTAGE__)                                   \
-   / __LL_ADC_DIGITAL_SCALE(__ADC_RESOLUTION__)                                \
-  )
+	__ADC_DATA__,\
+	__ADC_RESOLUTION__)                      \
+((__ADC_DATA__) * (__VREFANALOG_VOLTAGE__)                                   \
+	/ __LL_ADC_DIGITAL_SCALE(__ADC_RESOLUTION__)                                \
+)
 
 /**
   * @brief  Helper macro to calculate analog reference voltage (Vref+)
@@ -2406,12 +2402,12 @@ typedef struct
   * @retval Analog reference voltage (unit: mV)
   */
 #define __LL_ADC_CALC_VREFANALOG_VOLTAGE(__VREFINT_ADC_DATA__,\
-                                         __ADC_RESOLUTION__)                   \
-  (((uint32_t)(*VREFINT_CAL_ADDR) * VREFINT_CAL_VREF)                          \
-    / __LL_ADC_CONVERT_DATA_RESOLUTION((__VREFINT_ADC_DATA__),                 \
-                                       (__ADC_RESOLUTION__),                   \
-                                       LL_ADC_RESOLUTION_16B)                  \
-  )
+	__ADC_RESOLUTION__)                   \
+(((uint32_t)(*VREFINT_CAL_ADDR) * VREFINT_CAL_VREF)                          \
+	/ __LL_ADC_CONVERT_DATA_RESOLUTION((__VREFINT_ADC_DATA__),                 \
+		(__ADC_RESOLUTION__),                   \
+		LL_ADC_RESOLUTION_16B)                  \
+)
 
 /**
   * @brief  Helper macro to calculate the temperature (unit: degree Celsius)
@@ -2460,18 +2456,18 @@ typedef struct
   * @retval Temperature (unit: degree Celsius)
   */
 #define __LL_ADC_CALC_TEMPERATURE(__VREFANALOG_VOLTAGE__,\
-                                  __TEMPSENSOR_ADC_DATA__,\
-                                  __ADC_RESOLUTION__)                              \
-  (((( ((int32_t)((__LL_ADC_CONVERT_DATA_RESOLUTION((__TEMPSENSOR_ADC_DATA__),     \
-                                                    (__ADC_RESOLUTION__),          \
-                                                    LL_ADC_RESOLUTION_16B)         \
-                   * (__VREFANALOG_VOLTAGE__))                                     \
-                  / TEMPSENSOR_CAL_VREFANALOG)                                     \
-        - (int32_t) *TEMPSENSOR_CAL1_ADDR)                                         \
-     ) * (int32_t)(TEMPSENSOR_CAL2_TEMP - TEMPSENSOR_CAL1_TEMP)                    \
-    ) / (int32_t)((int32_t)*TEMPSENSOR_CAL2_ADDR - (int32_t)*TEMPSENSOR_CAL1_ADDR) \
-   ) + TEMPSENSOR_CAL1_TEMP                                                        \
-  )
+	__TEMPSENSOR_ADC_DATA__,\
+	__ADC_RESOLUTION__)                              \
+(((( ((int32_t)((__LL_ADC_CONVERT_DATA_RESOLUTION((__TEMPSENSOR_ADC_DATA__),     \
+								(__ADC_RESOLUTION__),          \
+								LL_ADC_RESOLUTION_16B)         \
+							* (__VREFANALOG_VOLTAGE__))                                     \
+						/ TEMPSENSOR_CAL_VREFANALOG)                                     \
+					- (int32_t) *TEMPSENSOR_CAL1_ADDR)                                         \
+			) * (int32_t)(TEMPSENSOR_CAL2_TEMP - TEMPSENSOR_CAL1_TEMP)                    \
+		) / (int32_t)((int32_t)*TEMPSENSOR_CAL2_ADDR - (int32_t)*TEMPSENSOR_CAL1_ADDR) \
+	) + TEMPSENSOR_CAL1_TEMP                                                        \
+)
 
 /**
   * @brief  Helper macro to calculate the temperature (unit: degree Celsius)
@@ -2519,22 +2515,22 @@ typedef struct
   * @retval Temperature (unit: degree Celsius)
   */
 #define __LL_ADC_CALC_TEMPERATURE_TYP_PARAMS(__TEMPSENSOR_TYP_AVGSLOPE__,\
-                                             __TEMPSENSOR_TYP_CALX_V__,\
-                                             __TEMPSENSOR_CALX_TEMP__,\
-                                             __VREFANALOG_VOLTAGE__,\
-                                             __TEMPSENSOR_ADC_DATA__,\
-                                             __ADC_RESOLUTION__)               \
-  ((( (                                                                        \
-       (int32_t)((((__TEMPSENSOR_ADC_DATA__) * (__VREFANALOG_VOLTAGE__))       \
-                  / __LL_ADC_DIGITAL_SCALE(__ADC_RESOLUTION__))                \
-                 * 1000UL)                                                     \
-       -                                                                       \
-       (int32_t)(((__TEMPSENSOR_TYP_CALX_V__))                                 \
-                 * 1000UL)                                                     \
-      )                                                                        \
-    ) / (int32_t)(__TEMPSENSOR_TYP_AVGSLOPE__)                                 \
-   ) + (int32_t)(__TEMPSENSOR_CALX_TEMP__)                                     \
-  )
+	__TEMPSENSOR_TYP_CALX_V__,\
+	__TEMPSENSOR_CALX_TEMP__,\
+	__VREFANALOG_VOLTAGE__,\
+	__TEMPSENSOR_ADC_DATA__,\
+	__ADC_RESOLUTION__)               \
+((( (                                                                        \
+				(int32_t)((((__TEMPSENSOR_ADC_DATA__) * (__VREFANALOG_VOLTAGE__))       \
+						/ __LL_ADC_DIGITAL_SCALE(__ADC_RESOLUTION__))                \
+					* 1000UL)                                                     \
+				-                                                                       \
+				(int32_t)(((__TEMPSENSOR_TYP_CALX_V__))                                 \
+					* 1000UL)                                                     \
+			)                                                                        \
+		) / (int32_t)(__TEMPSENSOR_TYP_AVGSLOPE__)                                 \
+	) + (int32_t)(__TEMPSENSOR_CALX_TEMP__)                                     \
+)
 
 /**
   * @}
@@ -2584,22 +2580,17 @@ typedef struct
   *         (1) Available on devices with several ADC instances.
   * @retval ADC register address
   */
-__STATIC_INLINE uint32_t LL_ADC_DMA_GetRegAddr(ADC_TypeDef *ADCx, uint32_t Register)
-{
-  uint32_t data_reg_addr;
-
-  if (Register == LL_ADC_DMA_REG_REGULAR_DATA)
-  {
-    /* Retrieve address of register DR */
-    data_reg_addr = (uint32_t) & (ADCx->DR);
-  }
-  else /* (Register == LL_ADC_DMA_REG_REGULAR_DATA_MULTI) */
-  {
-    /* Retrieve address of register CDR */
-    data_reg_addr = (uint32_t) & ((__LL_ADC_COMMON_INSTANCE(ADCx))->CDR);
-  }
-
-  return data_reg_addr;
+__STATIC_INLINE uint32_t LL_ADC_DMA_GetRegAddr(ADC_TypeDef *ADCx, uint32_t Register) {
+	uint32_t data_reg_addr;
+	if (Register == LL_ADC_DMA_REG_REGULAR_DATA) {
+		/* Retrieve address of register DR */
+		data_reg_addr = (uint32_t) & (ADCx->DR);
+	}
+	else { /* (Register == LL_ADC_DMA_REG_REGULAR_DATA_MULTI) */
+		/* Retrieve address of register CDR */
+		data_reg_addr = (uint32_t) & ((__LL_ADC_COMMON_INSTANCE(ADCx))->CDR);
+	}
+	return data_reg_addr;
 }
 
 /**
@@ -2644,9 +2635,8 @@ __STATIC_INLINE uint32_t LL_ADC_DMA_GetRegAddr(ADC_TypeDef *ADCx, uint32_t Regis
   *         @arg @ref LL_ADC_CLOCK_ASYNC_DIV256
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetCommonClock(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t CommonClock)
-{
-  MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_CKMODE | ADC_CCR_PRESC, CommonClock);
+__STATIC_INLINE void LL_ADC_SetCommonClock(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t CommonClock) {
+	MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_CKMODE | ADC_CCR_PRESC, CommonClock);
 }
 
 /**
@@ -2672,9 +2662,8 @@ __STATIC_INLINE void LL_ADC_SetCommonClock(ADC_Common_TypeDef *ADCxy_COMMON, uin
   *         @arg @ref LL_ADC_CLOCK_ASYNC_DIV128
   *         @arg @ref LL_ADC_CLOCK_ASYNC_DIV256
   */
-__STATIC_INLINE uint32_t LL_ADC_GetCommonClock(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_CKMODE | ADC_CCR_PRESC));
+__STATIC_INLINE uint32_t LL_ADC_GetCommonClock(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_CKMODE | ADC_CCR_PRESC));
 }
 
 /**
@@ -2712,9 +2701,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetCommonClock(ADC_Common_TypeDef *ADCxy_COMMON)
   *         @arg @ref LL_ADC_PATH_INTERNAL_VBAT
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetCommonPathInternalCh(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t PathInternal)
-{
-  MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_VREFEN | ADC_CCR_TSEN | ADC_CCR_VBATEN, PathInternal);
+__STATIC_INLINE void LL_ADC_SetCommonPathInternalCh(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t PathInternal) {
+	MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_VREFEN | ADC_CCR_TSEN | ADC_CCR_VBATEN, PathInternal);
 }
 
 /**
@@ -2734,9 +2722,8 @@ __STATIC_INLINE void LL_ADC_SetCommonPathInternalCh(ADC_Common_TypeDef *ADCxy_CO
   *         @arg @ref LL_ADC_PATH_INTERNAL_TEMPSENSOR
   *         @arg @ref LL_ADC_PATH_INTERNAL_VBAT
   */
-__STATIC_INLINE uint32_t LL_ADC_GetCommonPathInternalCh(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_VREFEN | ADC_CCR_TSEN | ADC_CCR_VBATEN));
+__STATIC_INLINE uint32_t LL_ADC_GetCommonPathInternalCh(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_VREFEN | ADC_CCR_TSEN | ADC_CCR_VBATEN));
 }
 
 /**
@@ -2769,9 +2756,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetCommonPathInternalCh(ADC_Common_TypeDef *ADCx
   *         @arg @ref LL_ADC_PATH_INTERNAL_VBAT
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetCommonPathInternalChAdd(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t PathInternal)
-{
-  SET_BIT(ADCxy_COMMON->CCR, PathInternal);
+__STATIC_INLINE void LL_ADC_SetCommonPathInternalChAdd(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t PathInternal) {
+	SET_BIT(ADCxy_COMMON->CCR, PathInternal);
 }
 
 /**
@@ -2793,9 +2779,8 @@ __STATIC_INLINE void LL_ADC_SetCommonPathInternalChAdd(ADC_Common_TypeDef *ADCxy
   *         @arg @ref LL_ADC_PATH_INTERNAL_VBAT
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetCommonPathInternalChRem(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t PathInternal)
-{
-  CLEAR_BIT(ADCxy_COMMON->CCR, PathInternal);
+__STATIC_INLINE void LL_ADC_SetCommonPathInternalChRem(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t PathInternal) {
+	CLEAR_BIT(ADCxy_COMMON->CCR, PathInternal);
 }
 
 /**
@@ -2840,16 +2825,18 @@ __STATIC_INLINE void LL_ADC_SetCommonPathInternalChRem(ADC_Common_TypeDef *ADCxy
   * @param  CalibrationFactor Value between Min_Data=0x00 and Max_Data=0x7F
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetCalibrationOffsetFactor(ADC_TypeDef *ADCx, uint32_t SingleDiff, uint32_t CalibrationFactor)
-{
-#if defined(ADC_VER_V5_V90)  
-  MODIFY_REG(ADCx->CALFACT_RES13,
-             SingleDiff & ADC_SINGLEDIFF_CALIB_FACTOR_MASK,
-             CalibrationFactor << (((SingleDiff & ADC_SINGLEDIFF_CALIB_F_BIT_D_MASK) >> ADC_SINGLEDIFF_CALIB_F_BIT_D_SHIFT4) & ~(SingleDiff & ADC_CALFACT_CALFACT_S)));
+__STATIC_INLINE void LL_ADC_SetCalibrationOffsetFactor(ADC_TypeDef *ADCx, uint32_t SingleDiff,
+	uint32_t CalibrationFactor) {
+#if defined(ADC_VER_V5_V90)
+	MODIFY_REG(ADCx->CALFACT_RES13,
+		SingleDiff & ADC_SINGLEDIFF_CALIB_FACTOR_MASK,
+		CalibrationFactor << (((SingleDiff & ADC_SINGLEDIFF_CALIB_F_BIT_D_MASK) >> ADC_SINGLEDIFF_CALIB_F_BIT_D_SHIFT4) & ~
+			(SingleDiff & ADC_CALFACT_CALFACT_S)));
 #else
-  MODIFY_REG(ADCx->CALFACT,
-             SingleDiff & ADC_SINGLEDIFF_CALIB_FACTOR_MASK,
-             CalibrationFactor << (((SingleDiff & ADC_SINGLEDIFF_CALIB_F_BIT_D_MASK) >> ADC_SINGLEDIFF_CALIB_F_BIT_D_SHIFT4) & ~(SingleDiff & ADC_CALFACT_CALFACT_S)));
+	MODIFY_REG(ADCx->CALFACT,
+		SingleDiff & ADC_SINGLEDIFF_CALIB_FACTOR_MASK,
+		CalibrationFactor << (((SingleDiff & ADC_SINGLEDIFF_CALIB_F_BIT_D_MASK) >> ADC_SINGLEDIFF_CALIB_F_BIT_D_SHIFT4) & ~
+			(SingleDiff & ADC_CALFACT_CALFACT_S)));
 #endif
 }
 
@@ -2871,16 +2858,19 @@ __STATIC_INLINE void LL_ADC_SetCalibrationOffsetFactor(ADC_TypeDef *ADCx, uint32
   *         @arg @ref LL_ADC_DIFFERENTIAL_ENDED
   * @retval Value between Min_Data=0x00 and Max_Data=0x7F
   */
-__STATIC_INLINE uint32_t LL_ADC_GetCalibrationOffsetFactor(ADC_TypeDef *ADCx, uint32_t SingleDiff)
-{
-  /* Retrieve bits with position in register depending on parameter           */
-  /* "SingleDiff".                                                            */
-  /* Parameter used with mask "ADC_SINGLEDIFF_CALIB_FACTOR_MASK" because      */
-  /* containing other bits reserved for other purpose.                        */
+__STATIC_INLINE uint32_t LL_ADC_GetCalibrationOffsetFactor(ADC_TypeDef *ADCx, uint32_t SingleDiff) {
+	/* Retrieve bits with position in register depending on parameter           */
+	/* "SingleDiff".                                                            */
+	/* Parameter used with mask "ADC_SINGLEDIFF_CALIB_FACTOR_MASK" because      */
+	/* containing other bits reserved for other purpose.                        */
 #if defined(ADC_VER_V5_V90)
-  return (uint32_t)(READ_BIT(ADCx->CALFACT_RES13, (SingleDiff & ADC_SINGLEDIFF_CALIB_FACTOR_MASK)) >> ((SingleDiff & ADC_SINGLEDIFF_CALIB_F_BIT_D_MASK) >> ADC_SINGLEDIFF_CALIB_F_BIT_D_SHIFT4));
+	return (uint32_t)(READ_BIT(ADCx->CALFACT_RES13,
+				(SingleDiff & ADC_SINGLEDIFF_CALIB_FACTOR_MASK)) >> ((SingleDiff & ADC_SINGLEDIFF_CALIB_F_BIT_D_MASK) >>
+				ADC_SINGLEDIFF_CALIB_F_BIT_D_SHIFT4));
 #else
-  return (uint32_t)(READ_BIT(ADCx->CALFACT, (SingleDiff & ADC_SINGLEDIFF_CALIB_FACTOR_MASK)) >> ((SingleDiff & ADC_SINGLEDIFF_CALIB_F_BIT_D_MASK) >> ADC_SINGLEDIFF_CALIB_F_BIT_D_SHIFT4));
+	return (uint32_t)(READ_BIT(ADCx->CALFACT,
+				(SingleDiff & ADC_SINGLEDIFF_CALIB_FACTOR_MASK)) >> ((SingleDiff & ADC_SINGLEDIFF_CALIB_F_BIT_D_MASK) >>
+				ADC_SINGLEDIFF_CALIB_F_BIT_D_SHIFT4));
 #endif
 }
 
@@ -2906,27 +2896,22 @@ __STATIC_INLINE uint32_t LL_ADC_GetCalibrationOffsetFactor(ADC_TypeDef *ADCx, ui
   * @param  CalibrationFactor Value between Min_Data=0x00 and Max_Data=0x3FFFFFFF
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetCalibrationLinearFactor(ADC_TypeDef *ADCx, uint32_t LinearityWord, uint32_t CalibrationFactor)
-{
+__STATIC_INLINE void LL_ADC_SetCalibrationLinearFactor(ADC_TypeDef *ADCx, uint32_t LinearityWord,
+	uint32_t CalibrationFactor) {
 #if defined(ADC_VER_V5_V90)
-  if (ADCx != ADC3)
-  {
-    uint32_t timeout_cpu_cycles = ADC_LINEARITY_BIT_TOGGLE_TIMEOUT;
-    MODIFY_REG(ADCx->CALFACT2_RES14, ADC_CALFACT2_LINCALFACT, CalibrationFactor);
-    MODIFY_REG(ADCx->CR, ADC_CR_ADCALLIN, LinearityWord);
-    while ((READ_BIT(ADCx->CR, LinearityWord) == 0UL) && (timeout_cpu_cycles > 0UL))
-    {
-      timeout_cpu_cycles--;
-    }
-  }
+	if (ADCx != ADC3) {
+		uint32_t timeout_cpu_cycles = ADC_LINEARITY_BIT_TOGGLE_TIMEOUT;
+		MODIFY_REG(ADCx->CALFACT2_RES14, ADC_CALFACT2_LINCALFACT, CalibrationFactor);
+		MODIFY_REG(ADCx->CR, ADC_CR_ADCALLIN, LinearityWord);
+		while ((READ_BIT(ADCx->CR, LinearityWord) == 0UL) && (timeout_cpu_cycles > 0UL))
+			timeout_cpu_cycles--;
+	}
 #else /* ADC_VER_V5_V90 */
-  uint32_t timeout_cpu_cycles = ADC_LINEARITY_BIT_TOGGLE_TIMEOUT;
-  MODIFY_REG(ADCx->CALFACT2, ADC_CALFACT2_LINCALFACT, CalibrationFactor);
-  MODIFY_REG(ADCx->CR, ADC_CR_ADCALLIN, LinearityWord);
-  while ((READ_BIT(ADCx->CR, LinearityWord) == 0UL) && (timeout_cpu_cycles > 0UL))
-  {
-    timeout_cpu_cycles--;
-  }
+	uint32_t timeout_cpu_cycles = ADC_LINEARITY_BIT_TOGGLE_TIMEOUT;
+	MODIFY_REG(ADCx->CALFACT2, ADC_CALFACT2_LINCALFACT, CalibrationFactor);
+	MODIFY_REG(ADCx->CR, ADC_CR_ADCALLIN, LinearityWord);
+	while ((READ_BIT(ADCx->CR, LinearityWord) == 0UL) && (timeout_cpu_cycles > 0UL))
+		timeout_cpu_cycles--;
 #endif
 }
 
@@ -2946,18 +2931,15 @@ __STATIC_INLINE void LL_ADC_SetCalibrationLinearFactor(ADC_TypeDef *ADCx, uint32
   *         @arg @ref LL_ADC_CALIB_LINEARITY_WORD6
   * @retval Value between Min_Data=0x00 and Max_Data=0x3FFFFFFF
   */
-__STATIC_INLINE uint32_t LL_ADC_GetCalibrationLinearFactor(ADC_TypeDef *ADCx, uint32_t LinearityWord)
-{
-  uint32_t timeout_cpu_cycles = ADC_LINEARITY_BIT_TOGGLE_TIMEOUT;
-  CLEAR_BIT(ADCx->CR, LinearityWord);
-  while ((READ_BIT(ADCx->CR, LinearityWord) != 0UL) && (timeout_cpu_cycles > 0UL))
-  {
-    timeout_cpu_cycles--;
-  }
+__STATIC_INLINE uint32_t LL_ADC_GetCalibrationLinearFactor(ADC_TypeDef *ADCx, uint32_t LinearityWord) {
+	uint32_t timeout_cpu_cycles = ADC_LINEARITY_BIT_TOGGLE_TIMEOUT;
+	CLEAR_BIT(ADCx->CR, LinearityWord);
+	while ((READ_BIT(ADCx->CR, LinearityWord) != 0UL) && (timeout_cpu_cycles > 0UL))
+		timeout_cpu_cycles--;
 #if defined(ADC_VER_V5_V90)
-  return (uint32_t)(READ_BIT(ADCx->CALFACT2_RES14, ADC_CALFACT2_LINCALFACT));
+	return (uint32_t)(READ_BIT(ADCx->CALFACT2_RES14, ADC_CALFACT2_LINCALFACT));
 #else
-  return (uint32_t)(READ_BIT(ADCx->CALFACT2, ADC_CALFACT2_LINCALFACT));
+	return (uint32_t)(READ_BIT(ADCx->CALFACT2, ADC_CALFACT2_LINCALFACT));
 #endif
 }
 /**
@@ -2978,52 +2960,32 @@ __STATIC_INLINE uint32_t LL_ADC_GetCalibrationLinearFactor(ADC_TypeDef *ADCx, ui
   *         @arg @ref LL_ADC_RESOLUTION_8B
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetResolution(ADC_TypeDef *ADCx, uint32_t Resolution)
-{
+__STATIC_INLINE void LL_ADC_SetResolution(ADC_TypeDef *ADCx, uint32_t Resolution) {
 #if defined(ADC_VER_V5_3)
-
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
-
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
 #elif defined(ADC_VER_V5_V90)
-  if (ADCx == ADC3)
-  {
-    MODIFY_REG(ADCx->CFGR, ADC3_CFGR_RES, ((__LL_ADC12_RESOLUTION_TO_ADC3(Resolution)  & (ADC_CFGR_RES_1 | ADC_CFGR_RES_0)) << 1UL));
-  }
-  else
-  {
-    if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Rev.Y */
-    {
-      MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
-    }
-    else /* Rev.V */
-    {
-      if (LL_ADC_RESOLUTION_8B == Resolution)
-      {
-        MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution | 0x0000000CUL);
-      }
-      else
-      {
-        MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
-      }
-    }
-  }
+	if (ADCx == ADC3)
+		MODIFY_REG(ADCx->CFGR, ADC3_CFGR_RES,
+			((__LL_ADC12_RESOLUTION_TO_ADC3(Resolution)  & (ADC_CFGR_RES_1 | ADC_CFGR_RES_0)) << 1UL));
+	else {
+		if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Rev.Y */
+			MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
+		else { /* Rev.V */
+			if (LL_ADC_RESOLUTION_8B == Resolution)
+				MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution | 0x0000000CUL);
+			else
+				MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
+		}
+	}
 #else /* ADC_VER_V5_V90 */
-  if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Rev.Y */
-  {
-    MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
-  }
-  else /* Rev.V */
-  {
-    if (LL_ADC_RESOLUTION_8B == Resolution)
-    {
-      MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution | 0x0000000CUL);
-    }
-    else
-    {
-      MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
-    }
-  }
-
+	if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Rev.Y */
+		MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
+	else { /* Rev.V */
+		if (LL_ADC_RESOLUTION_8B == Resolution)
+			MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution | 0x0000000CUL);
+		else
+			MODIFY_REG(ADCx->CFGR, ADC_CFGR_RES, Resolution);
+	}
 #endif /* ADC_VER_V5_X*/
 }
 
@@ -3041,46 +3003,27 @@ __STATIC_INLINE void LL_ADC_SetResolution(ADC_TypeDef *ADCx, uint32_t Resolution
   *         @arg @ref LL_ADC_RESOLUTION_8B
    *         @arg @ref LL_ADC_RESOLUTION_6B   **Value available for ADC3 on STM32H72x/3x devices only **
   */
-__STATIC_INLINE uint32_t LL_ADC_GetResolution(ADC_TypeDef *ADCx)
-{
+__STATIC_INLINE uint32_t LL_ADC_GetResolution(ADC_TypeDef *ADCx) {
 #if defined (ADC_VER_V5_3)
-
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES));
-
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES));
 #elif defined(ADC_VER_V5_V90)
-  if (ADCx == ADC3)
-  {
-    return (uint32_t)(READ_BIT(ADCx->CFGR, ADC3_CFGR_RES));
-  }
-  else
-  {
-    if ((uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES)) == 0x0000001CUL)
-    {
-      return (LL_ADC_RESOLUTION_8B);
-    }
-    else
-    {
-      return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES));
-    }
-  }
-
+	if (ADCx == ADC3)
+		return (uint32_t)(READ_BIT(ADCx->CFGR, ADC3_CFGR_RES));
+	else {
+		if ((uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES)) == 0x0000001CUL)
+			return (LL_ADC_RESOLUTION_8B);
+		else
+			return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES));
+	}
 #else  /* ADC_VER_V5_V90 */
-  if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Rev.Y */
-  {
-    return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES));
-  }
-  else /* Rev.V */
-  {
-    if ((uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES)) == 0x0000001CUL)
-    {
-      return (LL_ADC_RESOLUTION_8B);
-    }
-    else
-    {
-      return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES));
-    }
-  }
-
+	if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Rev.Y */
+		return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES));
+	else { /* Rev.V */
+		if ((uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES)) == 0x0000001CUL)
+			return (LL_ADC_RESOLUTION_8B);
+		else
+			return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_RES));
+	}
 #endif /* ADC_VER_V5_X */
 }
 
@@ -3135,9 +3078,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetResolution(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_LP_AUTOWAIT
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetLowPowerMode(ADC_TypeDef *ADCx, uint32_t LowPowerMode)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_AUTDLY, LowPowerMode);
+__STATIC_INLINE void LL_ADC_SetLowPowerMode(ADC_TypeDef *ADCx, uint32_t LowPowerMode) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_AUTDLY, LowPowerMode);
 }
 
 /**
@@ -3186,9 +3128,8 @@ __STATIC_INLINE void LL_ADC_SetLowPowerMode(ADC_TypeDef *ADCx, uint32_t LowPower
   *         @arg @ref LL_ADC_LP_MODE_NONE
   *         @arg @ref LL_ADC_LP_AUTOWAIT
   */
-__STATIC_INLINE uint32_t LL_ADC_GetLowPowerMode(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_AUTDLY));
+__STATIC_INLINE uint32_t LL_ADC_GetLowPowerMode(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_AUTDLY));
 }
 
 /**
@@ -3197,15 +3138,15 @@ __STATIC_INLINE uint32_t LL_ADC_GetLowPowerMode(ADC_TypeDef *ADCx)
   * @note   Caution: Channel selections is dependent to ADC instance and IP version:
   *         For STM32H72x/3x This is applicable only for ADC1/ADC2
   *         For Rest of STM32H7xxx This is applicable only all the ADCs instances.
-  * 
+  *
   * @param  ADCx ADC instance
   * @param  Channel This parameter can be one of the following values:
-  *         @arg @ref LL_ADC_CHANNEL_0           
-  *         @arg @ref LL_ADC_CHANNEL_1           
-  *         @arg @ref LL_ADC_CHANNEL_2           
-  *         @arg @ref LL_ADC_CHANNEL_3           
-  *         @arg @ref LL_ADC_CHANNEL_4           
-  *         @arg @ref LL_ADC_CHANNEL_5           
+  *         @arg @ref LL_ADC_CHANNEL_0
+  *         @arg @ref LL_ADC_CHANNEL_1
+  *         @arg @ref LL_ADC_CHANNEL_2
+  *         @arg @ref LL_ADC_CHANNEL_3
+  *         @arg @ref LL_ADC_CHANNEL_4
+  *         @arg @ref LL_ADC_CHANNEL_5
   *         @arg @ref LL_ADC_CHANNEL_6
   *         @arg @ref LL_ADC_CHANNEL_7
   *         @arg @ref LL_ADC_CHANNEL_8
@@ -3222,17 +3163,15 @@ __STATIC_INLINE uint32_t LL_ADC_GetLowPowerMode(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_CHANNEL_19
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetChannelPreSelection(ADC_TypeDef *ADCx, uint32_t Channel)
-{
+__STATIC_INLINE void LL_ADC_SetChannelPreSelection(ADC_TypeDef *ADCx, uint32_t Channel) {
 #if defined(ADC_VER_V5_V90)
-    if (ADCx != ADC3)
-    {
-      /* ADC channels preselection */
-      ADCx->PCSEL_RES0 |= (1UL << (__LL_ADC_CHANNEL_TO_DECIMAL_NB(Channel) & 0x1FUL));
-    }
+	if (ADCx != ADC3) {
+		/* ADC channels preselection */
+		ADCx->PCSEL_RES0 |= (1UL << (__LL_ADC_CHANNEL_TO_DECIMAL_NB(Channel) & 0x1FUL));
+	}
 #else
-    /* ADC channels preselection */
-    ADCx->PCSEL |= (1UL << (__LL_ADC_CHANNEL_TO_DECIMAL_NB(Channel) & 0x1FUL));
+	/* ADC channels preselection */
+	ADCx->PCSEL |= (1UL << (__LL_ADC_CHANNEL_TO_DECIMAL_NB(Channel) & 0x1FUL));
 #endif /* ADC_VER_V5_V90 */
 }
 
@@ -3309,23 +3248,21 @@ __STATIC_INLINE void LL_ADC_SetChannelPreSelection(ADC_TypeDef *ADCx, uint32_t C
   * @param  OffsetLevel Value between Min_Data=0x000 and Max_Data=0x1FFFFFF
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetOffset(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t Channel, uint32_t OffsetLevel)
-{
-  __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+__STATIC_INLINE void LL_ADC_SetOffset(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t Channel, uint32_t OffsetLevel) {
+	__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
 #if defined(ADC_VER_V5_V90)
-  if (ADCx == ADC3)
-  {
-    MODIFY_REG(*preg,
-               ADC3_OFR1_OFFSET1_EN | ADC_OFR1_OFFSET1_CH | ADC_OFR1_OFFSET1,
-               ADC3_OFR1_OFFSET1_EN | (Channel & ADC_CHANNEL_ID_NUMBER_MASK) | OffsetLevel);
-  }
-  else
+	if (ADCx == ADC3) {
+		MODIFY_REG(*preg,
+			ADC3_OFR1_OFFSET1_EN | ADC_OFR1_OFFSET1_CH | ADC_OFR1_OFFSET1,
+			ADC3_OFR1_OFFSET1_EN | (Channel & ADC_CHANNEL_ID_NUMBER_MASK) | OffsetLevel);
+	}
+	else
 #endif /* ADC_VER_V5_V90 */
-  {
-    MODIFY_REG(*preg,
-               ADC_OFR1_OFFSET1_CH | ADC_OFR1_OFFSET1,
-               (Channel & ADC_CHANNEL_ID_NUMBER_MASK) | OffsetLevel);
-  }
+	{
+		MODIFY_REG(*preg,
+			ADC_OFR1_OFFSET1_CH | ADC_OFR1_OFFSET1,
+			(Channel & ADC_CHANNEL_ID_NUMBER_MASK) | OffsetLevel);
+	}
 }
 
 /**
@@ -3391,11 +3328,9 @@ __STATIC_INLINE void LL_ADC_SetOffset(ADC_TypeDef *ADCx, uint32_t Offsety, uint3
   *                comparison with internal channel parameter to be done
   *                using helper macro @ref __LL_ADC_CHANNEL_INTERNAL_TO_EXTERNAL().
   */
-__STATIC_INLINE uint32_t LL_ADC_GetOffsetChannel(ADC_TypeDef *ADCx, uint32_t Offsety)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-
-  return (uint32_t) READ_BIT(*preg, ADC_OFR1_OFFSET1_CH);
+__STATIC_INLINE uint32_t LL_ADC_GetOffsetChannel(ADC_TypeDef *ADCx, uint32_t Offsety) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+	return (uint32_t) READ_BIT(*preg, ADC_OFR1_OFFSET1_CH);
 }
 
 /**
@@ -3417,11 +3352,9 @@ __STATIC_INLINE uint32_t LL_ADC_GetOffsetChannel(ADC_TypeDef *ADCx, uint32_t Off
   *         @arg @ref LL_ADC_OFFSET_4
   * @retval Value between Min_Data=0x000 and Max_Data=0x1FFFFFF
   */
-__STATIC_INLINE uint32_t LL_ADC_GetOffsetLevel(ADC_TypeDef *ADCx, uint32_t Offsety)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-
-  return (uint32_t) READ_BIT(*preg, ADC_OFR1_OFFSET1);
+__STATIC_INLINE uint32_t LL_ADC_GetOffsetLevel(ADC_TypeDef *ADCx, uint32_t Offsety) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+	return (uint32_t) READ_BIT(*preg, ADC_OFR1_OFFSET1);
 }
 
 
@@ -3440,9 +3373,9 @@ __STATIC_INLINE uint32_t LL_ADC_GetOffsetLevel(ADC_TypeDef *ADCx, uint32_t Offse
   *         @arg @ref LL_ADC_OFFSET_RSHIFT_DISABLE
   * @retval Returned None
   */
-__STATIC_INLINE void LL_ADC_SetDataRightShift(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t RigthShift)
-{
-  MODIFY_REG(ADCx->CFGR2, (ADC_CFGR2_RSHIFT1 | ADC_CFGR2_RSHIFT2 | ADC_CFGR2_RSHIFT3 | ADC_CFGR2_RSHIFT4), RigthShift << (Offsety & 0x1FUL));
+__STATIC_INLINE void LL_ADC_SetDataRightShift(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t RigthShift) {
+	MODIFY_REG(ADCx->CFGR2, (ADC_CFGR2_RSHIFT1 | ADC_CFGR2_RSHIFT2 | ADC_CFGR2_RSHIFT3 | ADC_CFGR2_RSHIFT4),
+		RigthShift << (Offsety & 0x1FUL));
 }
 
 /**
@@ -3459,9 +3392,8 @@ __STATIC_INLINE void LL_ADC_SetDataRightShift(ADC_TypeDef *ADCx, uint32_t Offset
   *         @arg @ref LL_ADC_OFFSET_RSHIFT_ENABLE
   *         @arg @ref LL_ADC_OFFSET_RSHIFT_DISABLE
   */
-__STATIC_INLINE uint32_t LL_ADC_GetDataRightShift(ADC_TypeDef *ADCx, uint32_t Offsety)
-{
-  return (uint32_t)((READ_BIT(ADCx->CFGR2, (ADC_CFGR2_RSHIFT1 << (Offsety & 0x1FUL)))) >> (Offsety & 0x1FUL));
+__STATIC_INLINE uint32_t LL_ADC_GetDataRightShift(ADC_TypeDef *ADCx, uint32_t Offsety) {
+	return (uint32_t)((READ_BIT(ADCx->CFGR2, (ADC_CFGR2_RSHIFT1 << (Offsety & 0x1FUL)))) >> (Offsety & 0x1FUL));
 }
 
 /**
@@ -3482,19 +3414,18 @@ __STATIC_INLINE uint32_t LL_ADC_GetDataRightShift(ADC_TypeDef *ADCx, uint32_t Of
   *         @arg @ref LL_ADC_OFFSET_SIGNED_SATURATION_DISABLE
   * @retval Returned None
   */
-__STATIC_INLINE void LL_ADC_SetOffsetSignedSaturation(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t OffsetSignedSaturation)
-{
+__STATIC_INLINE void LL_ADC_SetOffsetSignedSaturation(ADC_TypeDef *ADCx, uint32_t Offsety,
+	uint32_t OffsetSignedSaturation) {
 #if defined(ADC_VER_V5_V90)
-  if (ADCx == ADC3)
-  {
-    /* Function not available on this instance */
-  }
-  else
+	if (ADCx == ADC3) {
+		/* Function not available on this instance */
+	}
+	else
 #endif  /* ADC_VER_V5_V90 */
-  {
-    __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-    MODIFY_REG(*preg, ADC_OFR1_SSATE, OffsetSignedSaturation);
-  }
+	{
+		__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+		MODIFY_REG(*preg, ADC_OFR1_SSATE, OffsetSignedSaturation);
+	}
 }
 
 /**
@@ -3514,20 +3445,18 @@ __STATIC_INLINE void LL_ADC_SetOffsetSignedSaturation(ADC_TypeDef *ADCx, uint32_
   *         @arg @ref LL_ADC_OFFSET_SIGNED_SATURATION_ENABLE
   *         @arg @ref LL_ADC_OFFSET_SIGNED_SATURATION_DISABLE
   */
-__STATIC_INLINE uint32_t LL_ADC_GetOffsetSignedSaturation(ADC_TypeDef *ADCx, uint32_t Offsety)
-{
+__STATIC_INLINE uint32_t LL_ADC_GetOffsetSignedSaturation(ADC_TypeDef *ADCx, uint32_t Offsety) {
 #if defined(ADC_VER_V5_V90)
-  if (ADCx == ADC3)
-  {
-    /* Function not available on this instance */
-    return 0UL;
-  }
-  else
+	if (ADCx == ADC3) {
+		/* Function not available on this instance */
+		return 0UL;
+	}
+	else
 #endif  /* ADC_VER_V5_V90 */
-  {
-    const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-    return (uint32_t) READ_BIT(*preg, ADC_OFR1_SSATE);
-  }
+	{
+		const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+		return (uint32_t) READ_BIT(*preg, ADC_OFR1_SSATE);
+	}
 }
 
 #if defined(ADC_VER_V5_V90)
@@ -3553,16 +3482,13 @@ __STATIC_INLINE uint32_t LL_ADC_GetOffsetSignedSaturation(ADC_TypeDef *ADCx, uin
   *         @arg @ref LL_ADC_OFFSET_SATURATION_DISABLE
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetOffsetSaturation(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t OffsetSaturation)
-{
-  if (ADCx == ADC3)
-  {
-    __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-
-    MODIFY_REG(*preg,
-               ADC3_OFR1_SATEN,
-               OffsetSaturation);
-  }
+__STATIC_INLINE void LL_ADC_SetOffsetSaturation(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t OffsetSaturation) {
+	if (ADCx == ADC3) {
+		__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+		MODIFY_REG(*preg,
+			ADC3_OFR1_SATEN,
+			OffsetSaturation);
+	}
 }
 
 /**
@@ -3582,17 +3508,13 @@ __STATIC_INLINE void LL_ADC_SetOffsetSaturation(ADC_TypeDef *ADCx, uint32_t Offs
   *         @arg @ref LL_ADC_OFFSET_SATURATION_ENABLE
   *         @arg @ref LL_ADC_OFFSET_SATURATION_DISABLE
   */
-__STATIC_INLINE uint32_t LL_ADC_GetOffsetSaturation(ADC_TypeDef *ADCx, uint32_t Offsety)
-{
-  if (ADCx == ADC3)
-  {
-    const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-
-    return (uint32_t) READ_BIT(*preg, ADC3_OFR1_SATEN);
-  }else
-  {
-    return 0UL;
-  }
+__STATIC_INLINE uint32_t LL_ADC_GetOffsetSaturation(ADC_TypeDef *ADCx, uint32_t Offsety) {
+	if (ADCx == ADC3) {
+		const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+		return (uint32_t) READ_BIT(*preg, ADC3_OFR1_SATEN);
+	}
+	else
+		return 0UL;
 }
 
 /**
@@ -3617,16 +3539,13 @@ __STATIC_INLINE uint32_t LL_ADC_GetOffsetSaturation(ADC_TypeDef *ADCx, uint32_t 
   *         @arg @ref LL_ADC_OFFSET_SIGN_POSITIVE
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetOffsetSign(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t OffsetSign)
-{
-  if (ADCx == ADC3)
-  {
-    __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-
-    MODIFY_REG(*preg,
-               ADC3_OFR1_OFFSETPOS,
-               OffsetSign);
-  }
+__STATIC_INLINE void LL_ADC_SetOffsetSign(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t OffsetSign) {
+	if (ADCx == ADC3) {
+		__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+		MODIFY_REG(*preg,
+			ADC3_OFR1_OFFSETPOS,
+			OffsetSign);
+	}
 }
 
 /**
@@ -3646,18 +3565,13 @@ __STATIC_INLINE void LL_ADC_SetOffsetSign(ADC_TypeDef *ADCx, uint32_t Offsety, u
   *         @arg @ref LL_ADC_OFFSET_SIGN_NEGATIVE
   *         @arg @ref LL_ADC_OFFSET_SIGN_POSITIVE
   */
-__STATIC_INLINE uint32_t LL_ADC_GetOffsetSign(ADC_TypeDef *ADCx, uint32_t Offsety)
-{
-  if (ADCx == ADC3)
-  {
-    const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-
-    return (uint32_t) READ_BIT(*preg, ADC3_OFR1_OFFSETPOS);
-  }
-  else
-  { 
-    return 0UL;
-  }
+__STATIC_INLINE uint32_t LL_ADC_GetOffsetSign(ADC_TypeDef *ADCx, uint32_t Offsety) {
+	if (ADCx == ADC3) {
+		const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+		return (uint32_t) READ_BIT(*preg, ADC3_OFR1_OFFSETPOS);
+	}
+	else
+		return 0UL;
 }
 
 /**
@@ -3686,21 +3600,18 @@ __STATIC_INLINE uint32_t LL_ADC_GetOffsetSign(ADC_TypeDef *ADCx, uint32_t Offset
   *         @arg @ref LL_ADC_OFFSET_ENABLE
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetOffsetState(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t OffsetState)
-{
-  __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-  if (ADCx == ADC3)
-  {
-    MODIFY_REG(*preg,
-               ADC3_OFR1_OFFSET1_EN,
-               OffsetState);
-  }
-  else
-  {
-    MODIFY_REG(*preg,
-               ADC_OFR1_SSATE,
-               OffsetState);
-  }
+__STATIC_INLINE void LL_ADC_SetOffsetState(ADC_TypeDef *ADCx, uint32_t Offsety, uint32_t OffsetState) {
+	__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+	if (ADCx == ADC3) {
+		MODIFY_REG(*preg,
+			ADC3_OFR1_OFFSET1_EN,
+			OffsetState);
+	}
+	else {
+		MODIFY_REG(*preg,
+			ADC_OFR1_SSATE,
+			OffsetState);
+	}
 }
 
 /**
@@ -3720,17 +3631,12 @@ __STATIC_INLINE void LL_ADC_SetOffsetState(ADC_TypeDef *ADCx, uint32_t Offsety, 
   *         @arg @ref LL_ADC_OFFSET_DISABLE
   *         @arg @ref LL_ADC_OFFSET_ENABLE
   */
-__STATIC_INLINE uint32_t LL_ADC_GetOffsetState(ADC_TypeDef *ADCx, uint32_t Offsety)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
-  if (ADCx == ADC3)
-  {
-    return (uint32_t) READ_BIT(*preg, ADC3_OFR1_OFFSET1_EN);
-  }
-  else
-  {
-    return (uint32_t) READ_BIT(*preg, ADC_OFR1_SSATE);
-  }
+__STATIC_INLINE uint32_t LL_ADC_GetOffsetState(ADC_TypeDef *ADCx, uint32_t Offsety) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->OFR1, Offsety);
+	if (ADCx == ADC3)
+		return (uint32_t) READ_BIT(*preg, ADC3_OFR1_OFFSET1_EN);
+	else
+		return (uint32_t) READ_BIT(*preg, ADC_OFR1_SSATE);
 }
 
 #endif  /* ADC_VER_V5_V90 */
@@ -3787,9 +3693,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetOffsetState(ADC_TypeDef *ADCx, uint32_t Offse
   *         @arg @ref LL_ADC_REG_TRIG_EXT_LPTIM3_OUT
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetTriggerSource(ADC_TypeDef *ADCx, uint32_t TriggerSource)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_EXTEN | ADC_CFGR_EXTSEL, TriggerSource);
+__STATIC_INLINE void LL_ADC_REG_SetTriggerSource(ADC_TypeDef *ADCx, uint32_t TriggerSource) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_EXTEN | ADC_CFGR_EXTSEL, TriggerSource);
 }
 
 /**
@@ -3831,20 +3736,17 @@ __STATIC_INLINE void LL_ADC_REG_SetTriggerSource(ADC_TypeDef *ADCx, uint32_t Tri
   *         @arg @ref LL_ADC_REG_TRIG_EXT_LPTIM2_OUT
   *         @arg @ref LL_ADC_REG_TRIG_EXT_LPTIM3_OUT
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetTriggerSource(ADC_TypeDef *ADCx)
-{
-  __IO uint32_t TriggerSource = READ_BIT(ADCx->CFGR, ADC_CFGR_EXTSEL | ADC_CFGR_EXTEN);
-
-  /* Value for shift of {0; 4; 8; 12} depending on value of bitfield          */
-  /* corresponding to ADC_CFGR_EXTEN {0; 1; 2; 3}.                            */
-  uint32_t ShiftExten = ((TriggerSource & ADC_CFGR_EXTEN) >> (ADC_REG_TRIG_EXTEN_BITOFFSET_POS - 2UL));
-
-  /* Set bitfield corresponding to ADC_CFGR_EXTEN and ADC_CFGR_EXTSEL         */
-  /* to match with triggers literals definition.                              */
-  return ((TriggerSource
-           & (ADC_REG_TRIG_SOURCE_MASK >> ShiftExten) & ADC_CFGR_EXTSEL)
-          | ((ADC_REG_TRIG_EDGE_MASK >> ShiftExten) & ADC_CFGR_EXTEN)
-         );
+__STATIC_INLINE uint32_t LL_ADC_REG_GetTriggerSource(ADC_TypeDef *ADCx) {
+	__IO uint32_t TriggerSource = READ_BIT(ADCx->CFGR, ADC_CFGR_EXTSEL | ADC_CFGR_EXTEN);
+	/* Value for shift of {0; 4; 8; 12} depending on value of bitfield          */
+	/* corresponding to ADC_CFGR_EXTEN {0; 1; 2; 3}.                            */
+	uint32_t ShiftExten = ((TriggerSource & ADC_CFGR_EXTEN) >> (ADC_REG_TRIG_EXTEN_BITOFFSET_POS - 2UL));
+	/* Set bitfield corresponding to ADC_CFGR_EXTEN and ADC_CFGR_EXTSEL         */
+	/* to match with triggers literals definition.                              */
+	return ((TriggerSource
+				& (ADC_REG_TRIG_SOURCE_MASK >> ShiftExten) & ADC_CFGR_EXTSEL)
+			| ((ADC_REG_TRIG_EDGE_MASK >> ShiftExten) & ADC_CFGR_EXTEN)
+		);
 }
 
 /**
@@ -3858,9 +3760,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetTriggerSource(ADC_TypeDef *ADCx)
   * @retval Value "0" if trigger source external trigger
   *         Value "1" if trigger source SW start.
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_IsTriggerSourceSWStart(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CFGR, ADC_CFGR_EXTEN) == (LL_ADC_REG_TRIG_SOFTWARE & ADC_CFGR_EXTEN)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_REG_IsTriggerSourceSWStart(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CFGR, ADC_CFGR_EXTEN) == (LL_ADC_REG_TRIG_SOFTWARE & ADC_CFGR_EXTEN)) ? 1UL : 0UL);
 }
 
 /**
@@ -3878,9 +3779,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_IsTriggerSourceSWStart(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_REG_TRIG_EXT_RISINGFALLING
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetTriggerEdge(ADC_TypeDef *ADCx, uint32_t ExternalTriggerEdge)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_EXTEN, ExternalTriggerEdge);
+__STATIC_INLINE void LL_ADC_REG_SetTriggerEdge(ADC_TypeDef *ADCx, uint32_t ExternalTriggerEdge) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_EXTEN, ExternalTriggerEdge);
 }
 
 /**
@@ -3893,9 +3793,8 @@ __STATIC_INLINE void LL_ADC_REG_SetTriggerEdge(ADC_TypeDef *ADCx, uint32_t Exter
   *         @arg @ref LL_ADC_REG_TRIG_EXT_FALLING
   *         @arg @ref LL_ADC_REG_TRIG_EXT_RISINGFALLING
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetTriggerEdge(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_EXTEN));
+__STATIC_INLINE uint32_t LL_ADC_REG_GetTriggerEdge(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_EXTEN));
 }
 
 #if defined(ADC_VER_V5_V90)
@@ -3917,16 +3816,12 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetTriggerEdge(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_REG_SAMPLING_MODE_TRIGGER_CONTROLED
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetSamplingMode(ADC_TypeDef *ADCx, uint32_t SamplingMode)
-{
-  if (ADCx != ADC3)
-  {
-    /* Function not available on this instance */
-  }
-  else
-  {
-    MODIFY_REG(ADCx->CFGR2, ADC3_CFGR2_BULB | ADC3_CFGR2_SMPTRIG, SamplingMode);
-  }
+__STATIC_INLINE void LL_ADC_REG_SetSamplingMode(ADC_TypeDef *ADCx, uint32_t SamplingMode) {
+	if (ADCx != ADC3) {
+		/* Function not available on this instance */
+	}
+	else
+		MODIFY_REG(ADCx->CFGR2, ADC3_CFGR2_BULB | ADC3_CFGR2_SMPTRIG, SamplingMode);
 }
 #endif  /* ADC_VER_V5_V90 */
 
@@ -3984,9 +3879,8 @@ __STATIC_INLINE void LL_ADC_REG_SetSamplingMode(ADC_TypeDef *ADCx, uint32_t Samp
   *         @arg @ref LL_ADC_REG_SEQ_SCAN_ENABLE_16RANKS
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetSequencerLength(ADC_TypeDef *ADCx, uint32_t SequencerNbRanks)
-{
-  MODIFY_REG(ADCx->SQR1, ADC_SQR1_L, SequencerNbRanks);
+__STATIC_INLINE void LL_ADC_REG_SetSequencerLength(ADC_TypeDef *ADCx, uint32_t SequencerNbRanks) {
+	MODIFY_REG(ADCx->SQR1, ADC_SQR1_L, SequencerNbRanks);
 }
 
 /**
@@ -4038,9 +3932,8 @@ __STATIC_INLINE void LL_ADC_REG_SetSequencerLength(ADC_TypeDef *ADCx, uint32_t S
   *         @arg @ref LL_ADC_REG_SEQ_SCAN_ENABLE_15RANKS
   *         @arg @ref LL_ADC_REG_SEQ_SCAN_ENABLE_16RANKS
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerLength(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->SQR1, ADC_SQR1_L));
+__STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerLength(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->SQR1, ADC_SQR1_L));
 }
 
 /**
@@ -4070,9 +3963,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerLength(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_REG_SEQ_DISCONT_8RANKS
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetSequencerDiscont(ADC_TypeDef *ADCx, uint32_t SeqDiscont)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_DISCEN | ADC_CFGR_DISCNUM, SeqDiscont);
+__STATIC_INLINE void LL_ADC_REG_SetSequencerDiscont(ADC_TypeDef *ADCx, uint32_t SeqDiscont) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_DISCEN | ADC_CFGR_DISCNUM, SeqDiscont);
 }
 
 /**
@@ -4093,9 +3985,8 @@ __STATIC_INLINE void LL_ADC_REG_SetSequencerDiscont(ADC_TypeDef *ADCx, uint32_t 
   *         @arg @ref LL_ADC_REG_SEQ_DISCONT_7RANKS
   *         @arg @ref LL_ADC_REG_SEQ_DISCONT_8RANKS
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerDiscont(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_DISCEN | ADC_CFGR_DISCNUM));
+__STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerDiscont(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_DISCEN | ADC_CFGR_DISCNUM));
 }
 
 /**
@@ -4185,17 +4076,16 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerDiscont(ADC_TypeDef *ADCx)
   *             Other channels are slow channels (conversion rate: refer to reference manual).
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Rank, uint32_t Channel)
-{
-  /* Set bits with content of parameter "Channel" with bits position          */
-  /* in register and register position depending on parameter "Rank".         */
-  /* Parameters "Rank" and "Channel" are used with masks because containing   */
-  /* other bits reserved for other purpose.                                   */
-  __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->SQR1, ((Rank & ADC_REG_SQRX_REGOFFSET_MASK) >> ADC_SQRX_REGOFFSET_POS));
-
-  MODIFY_REG(*preg,
-             ADC_CHANNEL_ID_NUMBER_MASK_POSBIT0 << (Rank & ADC_REG_RANK_ID_SQRX_MASK),
-             ((Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (Rank & ADC_REG_RANK_ID_SQRX_MASK));
+__STATIC_INLINE void LL_ADC_REG_SetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Rank, uint32_t Channel) {
+	/* Set bits with content of parameter "Channel" with bits position          */
+	/* in register and register position depending on parameter "Rank".         */
+	/* Parameters "Rank" and "Channel" are used with masks because containing   */
+	/* other bits reserved for other purpose.                                   */
+	__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->SQR1,
+			((Rank & ADC_REG_SQRX_REGOFFSET_MASK) >> ADC_SQRX_REGOFFSET_POS));
+	MODIFY_REG(*preg,
+		ADC_CHANNEL_ID_NUMBER_MASK_POSBIT0 << (Rank & ADC_REG_RANK_ID_SQRX_MASK),
+		((Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (Rank & ADC_REG_RANK_ID_SQRX_MASK));
 }
 
 /**
@@ -4287,14 +4177,13 @@ __STATIC_INLINE void LL_ADC_REG_SetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Ra
   *                comparison with internal channel parameter to be done
   *                using helper macro @ref __LL_ADC_CHANNEL_INTERNAL_TO_EXTERNAL().
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Rank)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->SQR1, ((Rank & ADC_REG_SQRX_REGOFFSET_MASK) >> ADC_SQRX_REGOFFSET_POS));
-
-  return (uint32_t)((READ_BIT(*preg,
-                              ADC_CHANNEL_ID_NUMBER_MASK_POSBIT0 << (Rank & ADC_REG_RANK_ID_SQRX_MASK))
-                     >> (Rank & ADC_REG_RANK_ID_SQRX_MASK)) << ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS
-                   );
+__STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Rank) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->SQR1,
+			((Rank & ADC_REG_SQRX_REGOFFSET_MASK) >> ADC_SQRX_REGOFFSET_POS));
+	return (uint32_t)((READ_BIT(*preg,
+					ADC_CHANNEL_ID_NUMBER_MASK_POSBIT0 << (Rank & ADC_REG_RANK_ID_SQRX_MASK))
+				>> (Rank & ADC_REG_RANK_ID_SQRX_MASK)) << ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS
+		);
 }
 
 /**
@@ -4316,9 +4205,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetSequencerRanks(ADC_TypeDef *ADCx, uint32_
   *         @arg @ref LL_ADC_REG_CONV_CONTINUOUS
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetContinuousMode(ADC_TypeDef *ADCx, uint32_t Continuous)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_CONT, Continuous);
+__STATIC_INLINE void LL_ADC_REG_SetContinuousMode(ADC_TypeDef *ADCx, uint32_t Continuous) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_CONT, Continuous);
 }
 
 /**
@@ -4333,9 +4221,8 @@ __STATIC_INLINE void LL_ADC_REG_SetContinuousMode(ADC_TypeDef *ADCx, uint32_t Co
   *         @arg @ref LL_ADC_REG_CONV_SINGLE
   *         @arg @ref LL_ADC_REG_CONV_CONTINUOUS
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetContinuousMode(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_CONT));
+__STATIC_INLINE uint32_t LL_ADC_REG_GetContinuousMode(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_CONT));
 }
 /**
   * @brief  Set ADC data transfer mode
@@ -4349,9 +4236,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetContinuousMode(ADC_TypeDef *ADCx)
   * @param  DataTransferMode Select Data Management configuration
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetDataTransferMode(ADC_TypeDef *ADCx, uint32_t DataTransferMode)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_DMNGT, DataTransferMode);
+__STATIC_INLINE void LL_ADC_REG_SetDataTransferMode(ADC_TypeDef *ADCx, uint32_t DataTransferMode) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_DMNGT, DataTransferMode);
 }
 
 #if defined(ADC_VER_V5_V90)
@@ -4361,19 +4247,16 @@ __STATIC_INLINE void LL_ADC_REG_SetDataTransferMode(ADC_TypeDef *ADCx, uint32_t 
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableDMAReq (ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->CFGR, ADC3_CFGR_DMAEN);
+__STATIC_INLINE void LL_ADC_EnableDMAReq(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->CFGR, ADC3_CFGR_DMAEN);
 }
 
-__STATIC_INLINE void LL_ADC_DisableDMAReq(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT (ADCx->CFGR, ADC3_CFGR_DMAEN);
+__STATIC_INLINE void LL_ADC_DisableDMAReq(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->CFGR, ADC3_CFGR_DMAEN);
 }
 
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledDMAReq (ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CFGR, ADC3_CFGR_DMAEN) == (ADC3_CFGR_DMAEN)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledDMAReq(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CFGR, ADC3_CFGR_DMAEN) == (ADC3_CFGR_DMAEN)) ? 1UL : 0UL);
 }
 /**
   * @brief  Set ADC group regular conversion data transfer: no transfer or
@@ -4410,12 +4293,9 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledDMAReq (ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC3_REG_DMA_TRANSFER_UNLIMITED
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetDMATransferMode(ADC_TypeDef *ADCx, uint32_t DMATransfer)
-{
-  if (ADCx == ADC3)
-  {
-    MODIFY_REG(ADCx->CFGR, ADC3_CFGR_DMAEN | ADC3_CFGR_DMACFG, DMATransfer);
-  }
+__STATIC_INLINE void LL_ADC_REG_SetDMATransferMode(ADC_TypeDef *ADCx, uint32_t DMATransfer) {
+	if (ADCx == ADC3)
+		MODIFY_REG(ADCx->CFGR, ADC3_CFGR_DMAEN | ADC3_CFGR_DMACFG, DMATransfer);
 }
 
 /**
@@ -4448,16 +4328,11 @@ __STATIC_INLINE void LL_ADC_REG_SetDMATransferMode(ADC_TypeDef *ADCx, uint32_t D
   *         @arg @ref LL_ADC3_REG_DMA_TRANSFER_LIMITED
   *         @arg @ref LL_ADC3_REG_DMA_TRANSFER_UNLIMITED
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetDMATransferMode(ADC_TypeDef *ADCx)
-{
-  if (ADCx == ADC3)
-  {
-    return (uint32_t)(READ_BIT(ADCx->CFGR, ADC3_CFGR_DMAEN | ADC3_CFGR_DMACFG));
-  }
-   else
-  { 
-    return 0UL;
-  }
+__STATIC_INLINE uint32_t LL_ADC_REG_GetDMATransferMode(ADC_TypeDef *ADCx) {
+	if (ADCx == ADC3)
+		return (uint32_t)(READ_BIT(ADCx->CFGR, ADC3_CFGR_DMAEN | ADC3_CFGR_DMACFG));
+	else
+		return 0UL;
 }
 
 #endif  /* ADC_VER_V5_V90 */
@@ -4477,9 +4352,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetDMATransferMode(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_REG_DMA_TRANSFER_UNLIMITED
   *         @arg @ref LL_ADC_REG_DFSDM_TRANSFER
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetDataTransferMode(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_DMNGT));
+__STATIC_INLINE uint32_t LL_ADC_REG_GetDataTransferMode(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_DMNGT));
 }
 
 
@@ -4503,9 +4377,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetDataTransferMode(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_REG_OVR_DATA_OVERWRITTEN
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_SetOverrun(ADC_TypeDef *ADCx, uint32_t Overrun)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_OVRMOD, Overrun);
+__STATIC_INLINE void LL_ADC_REG_SetOverrun(ADC_TypeDef *ADCx, uint32_t Overrun) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_OVRMOD, Overrun);
 }
 
 /**
@@ -4517,9 +4390,8 @@ __STATIC_INLINE void LL_ADC_REG_SetOverrun(ADC_TypeDef *ADCx, uint32_t Overrun)
   *         @arg @ref LL_ADC_REG_OVR_DATA_PRESERVED
   *         @arg @ref LL_ADC_REG_OVR_DATA_OVERWRITTEN
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_GetOverrun(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_OVRMOD));
+__STATIC_INLINE uint32_t LL_ADC_REG_GetOverrun(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_OVRMOD));
 }
 
 /**
@@ -4574,9 +4446,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_GetOverrun(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_INJ_TRIG_EXT_LPTIM3_OUT
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_SetTriggerSource(ADC_TypeDef *ADCx, uint32_t TriggerSource)
-{
-  MODIFY_REG(ADCx->JSQR, ADC_JSQR_JEXTSEL | ADC_JSQR_JEXTEN, TriggerSource);
+__STATIC_INLINE void LL_ADC_INJ_SetTriggerSource(ADC_TypeDef *ADCx, uint32_t TriggerSource) {
+	MODIFY_REG(ADCx->JSQR, ADC_JSQR_JEXTSEL | ADC_JSQR_JEXTEN, TriggerSource);
 }
 
 /**
@@ -4618,20 +4489,17 @@ __STATIC_INLINE void LL_ADC_INJ_SetTriggerSource(ADC_TypeDef *ADCx, uint32_t Tri
   *         @arg @ref LL_ADC_INJ_TRIG_EXT_LPTIM2_OUT
   *         @arg @ref LL_ADC_INJ_TRIG_EXT_LPTIM3_OUT
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_GetTriggerSource(ADC_TypeDef *ADCx)
-{
-  __IO uint32_t TriggerSource = READ_BIT(ADCx->JSQR, ADC_JSQR_JEXTSEL | ADC_JSQR_JEXTEN);
-
-  /* Value for shift of {0; 4; 8; 12} depending on value of bitfield          */
-  /* corresponding to ADC_JSQR_JEXTEN {0; 1; 2; 3}.                           */
-  uint32_t ShiftJexten = ((TriggerSource & ADC_JSQR_JEXTEN) >> (ADC_INJ_TRIG_EXTEN_BITOFFSET_POS - 2UL));
-
-  /* Set bitfield corresponding to ADC_JSQR_JEXTEN and ADC_JSQR_JEXTSEL       */
-  /* to match with triggers literals definition.                              */
-  return ((TriggerSource
-           & (ADC_INJ_TRIG_SOURCE_MASK >> ShiftJexten) & ADC_JSQR_JEXTSEL)
-          | ((ADC_INJ_TRIG_EDGE_MASK >> ShiftJexten) & ADC_JSQR_JEXTEN)
-         );
+__STATIC_INLINE uint32_t LL_ADC_INJ_GetTriggerSource(ADC_TypeDef *ADCx) {
+	__IO uint32_t TriggerSource = READ_BIT(ADCx->JSQR, ADC_JSQR_JEXTSEL | ADC_JSQR_JEXTEN);
+	/* Value for shift of {0; 4; 8; 12} depending on value of bitfield          */
+	/* corresponding to ADC_JSQR_JEXTEN {0; 1; 2; 3}.                           */
+	uint32_t ShiftJexten = ((TriggerSource & ADC_JSQR_JEXTEN) >> (ADC_INJ_TRIG_EXTEN_BITOFFSET_POS - 2UL));
+	/* Set bitfield corresponding to ADC_JSQR_JEXTEN and ADC_JSQR_JEXTSEL       */
+	/* to match with triggers literals definition.                              */
+	return ((TriggerSource
+				& (ADC_INJ_TRIG_SOURCE_MASK >> ShiftJexten) & ADC_JSQR_JEXTSEL)
+			| ((ADC_INJ_TRIG_EDGE_MASK >> ShiftJexten) & ADC_JSQR_JEXTEN)
+		);
 }
 
 /**
@@ -4645,9 +4513,8 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_GetTriggerSource(ADC_TypeDef *ADCx)
   * @retval Value "0" if trigger source external trigger
   *         Value "1" if trigger source SW start.
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_IsTriggerSourceSWStart(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->JSQR, ADC_JSQR_JEXTEN) == (LL_ADC_INJ_TRIG_SOFTWARE & ADC_JSQR_JEXTEN)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_INJ_IsTriggerSourceSWStart(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->JSQR, ADC_JSQR_JEXTEN) == (LL_ADC_INJ_TRIG_SOFTWARE & ADC_JSQR_JEXTEN)) ? 1UL : 0UL);
 }
 
 /**
@@ -4665,9 +4532,8 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_IsTriggerSourceSWStart(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_INJ_TRIG_EXT_RISINGFALLING
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_SetTriggerEdge(ADC_TypeDef *ADCx, uint32_t ExternalTriggerEdge)
-{
-  MODIFY_REG(ADCx->JSQR, ADC_JSQR_JEXTEN, ExternalTriggerEdge);
+__STATIC_INLINE void LL_ADC_INJ_SetTriggerEdge(ADC_TypeDef *ADCx, uint32_t ExternalTriggerEdge) {
+	MODIFY_REG(ADCx->JSQR, ADC_JSQR_JEXTEN, ExternalTriggerEdge);
 }
 
 /**
@@ -4680,9 +4546,8 @@ __STATIC_INLINE void LL_ADC_INJ_SetTriggerEdge(ADC_TypeDef *ADCx, uint32_t Exter
   *         @arg @ref LL_ADC_INJ_TRIG_EXT_FALLING
   *         @arg @ref LL_ADC_INJ_TRIG_EXT_RISINGFALLING
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_GetTriggerEdge(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->JSQR, ADC_JSQR_JEXTEN));
+__STATIC_INLINE uint32_t LL_ADC_INJ_GetTriggerEdge(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->JSQR, ADC_JSQR_JEXTEN));
 }
 
 /**
@@ -4706,9 +4571,8 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_GetTriggerEdge(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_INJ_SEQ_SCAN_ENABLE_4RANKS
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_SetSequencerLength(ADC_TypeDef *ADCx, uint32_t SequencerNbRanks)
-{
-  MODIFY_REG(ADCx->JSQR, ADC_JSQR_JL, SequencerNbRanks);
+__STATIC_INLINE void LL_ADC_INJ_SetSequencerLength(ADC_TypeDef *ADCx, uint32_t SequencerNbRanks) {
+	MODIFY_REG(ADCx->JSQR, ADC_JSQR_JL, SequencerNbRanks);
 }
 
 /**
@@ -4727,9 +4591,8 @@ __STATIC_INLINE void LL_ADC_INJ_SetSequencerLength(ADC_TypeDef *ADCx, uint32_t S
   *         @arg @ref LL_ADC_INJ_SEQ_SCAN_ENABLE_3RANKS
   *         @arg @ref LL_ADC_INJ_SEQ_SCAN_ENABLE_4RANKS
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerLength(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->JSQR, ADC_JSQR_JL));
+__STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerLength(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->JSQR, ADC_JSQR_JL));
 }
 
 /**
@@ -4745,9 +4608,8 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerLength(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_INJ_SEQ_DISCONT_1RANK
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_SetSequencerDiscont(ADC_TypeDef *ADCx, uint32_t SeqDiscont)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_JDISCEN, SeqDiscont);
+__STATIC_INLINE void LL_ADC_INJ_SetSequencerDiscont(ADC_TypeDef *ADCx, uint32_t SeqDiscont) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_JDISCEN, SeqDiscont);
 }
 
 /**
@@ -4760,9 +4622,8 @@ __STATIC_INLINE void LL_ADC_INJ_SetSequencerDiscont(ADC_TypeDef *ADCx, uint32_t 
   *         @arg @ref LL_ADC_INJ_SEQ_DISCONT_DISABLE
   *         @arg @ref LL_ADC_INJ_SEQ_DISCONT_1RANK
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerDiscont(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_JDISCEN));
+__STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerDiscont(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_JDISCEN));
 }
 
 /**
@@ -4823,15 +4684,14 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerDiscont(ADC_TypeDef *ADCx)
   *             Other channels are slow channels (conversion rate: refer to reference manual).
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_SetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Rank, uint32_t Channel)
-{
-  /* Set bits with content of parameter "Channel" with bits position          */
-  /* in register depending on parameter "Rank".                               */
-  /* Parameters "Rank" and "Channel" are used with masks because containing   */
-  /* other bits reserved for other purpose.                                   */
-  MODIFY_REG(ADCx->JSQR,
-             (ADC_CHANNEL_ID_NUMBER_MASK >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (Rank & ADC_INJ_RANK_ID_JSQR_MASK),
-             ((Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (Rank & ADC_INJ_RANK_ID_JSQR_MASK));
+__STATIC_INLINE void LL_ADC_INJ_SetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Rank, uint32_t Channel) {
+	/* Set bits with content of parameter "Channel" with bits position          */
+	/* in register depending on parameter "Rank".                               */
+	/* Parameters "Rank" and "Channel" are used with masks because containing   */
+	/* other bits reserved for other purpose.                                   */
+	MODIFY_REG(ADCx->JSQR,
+		(ADC_CHANNEL_ID_NUMBER_MASK >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (Rank & ADC_INJ_RANK_ID_JSQR_MASK),
+		((Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (Rank & ADC_INJ_RANK_ID_JSQR_MASK));
 }
 
 /**
@@ -4895,12 +4755,11 @@ __STATIC_INLINE void LL_ADC_INJ_SetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Ra
   *                comparison with internal channel parameter to be done
   *                using helper macro @ref __LL_ADC_CHANNEL_INTERNAL_TO_EXTERNAL().
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Rank)
-{
-  return (uint32_t)((READ_BIT(ADCx->JSQR,
-                             (ADC_CHANNEL_ID_NUMBER_MASK >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (Rank & ADC_INJ_RANK_ID_JSQR_MASK))
-                    >> (Rank & ADC_INJ_RANK_ID_JSQR_MASK)) << ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS
-                   );
+__STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerRanks(ADC_TypeDef *ADCx, uint32_t Rank) {
+	return (uint32_t)((READ_BIT(ADCx->JSQR,
+					(ADC_CHANNEL_ID_NUMBER_MASK >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (Rank & ADC_INJ_RANK_ID_JSQR_MASK))
+				>> (Rank & ADC_INJ_RANK_ID_JSQR_MASK)) << ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS
+		);
 }
 
 /**
@@ -4933,9 +4792,8 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_GetSequencerRanks(ADC_TypeDef *ADCx, uint32_
   *         @arg @ref LL_ADC_INJ_TRIG_FROM_GRP_REGULAR
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_SetTrigAuto(ADC_TypeDef *ADCx, uint32_t TrigAuto)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_JAUTO, TrigAuto);
+__STATIC_INLINE void LL_ADC_INJ_SetTrigAuto(ADC_TypeDef *ADCx, uint32_t TrigAuto) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_JAUTO, TrigAuto);
 }
 
 /**
@@ -4947,9 +4805,8 @@ __STATIC_INLINE void LL_ADC_INJ_SetTrigAuto(ADC_TypeDef *ADCx, uint32_t TrigAuto
   *         @arg @ref LL_ADC_INJ_TRIG_INDEPENDENT
   *         @arg @ref LL_ADC_INJ_TRIG_FROM_GRP_REGULAR
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_GetTrigAuto(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_JAUTO));
+__STATIC_INLINE uint32_t LL_ADC_INJ_GetTrigAuto(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_JAUTO));
 }
 
 /**
@@ -4993,9 +4850,8 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_GetTrigAuto(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_INJ_QUEUE_2CONTEXTS_END_EMPTY
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_SetQueueMode(ADC_TypeDef *ADCx, uint32_t QueueMode)
-{
-  MODIFY_REG(ADCx->CFGR, ADC_CFGR_JQM | ADC_CFGR_JQDIS, QueueMode);
+__STATIC_INLINE void LL_ADC_INJ_SetQueueMode(ADC_TypeDef *ADCx, uint32_t QueueMode) {
+	MODIFY_REG(ADCx->CFGR, ADC_CFGR_JQM | ADC_CFGR_JQDIS, QueueMode);
 }
 
 /**
@@ -5008,9 +4864,8 @@ __STATIC_INLINE void LL_ADC_INJ_SetQueueMode(ADC_TypeDef *ADCx, uint32_t QueueMo
   *         @arg @ref LL_ADC_INJ_QUEUE_2CONTEXTS_LAST_ACTIVE
   *         @arg @ref LL_ADC_INJ_QUEUE_2CONTEXTS_END_EMPTY
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_GetQueueMode(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_JQM | ADC_CFGR_JQDIS));
+__STATIC_INLINE uint32_t LL_ADC_INJ_GetQueueMode(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR, ADC_CFGR_JQM | ADC_CFGR_JQDIS));
 }
 
 /**
@@ -5210,37 +5065,40 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_GetQueueMode(ADC_TypeDef *ADCx)
   * @retval None
   */
 __STATIC_INLINE void LL_ADC_INJ_ConfigQueueContext(ADC_TypeDef *ADCx,
-                                                   uint32_t TriggerSource,
-                                                   uint32_t ExternalTriggerEdge,
-                                                   uint32_t SequencerNbRanks,
-                                                   uint32_t Rank1_Channel,
-                                                   uint32_t Rank2_Channel,
-                                                   uint32_t Rank3_Channel,
-                                                   uint32_t Rank4_Channel)
-{
-  /* Set bits with content of parameter "Rankx_Channel" with bits position    */
-  /* in register depending on literal "LL_ADC_INJ_RANK_x".                    */
-  /* Parameters "Rankx_Channel" and "LL_ADC_INJ_RANK_x" are used with masks   */
-  /* because containing other bits reserved for other purpose.                */
-  /* If parameter "TriggerSource" is set to SW start, then parameter          */
-  /* "ExternalTriggerEdge" is discarded.                                      */
-  uint32_t is_trigger_not_sw = (uint32_t)((TriggerSource != LL_ADC_INJ_TRIG_SOFTWARE) ? 1UL : 0UL);
-  MODIFY_REG(ADCx->JSQR,
-             ADC_JSQR_JEXTSEL |
-             ADC_JSQR_JEXTEN  |
-             ADC_JSQR_JSQ4    |
-             ADC_JSQR_JSQ3    |
-             ADC_JSQR_JSQ2    |
-             ADC_JSQR_JSQ1    |
-             ADC_JSQR_JL,
-             (TriggerSource & ADC_JSQR_JEXTSEL)        |
-             (ExternalTriggerEdge * (is_trigger_not_sw)) |
-             (((Rank4_Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (LL_ADC_INJ_RANK_4 & ADC_INJ_RANK_ID_JSQR_MASK)) |
-             (((Rank3_Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (LL_ADC_INJ_RANK_3 & ADC_INJ_RANK_ID_JSQR_MASK)) |
-             (((Rank2_Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (LL_ADC_INJ_RANK_2 & ADC_INJ_RANK_ID_JSQR_MASK)) |
-             (((Rank1_Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) << (LL_ADC_INJ_RANK_1 & ADC_INJ_RANK_ID_JSQR_MASK)) |
-             SequencerNbRanks
-            );
+	uint32_t TriggerSource,
+	uint32_t ExternalTriggerEdge,
+	uint32_t SequencerNbRanks,
+	uint32_t Rank1_Channel,
+	uint32_t Rank2_Channel,
+	uint32_t Rank3_Channel,
+	uint32_t Rank4_Channel) {
+	/* Set bits with content of parameter "Rankx_Channel" with bits position    */
+	/* in register depending on literal "LL_ADC_INJ_RANK_x".                    */
+	/* Parameters "Rankx_Channel" and "LL_ADC_INJ_RANK_x" are used with masks   */
+	/* because containing other bits reserved for other purpose.                */
+	/* If parameter "TriggerSource" is set to SW start, then parameter          */
+	/* "ExternalTriggerEdge" is discarded.                                      */
+	uint32_t is_trigger_not_sw = (uint32_t)((TriggerSource != LL_ADC_INJ_TRIG_SOFTWARE) ? 1UL : 0UL);
+	MODIFY_REG(ADCx->JSQR,
+		ADC_JSQR_JEXTSEL |
+		ADC_JSQR_JEXTEN  |
+		ADC_JSQR_JSQ4    |
+		ADC_JSQR_JSQ3    |
+		ADC_JSQR_JSQ2    |
+		ADC_JSQR_JSQ1    |
+		ADC_JSQR_JL,
+		(TriggerSource & ADC_JSQR_JEXTSEL)        |
+		(ExternalTriggerEdge * (is_trigger_not_sw)) |
+		(((Rank4_Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) <<
+			(LL_ADC_INJ_RANK_4 & ADC_INJ_RANK_ID_JSQR_MASK)) |
+		(((Rank3_Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) <<
+			(LL_ADC_INJ_RANK_3 & ADC_INJ_RANK_ID_JSQR_MASK)) |
+		(((Rank2_Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) <<
+			(LL_ADC_INJ_RANK_2 & ADC_INJ_RANK_ID_JSQR_MASK)) |
+		(((Rank1_Channel & ADC_CHANNEL_ID_NUMBER_MASK) >> ADC_CHANNEL_ID_NUMBER_BITOFFSET_POS) <<
+			(LL_ADC_INJ_RANK_1 & ADC_INJ_RANK_ID_JSQR_MASK)) |
+		SequencerNbRanks
+	);
 }
 
 /**
@@ -5339,17 +5197,16 @@ __STATIC_INLINE void LL_ADC_INJ_ConfigQueueContext(ADC_TypeDef *ADCx,
   *         @arg @ref LL_ADC_SAMPLINGTIME_810CYCLES_5
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetChannelSamplingTime(ADC_TypeDef *ADCx, uint32_t Channel, uint32_t SamplingTime)
-{
-  /* Set bits with content of parameter "SamplingTime" with bits position     */
-  /* in register and register position depending on parameter "Channel".      */
-  /* Parameter "Channel" is used with masks because containing                */
-  /* other bits reserved for other purpose.                                   */
-  __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->SMPR1, ((Channel & ADC_CHANNEL_SMPRX_REGOFFSET_MASK) >> ADC_SMPRX_REGOFFSET_POS));
-
-  MODIFY_REG(*preg,
-             ADC_SMPR1_SMP0 << ((Channel & ADC_CHANNEL_SMPx_BITOFFSET_MASK) >> ADC_CHANNEL_SMPx_BITOFFSET_POS),
-             SamplingTime   << ((Channel & ADC_CHANNEL_SMPx_BITOFFSET_MASK) >> ADC_CHANNEL_SMPx_BITOFFSET_POS));
+__STATIC_INLINE void LL_ADC_SetChannelSamplingTime(ADC_TypeDef *ADCx, uint32_t Channel, uint32_t SamplingTime) {
+	/* Set bits with content of parameter "SamplingTime" with bits position     */
+	/* in register and register position depending on parameter "Channel".      */
+	/* Parameter "Channel" is used with masks because containing                */
+	/* other bits reserved for other purpose.                                   */
+	__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->SMPR1,
+			((Channel & ADC_CHANNEL_SMPRX_REGOFFSET_MASK) >> ADC_SMPRX_REGOFFSET_POS));
+	MODIFY_REG(*preg,
+		ADC_SMPR1_SMP0 << ((Channel & ADC_CHANNEL_SMPx_BITOFFSET_MASK) >> ADC_CHANNEL_SMPx_BITOFFSET_POS),
+		SamplingTime   << ((Channel & ADC_CHANNEL_SMPx_BITOFFSET_MASK) >> ADC_CHANNEL_SMPx_BITOFFSET_POS));
 }
 
 /**
@@ -5424,14 +5281,13 @@ __STATIC_INLINE void LL_ADC_SetChannelSamplingTime(ADC_TypeDef *ADCx, uint32_t C
   *         @arg @ref LL_ADC_SAMPLINGTIME_387CYCLES_5
   *         @arg @ref LL_ADC_SAMPLINGTIME_810CYCLES_5
   */
-__STATIC_INLINE uint32_t LL_ADC_GetChannelSamplingTime(ADC_TypeDef *ADCx, uint32_t Channel)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->SMPR1, ((Channel & ADC_CHANNEL_SMPRX_REGOFFSET_MASK) >> ADC_SMPRX_REGOFFSET_POS));
-
-  return (uint32_t)(READ_BIT(*preg,
-                             ADC_SMPR1_SMP0 << ((Channel & ADC_CHANNEL_SMPx_BITOFFSET_MASK) >> ADC_CHANNEL_SMPx_BITOFFSET_POS))
-                    >> ((Channel & ADC_CHANNEL_SMPx_BITOFFSET_MASK) >> ADC_CHANNEL_SMPx_BITOFFSET_POS)
-                   );
+__STATIC_INLINE uint32_t LL_ADC_GetChannelSamplingTime(ADC_TypeDef *ADCx, uint32_t Channel) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->SMPR1,
+			((Channel & ADC_CHANNEL_SMPRX_REGOFFSET_MASK) >> ADC_SMPRX_REGOFFSET_POS));
+	return (uint32_t)(READ_BIT(*preg,
+				ADC_SMPR1_SMP0 << ((Channel & ADC_CHANNEL_SMPx_BITOFFSET_MASK) >> ADC_CHANNEL_SMPx_BITOFFSET_POS))
+			>> ((Channel & ADC_CHANNEL_SMPx_BITOFFSET_MASK) >> ADC_CHANNEL_SMPx_BITOFFSET_POS)
+		);
 }
 
 /**
@@ -5485,31 +5341,28 @@ __STATIC_INLINE uint32_t LL_ADC_GetChannelSamplingTime(ADC_TypeDef *ADCx, uint32
   *         @arg @ref LL_ADC_DIFFERENTIAL_ENDED
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetChannelSingleDiff(ADC_TypeDef *ADCx, uint32_t Channel, uint32_t SingleDiff)
-{
+__STATIC_INLINE void LL_ADC_SetChannelSingleDiff(ADC_TypeDef *ADCx, uint32_t Channel, uint32_t SingleDiff) {
 #if defined(ADC_VER_V5_V90)
-  /* Bits of channels in single or differential mode are set only for         */
-  /* differential mode (for single mode, mask of bits allowed to be set is    */
-  /* shifted out of range of bits of channels in single or differential mode. */
-  if (ADCx == ADC3)
-  {
-    MODIFY_REG(ADCx->LTR2_DIFSEL,
-               Channel & ADC_SINGLEDIFF_CHANNEL_MASK,
-               (Channel & ADC_SINGLEDIFF_CHANNEL_MASK) & (ADC_DIFSEL_DIFSEL >> (SingleDiff & ADC_SINGLEDIFF_CHANNEL_SHIFT_MASK)));
-  }
-  else
-  {
-    MODIFY_REG(ADCx->DIFSEL_RES12,
-               Channel & ADC_SINGLEDIFF_CHANNEL_MASK,
-               (Channel & ADC_SINGLEDIFF_CHANNEL_MASK) & (ADC_DIFSEL_DIFSEL >> (SingleDiff & ADC_SINGLEDIFF_CHANNEL_SHIFT_MASK)));
-  }
+	/* Bits of channels in single or differential mode are set only for         */
+	/* differential mode (for single mode, mask of bits allowed to be set is    */
+	/* shifted out of range of bits of channels in single or differential mode. */
+	if (ADCx == ADC3) {
+		MODIFY_REG(ADCx->LTR2_DIFSEL,
+			Channel & ADC_SINGLEDIFF_CHANNEL_MASK,
+			(Channel & ADC_SINGLEDIFF_CHANNEL_MASK) & (ADC_DIFSEL_DIFSEL >> (SingleDiff & ADC_SINGLEDIFF_CHANNEL_SHIFT_MASK)));
+	}
+	else {
+		MODIFY_REG(ADCx->DIFSEL_RES12,
+			Channel & ADC_SINGLEDIFF_CHANNEL_MASK,
+			(Channel & ADC_SINGLEDIFF_CHANNEL_MASK) & (ADC_DIFSEL_DIFSEL >> (SingleDiff & ADC_SINGLEDIFF_CHANNEL_SHIFT_MASK)));
+	}
 #else  /* ADC_VER_V5_V90 */
-  /* Bits of channels in single or differential mode are set only for         */
-  /* differential mode (for single mode, mask of bits allowed to be set is    */
-  /* shifted out of range of bits of channels in single or differential mode. */
-  MODIFY_REG(ADCx->DIFSEL,
-             Channel & ADC_SINGLEDIFF_CHANNEL_MASK,
-             (Channel & ADC_SINGLEDIFF_CHANNEL_MASK) & (ADC_DIFSEL_DIFSEL >> (SingleDiff & ADC_SINGLEDIFF_CHANNEL_SHIFT_MASK)));
+	/* Bits of channels in single or differential mode are set only for         */
+	/* differential mode (for single mode, mask of bits allowed to be set is    */
+	/* shifted out of range of bits of channels in single or differential mode. */
+	MODIFY_REG(ADCx->DIFSEL,
+		Channel & ADC_SINGLEDIFF_CHANNEL_MASK,
+		(Channel & ADC_SINGLEDIFF_CHANNEL_MASK) & (ADC_DIFSEL_DIFSEL >> (SingleDiff & ADC_SINGLEDIFF_CHANNEL_SHIFT_MASK)));
 #endif
 }
 
@@ -5556,12 +5409,11 @@ __STATIC_INLINE void LL_ADC_SetChannelSingleDiff(ADC_TypeDef *ADCx, uint32_t Cha
   *         @arg @ref LL_ADC_CHANNEL_19
   * @retval 0: channel in single-ended mode, else: channel in differential mode
   */
-__STATIC_INLINE uint32_t LL_ADC_GetChannelSingleDiff(ADC_TypeDef *ADCx, uint32_t Channel)
-{
-#if defined(ADC_VER_V5_V90)  
-  return (uint32_t)(READ_BIT(ADCx->DIFSEL_RES12, (Channel & ADC_SINGLEDIFF_CHANNEL_MASK)));
-#else  
-  return (uint32_t)(READ_BIT(ADCx->DIFSEL, (Channel & ADC_SINGLEDIFF_CHANNEL_MASK)));
+__STATIC_INLINE uint32_t LL_ADC_GetChannelSingleDiff(ADC_TypeDef *ADCx, uint32_t Channel) {
+#if defined(ADC_VER_V5_V90)
+	return (uint32_t)(READ_BIT(ADCx->DIFSEL_RES12, (Channel & ADC_SINGLEDIFF_CHANNEL_MASK)));
+#else
+	return (uint32_t)(READ_BIT(ADCx->DIFSEL, (Channel & ADC_SINGLEDIFF_CHANNEL_MASK)));
 #endif
 }
 
@@ -5704,18 +5556,17 @@ __STATIC_INLINE uint32_t LL_ADC_GetChannelSingleDiff(ADC_TypeDef *ADCx, uint32_t
   *         (2) On STM32H7, parameter available only on ADC instance: ADC2.
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetAnalogWDMonitChannels(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t AWDChannelGroup)
-{
-  /* Set bits with content of parameter "AWDChannelGroup" with bits position  */
-  /* in register and register position depending on parameter "AWDy".         */
-  /* Parameters "AWDChannelGroup" and "AWDy" are used with masks because      */
-  /* containing other bits reserved for other purpose.                        */
-  __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->CFGR, ((AWDy & ADC_AWD_CRX_REGOFFSET_MASK) >> ADC_AWD_CRX_REGOFFSET_POS)
-                                                      + ((AWDy & ADC_AWD_CR12_REGOFFSETGAP_MASK) * ADC_AWD_CR12_REGOFFSETGAP_VAL));
-
-  MODIFY_REG(*preg,
-             (AWDy & ADC_AWD_CR_ALL_CHANNEL_MASK),
-             AWDChannelGroup & AWDy);
+__STATIC_INLINE void LL_ADC_SetAnalogWDMonitChannels(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t AWDChannelGroup) {
+	/* Set bits with content of parameter "AWDChannelGroup" with bits position  */
+	/* in register and register position depending on parameter "AWDy".         */
+	/* Parameters "AWDChannelGroup" and "AWDy" are used with masks because      */
+	/* containing other bits reserved for other purpose.                        */
+	__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->CFGR,
+			((AWDy & ADC_AWD_CRX_REGOFFSET_MASK) >> ADC_AWD_CRX_REGOFFSET_POS)
+			+ ((AWDy & ADC_AWD_CR12_REGOFFSETGAP_MASK) * ADC_AWD_CR12_REGOFFSETGAP_VAL));
+	MODIFY_REG(*preg,
+		(AWDy & ADC_AWD_CR_ALL_CHANNEL_MASK),
+		AWDChannelGroup & AWDy);
 }
 
 /**
@@ -5843,60 +5694,50 @@ __STATIC_INLINE void LL_ADC_SetAnalogWDMonitChannels(ADC_TypeDef *ADCx, uint32_t
   *
   *         (0) On STM32H7, parameter available only on analog watchdog number: AWD1.
   */
-__STATIC_INLINE uint32_t LL_ADC_GetAnalogWDMonitChannels(ADC_TypeDef *ADCx, uint32_t AWDy)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->CFGR, ((AWDy & ADC_AWD_CRX_REGOFFSET_MASK) >> ADC_AWD_CRX_REGOFFSET_POS)
-                                                            + ((AWDy & ADC_AWD_CR12_REGOFFSETGAP_MASK) * ADC_AWD_CR12_REGOFFSETGAP_VAL));
-
-  uint32_t AnalogWDMonitChannels = (READ_BIT(*preg, AWDy) & AWDy & ADC_AWD_CR_ALL_CHANNEL_MASK);
-
-  /* If "AnalogWDMonitChannels" == 0, then the selected AWD is disabled       */
-  /* (parameter value LL_ADC_AWD_DISABLE).                                    */
-  /* Else, the selected AWD is enabled and is monitoring a group of channels  */
-  /* or a single channel.                                                     */
-  if (AnalogWDMonitChannels != 0UL)
-  {
-    if (AWDy == LL_ADC_AWD1)
-    {
-      if ((AnalogWDMonitChannels & ADC_CFGR_AWD1SGL) == 0UL)
-      {
-        /* AWD monitoring a group of channels */
-        AnalogWDMonitChannels = ((AnalogWDMonitChannels
-                                  | (ADC_AWD_CR23_CHANNEL_MASK)
-                                 )
-                                 & (~(ADC_CFGR_AWD1CH))
-                                );
-      }
-      else
-      {
-        /* AWD monitoring a single channel */
-        AnalogWDMonitChannels = (AnalogWDMonitChannels
-                                 | (ADC_AWD2CR_AWD2CH_0 << (AnalogWDMonitChannels >> ADC_CFGR_AWD1CH_Pos))
-                                );
-      }
-    }
-    else
-    {
-      if ((AnalogWDMonitChannels & ADC_AWD_CR23_CHANNEL_MASK) == ADC_AWD_CR23_CHANNEL_MASK)
-      {
-        /* AWD monitoring a group of channels */
-        AnalogWDMonitChannels = (ADC_AWD_CR23_CHANNEL_MASK
-                                 | ((ADC_CFGR_JAWD1EN | ADC_CFGR_AWD1EN))
-                                );
-      }
-      else
-      {
-        /* AWD monitoring a single channel */
-        /* AWD monitoring a group of channels */
-        AnalogWDMonitChannels = (AnalogWDMonitChannels
-                                 | (ADC_CFGR_JAWD1EN | ADC_CFGR_AWD1EN | ADC_CFGR_AWD1SGL)
-                                 | (__LL_ADC_CHANNEL_TO_DECIMAL_NB(AnalogWDMonitChannels) << ADC_CFGR_AWD1CH_Pos)
-                                );
-      }
-    }
-  }
-
-  return AnalogWDMonitChannels;
+__STATIC_INLINE uint32_t LL_ADC_GetAnalogWDMonitChannels(ADC_TypeDef *ADCx, uint32_t AWDy) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->CFGR,
+			((AWDy & ADC_AWD_CRX_REGOFFSET_MASK) >> ADC_AWD_CRX_REGOFFSET_POS)
+			+ ((AWDy & ADC_AWD_CR12_REGOFFSETGAP_MASK) * ADC_AWD_CR12_REGOFFSETGAP_VAL));
+	uint32_t AnalogWDMonitChannels = (READ_BIT(*preg, AWDy) & AWDy & ADC_AWD_CR_ALL_CHANNEL_MASK);
+	/* If "AnalogWDMonitChannels" == 0, then the selected AWD is disabled       */
+	/* (parameter value LL_ADC_AWD_DISABLE).                                    */
+	/* Else, the selected AWD is enabled and is monitoring a group of channels  */
+	/* or a single channel.                                                     */
+	if (AnalogWDMonitChannels != 0UL) {
+		if (AWDy == LL_ADC_AWD1) {
+			if ((AnalogWDMonitChannels & ADC_CFGR_AWD1SGL) == 0UL) {
+				/* AWD monitoring a group of channels */
+				AnalogWDMonitChannels = ((AnalogWDMonitChannels
+							| (ADC_AWD_CR23_CHANNEL_MASK)
+						)
+						& (~(ADC_CFGR_AWD1CH))
+					);
+			}
+			else {
+				/* AWD monitoring a single channel */
+				AnalogWDMonitChannels = (AnalogWDMonitChannels
+						| (ADC_AWD2CR_AWD2CH_0 << (AnalogWDMonitChannels >> ADC_CFGR_AWD1CH_Pos))
+					);
+			}
+		}
+		else {
+			if ((AnalogWDMonitChannels & ADC_AWD_CR23_CHANNEL_MASK) == ADC_AWD_CR23_CHANNEL_MASK) {
+				/* AWD monitoring a group of channels */
+				AnalogWDMonitChannels = (ADC_AWD_CR23_CHANNEL_MASK
+						| ((ADC_CFGR_JAWD1EN | ADC_CFGR_AWD1EN))
+					);
+			}
+			else {
+				/* AWD monitoring a single channel */
+				/* AWD monitoring a group of channels */
+				AnalogWDMonitChannels = (AnalogWDMonitChannels
+						| (ADC_CFGR_JAWD1EN | ADC_CFGR_AWD1EN | ADC_CFGR_AWD1SGL)
+						| (__LL_ADC_CHANNEL_TO_DECIMAL_NB(AnalogWDMonitChannels) << ADC_CFGR_AWD1CH_Pos)
+					);
+			}
+		}
+	}
+	return AnalogWDMonitChannels;
 }
 
 /**
@@ -5952,46 +5793,44 @@ __STATIC_INLINE uint32_t LL_ADC_GetAnalogWDMonitChannels(ADC_TypeDef *ADCx, uint
   * @param  AWDThresholdValue Value between Min_Data=0x000 and Max_Data=0xFFF
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t AWDThresholdsHighLow, uint32_t AWDThresholdValue)
-{
+__STATIC_INLINE void LL_ADC_SetAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t AWDThresholdsHighLow,
+	uint32_t AWDThresholdValue) {
 #if defined(ADC_VER_V5_V90)
-  if (ADCx == ADC3)
-  {
-    /* Set bits with content of parameter "AWDThresholdValue" with bits         */
-    /* position in register and register position depending on parameters       */
-    /* "AWDThresholdsHighLow" and "AWDy".                                       */
-    /* Parameters "AWDy" and "AWDThresholdValue" are used with masks because    */
-    /* containing other bits reserved for other purpose.                        */
-    __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1, ((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS));
-
-    MODIFY_REG(*preg,
-               AWDThresholdsHighLow,
-               AWDThresholdValue << ((AWDThresholdsHighLow & ADC_AWD_TRX_BIT_HIGH_MASK) >> ADC_AWD_TRX_BIT_HIGH_SHIFT4));
-  }
-  else
-  {
-    /* Set bits with content of parameter "AWDThresholdValue" with bits         */
-    /* position in register and register position depending on parameters       */
-    /* "AWDThresholdsHighLow" and "AWDy".                                       */
-    /* Parameters "AWDy" and "AWDThresholdValue" are used with masks because    */
-    /* containing other bits reserved for other purpose.                        */
-    __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1, (((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
-                                                        + ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
-                                                        + (AWDThresholdsHighLow));
-
-    MODIFY_REG(*preg, ADC_LTR_LT, AWDThresholdValue);
-  }
+	if (ADCx == ADC3) {
+		/* Set bits with content of parameter "AWDThresholdValue" with bits         */
+		/* position in register and register position depending on parameters       */
+		/* "AWDThresholdsHighLow" and "AWDy".                                       */
+		/* Parameters "AWDy" and "AWDThresholdValue" are used with masks because    */
+		/* containing other bits reserved for other purpose.                        */
+		__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1,
+				((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS));
+		MODIFY_REG(*preg,
+			AWDThresholdsHighLow,
+			AWDThresholdValue << ((AWDThresholdsHighLow & ADC_AWD_TRX_BIT_HIGH_MASK) >> ADC_AWD_TRX_BIT_HIGH_SHIFT4));
+	}
+	else {
+		/* Set bits with content of parameter "AWDThresholdValue" with bits         */
+		/* position in register and register position depending on parameters       */
+		/* "AWDThresholdsHighLow" and "AWDy".                                       */
+		/* Parameters "AWDy" and "AWDThresholdValue" are used with masks because    */
+		/* containing other bits reserved for other purpose.                        */
+		__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1,
+				(((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
+				+ ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
+				+ (AWDThresholdsHighLow));
+		MODIFY_REG(*preg, ADC_LTR_LT, AWDThresholdValue);
+	}
 #else
-  /* Set bits with content of parameter "AWDThresholdValue" with bits         */
-  /* position in register and register position depending on parameters       */
-  /* "AWDThresholdsHighLow" and "AWDy".                                       */
-  /* Parameters "AWDy" and "AWDThresholdValue" are used with masks because    */
-  /* containing other bits reserved for other purpose.                        */
-  __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1, (((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
-                                                      + ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
-                                                      + (AWDThresholdsHighLow));
-
-  MODIFY_REG(*preg, ADC_LTR_LT, AWDThresholdValue);
+	/* Set bits with content of parameter "AWDThresholdValue" with bits         */
+	/* position in register and register position depending on parameters       */
+	/* "AWDThresholdsHighLow" and "AWDy".                                       */
+	/* Parameters "AWDy" and "AWDThresholdValue" are used with masks because    */
+	/* containing other bits reserved for other purpose.                        */
+	__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1,
+			(((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
+			+ ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
+			+ (AWDThresholdsHighLow));
+	MODIFY_REG(*preg, ADC_LTR_LT, AWDThresholdValue);
 #endif  /* ADC_VER_V5_V90 */
 }
 
@@ -6018,20 +5857,19 @@ __STATIC_INLINE void LL_ADC_SetAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_t AW
   *         @arg @ref LL_ADC_AWD_THRESHOLD_LOW
   * @retval Value between Min_Data=0x000 and Max_Data=0x3FFFFFF
 */
-__STATIC_INLINE uint32_t LL_ADC_GetAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t AWDThresholdsHighLow)
-{
+__STATIC_INLINE uint32_t LL_ADC_GetAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t AWDThresholdsHighLow) {
 #if defined(ADC_VER_V5_V90)
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1, (((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
-                                                            + ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
-                                                            + (AWDThresholdsHighLow));
-
-  return (uint32_t)(READ_BIT(*preg, ADC_LTR_LT));
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1,
+			(((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
+			+ ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
+			+ (AWDThresholdsHighLow));
+	return (uint32_t)(READ_BIT(*preg, ADC_LTR_LT));
 #else
-   const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1, (((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
-                                                                   + ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
-                                                                   + (AWDThresholdsHighLow));
-
-  return (uint32_t)(READ_BIT(*preg, ADC_LTR_LT));
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1,
+			(((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
+			+ ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
+			+ (AWDThresholdsHighLow));
+	return (uint32_t)(READ_BIT(*preg, ADC_LTR_LT));
 #endif
 }
 
@@ -6081,33 +5919,32 @@ __STATIC_INLINE uint32_t LL_ADC_GetAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_
   * @param  AWDThresholdLowValue Value between Min_Data=0x000 and Max_Data=0xFFF
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ConfigAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t AWDThresholdHighValue, uint32_t AWDThresholdLowValue)
-{
-  /* Set bits with content of parameter "AWDThresholdxxxValue" with bits      */
-  /* position in register and register position depending on parameter        */
-  /* "AWDy".                                                                  */
-  /* Parameters "AWDy" and "AWDThresholdxxxValue" are used with masks because */
-  /* containing other bits reserved for other purpose.                        */
-  if (ADCx == ADC3)
-  {
-    uint32_t __IO *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1, ((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS));
-
-    MODIFY_REG(*preg,
-               ADC3_TR1_HT1 | ADC3_TR1_LT1,
-               (AWDThresholdHighValue << ADC3_TR1_HT1_Pos) | AWDThresholdLowValue);
-  }
-  else
-  {
-    __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1, (((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
-                                                        + ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
-                                                        + (LL_ADC_AWD_THRESHOLD_LOW));
-    __IO uint32_t *preg2 = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1, (((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
-                                                         + ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
-                                                         + (LL_ADC_AWD_THRESHOLD_HIGH));
-
-    MODIFY_REG(*preg, ADC_LTR_LT, AWDThresholdLowValue);
-    MODIFY_REG(*preg2, ADC_HTR_HT, AWDThresholdHighValue);
-  }
+__STATIC_INLINE void LL_ADC_ConfigAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t AWDThresholdHighValue,
+	uint32_t AWDThresholdLowValue) {
+	/* Set bits with content of parameter "AWDThresholdxxxValue" with bits      */
+	/* position in register and register position depending on parameter        */
+	/* "AWDy".                                                                  */
+	/* Parameters "AWDy" and "AWDThresholdxxxValue" are used with masks because */
+	/* containing other bits reserved for other purpose.                        */
+	if (ADCx == ADC3) {
+		uint32_t __IO *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1,
+				((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS));
+		MODIFY_REG(*preg,
+			ADC3_TR1_HT1 | ADC3_TR1_LT1,
+			(AWDThresholdHighValue << ADC3_TR1_HT1_Pos) | AWDThresholdLowValue);
+	}
+	else {
+		__IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1,
+				(((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
+				+ ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
+				+ (LL_ADC_AWD_THRESHOLD_LOW));
+		__IO uint32_t *preg2 = __ADC_PTR_REG_OFFSET(ADCx->LTR1_TR1,
+				(((AWDy & ADC_AWD_TRX_REGOFFSET_MASK) >> ADC_AWD_TRX_REGOFFSET_POS) * 2UL)
+				+ ((AWDy & ADC_AWD_TR12_REGOFFSETGAP_MASK) * ADC_AWD_TR12_REGOFFSETGAP_VAL)
+				+ (LL_ADC_AWD_THRESHOLD_HIGH));
+		MODIFY_REG(*preg, ADC_LTR_LT, AWDThresholdLowValue);
+		MODIFY_REG(*preg2, ADC_HTR_HT, AWDThresholdHighValue);
+	}
 }
 
 
@@ -6135,14 +5972,12 @@ __STATIC_INLINE void LL_ADC_ConfigAnalogWDThresholds(ADC_TypeDef *ADCx, uint32_t
   *         @arg @ref LL_ADC_AWD_FILTERING_8SAMPLES
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetAWDFilteringConfiguration(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t FilteringConfig)
-{
-  if (ADCx == ADC3)
-  {
-    /* Prevent unused argument(s) compilation warning */
-    (void)(AWDy);
-    MODIFY_REG(ADCx->LTR1_TR1, ADC3_TR1_AWDFILT, FilteringConfig);
-  }
+__STATIC_INLINE void LL_ADC_SetAWDFilteringConfiguration(ADC_TypeDef *ADCx, uint32_t AWDy, uint32_t FilteringConfig) {
+	if (ADCx == ADC3) {
+		/* Prevent unused argument(s) compilation warning */
+		(void)(AWDy);
+		MODIFY_REG(ADCx->LTR1_TR1, ADC3_TR1_AWDFILT, FilteringConfig);
+	}
 }
 
 /**
@@ -6164,19 +5999,16 @@ __STATIC_INLINE void LL_ADC_SetAWDFilteringConfiguration(ADC_TypeDef *ADCx, uint
   *         @arg @ref LL_ADC_AWD_FILTERING_7SAMPLES
   *         @arg @ref LL_ADC_AWD_FILTERING_8SAMPLES
   */
-__STATIC_INLINE uint32_t LL_ADC_GetAWDFilteringConfiguration(ADC_TypeDef *ADCx, uint32_t AWDy)
-{
-  if (ADCx == ADC3)
-  {
-    /* Prevent unused argument(s) compilation warning */
-    (void)(AWDy);
-    return (uint32_t)(READ_BIT(ADCx->LTR1_TR1, ADC3_TR1_AWDFILT));
-  }
-  else
-  {
-    /* Function not available on this instance, return 0 */
-    return 0UL;
-  }
+__STATIC_INLINE uint32_t LL_ADC_GetAWDFilteringConfiguration(ADC_TypeDef *ADCx, uint32_t AWDy) {
+	if (ADCx == ADC3) {
+		/* Prevent unused argument(s) compilation warning */
+		(void)(AWDy);
+		return (uint32_t)(READ_BIT(ADCx->LTR1_TR1, ADC3_TR1_AWDFILT));
+	}
+	else {
+		/* Function not available on this instance, return 0 */
+		return 0UL;
+	}
 }
 #endif /* ADC_VER_V5_V90 */
 /**
@@ -6212,9 +6044,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetAWDFilteringConfiguration(ADC_TypeDef *ADCx, 
   *         @arg @ref LL_ADC_OVS_GRP_INJ_REG_RESUMED
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetOverSamplingScope(ADC_TypeDef *ADCx, uint32_t OvsScope)
-{
-  MODIFY_REG(ADCx->CFGR2, ADC_CFGR2_ROVSE | ADC_CFGR2_JOVSE | ADC_CFGR2_ROVSM, OvsScope);
+__STATIC_INLINE void LL_ADC_SetOverSamplingScope(ADC_TypeDef *ADCx, uint32_t OvsScope) {
+	MODIFY_REG(ADCx->CFGR2, ADC_CFGR2_ROVSE | ADC_CFGR2_JOVSE | ADC_CFGR2_ROVSM, OvsScope);
 }
 
 /**
@@ -6237,9 +6068,8 @@ __STATIC_INLINE void LL_ADC_SetOverSamplingScope(ADC_TypeDef *ADCx, uint32_t Ovs
   *         @arg @ref LL_ADC_OVS_GRP_INJECTED
   *         @arg @ref LL_ADC_OVS_GRP_INJ_REG_RESUMED
   */
-__STATIC_INLINE uint32_t LL_ADC_GetOverSamplingScope(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR2, ADC_CFGR2_ROVSE | ADC_CFGR2_JOVSE | ADC_CFGR2_ROVSM));
+__STATIC_INLINE uint32_t LL_ADC_GetOverSamplingScope(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR2, ADC_CFGR2_ROVSE | ADC_CFGR2_JOVSE | ADC_CFGR2_ROVSM));
 }
 
 /**
@@ -6264,9 +6094,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetOverSamplingScope(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_OVS_REG_DISCONT
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetOverSamplingDiscont(ADC_TypeDef *ADCx, uint32_t OverSamplingDiscont)
-{
-  MODIFY_REG(ADCx->CFGR2, ADC_CFGR2_TROVS, OverSamplingDiscont);
+__STATIC_INLINE void LL_ADC_SetOverSamplingDiscont(ADC_TypeDef *ADCx, uint32_t OverSamplingDiscont) {
+	MODIFY_REG(ADCx->CFGR2, ADC_CFGR2_TROVS, OverSamplingDiscont);
 }
 
 /**
@@ -6283,9 +6112,8 @@ __STATIC_INLINE void LL_ADC_SetOverSamplingDiscont(ADC_TypeDef *ADCx, uint32_t O
   *         @arg @ref LL_ADC_OVS_REG_CONT
   *         @arg @ref LL_ADC_OVS_REG_DISCONT
   */
-__STATIC_INLINE uint32_t LL_ADC_GetOverSamplingDiscont(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR2, ADC_CFGR2_TROVS));
+__STATIC_INLINE uint32_t LL_ADC_GetOverSamplingDiscont(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR2, ADC_CFGR2_TROVS));
 }
 
 /**
@@ -6317,9 +6145,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetOverSamplingDiscont(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_OVS_SHIFT_RIGHT_11
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ConfigOverSamplingRatioShift(ADC_TypeDef *ADCx, uint32_t Ratio, uint32_t Shift)
-{
-  MODIFY_REG(ADCx->CFGR2, (ADC_CFGR2_OVSS | ADC_CFGR2_OVSR), (Shift | (((Ratio - 1UL) << ADC_CFGR2_OVSR_Pos))));
+__STATIC_INLINE void LL_ADC_ConfigOverSamplingRatioShift(ADC_TypeDef *ADCx, uint32_t Ratio, uint32_t Shift) {
+	MODIFY_REG(ADCx->CFGR2, (ADC_CFGR2_OVSS | ADC_CFGR2_OVSR), (Shift | (((Ratio - 1UL) << ADC_CFGR2_OVSR_Pos))));
 }
 
 /**
@@ -6329,9 +6156,8 @@ __STATIC_INLINE void LL_ADC_ConfigOverSamplingRatioShift(ADC_TypeDef *ADCx, uint
   * @param  ADCx ADC instance
   * @retval Ratio This parameter can be in the from 1 to 1024.
 */
-__STATIC_INLINE uint32_t LL_ADC_GetOverSamplingRatio(ADC_TypeDef *ADCx)
-{
-  return (((uint32_t)(READ_BIT(ADCx->CFGR2, ADC_CFGR2_OVSR)) + (1UL << ADC_CFGR2_OVSR_Pos)) >> ADC_CFGR2_OVSR_Pos);
+__STATIC_INLINE uint32_t LL_ADC_GetOverSamplingRatio(ADC_TypeDef *ADCx) {
+	return (((uint32_t)(READ_BIT(ADCx->CFGR2, ADC_CFGR2_OVSR)) + (1UL << ADC_CFGR2_OVSR_Pos)) >> ADC_CFGR2_OVSR_Pos);
 }
 
 /**
@@ -6353,9 +6179,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetOverSamplingRatio(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_OVS_SHIFT_RIGHT_10
   *         @arg @ref LL_ADC_OVS_SHIFT_RIGHT_11
 */
-__STATIC_INLINE uint32_t LL_ADC_GetOverSamplingShift(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->CFGR2, ADC_CFGR2_OVSS));
+__STATIC_INLINE uint32_t LL_ADC_GetOverSamplingShift(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->CFGR2, ADC_CFGR2_OVSS));
 }
 
 /**
@@ -6381,22 +6206,15 @@ __STATIC_INLINE uint32_t LL_ADC_GetOverSamplingShift(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_BOOST_MODE_50MHZ
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetBoostMode(ADC_TypeDef *ADCx, uint32_t BoostMode)
-{
+__STATIC_INLINE void LL_ADC_SetBoostMode(ADC_TypeDef *ADCx, uint32_t BoostMode) {
 #if defined(ADC_VER_V5_V90)
-  if (ADCx != ADC3)
-  {
-    MODIFY_REG(ADCx->CR, ADC_CR_BOOST, (BoostMode & ADC_CR_BOOST));
-  }
+	if (ADCx != ADC3)
+		MODIFY_REG(ADCx->CR, ADC_CR_BOOST, (BoostMode & ADC_CR_BOOST));
 #else   /* ADC_VER_V5_V90 */
-  if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Cut 1.x */
-  {
-    MODIFY_REG(ADCx->CR, ADC_CR_BOOST_0, (BoostMode >> 2UL));
-  }
-  else /* Cut 2.x */
-  {
-    MODIFY_REG(ADCx->CR, ADC_CR_BOOST, (BoostMode & ADC_CR_BOOST));
-  }
+	if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Cut 1.x */
+		MODIFY_REG(ADCx->CR, ADC_CR_BOOST_0, (BoostMode >> 2UL));
+	else /* Cut 2.x */
+		MODIFY_REG(ADCx->CR, ADC_CR_BOOST, (BoostMode & ADC_CR_BOOST));
 #endif
 }
 
@@ -6411,16 +6229,11 @@ __STATIC_INLINE void LL_ADC_SetBoostMode(ADC_TypeDef *ADCx, uint32_t BoostMode)
   * @param  ADCx ADC instance
   * @retval 0: Boost disabled 1: Boost enabled
   */
-__STATIC_INLINE uint32_t LL_ADC_GetBoostMode(ADC_TypeDef *ADCx)
-{
-  if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Cut 1.x */
-  {
-    return (uint32_t)READ_BIT(ADCx->CR, ADC_CR_BOOST_0);
-  }
-  else /* Cut 2.x */
-  {
-    return ((READ_BIT(ADCx->CR, ADC_CR_BOOST) == (ADC_CR_BOOST)) ? 1UL : 0UL);
-  }
+__STATIC_INLINE uint32_t LL_ADC_GetBoostMode(ADC_TypeDef *ADCx) {
+	if ((DBGMCU->IDCODE & 0x30000000UL) == 0x10000000UL) /* Cut 1.x */
+		return (uint32_t)READ_BIT(ADCx->CR, ADC_CR_BOOST_0);
+	else /* Cut 2.x */
+		return ((READ_BIT(ADCx->CR, ADC_CR_BOOST) == (ADC_CR_BOOST)) ? 1UL : 0UL);
 }
 
 /**
@@ -6449,9 +6262,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetBoostMode(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_MULTI_DUAL_REG_INT_INJ_SIM
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetMultimode(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t Multimode)
-{
-  MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_DUAL, Multimode);
+__STATIC_INLINE void LL_ADC_SetMultimode(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t Multimode) {
+	MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_DUAL, Multimode);
 }
 
 /**
@@ -6473,9 +6285,8 @@ __STATIC_INLINE void LL_ADC_SetMultimode(ADC_Common_TypeDef *ADCxy_COMMON, uint3
   *         @arg @ref LL_ADC_MULTI_DUAL_REG_SIM_INJ_ALT
   *         @arg @ref LL_ADC_MULTI_DUAL_REG_INT_INJ_SIM
   */
-__STATIC_INLINE uint32_t LL_ADC_GetMultimode(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_DUAL));
+__STATIC_INLINE uint32_t LL_ADC_GetMultimode(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_DUAL));
 }
 
 /**
@@ -6521,9 +6332,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetMultimode(ADC_Common_TypeDef *ADCxy_COMMON)
   *         @arg @ref LL_ADC_MULTI_REG_DMA_RES_8B
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetMultiDMATransfer(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t MultiDMATransfer)
-{
-  MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_DAMDF, MultiDMATransfer);
+__STATIC_INLINE void LL_ADC_SetMultiDMATransfer(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t MultiDMATransfer) {
+	MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_DAMDF, MultiDMATransfer);
 }
 
 /**
@@ -6564,9 +6374,8 @@ __STATIC_INLINE void LL_ADC_SetMultiDMATransfer(ADC_Common_TypeDef *ADCxy_COMMON
   *         @arg @ref LL_ADC_MULTI_REG_DMA_RES_32_10B
   *         @arg @ref LL_ADC_MULTI_REG_DMA_RES_8B
   */
-__STATIC_INLINE uint32_t LL_ADC_GetMultiDMATransfer(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_DAMDF));
+__STATIC_INLINE uint32_t LL_ADC_GetMultiDMATransfer(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_DAMDF));
 }
 
 /**
@@ -6609,9 +6418,8 @@ __STATIC_INLINE uint32_t LL_ADC_GetMultiDMATransfer(ADC_Common_TypeDef *ADCxy_CO
   *         (7) Parameter available only if ADC resolution is 16 or 14 bits.
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_SetMultiTwoSamplingDelay(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t MultiTwoSamplingDelay)
-{
-  MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_DELAY, MultiTwoSamplingDelay);
+__STATIC_INLINE void LL_ADC_SetMultiTwoSamplingDelay(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t MultiTwoSamplingDelay) {
+	MODIFY_REG(ADCxy_COMMON->CCR, ADC_CCR_DELAY, MultiTwoSamplingDelay);
 }
 
 /**
@@ -6642,9 +6450,8 @@ __STATIC_INLINE void LL_ADC_SetMultiTwoSamplingDelay(ADC_Common_TypeDef *ADCxy_C
   *         (6) Parameter available only if ADC resolution is 12 bits.
   *         (7) Parameter available only if ADC resolution is 16 or 14 bits.
   */
-__STATIC_INLINE uint32_t LL_ADC_GetMultiTwoSamplingDelay(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_DELAY));
+__STATIC_INLINE uint32_t LL_ADC_GetMultiTwoSamplingDelay(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return (uint32_t)(READ_BIT(ADCxy_COMMON->CCR, ADC_CCR_DELAY));
 }
 
 /**
@@ -6667,14 +6474,13 @@ __STATIC_INLINE uint32_t LL_ADC_GetMultiTwoSamplingDelay(ADC_Common_TypeDef *ADC
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableDeepPowerDown(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_DEEPPWD);
+__STATIC_INLINE void LL_ADC_EnableDeepPowerDown(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_DEEPPWD);
 }
 
 /**
@@ -6690,12 +6496,11 @@ __STATIC_INLINE void LL_ADC_EnableDeepPowerDown(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableDeepPowerDown(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  CLEAR_BIT(ADCx->CR, (ADC_CR_DEEPPWD | ADC_CR_BITS_PROPERTY_RS));
+__STATIC_INLINE void LL_ADC_DisableDeepPowerDown(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	CLEAR_BIT(ADCx->CR, (ADC_CR_DEEPPWD | ADC_CR_BITS_PROPERTY_RS));
 }
 
 /**
@@ -6704,9 +6509,8 @@ __STATIC_INLINE void LL_ADC_DisableDeepPowerDown(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval 0: deep power down is disabled, 1: deep power down is enabled.
   */
-__STATIC_INLINE uint32_t LL_ADC_IsDeepPowerDownEnabled(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_DEEPPWD) == (ADC_CR_DEEPPWD)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsDeepPowerDownEnabled(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_DEEPPWD) == (ADC_CR_DEEPPWD)) ? 1UL : 0UL);
 }
 
 /**
@@ -6723,14 +6527,13 @@ __STATIC_INLINE uint32_t LL_ADC_IsDeepPowerDownEnabled(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableInternalRegulator(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_ADVREGEN);
+__STATIC_INLINE void LL_ADC_EnableInternalRegulator(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_ADVREGEN);
 }
 
 /**
@@ -6742,9 +6545,8 @@ __STATIC_INLINE void LL_ADC_EnableInternalRegulator(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableInternalRegulator(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->CR, (ADC_CR_ADVREGEN | ADC_CR_BITS_PROPERTY_RS));
+__STATIC_INLINE void LL_ADC_DisableInternalRegulator(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->CR, (ADC_CR_ADVREGEN | ADC_CR_BITS_PROPERTY_RS));
 }
 
 /**
@@ -6753,9 +6555,8 @@ __STATIC_INLINE void LL_ADC_DisableInternalRegulator(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval 0: internal regulator is disabled, 1: internal regulator is enabled.
   */
-__STATIC_INLINE uint32_t LL_ADC_IsInternalRegulatorEnabled(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_ADVREGEN) == (ADC_CR_ADVREGEN)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsInternalRegulatorEnabled(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_ADVREGEN) == (ADC_CR_ADVREGEN)) ? 1UL : 0UL);
 }
 
 /**
@@ -6774,14 +6575,13 @@ __STATIC_INLINE uint32_t LL_ADC_IsInternalRegulatorEnabled(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_Enable(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_ADEN);
+__STATIC_INLINE void LL_ADC_Enable(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_ADEN);
 }
 
 /**
@@ -6794,14 +6594,13 @@ __STATIC_INLINE void LL_ADC_Enable(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_Disable(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_ADDIS);
+__STATIC_INLINE void LL_ADC_Disable(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_ADDIS);
 }
 
 /**
@@ -6813,9 +6612,8 @@ __STATIC_INLINE void LL_ADC_Disable(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval 0: ADC is disabled, 1: ADC is enabled.
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabled(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_ADEN) == (ADC_CR_ADEN)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabled(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_ADEN) == (ADC_CR_ADEN)) ? 1UL : 0UL);
 }
 
 /**
@@ -6824,9 +6622,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabled(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval 0: no ADC disable command on going.
   */
-__STATIC_INLINE uint32_t LL_ADC_IsDisableOngoing(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_ADDIS) == (ADC_CR_ADDIS)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsDisableOngoing(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_ADDIS) == (ADC_CR_ADDIS)) ? 1UL : 0UL);
 }
 
 /**
@@ -6862,14 +6659,13 @@ __STATIC_INLINE uint32_t LL_ADC_IsDisableOngoing(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_DIFFERENTIAL_ENDED
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_StartCalibration(ADC_TypeDef *ADCx, uint32_t CalibrationMode, uint32_t SingleDiff)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_ADCALLIN | ADC_CR_ADCALDIF | ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_ADCAL | (CalibrationMode & ADC_CALIB_MODE_MASK) | (SingleDiff & ADC_SINGLEDIFF_CALIB_START_MASK));
+__STATIC_INLINE void LL_ADC_StartCalibration(ADC_TypeDef *ADCx, uint32_t CalibrationMode, uint32_t SingleDiff) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_ADCALLIN | ADC_CR_ADCALDIF | ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_ADCAL | (CalibrationMode & ADC_CALIB_MODE_MASK) | (SingleDiff & ADC_SINGLEDIFF_CALIB_START_MASK));
 }
 
 /**
@@ -6878,9 +6674,8 @@ __STATIC_INLINE void LL_ADC_StartCalibration(ADC_TypeDef *ADCx, uint32_t Calibra
   * @param  ADCx ADC instance
   * @retval 0: calibration complete, 1: calibration in progress.
   */
-__STATIC_INLINE uint32_t LL_ADC_IsCalibrationOnGoing(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_ADCAL) == (ADC_CR_ADCAL)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsCalibrationOnGoing(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_ADCAL) == (ADC_CR_ADCAL)) ? 1UL : 0UL);
 }
 
 /**
@@ -6909,14 +6704,13 @@ __STATIC_INLINE uint32_t LL_ADC_IsCalibrationOnGoing(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_StartConversion(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_ADSTART);
+__STATIC_INLINE void LL_ADC_REG_StartConversion(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_ADSTART);
 }
 
 /**
@@ -6929,14 +6723,13 @@ __STATIC_INLINE void LL_ADC_REG_StartConversion(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_REG_StopConversion(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_ADSTP);
+__STATIC_INLINE void LL_ADC_REG_StopConversion(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_ADSTP);
 }
 
 /**
@@ -6945,9 +6738,8 @@ __STATIC_INLINE void LL_ADC_REG_StopConversion(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval 0: no conversion is on going on ADC group regular.
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_IsConversionOngoing(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_ADSTART) == (ADC_CR_ADSTART)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_REG_IsConversionOngoing(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_ADSTART) == (ADC_CR_ADSTART)) ? 1UL : 0UL);
 }
 
 /**
@@ -6956,9 +6748,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_IsConversionOngoing(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval 0: no command of conversion stop is on going on ADC group regular.
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_IsStopConversionOngoing(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_ADSTP) == (ADC_CR_ADSTP)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_REG_IsStopConversionOngoing(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_ADSTP) == (ADC_CR_ADSTP)) ? 1UL : 0UL);
 }
 
 /**
@@ -6970,9 +6761,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_IsStopConversionOngoing(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval Value between Min_Data=0x00000000 and Max_Data=0xFFFFFFFF
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_ReadConversionData32(ADC_TypeDef *ADCx)
-{
-  return (uint32_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
+__STATIC_INLINE uint32_t LL_ADC_REG_ReadConversionData32(ADC_TypeDef *ADCx) {
+	return (uint32_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
 }
 
 /**
@@ -6985,9 +6775,8 @@ __STATIC_INLINE uint32_t LL_ADC_REG_ReadConversionData32(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval Value between Min_Data=0x00 and Max_Data=0xFFFF
   */
-__STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData16(ADC_TypeDef *ADCx)
-{
-  return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
+__STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData16(ADC_TypeDef *ADCx) {
+	return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
 }
 
 /**
@@ -7000,9 +6789,8 @@ __STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData16(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval Value between Min_Data=0x00 and Max_Data=0x3FF
   */
-__STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData14(ADC_TypeDef *ADCx)
-{
-  return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
+__STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData14(ADC_TypeDef *ADCx) {
+	return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
 }
 
 /**
@@ -7015,9 +6803,8 @@ __STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData14(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval Value between Min_Data=0x000 and Max_Data=0xFFF
   */
-__STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData12(ADC_TypeDef *ADCx)
-{
-  return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
+__STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData12(ADC_TypeDef *ADCx) {
+	return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
 }
 
 /**
@@ -7030,9 +6817,8 @@ __STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData12(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval Value between Min_Data=0x000 and Max_Data=0x3FF
   */
-__STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData10(ADC_TypeDef *ADCx)
-{
-  return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
+__STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData10(ADC_TypeDef *ADCx) {
+	return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
 }
 
 /**
@@ -7045,9 +6831,8 @@ __STATIC_INLINE uint16_t LL_ADC_REG_ReadConversionData10(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval Value between Min_Data=0x00 and Max_Data=0xFF
   */
-__STATIC_INLINE uint8_t LL_ADC_REG_ReadConversionData8(ADC_TypeDef *ADCx)
-{
-  return (uint8_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
+__STATIC_INLINE uint8_t LL_ADC_REG_ReadConversionData8(ADC_TypeDef *ADCx) {
+	return (uint8_t)(READ_BIT(ADCx->DR, ADC_DR_RDATA));
 }
 /**
   * @brief  Get ADC multimode conversion data of ADC master, ADC slave
@@ -7070,12 +6855,12 @@ __STATIC_INLINE uint8_t LL_ADC_REG_ReadConversionData8(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_MULTI_MASTER_SLAVE
   * @retval Value between Min_Data=0x00000000 and Max_Data=0xFFFFFFFF
   */
-__STATIC_INLINE uint32_t LL_ADC_REG_ReadMultiConversionData32(ADC_Common_TypeDef *ADCxy_COMMON, uint32_t ConversionData)
-{
-  return (uint32_t)(READ_BIT(ADCxy_COMMON->CDR,
-                             ConversionData)
-                    >> (POSITION_VAL(ConversionData) & 0x1FUL)
-                   );
+__STATIC_INLINE uint32_t LL_ADC_REG_ReadMultiConversionData32(ADC_Common_TypeDef *ADCxy_COMMON,
+	uint32_t ConversionData) {
+	return (uint32_t)(READ_BIT(ADCxy_COMMON->CDR,
+				ConversionData)
+			>> (POSITION_VAL(ConversionData) & 0x1FUL)
+		);
 }
 
 /**
@@ -7104,14 +6889,13 @@ __STATIC_INLINE uint32_t LL_ADC_REG_ReadMultiConversionData32(ADC_Common_TypeDef
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_StartConversion(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_JADSTART);
+__STATIC_INLINE void LL_ADC_INJ_StartConversion(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_JADSTART);
 }
 
 /**
@@ -7124,14 +6908,13 @@ __STATIC_INLINE void LL_ADC_INJ_StartConversion(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_INJ_StopConversion(ADC_TypeDef *ADCx)
-{
-  /* Note: Write register with some additional bits forced to state reset     */
-  /*       instead of modifying only the selected bit for this function,      */
-  /*       to not interfere with bits with HW property "rs".                  */
-  MODIFY_REG(ADCx->CR,
-             ADC_CR_BITS_PROPERTY_RS,
-             ADC_CR_JADSTP);
+__STATIC_INLINE void LL_ADC_INJ_StopConversion(ADC_TypeDef *ADCx) {
+	/* Note: Write register with some additional bits forced to state reset     */
+	/*       instead of modifying only the selected bit for this function,      */
+	/*       to not interfere with bits with HW property "rs".                  */
+	MODIFY_REG(ADCx->CR,
+		ADC_CR_BITS_PROPERTY_RS,
+		ADC_CR_JADSTP);
 }
 
 /**
@@ -7140,9 +6923,8 @@ __STATIC_INLINE void LL_ADC_INJ_StopConversion(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval 0: no conversion is on going on ADC group injected.
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_IsConversionOngoing(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_JADSTART) == (ADC_CR_JADSTART)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_INJ_IsConversionOngoing(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_JADSTART) == (ADC_CR_JADSTART)) ? 1UL : 0UL);
 }
 
 /**
@@ -7151,9 +6933,8 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_IsConversionOngoing(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval 0: no command of conversion stop is on going on ADC group injected.
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_IsStopConversionOngoing(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->CR, ADC_CR_JADSTP) == (ADC_CR_JADSTP)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_INJ_IsStopConversionOngoing(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->CR, ADC_CR_JADSTP) == (ADC_CR_JADSTP)) ? 1UL : 0UL);
 }
 
 /**
@@ -7173,13 +6954,12 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_IsStopConversionOngoing(ADC_TypeDef *ADCx)
   *         @arg @ref LL_ADC_INJ_RANK_4
   * @retval Value between Min_Data=0x00000000 and Max_Data=0xFFFFFFFF
   */
-__STATIC_INLINE uint32_t LL_ADC_INJ_ReadConversionData32(ADC_TypeDef *ADCx, uint32_t Rank)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1, ((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
-
-  return (uint32_t)(READ_BIT(*preg,
-                             ADC_JDR1_JDATA)
-                   );
+__STATIC_INLINE uint32_t LL_ADC_INJ_ReadConversionData32(ADC_TypeDef *ADCx, uint32_t Rank) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1,
+			((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
+	return (uint32_t)(READ_BIT(*preg,
+				ADC_JDR1_JDATA)
+		);
 }
 
 /**
@@ -7200,13 +6980,12 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_ReadConversionData32(ADC_TypeDef *ADCx, uint
   *         @arg @ref LL_ADC_INJ_RANK_4
   * @retval Value between Min_Data=0x000 and Max_Data=0xFFFF
   */
-__STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData16(ADC_TypeDef *ADCx, uint32_t Rank)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1, ((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
-
-  return (uint16_t)(READ_BIT(*preg,
-                             ADC_JDR1_JDATA)
-                   );
+__STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData16(ADC_TypeDef *ADCx, uint32_t Rank) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1,
+			((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
+	return (uint16_t)(READ_BIT(*preg,
+				ADC_JDR1_JDATA)
+		);
 }
 
 /**
@@ -7227,13 +7006,12 @@ __STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData16(ADC_TypeDef *ADCx, uint
   *         @arg @ref LL_ADC_INJ_RANK_4
   * @retval Value between Min_Data=0x000 and Max_Data=0x3FFF
   */
-__STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData14(ADC_TypeDef *ADCx, uint32_t Rank)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1, ((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
-
-  return (uint16_t)(READ_BIT(*preg,
-                             ADC_JDR1_JDATA)
-                   );
+__STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData14(ADC_TypeDef *ADCx, uint32_t Rank) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1,
+			((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
+	return (uint16_t)(READ_BIT(*preg,
+				ADC_JDR1_JDATA)
+		);
 }
 
 /**
@@ -7254,13 +7032,12 @@ __STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData14(ADC_TypeDef *ADCx, uint
   *         @arg @ref LL_ADC_INJ_RANK_4
   * @retval Value between Min_Data=0x000 and Max_Data=0xFFF
   */
-__STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData12(ADC_TypeDef *ADCx, uint32_t Rank)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1, ((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
-
-  return (uint16_t)(READ_BIT(*preg,
-                             ADC_JDR1_JDATA)
-                   );
+__STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData12(ADC_TypeDef *ADCx, uint32_t Rank) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1,
+			((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
+	return (uint16_t)(READ_BIT(*preg,
+				ADC_JDR1_JDATA)
+		);
 }
 
 /**
@@ -7281,13 +7058,12 @@ __STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData12(ADC_TypeDef *ADCx, uint
   *         @arg @ref LL_ADC_INJ_RANK_4
   * @retval Value between Min_Data=0x000 and Max_Data=0x3FF
   */
-__STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData10(ADC_TypeDef *ADCx, uint32_t Rank)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1, ((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
-
-  return (uint16_t)(READ_BIT(*preg,
-                             ADC_JDR1_JDATA)
-                   );
+__STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData10(ADC_TypeDef *ADCx, uint32_t Rank) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1,
+			((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
+	return (uint16_t)(READ_BIT(*preg,
+				ADC_JDR1_JDATA)
+		);
 }
 
 /**
@@ -7308,13 +7084,12 @@ __STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData10(ADC_TypeDef *ADCx, uint
   *         @arg @ref LL_ADC_INJ_RANK_4
   * @retval Value between Min_Data=0x00 and Max_Data=0xFF
   */
-__STATIC_INLINE uint8_t LL_ADC_INJ_ReadConversionData8(ADC_TypeDef *ADCx, uint32_t Rank)
-{
-  const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1, ((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
-
-  return (uint8_t)(READ_BIT(*preg,
-                            ADC_JDR1_JDATA)
-                  );
+__STATIC_INLINE uint8_t LL_ADC_INJ_ReadConversionData8(ADC_TypeDef *ADCx, uint32_t Rank) {
+	const __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1,
+			((Rank & ADC_INJ_JDRX_REGOFFSET_MASK) >> ADC_JDRX_REGOFFSET_POS));
+	return (uint8_t)(READ_BIT(*preg,
+				ADC_JDR1_JDATA)
+		);
 }
 
 /**
@@ -7334,9 +7109,8 @@ __STATIC_INLINE uint8_t LL_ADC_INJ_ReadConversionData8(ADC_TypeDef *ADCx, uint32
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_ADRDY(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_ADRDY) == (LL_ADC_FLAG_ADRDY)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_ADRDY(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_ADRDY) == (LL_ADC_FLAG_ADRDY)) ? 1UL : 0UL);
 }
 
 /**
@@ -7345,9 +7119,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_ADRDY(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOC(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, ADC_ISR_EOC) == (ADC_ISR_EOC)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOC(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, ADC_ISR_EOC) == (ADC_ISR_EOC)) ? 1UL : 0UL);
 }
 
 /**
@@ -7356,9 +7129,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOS(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_EOS) == (LL_ADC_FLAG_EOS)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOS(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_EOS) == (LL_ADC_FLAG_EOS)) ? 1UL : 0UL);
 }
 
 /**
@@ -7367,9 +7139,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_OVR(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_OVR) == (LL_ADC_FLAG_OVR)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_OVR(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_OVR) == (LL_ADC_FLAG_OVR)) ? 1UL : 0UL);
 }
 
 /**
@@ -7378,9 +7149,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_OVR(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOSMP(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_EOSMP) == (LL_ADC_FLAG_EOSMP)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOSMP(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_EOSMP) == (LL_ADC_FLAG_EOSMP)) ? 1UL : 0UL);
 }
 
 /**
@@ -7389,9 +7159,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_EOSMP(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JEOC(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_JEOC) == (LL_ADC_FLAG_JEOC)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JEOC(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_JEOC) == (LL_ADC_FLAG_JEOC)) ? 1UL : 0UL);
 }
 
 /**
@@ -7400,9 +7169,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JEOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JEOS(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_JEOS) == (LL_ADC_FLAG_JEOS)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JEOS(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_JEOS) == (LL_ADC_FLAG_JEOS)) ? 1UL : 0UL);
 }
 
 /**
@@ -7411,9 +7179,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JEOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JQOVF(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_JQOVF) == (LL_ADC_FLAG_JQOVF)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JQOVF(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_JQOVF) == (LL_ADC_FLAG_JQOVF)) ? 1UL : 0UL);
 }
 
 /**
@@ -7422,9 +7189,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JQOVF(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD1(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_AWD1) == (LL_ADC_FLAG_AWD1)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD1(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_AWD1) == (LL_ADC_FLAG_AWD1)) ? 1UL : 0UL);
 }
 
 /**
@@ -7433,9 +7199,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD1(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD2(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_AWD2) == (LL_ADC_FLAG_AWD2)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD2(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_AWD2) == (LL_ADC_FLAG_AWD2)) ? 1UL : 0UL);
 }
 
 /**
@@ -7444,9 +7209,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD2(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD3(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_AWD3) == (LL_ADC_FLAG_AWD3)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD3(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->ISR, LL_ADC_FLAG_AWD3) == (LL_ADC_FLAG_AWD3)) ? 1UL : 0UL);
 }
 
 /**
@@ -7458,9 +7222,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_AWD3(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_ADRDY(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_ADRDY);
+__STATIC_INLINE void LL_ADC_ClearFlag_ADRDY(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_ADRDY);
 }
 
 /**
@@ -7469,9 +7232,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_ADRDY(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_EOC(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_EOC);
+__STATIC_INLINE void LL_ADC_ClearFlag_EOC(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_EOC);
 }
 
 /**
@@ -7480,9 +7242,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_EOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_EOS(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_EOS);
+__STATIC_INLINE void LL_ADC_ClearFlag_EOS(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_EOS);
 }
 
 /**
@@ -7491,9 +7252,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_EOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_OVR(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_OVR);
+__STATIC_INLINE void LL_ADC_ClearFlag_OVR(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_OVR);
 }
 
 /**
@@ -7502,9 +7262,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_OVR(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_EOSMP(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_EOSMP);
+__STATIC_INLINE void LL_ADC_ClearFlag_EOSMP(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_EOSMP);
 }
 
 /**
@@ -7513,9 +7272,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_EOSMP(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_JEOC(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_JEOC);
+__STATIC_INLINE void LL_ADC_ClearFlag_JEOC(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_JEOC);
 }
 
 /**
@@ -7524,9 +7282,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_JEOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_JEOS(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_JEOS);
+__STATIC_INLINE void LL_ADC_ClearFlag_JEOS(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_JEOS);
 }
 
 /**
@@ -7535,9 +7292,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_JEOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_JQOVF(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_JQOVF);
+__STATIC_INLINE void LL_ADC_ClearFlag_JQOVF(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_JQOVF);
 }
 
 /**
@@ -7546,9 +7302,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_JQOVF(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_AWD1(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_AWD1);
+__STATIC_INLINE void LL_ADC_ClearFlag_AWD1(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_AWD1);
 }
 
 /**
@@ -7557,9 +7312,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_AWD1(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_AWD2(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_AWD2);
+__STATIC_INLINE void LL_ADC_ClearFlag_AWD2(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_AWD2);
 }
 
 /**
@@ -7568,9 +7322,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_AWD2(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_ClearFlag_AWD3(ADC_TypeDef *ADCx)
-{
-  WRITE_REG(ADCx->ISR, LL_ADC_FLAG_AWD3);
+__STATIC_INLINE void LL_ADC_ClearFlag_AWD3(ADC_TypeDef *ADCx) {
+	WRITE_REG(ADCx->ISR, LL_ADC_FLAG_AWD3);
 }
 
 /**
@@ -7580,9 +7333,8 @@ __STATIC_INLINE void LL_ADC_ClearFlag_AWD3(ADC_TypeDef *ADCx)
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_ADRDY(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_ADRDY_MST) == (LL_ADC_FLAG_ADRDY_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_ADRDY(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_ADRDY_MST) == (LL_ADC_FLAG_ADRDY_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7592,9 +7344,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_ADRDY(ADC_Common_TypeDef *ADCxy
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_ADRDY(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_ADRDY_SLV) == (LL_ADC_FLAG_ADRDY_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_ADRDY(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_ADRDY_SLV) == (LL_ADC_FLAG_ADRDY_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7604,9 +7355,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_ADRDY(ADC_Common_TypeDef *ADCxy
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOC(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOC_SLV) == (LL_ADC_FLAG_EOC_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOC(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOC_SLV) == (LL_ADC_FLAG_EOC_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7616,9 +7366,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOC(ADC_Common_TypeDef *ADCxy_C
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOC(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOC_SLV) == (LL_ADC_FLAG_EOC_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOC(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOC_SLV) == (LL_ADC_FLAG_EOC_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7628,9 +7377,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOC(ADC_Common_TypeDef *ADCxy_C
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOS(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOS_MST) == (LL_ADC_FLAG_EOS_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOS(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOS_MST) == (LL_ADC_FLAG_EOS_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7640,9 +7388,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOS(ADC_Common_TypeDef *ADCxy_C
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOS(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOS_SLV) == (LL_ADC_FLAG_EOS_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOS(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOS_SLV) == (LL_ADC_FLAG_EOS_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7652,9 +7399,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOS(ADC_Common_TypeDef *ADCxy_C
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_OVR(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_OVR_MST) == (LL_ADC_FLAG_OVR_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_OVR(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_OVR_MST) == (LL_ADC_FLAG_OVR_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7664,9 +7410,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_OVR(ADC_Common_TypeDef *ADCxy_C
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_OVR(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_OVR_SLV) == (LL_ADC_FLAG_OVR_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_OVR(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_OVR_SLV) == (LL_ADC_FLAG_OVR_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7676,9 +7421,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_OVR(ADC_Common_TypeDef *ADCxy_C
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOSMP(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOSMP_MST) == (LL_ADC_FLAG_EOSMP_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOSMP(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOSMP_MST) == (LL_ADC_FLAG_EOSMP_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7688,9 +7432,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOSMP(ADC_Common_TypeDef *ADCxy
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOSMP(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOSMP_SLV) == (LL_ADC_FLAG_EOSMP_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOSMP(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_EOSMP_SLV) == (LL_ADC_FLAG_EOSMP_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7700,9 +7443,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_EOSMP(ADC_Common_TypeDef *ADCxy
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JEOC(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JEOC_MST) == (LL_ADC_FLAG_JEOC_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JEOC(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JEOC_MST) == (LL_ADC_FLAG_JEOC_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7712,9 +7454,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JEOC(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JEOC(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JEOC_SLV) == (LL_ADC_FLAG_JEOC_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JEOC(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JEOC_SLV) == (LL_ADC_FLAG_JEOC_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7724,9 +7465,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JEOC(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JEOS(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JEOS_MST) == (LL_ADC_FLAG_JEOS_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JEOS(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JEOS_MST) == (LL_ADC_FLAG_JEOS_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7736,9 +7476,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JEOS(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JEOS(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JEOS_SLV) == (LL_ADC_FLAG_JEOS_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JEOS(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JEOS_SLV) == (LL_ADC_FLAG_JEOS_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7748,9 +7487,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JEOS(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JQOVF(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JQOVF_MST) == (LL_ADC_FLAG_JQOVF_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JQOVF(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JQOVF_MST) == (LL_ADC_FLAG_JQOVF_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7760,9 +7498,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_JQOVF(ADC_Common_TypeDef *ADCxy
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JQOVF(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JQOVF_SLV) == (LL_ADC_FLAG_JQOVF_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JQOVF(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_JQOVF_SLV) == (LL_ADC_FLAG_JQOVF_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7772,9 +7509,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_JQOVF(ADC_Common_TypeDef *ADCxy
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD1(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD1_MST) == (LL_ADC_FLAG_AWD1_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD1(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD1_MST) == (LL_ADC_FLAG_AWD1_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7784,9 +7520,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD1(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD1(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD1_SLV) == (LL_ADC_FLAG_AWD1_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD1(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD1_SLV) == (LL_ADC_FLAG_AWD1_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7796,9 +7531,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD1(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD2(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD2_MST) == (LL_ADC_FLAG_AWD2_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD2(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD2_MST) == (LL_ADC_FLAG_AWD2_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7808,9 +7542,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD2(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD2(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD2_SLV) == (LL_ADC_FLAG_AWD2_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD2(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD2_SLV) == (LL_ADC_FLAG_AWD2_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7820,9 +7553,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD2(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD3(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD3_MST) == (LL_ADC_FLAG_AWD3_MST)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD3(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD3_MST) == (LL_ADC_FLAG_AWD3_MST)) ? 1UL : 0UL);
 }
 
 /**
@@ -7832,9 +7564,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_AWD3(ADC_Common_TypeDef *ADCxy_
   *         (can be set directly from CMSIS definition or by using helper macro @ref __LL_ADC_COMMON_INSTANCE() )
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD3(ADC_Common_TypeDef *ADCxy_COMMON)
-{
-  return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD3_SLV) == (LL_ADC_FLAG_AWD3_SLV)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD3(ADC_Common_TypeDef *ADCxy_COMMON) {
+	return ((READ_BIT(ADCxy_COMMON->CSR, LL_ADC_FLAG_AWD3_SLV) == (LL_ADC_FLAG_AWD3_SLV)) ? 1UL : 0UL);
 }
 
 /**
@@ -7851,9 +7582,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_SLV_AWD3(ADC_Common_TypeDef *ADCxy_
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_ADRDY(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_ADRDY);
+__STATIC_INLINE void LL_ADC_EnableIT_ADRDY(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_ADRDY);
 }
 
 /**
@@ -7862,9 +7592,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_ADRDY(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_EOC(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_EOC);
+__STATIC_INLINE void LL_ADC_EnableIT_EOC(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_EOC);
 }
 
 /**
@@ -7873,9 +7602,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_EOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_EOS(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_EOS);
+__STATIC_INLINE void LL_ADC_EnableIT_EOS(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_EOS);
 }
 
 /**
@@ -7884,9 +7612,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_EOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_OVR(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_OVR);
+__STATIC_INLINE void LL_ADC_EnableIT_OVR(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_OVR);
 }
 
 /**
@@ -7895,9 +7622,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_OVR(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_EOSMP(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_EOSMP);
+__STATIC_INLINE void LL_ADC_EnableIT_EOSMP(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_EOSMP);
 }
 
 /**
@@ -7906,9 +7632,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_EOSMP(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_JEOC(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_JEOC);
+__STATIC_INLINE void LL_ADC_EnableIT_JEOC(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_JEOC);
 }
 
 /**
@@ -7917,9 +7642,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_JEOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_JEOS(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_JEOS);
+__STATIC_INLINE void LL_ADC_EnableIT_JEOS(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_JEOS);
 }
 
 /**
@@ -7928,9 +7652,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_JEOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_JQOVF(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_JQOVF);
+__STATIC_INLINE void LL_ADC_EnableIT_JQOVF(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_JQOVF);
 }
 
 /**
@@ -7939,9 +7662,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_JQOVF(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_AWD1(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_AWD1);
+__STATIC_INLINE void LL_ADC_EnableIT_AWD1(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_AWD1);
 }
 
 /**
@@ -7950,9 +7672,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_AWD1(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_AWD2(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_AWD2);
+__STATIC_INLINE void LL_ADC_EnableIT_AWD2(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_AWD2);
 }
 
 /**
@@ -7961,9 +7682,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_AWD2(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_EnableIT_AWD3(ADC_TypeDef *ADCx)
-{
-  SET_BIT(ADCx->IER, LL_ADC_IT_AWD3);
+__STATIC_INLINE void LL_ADC_EnableIT_AWD3(ADC_TypeDef *ADCx) {
+	SET_BIT(ADCx->IER, LL_ADC_IT_AWD3);
 }
 
 /**
@@ -7972,9 +7692,8 @@ __STATIC_INLINE void LL_ADC_EnableIT_AWD3(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_ADRDY(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_ADRDY);
+__STATIC_INLINE void LL_ADC_DisableIT_ADRDY(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_ADRDY);
 }
 
 /**
@@ -7983,9 +7702,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_ADRDY(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_EOC(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOC);
+__STATIC_INLINE void LL_ADC_DisableIT_EOC(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOC);
 }
 
 /**
@@ -7994,9 +7712,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_EOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_EOS(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOS);
+__STATIC_INLINE void LL_ADC_DisableIT_EOS(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOS);
 }
 
 /**
@@ -8005,9 +7722,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_EOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_OVR(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_OVR);
+__STATIC_INLINE void LL_ADC_DisableIT_OVR(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_OVR);
 }
 
 /**
@@ -8016,9 +7732,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_OVR(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_EOSMP(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOSMP);
+__STATIC_INLINE void LL_ADC_DisableIT_EOSMP(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOSMP);
 }
 
 /**
@@ -8027,9 +7742,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_EOSMP(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_JEOC(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_JEOC);
+__STATIC_INLINE void LL_ADC_DisableIT_JEOC(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_JEOC);
 }
 
 /**
@@ -8038,9 +7752,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_JEOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_JEOS(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_JEOS);
+__STATIC_INLINE void LL_ADC_DisableIT_JEOS(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_JEOS);
 }
 
 /**
@@ -8049,9 +7762,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_JEOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_JQOVF(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_JQOVF);
+__STATIC_INLINE void LL_ADC_DisableIT_JQOVF(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_JQOVF);
 }
 
 /**
@@ -8060,9 +7772,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_JQOVF(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_AWD1(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD1);
+__STATIC_INLINE void LL_ADC_DisableIT_AWD1(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD1);
 }
 
 /**
@@ -8071,9 +7782,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_AWD1(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_AWD2(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD2);
+__STATIC_INLINE void LL_ADC_DisableIT_AWD2(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD2);
 }
 
 /**
@@ -8082,9 +7792,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_AWD2(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval None
   */
-__STATIC_INLINE void LL_ADC_DisableIT_AWD3(ADC_TypeDef *ADCx)
-{
-  CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD3);
+__STATIC_INLINE void LL_ADC_DisableIT_AWD3(ADC_TypeDef *ADCx) {
+	CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD3);
 }
 
 /**
@@ -8094,9 +7803,8 @@ __STATIC_INLINE void LL_ADC_DisableIT_AWD3(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_ADRDY(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_ADRDY) == (LL_ADC_IT_ADRDY)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_ADRDY(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_ADRDY) == (LL_ADC_IT_ADRDY)) ? 1UL : 0UL);
 }
 
 /**
@@ -8106,9 +7814,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_ADRDY(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOC(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_EOC) == (LL_ADC_IT_EOC)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOC(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_EOC) == (LL_ADC_IT_EOC)) ? 1UL : 0UL);
 }
 
 /**
@@ -8118,9 +7825,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOS(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_EOS) == (LL_ADC_IT_EOS)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOS(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_EOS) == (LL_ADC_IT_EOS)) ? 1UL : 0UL);
 }
 
 /**
@@ -8130,9 +7836,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_OVR(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_OVR) == (LL_ADC_IT_OVR)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_OVR(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_OVR) == (LL_ADC_IT_OVR)) ? 1UL : 0UL);
 }
 
 /**
@@ -8142,9 +7847,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_OVR(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOSMP(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_EOSMP) == (LL_ADC_IT_EOSMP)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOSMP(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_EOSMP) == (LL_ADC_IT_EOSMP)) ? 1UL : 0UL);
 }
 
 /**
@@ -8154,9 +7858,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_EOSMP(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JEOC(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_JEOC) == (LL_ADC_IT_JEOC)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JEOC(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_JEOC) == (LL_ADC_IT_JEOC)) ? 1UL : 0UL);
 }
 
 /**
@@ -8166,9 +7869,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JEOC(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JEOS(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_JEOS) == (LL_ADC_IT_JEOS)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JEOS(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_JEOS) == (LL_ADC_IT_JEOS)) ? 1UL : 0UL);
 }
 
 /**
@@ -8178,9 +7880,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JEOS(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JQOVF(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_JQOVF) == (LL_ADC_IT_JQOVF)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JQOVF(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_JQOVF) == (LL_ADC_IT_JQOVF)) ? 1UL : 0UL);
 }
 
 /**
@@ -8190,9 +7891,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_JQOVF(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_AWD1(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_AWD1) == (LL_ADC_IT_AWD1)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_AWD1(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_AWD1) == (LL_ADC_IT_AWD1)) ? 1UL : 0UL);
 }
 
 /**
@@ -8202,9 +7902,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_AWD1(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_AWD2(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_AWD2) == (LL_ADC_IT_AWD2)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_AWD2(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_AWD2) == (LL_ADC_IT_AWD2)) ? 1UL : 0UL);
 }
 
 /**
@@ -8214,9 +7913,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_AWD2(ADC_TypeDef *ADCx)
   * @param  ADCx ADC instance
   * @retval State of bit (1 or 0).
   */
-__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_AWD3(ADC_TypeDef *ADCx)
-{
-  return ((READ_BIT(ADCx->IER, LL_ADC_IT_AWD3) == (LL_ADC_IT_AWD3)) ? 1UL : 0UL);
+__STATIC_INLINE uint32_t LL_ADC_IsEnabledIT_AWD3(ADC_TypeDef *ADCx) {
+	return ((READ_BIT(ADCx->IER, LL_ADC_IT_AWD3) == (LL_ADC_IT_AWD3)) ? 1UL : 0UL);
 }
 
 /**

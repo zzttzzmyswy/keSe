@@ -101,25 +101,25 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #if defined(DUAL_CORE)
-/** @defgroup HSEM_Private_Constants  HSEM Private Constants
-  * @{
-  */
+	/** @defgroup HSEM_Private_Constants  HSEM Private Constants
+	* @{
+	*/
 
-#ifndef HSEM_R_MASTERID
-#define HSEM_R_MASTERID HSEM_R_COREID
-#endif
+	#ifndef HSEM_R_MASTERID
+		#define HSEM_R_MASTERID HSEM_R_COREID
+	#endif
 
-#ifndef HSEM_RLR_MASTERID
-#define HSEM_RLR_MASTERID HSEM_RLR_COREID
-#endif
+	#ifndef HSEM_RLR_MASTERID
+		#define HSEM_RLR_MASTERID HSEM_RLR_COREID
+	#endif
 
-#ifndef HSEM_CR_MASTERID
-#define HSEM_CR_MASTERID HSEM_CR_COREID
-#endif
+	#ifndef HSEM_CR_MASTERID
+		#define HSEM_CR_MASTERID HSEM_CR_COREID
+	#endif
 
-/**
-  * @}
-  */  
+	/**
+	* @}
+	*/
 #endif /* DUAL_CORE */
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -156,36 +156,31 @@
   * @param  ProcessID: Process ID from 0 to 255
   * @retval HAL status
   */
-HAL_StatusTypeDef  HAL_HSEM_Take(uint32_t SemID, uint32_t ProcessID)
-{
-  /* Check the parameters */
-  assert_param(IS_HSEM_SEMID(SemID));
-  assert_param(IS_HSEM_PROCESSID(ProcessID));
-
+HAL_StatusTypeDef  HAL_HSEM_Take(uint32_t SemID, uint32_t ProcessID) {
+	/* Check the parameters */
+	assert_param(IS_HSEM_SEMID(SemID));
+	assert_param(IS_HSEM_PROCESSID(ProcessID));
 #if  USE_MULTI_CORE_SHARED_CODE != 0U
-  /* First step  write R register with MasterID, processID and take bit=1*/
-  HSEM->R[SemID] = ((ProcessID & HSEM_R_PROCID) | ((HAL_GetCurrentCPUID() << POSITION_VAL(HSEM_R_MASTERID)) & HSEM_R_MASTERID) | HSEM_R_LOCK);
-
-  /* second step : read the R register . Take achieved if MasterID and processID match and take bit set to 1 */
-  if (HSEM->R[SemID] == ((ProcessID & HSEM_R_PROCID) | ((HAL_GetCurrentCPUID() << POSITION_VAL(HSEM_R_MASTERID)) & HSEM_R_MASTERID) | HSEM_R_LOCK))
-  {
-    /*take success when MasterID and ProcessID match and take bit set*/
-    return HAL_OK;
-  }
+	/* First step  write R register with MasterID, processID and take bit=1*/
+	HSEM->R[SemID] = ((ProcessID & HSEM_R_PROCID) | ((HAL_GetCurrentCPUID() << POSITION_VAL(
+						HSEM_R_MASTERID)) & HSEM_R_MASTERID) | HSEM_R_LOCK);
+	/* second step : read the R register . Take achieved if MasterID and processID match and take bit set to 1 */
+	if (HSEM->R[SemID] == ((ProcessID & HSEM_R_PROCID) | ((HAL_GetCurrentCPUID() << POSITION_VAL(
+						HSEM_R_MASTERID)) & HSEM_R_MASTERID) | HSEM_R_LOCK)) {
+		/*take success when MasterID and ProcessID match and take bit set*/
+		return HAL_OK;
+	}
 #else
-  /* First step  write R register with MasterID, processID and take bit=1*/
-  HSEM->R[SemID] = (ProcessID | HSEM_CR_COREID_CURRENT | HSEM_R_LOCK);
-
-  /* second step : read the R register . Take achieved if MasterID and processID match and take bit set to 1 */
-  if (HSEM->R[SemID] == (ProcessID | HSEM_CR_COREID_CURRENT | HSEM_R_LOCK))
-  {
-    /*take success when MasterID and ProcessID match and take bit set*/
-    return HAL_OK;
-  }
+	/* First step  write R register with MasterID, processID and take bit=1*/
+	HSEM->R[SemID] = (ProcessID | HSEM_CR_COREID_CURRENT | HSEM_R_LOCK);
+	/* second step : read the R register . Take achieved if MasterID and processID match and take bit set to 1 */
+	if (HSEM->R[SemID] == (ProcessID | HSEM_CR_COREID_CURRENT | HSEM_R_LOCK)) {
+		/*take success when MasterID and ProcessID match and take bit set*/
+		return HAL_OK;
+	}
 #endif
-
-  /* Semaphore take fails*/
-  return HAL_ERROR;
+	/* Semaphore take fails*/
+	return HAL_ERROR;
 }
 
 /**
@@ -193,38 +188,33 @@ HAL_StatusTypeDef  HAL_HSEM_Take(uint32_t SemID, uint32_t ProcessID)
   * @param  SemID: semaphore ID from 0 to 31
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_HSEM_FastTake(uint32_t SemID)
-{
-  /* Check the parameters */
-  assert_param(IS_HSEM_SEMID(SemID));
-
+HAL_StatusTypeDef HAL_HSEM_FastTake(uint32_t SemID) {
+	/* Check the parameters */
+	assert_param(IS_HSEM_SEMID(SemID));
 #if  USE_MULTI_CORE_SHARED_CODE != 0U
-  /* Read the RLR register to take the semaphore */
-  if (HSEM->RLR[SemID] == (((HAL_GetCurrentCPUID() << POSITION_VAL(HSEM_R_MASTERID)) & HSEM_RLR_MASTERID) | HSEM_RLR_LOCK))
-  {
-    /*take success when MasterID match and take bit set*/
-    return HAL_OK;
-  }
-#else  
-  /* Read the RLR register to take the semaphore */
-  if (HSEM->RLR[SemID] == (HSEM_CR_COREID_CURRENT | HSEM_RLR_LOCK))
-  {
-    /*take success when MasterID match and take bit set*/
-    return HAL_OK;
-  }
+	/* Read the RLR register to take the semaphore */
+	if (HSEM->RLR[SemID] == (((HAL_GetCurrentCPUID() << POSITION_VAL(HSEM_R_MASTERID)) & HSEM_RLR_MASTERID) |
+			HSEM_RLR_LOCK)) {
+		/*take success when MasterID match and take bit set*/
+		return HAL_OK;
+	}
+#else
+	/* Read the RLR register to take the semaphore */
+	if (HSEM->RLR[SemID] == (HSEM_CR_COREID_CURRENT | HSEM_RLR_LOCK)) {
+		/*take success when MasterID match and take bit set*/
+		return HAL_OK;
+	}
 #endif
-
-  /* Semaphore take fails */
-  return HAL_ERROR;
+	/* Semaphore take fails */
+	return HAL_ERROR;
 }
 /**
   * @brief  Check semaphore state Taken or not.
   * @param  SemID: semaphore ID
   * @retval HAL HSEM state
   */
-uint32_t HAL_HSEM_IsSemTaken(uint32_t SemID)
-{
-  return (((HSEM->R[SemID] & HSEM_R_LOCK) != 0U) ? 1UL : 0UL);
+uint32_t HAL_HSEM_IsSemTaken(uint32_t SemID) {
+	return (((HSEM->R[SemID] & HSEM_R_LOCK) != 0U) ? 1UL : 0UL);
 }
 
 
@@ -234,19 +224,16 @@ uint32_t HAL_HSEM_IsSemTaken(uint32_t SemID)
   * @param  ProcessID: Process ID from 0 to 255
   * @retval None
   */
-void  HAL_HSEM_Release(uint32_t SemID, uint32_t ProcessID)
-{
-  /* Check the parameters */
-  assert_param(IS_HSEM_SEMID(SemID));
-  assert_param(IS_HSEM_PROCESSID(ProcessID));
-
-  /* Clear the semaphore by writing to the R register : the MasterID , the processID and take bit = 0  */
+void  HAL_HSEM_Release(uint32_t SemID, uint32_t ProcessID) {
+	/* Check the parameters */
+	assert_param(IS_HSEM_SEMID(SemID));
+	assert_param(IS_HSEM_PROCESSID(ProcessID));
+	/* Clear the semaphore by writing to the R register : the MasterID , the processID and take bit = 0  */
 #if  USE_MULTI_CORE_SHARED_CODE != 0U
-  HSEM->R[SemID] = (ProcessID | ((HAL_GetCurrentCPUID() << POSITION_VAL(HSEM_R_MASTERID)) & HSEM_R_MASTERID));
+	HSEM->R[SemID] = (ProcessID | ((HAL_GetCurrentCPUID() << POSITION_VAL(HSEM_R_MASTERID)) & HSEM_R_MASTERID));
 #else
-  HSEM->R[SemID] = (ProcessID | HSEM_CR_COREID_CURRENT);
+	HSEM->R[SemID] = (ProcessID | HSEM_CR_COREID_CURRENT);
 #endif
-
 }
 
 /**
@@ -255,12 +242,10 @@ void  HAL_HSEM_Release(uint32_t SemID, uint32_t ProcessID)
   * @param  CoreID: CoreID of the CPU that is using semaphores to be released
   * @retval None
   */
-void HAL_HSEM_ReleaseAll(uint32_t Key, uint32_t CoreID)
-{
-  assert_param(IS_HSEM_KEY(Key));
-  assert_param(IS_HSEM_COREID(CoreID));
-
-  HSEM->CR = ((Key << HSEM_CR_KEY_Pos) | (CoreID << HSEM_CR_COREID_Pos));
+void HAL_HSEM_ReleaseAll(uint32_t Key, uint32_t CoreID) {
+	assert_param(IS_HSEM_KEY(Key));
+	assert_param(IS_HSEM_COREID(CoreID));
+	HSEM->CR = ((Key << HSEM_CR_KEY_Pos) | (CoreID << HSEM_CR_COREID_Pos));
 }
 
 /**
@@ -287,21 +272,17 @@ void HAL_HSEM_ReleaseAll(uint32_t Key, uint32_t CoreID)
   * @param  Key: Semaphore Key , value from 0 to 0xFFFF
   * @retval None
   */
-void  HAL_HSEM_SetClearKey(uint32_t Key)
-{
-  assert_param(IS_HSEM_KEY(Key));
-
-  MODIFY_REG(HSEM->KEYR, HSEM_KEYR_KEY, (Key << HSEM_KEYR_KEY_Pos));
-
+void  HAL_HSEM_SetClearKey(uint32_t Key) {
+	assert_param(IS_HSEM_KEY(Key));
+	MODIFY_REG(HSEM->KEYR, HSEM_KEYR_KEY, (Key << HSEM_KEYR_KEY_Pos));
 }
 
 /**
   * @brief  Get semaphore Key .
   * @retval Semaphore Key , value from 0 to 0xFFFF
   */
-uint32_t HAL_HSEM_GetClearKey(void)
-{
-  return (HSEM->KEYR >> HSEM_KEYR_KEY_Pos);
+uint32_t HAL_HSEM_GetClearKey(void) {
+	return (HSEM->KEYR >> HSEM_KEYR_KEY_Pos);
 }
 
 /**
@@ -326,22 +307,19 @@ uint32_t HAL_HSEM_GetClearKey(void)
   * @param  SemMask: Mask of Released semaphores
   * @retval Semaphore Key
   */
-void HAL_HSEM_ActivateNotification(uint32_t SemMask)
-{
+void HAL_HSEM_ActivateNotification(uint32_t SemMask) {
 #if  USE_MULTI_CORE_SHARED_CODE != 0U
-  /*enable the semaphore mask interrupts */
-  if (HAL_GetCurrentCPUID() == HSEM_CPU1_COREID)
-  {
-    /*Use interrupt line 0 for CPU1 Master */
-    HSEM->C1IER |= SemMask;
-  }
-  else /* HSEM_CPU2_COREID */
-  {
-    /*Use interrupt line 1 for CPU2 Master*/
-    HSEM->C2IER |= SemMask;
-  }
+	/*enable the semaphore mask interrupts */
+	if (HAL_GetCurrentCPUID() == HSEM_CPU1_COREID) {
+		/*Use interrupt line 0 for CPU1 Master */
+		HSEM->C1IER |= SemMask;
+	}
+	else { /* HSEM_CPU2_COREID */
+		/*Use interrupt line 1 for CPU2 Master*/
+		HSEM->C2IER |= SemMask;
+	}
 #else
-  HSEM_COMMON->IER |= SemMask;
+	HSEM_COMMON->IER |= SemMask;
 #endif
 }
 
@@ -350,22 +328,19 @@ void HAL_HSEM_ActivateNotification(uint32_t SemMask)
   * @param  SemMask: Mask of Released semaphores
   * @retval Semaphore Key
   */
-void HAL_HSEM_DeactivateNotification(uint32_t SemMask)
-{
+void HAL_HSEM_DeactivateNotification(uint32_t SemMask) {
 #if  USE_MULTI_CORE_SHARED_CODE != 0U
-  /*enable the semaphore mask interrupts */
-  if (HAL_GetCurrentCPUID() == HSEM_CPU1_COREID)
-  {
-    /*Use interrupt line 0 for CPU1 Master */
-    HSEM->C1IER &= ~SemMask;
-  }
-  else /* HSEM_CPU2_COREID */
-  {
-    /*Use interrupt line 1 for CPU2 Master*/
-    HSEM->C2IER &= ~SemMask;
-  }
+	/*enable the semaphore mask interrupts */
+	if (HAL_GetCurrentCPUID() == HSEM_CPU1_COREID) {
+		/*Use interrupt line 0 for CPU1 Master */
+		HSEM->C1IER &= ~SemMask;
+	}
+	else { /* HSEM_CPU2_COREID */
+		/*Use interrupt line 1 for CPU2 Master*/
+		HSEM->C2IER &= ~SemMask;
+	}
 #else
-  HSEM_COMMON->IER &= ~SemMask;
+	HSEM_COMMON->IER &= ~SemMask;
 #endif
 }
 
@@ -373,45 +348,35 @@ void HAL_HSEM_DeactivateNotification(uint32_t SemMask)
   * @brief  This function handles HSEM interrupt request
   * @retval None
   */
-void HAL_HSEM_IRQHandler(void)
-{
-  uint32_t statusreg;
+void HAL_HSEM_IRQHandler(void) {
+	uint32_t statusreg;
 #if  USE_MULTI_CORE_SHARED_CODE != 0U
-  if (HAL_GetCurrentCPUID() == HSEM_CPU1_COREID)
-  {
-    /* Get the list of masked freed semaphores*/
-    statusreg = HSEM->C1MISR; /*Use interrupt line 0 for CPU1 Master*/
-
-    /*Disable Interrupts*/
-    HSEM->C1IER &= ~((uint32_t)statusreg);
-
-    /*Clear Flags*/
-    HSEM->C1ICR = ((uint32_t)statusreg);
-  }
-  else /* HSEM_CPU2_COREID */
-  {
-    /* Get the list of masked freed semaphores*/
-    statusreg = HSEM->C2MISR;/*Use interrupt line 1 for CPU2 Master*/
-
-    /*Disable Interrupts*/
-    HSEM->C2IER &= ~((uint32_t)statusreg);
-
-    /*Clear Flags*/
-    HSEM->C2ICR = ((uint32_t)statusreg);
-  }
+	if (HAL_GetCurrentCPUID() == HSEM_CPU1_COREID) {
+		/* Get the list of masked freed semaphores*/
+		statusreg = HSEM->C1MISR; /*Use interrupt line 0 for CPU1 Master*/
+		/*Disable Interrupts*/
+		HSEM->C1IER &= ~((uint32_t)statusreg);
+		/*Clear Flags*/
+		HSEM->C1ICR = ((uint32_t)statusreg);
+	}
+	else { /* HSEM_CPU2_COREID */
+		/* Get the list of masked freed semaphores*/
+		statusreg = HSEM->C2MISR;/*Use interrupt line 1 for CPU2 Master*/
+		/*Disable Interrupts*/
+		HSEM->C2IER &= ~((uint32_t)statusreg);
+		/*Clear Flags*/
+		HSEM->C2ICR = ((uint32_t)statusreg);
+	}
 #else
-  /* Get the list of masked freed semaphores*/
-  statusreg = HSEM_COMMON->MISR;
-
-  /*Disable Interrupts*/
-  HSEM_COMMON->IER &= ~((uint32_t)statusreg);
-
-  /*Clear Flags*/
-  HSEM_COMMON->ICR = ((uint32_t)statusreg);
-
+	/* Get the list of masked freed semaphores*/
+	statusreg = HSEM_COMMON->MISR;
+	/*Disable Interrupts*/
+	HSEM_COMMON->IER &= ~((uint32_t)statusreg);
+	/*Clear Flags*/
+	HSEM_COMMON->ICR = ((uint32_t)statusreg);
 #endif
-  /* Call FreeCallback */
-  HAL_HSEM_FreeCallback(statusreg);
+	/* Call FreeCallback */
+	HAL_HSEM_FreeCallback(statusreg);
 }
 
 /**
@@ -419,14 +384,12 @@ void HAL_HSEM_IRQHandler(void)
   * @param SemMask: Mask of Released semaphores
   * @retval None
   */
-__weak void HAL_HSEM_FreeCallback(uint32_t SemMask)
-{
-  /* Prevent unused argument(s) compilation warning */
-  UNUSED(SemMask);
-
-  /* NOTE : This function should not be modified, when the callback is needed,
-  the HAL_HSEM_FreeCallback can be implemented in the user file
-    */
+__weak void HAL_HSEM_FreeCallback(uint32_t SemMask) {
+	/* Prevent unused argument(s) compilation warning */
+	UNUSED(SemMask);
+	/* NOTE : This function should not be modified, when the callback is needed,
+	the HAL_HSEM_FreeCallback can be implemented in the user file
+	  */
 }
 
 /**
