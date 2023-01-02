@@ -95,7 +95,7 @@ void Error_Handler(void);
 #define IN_SRAM_D4 __attribute__((section(".RAM_D4")))
 #define IN_FLASH_EXT __attribute__((section("EXTFLASH")))
 
-// GPIOÒı½ÅÎ»ÖÃ¶¨Òå
+// GPIOå¼•è„šä½ç½®å®šä¹‰
 #define PIN0 1 << 0
 #define PIN1 1 << 1
 #define PIN2 1 << 2
@@ -113,19 +113,19 @@ void Error_Handler(void);
 #define PIN14 1 << 14
 #define PIN15 1 << 15
 
-// GPIOÉèÖÃ×¨ÓÃºê¶¨Òå
-#define GPIO_MODE_IN 0  // ÆÕÍ¨ÊäÈëÄ£Ê½
-#define GPIO_MODE_OUT 1 // ÆÕÍ¨Êä³öÄ£Ê½
-#define GPIO_MODE_AF 2  // AF¹¦ÄÜÄ£Ê½
-#define GPIO_MODE_AIN 3 // Ä£ÄâÊäÈëÄ£Ê½
+// GPIOè®¾ç½®ä¸“ç”¨å®å®šä¹‰
+#define GPIO_MODE_IN 0  // æ™®é€šè¾“å…¥æ¨¡å¼
+#define GPIO_MODE_OUT 1 // æ™®é€šè¾“å‡ºæ¨¡å¼
+#define GPIO_MODE_AF 2  // AFåŠŸèƒ½æ¨¡å¼
+#define GPIO_MODE_AIN 3 // æ¨¡æ‹Ÿè¾“å…¥æ¨¡å¼
 
-#define GPIO_PUPD_NONE 0 // ²»´øÉÏÏÂÀ­
-#define GPIO_PUPD_PU 1   // ÉÏÀ­
-#define GPIO_PUPD_PD 2   // ÏÂÀ­
-#define GPIO_PUPD_RES 3  // ±£Áô
+#define GPIO_PUPD_NONE 0 // ä¸å¸¦ä¸Šä¸‹æ‹‰
+#define GPIO_PUPD_PU 1   // ä¸Šæ‹‰
+#define GPIO_PUPD_PD 2   // ä¸‹æ‹‰
+#define GPIO_PUPD_RES 3  // ä¿ç•™
 
-#define GPIO_OTYPE_PP 0 // ÍÆÍìÊä³ö
-#define GPIO_OTYPE_OD 1 // ¿ªÂ©Êä³ö
+#define GPIO_OTYPE_PP 0 // æ¨æŒ½è¾“å‡º
+#define GPIO_OTYPE_OD 1 // å¼€æ¼è¾“å‡º
 
 /* USER CODE END Private defines */
 

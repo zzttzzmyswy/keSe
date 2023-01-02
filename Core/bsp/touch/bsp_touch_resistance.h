@@ -9,9 +9,9 @@ void GPIO_Set(GPIO_TypeDef *GPIOx, uint32_t BITx, uint32_t MODE, uint32_t OTYPE,
 void GPIO_Pin_Set(GPIO_TypeDef *GPIOx, uint16_t pinx, uint8_t status);
 uint8_t GPIO_Pin_Get(GPIO_TypeDef *GPIOx, uint16_t pinx);
 
-void Adc_Init(void);     /*´¥Ãş×ÊÔ´³õÊ¼»¯*/
-uint32_t touch_ad(void); /*»ñÈ¡µç×è´¥Ãşµã*/
+void Adc_Init(void);     /*è§¦æ‘¸èµ„æºåˆå§‹åŒ–*/
+uint32_t touch_ad(void); /*è·å–ç”µé˜»è§¦æ‘¸ç‚¹*/
 
-extern int32_t port[2]; /*µç×è´¥Ãşµã£¬¸ºÊı´ú±íÃ»ÓĞ´¥Ãş*/
+extern int32_t port[2]; /*ç”µé˜»è§¦æ‘¸ç‚¹ï¼Œè´Ÿæ•°ä»£è¡¨æ²¡æœ‰è§¦æ‘¸*/
 
 #endif /* __BSP_TOUCH_RESISTANCE_H */

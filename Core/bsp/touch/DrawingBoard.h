@@ -5,77 +5,77 @@
 #include "main.h"
 
 /*
-    LCD ÑÕÉ«´úÂë£¬COLOR_ÊÇColorµÄ¼òĞ´
-    16BitÓÉ¸ßÎ»ÖÁµÍÎ»£¬ RRRR RGGG GGGB BBBB
+    LCD é¢œè‰²ä»£ç ï¼ŒCOLOR_æ˜¯Colorçš„ç®€å†™
+    16Bitç”±é«˜ä½è‡³ä½ä½ï¼Œ RRRR RGGG GGGB BBBB
 */
-/*RGB565 ÑÕÉ«×ª»»*/
+/*RGB565 é¢œè‰²è½¬æ¢*/
 #define RGB(R, G, B)                                                           \
 	(((R >> 3) << 11) | ((G >> 2) << 5) |                                        \
-		(B >> 3)) /* ½«8Î»R,G,B×ª»¯Îª 16Î»RGB565¸ñÊ½ */
+		(B >> 3)) /* å°†8ä½R,G,Bè½¬åŒ–ä¸º 16ä½RGB565æ ¼å¼ */
 #define RGB565_R(x) ((x >> 8) & 0xF8)
 #define RGB565_G(x) ((x >> 3) & 0xFC)
 #define RGB565_B(x) ((x << 3) & 0xF8)
 
 enum {
-	COLOR_WHITE = RGB(255, 255, 255),       /* °×É« */
-	COLOR_BLACK = RGB(0, 0, 0),             /* ºÚÉ« */
-	COLOR_RED = RGB(255, 0, 0),             /* ºìÉ« */
-	COLOR_GREEN = RGB(0, 255, 0),           /* ÂÌÉ« */
-	COLOR_BLUE = RGB(0, 0, 255),            /* À¶É« */
-	COLOR_YELLOW = RGB(255, 255, 0),        /* »ÆÉ« */
-	COLOR_GREY = RGB(98, 98, 98),           /* Éî»ÒÉ« */
-	COLOR_GREY1 = RGB(150, 150, 150),       /* Ç³»ÒÉ« */
-	COLOR_GREY2 = RGB(180, 180, 180),       /* Ç³»ÒÉ« */
-	COLOR_GREY3 = RGB(200, 200, 200),       /* ×îÇ³»ÒÉ« */
-	COLOR_GREY4 = RGB(230, 230, 230),       /* ×îÇ³»ÒÉ« */
-	COLOR_BUTTON_GREY = RGB(240, 240, 240), /* °´Å¥±íÃæ»ÒÉ« */
-	COLOR_MAGENTA = RGB(255, 0, 255),       /* ºì×ÏÉ«£¬ÑóºìÉ« */
-	COLOR_CYAN = RGB(0, 255, 255),          /* À¶ÂÌÉ«£¬ÇàÉ« */
-	COLOR_BLUE1 = RGB(0, 0, 240),           /* ÉîÀ¶É« */
-	COLOR_BLUE2 = RGB(0, 0, 128),           /* ÉîÀ¶É« */
-	COLOR_BLUE3 = RGB(68, 68, 255),         /* Ç³À¶É«1 */
-	COLOR_BLUE4 = RGB(0, 64, 128),          /* Ç³À¶É«1 */
-	COLOR_MASK = 0x7FFF /* RGB565ÑÕÉ«ÑÚÂë£¬ÓÃÓÚÎÄ×Ö±³¾°Í¸Ã÷ */
+	COLOR_WHITE = RGB(255, 255, 255),       /* ç™½è‰² */
+	COLOR_BLACK = RGB(0, 0, 0),             /* é»‘è‰² */
+	COLOR_RED = RGB(255, 0, 0),             /* çº¢è‰² */
+	COLOR_GREEN = RGB(0, 255, 0),           /* ç»¿è‰² */
+	COLOR_BLUE = RGB(0, 0, 255),            /* è“è‰² */
+	COLOR_YELLOW = RGB(255, 255, 0),        /* é»„è‰² */
+	COLOR_GREY = RGB(98, 98, 98),           /* æ·±ç°è‰² */
+	COLOR_GREY1 = RGB(150, 150, 150),       /* æµ…ç°è‰² */
+	COLOR_GREY2 = RGB(180, 180, 180),       /* æµ…ç°è‰² */
+	COLOR_GREY3 = RGB(200, 200, 200),       /* æœ€æµ…ç°è‰² */
+	COLOR_GREY4 = RGB(230, 230, 230),       /* æœ€æµ…ç°è‰² */
+	COLOR_BUTTON_GREY = RGB(240, 240, 240), /* æŒ‰é’®è¡¨é¢ç°è‰² */
+	COLOR_MAGENTA = RGB(255, 0, 255),       /* çº¢ç´«è‰²ï¼Œæ´‹çº¢è‰² */
+	COLOR_CYAN = RGB(0, 255, 255),          /* è“ç»¿è‰²ï¼Œé’è‰² */
+	COLOR_BLUE1 = RGB(0, 0, 240),           /* æ·±è“è‰² */
+	COLOR_BLUE2 = RGB(0, 0, 128),           /* æ·±è“è‰² */
+	COLOR_BLUE3 = RGB(68, 68, 255),         /* æµ…è“è‰²1 */
+	COLOR_BLUE4 = RGB(0, 64, 128),          /* æµ…è“è‰²1 */
+	COLOR_MASK = 0x7FFF /* RGB565é¢œè‰²æ©ç ï¼Œç”¨äºæ–‡å­—èƒŒæ™¯é€æ˜ */
 };
 
-/*»­Ë¢ĞÎ×´ÁĞ±í*/
+/*ç”»åˆ·å½¢çŠ¶åˆ—è¡¨*/
 typedef enum {
-	/*1ÏñËØ¿í¶ÈÏß*/
+	/*1åƒç´ å®½åº¦çº¿*/
 	LINE_SINGLE_PIXCEL = 0,
-	/*2ÏñËØ¿í¶ÈÏß*/
+	/*2åƒç´ å®½åº¦çº¿*/
 	LINE_2_PIXCEL,
-	/*4ÏñËØ¿í¶ÈÏß*/
+	/*4åƒç´ å®½åº¦çº¿*/
 	LINE_4_PIXCEL,
-	/*6ÏñËØ¿í¶ÈÏß*/
+	/*6åƒç´ å®½åº¦çº¿*/
 	LINE_6_PIXCEL,
-	/*8ÏñËØ¿í¶ÈÏß*/
+	/*8åƒç´ å®½åº¦çº¿*/
 	LINE_8_PIXCEL,
-	/*16ÏñËØ¿í¶ÈÏß*/
+	/*16åƒç´ å®½åº¦çº¿*/
 	LINE_16_PIXCEL,
-	/*´øÔ²Á¬Ïß*/
+	/*å¸¦åœ†è¿çº¿*/
 	LINE_WITH_CIRCLE,
-	/*¾ØĞÎ*/
+	/*çŸ©å½¢*/
 	RECT,
-	/*ÏğÆ¤*/
+	/*æ©¡çš®*/
 	ERASER,
 } BRUSH_SHAPE;
 
-/*»­Ë¢²ÎÊı*/
+/*ç”»åˆ·å‚æ•°*/
 typedef struct {
-	/*ÑÕÉ«*/
+	/*é¢œè‰²*/
 	uint16_t color;
-	/*»­Ë¢ÀàĞÍ*/
+	/*ç”»åˆ·ç±»å‹*/
 	BRUSH_SHAPE brush_shape;
 } DrawingBoard_Brush_Style;
 
-/*°´Å¥½á¹¹Ìå²ÎÊı*/
-/*×óÉÏ½Ç¿ªÊ¼x*/
-/*×óÉÏ½Ç¿ªÊ¼y*/
-/*ÓÒÏÂ½Çx*/
-/*ÓÒÏÂ½Çy*/
-/*°´Å¥²ÎÊı*/
-/*°´Å¥»æÖÆº¯Êı*/
-/*°´Å¥»Øµ÷º¯Êı*/
+/*æŒ‰é’®ç»“æ„ä½“å‚æ•°*/
+/*å·¦ä¸Šè§’å¼€å§‹x*/
+/*å·¦ä¸Šè§’å¼€å§‹y*/
+/*å³ä¸‹è§’x*/
+/*å³ä¸‹è§’y*/
+/*æŒ‰é’®å‚æ•°*/
+/*æŒ‰é’®ç»˜åˆ¶å‡½æ•°*/
+/*æŒ‰é’®å›è°ƒå‡½æ•°*/
 typedef struct {
 	uint16_t start_x;
 	uint16_t start_y;
@@ -87,30 +87,30 @@ typedef struct {
 	void (*btn_command)(void *btn);
 } DrawingBoard_Button;
 
-/**************ºê¶¨Òå*****************/
+/**************å®å®šä¹‰*****************/
 
 #define ABS(X) ((X) > 0 ? (X) : -(X))
 
-#define BUTTON_WIDTH 60                              /* °´Å¥¿í¶È */
-#define BUTTON_HEIGHT 30                             /* °´Å¥¸ß¶È */
-#define BUTTON_NUM 18                                /* °´Å¥ÊıÄ¿ */
-#define DRAWING_BOARD_START_X (BUTTON_WIDTH * 1 + 1) /* »­°å×óÉÏ½ÇX×ø±ê */
-#define DRAWING_BOARD_START_Y 1 /* »­°å×óÉÏ½ÇY×ø±ê */
+#define BUTTON_WIDTH 60                              /* æŒ‰é’®å®½åº¦ */
+#define BUTTON_HEIGHT 30                             /* æŒ‰é’®é«˜åº¦ */
+#define BUTTON_NUM 18                                /* æŒ‰é’®æ•°ç›® */
+#define DRAWING_BOARD_START_X (BUTTON_WIDTH * 1 + 1) /* ç”»æ¿å·¦ä¸Šè§’Xåæ ‡ */
+#define DRAWING_BOARD_START_Y 1 /* ç”»æ¿å·¦ä¸Šè§’Yåæ ‡ */
 #define DRAWING_BOARD_END_X                                                    \
-	(LCD_PIXEL_WIDTH - 1 - BUTTON_WIDTH)             /* »­°åÓÒÏÂ½ÇX×ø±ê */
-#define DRAWING_BOARD_END_Y (LCD_PIXEL_HEIGHT - 1) /* »­°åÓÒÏÂ½ÇY×ø±ê */
+	(LCD_PIXEL_WIDTH - 1 - BUTTON_WIDTH)             /* ç”»æ¿å³ä¸‹è§’Xåæ ‡ */
+#define DRAWING_BOARD_END_Y (LCD_PIXEL_HEIGHT - 1) /* ç”»æ¿å³ä¸‹è§’Yåæ ‡ */
 
 #define DrawingBoard_BUTTON_INIT_CODE { \
-		/*±ÊË¢Ïà¹Ø°´Å¥*/                                  \
-		/*½á¹¹Ìå²ÎÊıÈçÏÂ*/                                    \
-		/*×óÉÏ½Ç¿ªÊ¼x*/                                   \
-		/*×óÉÏ½Ç¿ªÊ¼y*/                                   \
-		/*ÓÒÏÂ½Çx*/                                   \
-		/*ÓÒÏÂ½Çy*/                                   \
-		/*°´Å¥²ÎÊı*/                                  \
-		/*°´Å¥»æÖÆº¯Êı*/                                  \
-		/*°´Å¥»Øµ÷º¯Êı*/                                  \
-		/*ÏğÆ¤éß*/                                    \
+		/*ç¬”åˆ·ç›¸å…³æŒ‰é’®*/                                  \
+		/*ç»“æ„ä½“å‚æ•°å¦‚ä¸‹*/                                    \
+		/*å·¦ä¸Šè§’å¼€å§‹x*/                                   \
+		/*å·¦ä¸Šè§’å¼€å§‹y*/                                   \
+		/*å³ä¸‹è§’x*/                                   \
+		/*å³ä¸‹è§’y*/                                   \
+		/*æŒ‰é’®å‚æ•°*/                                  \
+		/*æŒ‰é’®ç»˜åˆ¶å‡½æ•°*/                                  \
+		/*æŒ‰é’®å›è°ƒå‡½æ•°*/                                  \
+		/*æ©¡çš®æª«*/                                    \
 		button[0].start_x = 0;\
 		button[0].start_y = BUTTON_HEIGHT * 0;\
 		button[0].end_x = BUTTON_WIDTH * 1;\
@@ -119,7 +119,7 @@ typedef struct {
 		button[0].touch_flag = 0;\
 		button[0].draw_btn = Draw_Button_Eraser;\
 		button[0].btn_command = Select_Brush_Class;\
-		/*¾ØĞÎ*/                                  \
+		/*çŸ©å½¢*/                                  \
 		button[1].start_x = 0;\
 		button[1].start_y = BUTTON_HEIGHT * 1;\
 		button[1].end_x = BUTTON_WIDTH * 1;\
@@ -128,7 +128,7 @@ typedef struct {
 		button[1].touch_flag = 0;\
 		button[1].draw_btn = Draw_Button_Rect;\
 		button[1].btn_command = Select_Brush_Class;\
-		/*´øÔ²Ïß*/                                    \
+		/*å¸¦åœ†çº¿*/                                    \
 		button[2].start_x = 0;\
 		button[2].start_y = BUTTON_HEIGHT * 2;\
 		button[2].end_x = BUTTON_WIDTH * 1;\
@@ -137,7 +137,7 @@ typedef struct {
 		button[2].touch_flag = 0;\
 		button[2].draw_btn = Draw_Button_Shape;\
 		button[2].btn_command = Select_Brush_Class;\
-		/*¿í¶ÈÎª1µÄÏß*/                                   \
+		/*å®½åº¦ä¸º1çš„çº¿*/                                   \
 		button[3].start_x = 0;\
 		button[3].start_y = BUTTON_HEIGHT * 3;\
 		button[3].end_x = BUTTON_WIDTH * 1;\
@@ -146,7 +146,7 @@ typedef struct {
 		button[3].touch_flag = 0;\
 		button[3].draw_btn = Draw_Button_Shape;\
 		button[3].btn_command = Select_Brush_Class;\
-		/*¿í¶ÈÎª2µÄÏß*/                                   \
+		/*å®½åº¦ä¸º2çš„çº¿*/                                   \
 		button[4].start_x = 0;\
 		button[4].start_y = BUTTON_HEIGHT * 4;\
 		button[4].end_x = BUTTON_WIDTH * 1;\
@@ -155,7 +155,7 @@ typedef struct {
 		button[4].touch_flag = 0;\
 		button[4].draw_btn = Draw_Button_Shape;\
 		button[4].btn_command = Select_Brush_Class;\
-		/*¿í¶ÈÎª4µÄÏß*/                                   \
+		/*å®½åº¦ä¸º4çš„çº¿*/                                   \
 		button[5].start_x = 0;\
 		button[5].start_y = BUTTON_HEIGHT * 5;\
 		button[5].end_x = BUTTON_WIDTH * 1;\
@@ -164,7 +164,7 @@ typedef struct {
 		button[5].touch_flag = 0;\
 		button[5].draw_btn = Draw_Button_Shape;\
 		button[5].btn_command = Select_Brush_Class;\
-		/*¿í¶ÈÎª6µÄÏß*/                                   \
+		/*å®½åº¦ä¸º6çš„çº¿*/                                   \
 		button[6].start_x = 0;\
 		button[6].start_y = BUTTON_HEIGHT * 6;\
 		button[6].end_x = BUTTON_WIDTH * 1;\
@@ -173,7 +173,7 @@ typedef struct {
 		button[6].touch_flag = 0;\
 		button[6].draw_btn = Draw_Button_Shape;\
 		button[6].btn_command = Select_Brush_Class;\
-		/*¿í¶ÈÎª8µÄÏß*/                                   \
+		/*å®½åº¦ä¸º8çš„çº¿*/                                   \
 		button[7].start_x = 0;\
 		button[7].start_y = BUTTON_HEIGHT * 7;\
 		button[7].end_x = BUTTON_WIDTH * 1;\
@@ -182,7 +182,7 @@ typedef struct {
 		button[7].touch_flag = 0;\
 		button[7].draw_btn = Draw_Button_Shape;\
 		button[7].btn_command = Select_Brush_Class;\
-		/*¿í¶ÈÎª16µÄÏß*/                                  \
+		/*å®½åº¦ä¸º16çš„çº¿*/                                  \
 		button[8].start_x = 0;\
 		button[8].start_y = BUTTON_HEIGHT * 8;\
 		button[8].end_x = BUTTON_WIDTH * 1;\
@@ -191,8 +191,8 @@ typedef struct {
 		button[8].touch_flag = 0;\
 		button[8].draw_btn = Draw_Button_Shape;\
 		button[8].btn_command = Select_Brush_Class;\
-		/*ÇåÆÁºÍÑÕÉ«°´Å¥*/                                    \
-		/*ÇåÆÁ*/                                  \
+		/*æ¸…å±å’Œé¢œè‰²æŒ‰é’®*/                                    \
+		/*æ¸…å±*/                                  \
 		button[9].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[9].start_y = BUTTON_HEIGHT * 0;\
 		button[9].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -201,7 +201,7 @@ typedef struct {
 		button[9].touch_flag = 0;\
 		button[9].draw_btn = Draw_Button_Clear;\
 		button[9].btn_command = Clear_DrawingBoard_Area;\
-		/*ºìÉ«*/                                  \
+		/*çº¢è‰²*/                                  \
 		button[10].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[10].start_y = BUTTON_HEIGHT * 1;\
 		button[10].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -210,7 +210,7 @@ typedef struct {
 		button[10].touch_flag = 0;\
 		button[10].draw_btn = Draw_Button_Color;\
 		button[10].btn_command = Select_Shape_Color;\
-		/*ÂÌÉ«*/                                  \
+		/*ç»¿è‰²*/                                  \
 		button[11].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[11].start_y = BUTTON_HEIGHT * 2;\
 		button[11].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -219,7 +219,7 @@ typedef struct {
 		button[11].touch_flag = 0;\
 		button[11].draw_btn = Draw_Button_Color;\
 		button[11].btn_command = Select_Shape_Color;\
-		/*À¶É«*/                                  \
+		/*è“è‰²*/                                  \
 		button[12].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[12].start_y = BUTTON_HEIGHT * 3;\
 		button[12].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -228,7 +228,7 @@ typedef struct {
 		button[12].touch_flag = 0;\
 		button[12].draw_btn = Draw_Button_Color;\
 		button[12].btn_command = Select_Shape_Color;\
-		/*×ÏÉ«*/                                  \
+		/*ç´«è‰²*/                                  \
 		button[13].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[13].start_y = BUTTON_HEIGHT * 4;\
 		button[13].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -237,7 +237,7 @@ typedef struct {
 		button[13].touch_flag = 0;\
 		button[13].draw_btn = Draw_Button_Color;\
 		button[13].btn_command = Select_Shape_Color;\
-		/*»ÆÉ«*/                                  \
+		/*é»„è‰²*/                                  \
 		button[14].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[14].start_y = BUTTON_HEIGHT * 5;\
 		button[14].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -246,7 +246,7 @@ typedef struct {
 		button[14].touch_flag = 0;\
 		button[14].draw_btn = Draw_Button_Color;\
 		button[14].btn_command = Select_Shape_Color;\
-		/*ÇàÉ«*/                                  \
+		/*é’è‰²*/                                  \
 		button[15].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[15].start_y = BUTTON_HEIGHT * 6;\
 		button[15].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -255,7 +255,7 @@ typedef struct {
 		button[15].touch_flag = 0;\
 		button[15].draw_btn = Draw_Button_Color;\
 		button[15].btn_command = Select_Shape_Color;\
-		/*ºÚÉ«*/                                  \
+		/*é»‘è‰²*/                                  \
 		button[16].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[16].start_y = BUTTON_HEIGHT * 7;\
 		button[16].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -264,7 +264,7 @@ typedef struct {
 		button[16].touch_flag = 0;\
 		button[16].draw_btn = Draw_Button_Color;\
 		button[16].btn_command = Select_Shape_Color;\
-		/*»ÒÉ«*/                                  \
+		/*ç°è‰²*/                                  \
 		button[17].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[17].start_y = BUTTON_HEIGHT * 8;\
 		button[17].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -274,13 +274,13 @@ typedef struct {
 		button[17].draw_btn = Draw_Button_Color;\
 		button[17].btn_command = Select_Shape_Color;}
 
-/**************º¯Êı*****************/
-/*»¬°å×ÊÔ´³õÊ¼»¯*/
+/**************å‡½æ•°*****************/
+/*æ»‘æ¿èµ„æºåˆå§‹åŒ–*/
 void DrawingBoard_Init(void);
-/*·¢ËÍ°´ÏÂ*/
+/*å‘é€æŒ‰ä¸‹*/
 void DrawingBoard_Button_Down(int16_t pre_x, int16_t pre_y, int16_t x,
 	int16_t y);
-/*·¢ËÍ°´ÏÂµ½Ì§Æğ*/
+/*å‘é€æŒ‰ä¸‹åˆ°æŠ¬èµ·*/
 void DrawingBoard_Button_Up(uint16_t x, uint16_t y);
 
 #endif //_DrawingBoard_H

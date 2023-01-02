@@ -1,107 +1,107 @@
 #include "DrawingBoard.h"
 #include "bsp_lcd.h"
 
-/*°´Å¥½á¹¹ÌåÊı×é*/
+/*æŒ‰é’®ç»“æ„ä½“æ•°ç»„*/
 static DrawingBoard_Button button[BUTTON_NUM];
-/*»­±Ê²ÎÊı*/
+/*ç”»ç¬”å‚æ•°*/
 static DrawingBoard_Brush_Style DrawingBoard_brush;
 
-/*°´Å¥×ÊÔ´×¢²áº¯Êı*/
+/*æŒ‰é’®èµ„æºæ³¨å†Œå‡½æ•°*/
 static void DrawingBoard_Button_Init(void);
-/*ÑÕÉ«°´Å¥µÄÃè»æº¯Êı*/
+/*é¢œè‰²æŒ‰é’®çš„æç»˜å‡½æ•°*/
 static void Draw_Button_Color(void *btn);
-/*ÇåÆÁ°´Å¥»æÖÆº¯Êı*/
+/*æ¸…å±æŒ‰é’®ç»˜åˆ¶å‡½æ•°*/
 static void Draw_Button_Clear(void *btn);
-/*»­±Ê°´Å¥»æÖÆº¯Êı*/
+/*ç”»ç¬”æŒ‰é’®ç»˜åˆ¶å‡½æ•°*/
 static void Draw_Button_Shape(void *btn);
-/*ÏğÆ¤°´Å¥µÄÃè»æº¯Êı*/
+/*æ©¡çš®æŒ‰é’®çš„æç»˜å‡½æ•°*/
 static void Draw_Button_Eraser(void *btn);
-/*¾ØĞÎ°´Å¥µÄÃè»æº¯Êı*/
+/*çŸ©å½¢æŒ‰é’®çš„æç»˜å‡½æ•°*/
 static void Draw_Button_Rect(void *btn);
-/*Ñ¡ÔñÑÕÉ«*/
+/*é€‰æ‹©é¢œè‰²*/
 static void Select_Shape_Color(void *btn);
-/*Ñ¡Ôñ±ÊË¢ÀàĞÍ*/
+/*é€‰æ‹©ç¬”åˆ·ç±»å‹*/
 static void Select_Brush_Class(void *btn);
-/*ÇåÆÁ*/
+/*æ¸…å±*/
 static void Clear_DrawingBoard_Area(void *btn);
-/*Ãè»æÒ»¶¨ÏñËØ¿í¶ÈµÄ¹ì¼£Ïß*/
+/*æç»˜ä¸€å®šåƒç´ å®½åº¦çš„è½¨è¿¹çº¿*/
 static void LCD_DrawUniLineCircle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t thick);
-/*´¦ÀíÃè»æ¹ì¼££¬ÓÃÓÚ´¥Ãş»­°å*/
+/*å¤„ç†æç»˜è½¨è¿¹ï¼Œç”¨äºè§¦æ‘¸ç”»æ¿*/
 static void
 DrawingBoard_Draw_Graph(int16_t pre_x, int16_t pre_y, int16_t x, int16_t y,
 	DrawingBoard_Brush_Style *DrawingBoard_brush);
-/*ÓÃÓÚ´¢´æ¾ØĞÎÆğÊ¼µãµÄ¾²Ì¬±äÁ¿*/
+/*ç”¨äºå‚¨å­˜çŸ©å½¢èµ·å§‹ç‚¹çš„é™æ€å˜é‡*/
 static int32_t Rect_x = -1, Rect_y = -1;
 
 /**
- * @brief  »­°å³õÊ¼»¯
+ * @brief  ç”»æ¿åˆå§‹åŒ–
  * @retval None
  */
 void DrawingBoard_Init(void) {
 	uint8_t i;
-	/* ÕûÆÁÇåÎª°×É« */
-	LCD_Clear(COLOR_WHITE); /* ÇåÆÁ£¬ÏÔÊ¾È«ºÚ */
-	/* ³õÊ¼»¯°´Å¥ */
+	/* æ•´å±æ¸…ä¸ºç™½è‰² */
+	LCD_Clear(COLOR_WHITE); /* æ¸…å±ï¼Œæ˜¾ç¤ºå…¨é»‘ */
+	/* åˆå§‹åŒ–æŒ‰é’® */
 	DrawingBoard_Button_Init();
-	/* Ãè»æ°´Å¥ */
+	/* æç»˜æŒ‰é’® */
 	for (i = 0; i < BUTTON_NUM; i++)
 		button[i].draw_btn(&button[i]);
-	/* ³õÊ¼»¯»­±Ê */
+	/* åˆå§‹åŒ–ç”»ç¬” */
 	DrawingBoard_brush.color = COLOR_BLACK;
 	DrawingBoard_brush.brush_shape = LINE_SINGLE_PIXCEL;
 }
 
 /**
- * @brief  °´¼ü±»°´ÏÂÊ±µ÷ÓÃµÄº¯Êı
- * @param  µÚÒ»¸öºÍµÚ¶ş¸ö²ÎÊıÎªÉÏÒ»¸öµã£¬µÚÈı¸öºÍµÚËÄ¸ö²ÎÊıÎªµ±Ç°µÄµã
+ * @brief  æŒ‰é”®è¢«æŒ‰ä¸‹æ—¶è°ƒç”¨çš„å‡½æ•°
+ * @param  ç¬¬ä¸€ä¸ªå’Œç¬¬äºŒä¸ªå‚æ•°ä¸ºä¸Šä¸€ä¸ªç‚¹ï¼Œç¬¬ä¸‰ä¸ªå’Œç¬¬å››ä¸ªå‚æ•°ä¸ºå½“å‰çš„ç‚¹
  * @retval None
  */
 void DrawingBoard_Button_Down(int16_t pre_x, int16_t pre_y, int16_t x,
 	int16_t y) {
 	uint8_t i;
 	for (i = 0; i < BUTTON_NUM; i++) {
-		/* ´¥Ãşµ½ÁË°´Å¥ */
+		/* è§¦æ‘¸åˆ°äº†æŒ‰é’® */
 		if (x <= button[i].end_x && y <= button[i].end_y &&
 			y >= button[i].start_y && x >= button[i].start_x) {
-			if (button[i].touch_flag == 0) { /*Ô­±¾µÄ×´Ì¬ÎªÃ»ÓĞ°´ÏÂ£¬Ôò¸üĞÂ×´Ì¬*/
-				button[i].touch_flag = 1;       /* ¼ÇÂ¼°´ÏÂ±êÖ¾ */
-				button[i].draw_btn(&button[i]); /*ÖØ»æ°´Å¥*/
+			if (button[i].touch_flag == 0) { /*åŸæœ¬çš„çŠ¶æ€ä¸ºæ²¡æœ‰æŒ‰ä¸‹ï¼Œåˆ™æ›´æ–°çŠ¶æ€*/
+				button[i].touch_flag = 1;       /* è®°å½•æŒ‰ä¸‹æ ‡å¿— */
+				button[i].draw_btn(&button[i]); /*é‡ç»˜æŒ‰é’®*/
 			}
 		}
 		else if (button[i].touch_flag ==
-			1) { /* ´¥ÃşÒÆ³öÁË°´¼üµÄ·¶Î§ÇÒÖ®Ç°ÓĞ°´ÏÂ°´Å¥ */
-			button[i].touch_flag = 0; /* Çå³ı°´ÏÂ±êÖ¾£¬ÅĞ¶ÏÎªÎó²Ù×÷*/
-			button[i].draw_btn(&button[i]); /*ÖØ»æ°´Å¥*/
+			1) { /* è§¦æ‘¸ç§»å‡ºäº†æŒ‰é”®çš„èŒƒå›´ä¸”ä¹‹å‰æœ‰æŒ‰ä¸‹æŒ‰é’® */
+			button[i].touch_flag = 0; /* æ¸…é™¤æŒ‰ä¸‹æ ‡å¿—ï¼Œåˆ¤æ–­ä¸ºè¯¯æ“ä½œ*/
+			button[i].draw_btn(&button[i]); /*é‡ç»˜æŒ‰é’®*/
 		}
 	}
-	/*½øĞĞÍ¼ĞÎ»æÖÆ*/
+	/*è¿›è¡Œå›¾å½¢ç»˜åˆ¶*/
 	DrawingBoard_Draw_Graph(pre_x, pre_y, x, y, &DrawingBoard_brush);
 }
 
 /**
- * @brief  °´¼ü±»ÊÍ·ÅÊ±µ÷ÓÃµÄº¯Êı
- * @param  µÚÒ»¸öºÍµÚ¶ş¸ö²ÎÊıµ±Ç°µÄµã
+ * @brief  æŒ‰é”®è¢«é‡Šæ”¾æ—¶è°ƒç”¨çš„å‡½æ•°
+ * @param  ç¬¬ä¸€ä¸ªå’Œç¬¬äºŒä¸ªå‚æ•°å½“å‰çš„ç‚¹
  * @retval None
  */
 void DrawingBoard_Button_Up(uint16_t x, uint16_t y) {
 	uint8_t i;
 	for (i = 0; i < BUTTON_NUM; i++) {
-		/* ´¥±ÊÔÚ°´Å¥ÇøÓòÊÍ·Å */
+		/* è§¦ç¬”åœ¨æŒ‰é’®åŒºåŸŸé‡Šæ”¾ */
 		if ((x < button[i].end_x && x > button[i].start_x && y < button[i].end_y &&
 				y > button[i].start_y)) {
-			button[i].touch_flag = 0;          /*ÊÍ·Å´¥Ãş±êÖ¾*/
-			button[i].draw_btn(&button[i]);    /*ÖØ»æ°´Å¥*/
-			button[i].btn_command(&button[i]); /*Ö´ĞĞ°´¼üµÄ¹¦ÄÜÃüÁî*/
+			button[i].touch_flag = 0;          /*é‡Šæ”¾è§¦æ‘¸æ ‡å¿—*/
+			button[i].draw_btn(&button[i]);    /*é‡ç»˜æŒ‰é’®*/
+			button[i].btn_command(&button[i]); /*æ‰§è¡ŒæŒ‰é”®çš„åŠŸèƒ½å‘½ä»¤*/
 			break;
 		}
 	}
 	if (x > DRAWING_BOARD_START_X && x < DRAWING_BOARD_END_X) {
-		/* ´¥±ÊÔÚ»­°åÇøÓòÊÍ·Å */
-		switch (DrawingBoard_brush.brush_shape) { /*¸ù¾İ»­Ë¢²ÎÊıÃè»æ²»Í¬µÄ¹ì¼£*/
-		/* Ãè»æ¾ØĞÎ */
+		/* è§¦ç¬”åœ¨ç”»æ¿åŒºåŸŸé‡Šæ”¾ */
+		switch (DrawingBoard_brush.brush_shape) { /*æ ¹æ®ç”»åˆ·å‚æ•°æç»˜ä¸åŒçš„è½¨è¿¹*/
+		/* æç»˜çŸ©å½¢ */
 		case RECT:
 			if (x - 10 < DRAWING_BOARD_START_X ||
-				x + 10 > DRAWING_BOARD_END_X) // »®¶¨±ß½ç·¶Î§
+				x + 10 > DRAWING_BOARD_END_X) // åˆ’å®šè¾¹ç•ŒèŒƒå›´
 				break;
 			if (Rect_x != x && Rect_y != y) {
 				if (!(x > DRAWING_BOARD_END_X - 10 || y > DRAWING_BOARD_END_Y - 10 ||
@@ -120,86 +120,86 @@ void DrawingBoard_Button_Up(uint16_t x, uint16_t y) {
 }
 
 /**
- * @brief  ÔÚ»­°åÇøÓòÃè»æÍ¼ĞÎ
+ * @brief  åœ¨ç”»æ¿åŒºåŸŸæç»˜å›¾å½¢
  * @param
- * µÚÒ»¸öºÍµÚ¶ş¸ö²ÎÊıÎªÉÏÒ»¸öµã£¬µÚÈı¸öºÍµÚËÄ¸ö²ÎÊıÎªµ±Ç°µÄµã£¬µÚÎå¸ö²ÎÊıÎª±ÊË¢½á¹¹ÌåÖ¸Õë
+ * ç¬¬ä¸€ä¸ªå’Œç¬¬äºŒä¸ªå‚æ•°ä¸ºä¸Šä¸€ä¸ªç‚¹ï¼Œç¬¬ä¸‰ä¸ªå’Œç¬¬å››ä¸ªå‚æ•°ä¸ºå½“å‰çš„ç‚¹ï¼Œç¬¬äº”ä¸ªå‚æ•°ä¸ºç¬”åˆ·ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void
 DrawingBoard_Draw_Graph(int16_t pre_x, int16_t pre_y, int16_t x, int16_t y,
 	DrawingBoard_Brush_Style *DrawingBoard_brush) {
-	/*´¥ÃşÎ»ÖÃÔÚ»­°åÇøÓò*/
+	/*è§¦æ‘¸ä½ç½®åœ¨ç”»æ¿åŒºåŸŸ*/
 	if (x > DRAWING_BOARD_START_X && pre_x > DRAWING_BOARD_START_X
 		&& x < DRAWING_BOARD_END_X
 		&& pre_x < DRAWING_BOARD_END_X) {
-		switch (DrawingBoard_brush->brush_shape) { /*¸ù¾İ»­Ë¢²ÎÊıÃè»æ²»Í¬µÄ¹ì¼£*/
-		/* Ãè»æ1ÏñËØ¿í¶ÈµÄÏß */
+		switch (DrawingBoard_brush->brush_shape) { /*æ ¹æ®ç”»åˆ·å‚æ•°æç»˜ä¸åŒçš„è½¨è¿¹*/
+		/* æç»˜1åƒç´ å®½åº¦çš„çº¿ */
 		case LINE_SINGLE_PIXCEL:
-			if (pre_x < 0 || pre_y < 0) // ĞÂµÄ±Ê¼£
+			if (pre_x < 0 || pre_y < 0) // æ–°çš„ç¬”è¿¹
 				PutPixel(x, y);
-			else // ¼ÌĞøÉÏÒ»´ÎµÄ±Ê¼£
+			else // ç»§ç»­ä¸Šä¸€æ¬¡çš„ç¬”è¿¹
 				LCD_DrawUniLine(pre_x, pre_y, x, y);
 			break;
 		case LINE_2_PIXCEL:
 			if (x - 1 < DRAWING_BOARD_START_X
-				|| pre_x - 1 < DRAWING_BOARD_START_X) // »®¶¨±ß½ç·¶Î§
+				|| pre_x - 1 < DRAWING_BOARD_START_X) // åˆ’å®šè¾¹ç•ŒèŒƒå›´
 				break;
 			LCD_DrawUniLineCircle(pre_x, pre_y, x, y, 1);
 			break;
 		case LINE_4_PIXCEL:
 			if (x - 2 < DRAWING_BOARD_START_X
-				|| pre_x - 2 < DRAWING_BOARD_START_X) // »®¶¨±ß½ç·¶Î§
+				|| pre_x - 2 < DRAWING_BOARD_START_X) // åˆ’å®šè¾¹ç•ŒèŒƒå›´
 				break;
 			LCD_DrawUniLineCircle(pre_x, pre_y, x, y, 2);
 			break;
 		case LINE_6_PIXCEL:
 			if (x - 3 < DRAWING_BOARD_START_X
-				|| pre_x - 3 < DRAWING_BOARD_START_X) // »®¶¨±ß½ç·¶Î§
+				|| pre_x - 3 < DRAWING_BOARD_START_X) // åˆ’å®šè¾¹ç•ŒèŒƒå›´
 				break;
 			LCD_DrawUniLineCircle(pre_x, pre_y, x, y, 3);
 			break;
 		case LINE_8_PIXCEL:
 			if (x - 4 < DRAWING_BOARD_START_X
-				|| pre_x - 4 < DRAWING_BOARD_START_X) // »®¶¨±ß½ç·¶Î§
+				|| pre_x - 4 < DRAWING_BOARD_START_X) // åˆ’å®šè¾¹ç•ŒèŒƒå›´
 				break;
 			LCD_DrawUniLineCircle(pre_x, pre_y, x, y, 4);
 			break;
 		case LINE_16_PIXCEL:
 			if (x - 8 < DRAWING_BOARD_START_X
-				|| pre_x - 8 < DRAWING_BOARD_START_X) // »®¶¨±ß½ç·¶Î§
+				|| pre_x - 8 < DRAWING_BOARD_START_X) // åˆ’å®šè¾¹ç•ŒèŒƒå›´
 				break;
 			LCD_DrawUniLineCircle(pre_x, pre_y, x, y, 8);
 			break;
-		/*»æÖÆ¾ØĞÎ*/
+		/*ç»˜åˆ¶çŸ©å½¢*/
 		case RECT:
 			if (x - 10 < DRAWING_BOARD_START_X
-				|| pre_x - 10 < DRAWING_BOARD_START_X) // »®¶¨±ß½ç·¶Î§
+				|| pre_x - 10 < DRAWING_BOARD_START_X) // åˆ’å®šè¾¹ç•ŒèŒƒå›´
 				break;
 			if (Rect_x == -1) {
 				if (!(x > DRAWING_BOARD_END_X - 10 || y > DRAWING_BOARD_END_Y - 10
 						|| x - 10 < DRAWING_BOARD_START_X
 						|| y - 10 < DRAWING_BOARD_START_Y)) {
-					/*¼ÇÂ¼¾ØĞÎÆğµã*/
+					/*è®°å½•çŸ©å½¢èµ·ç‚¹*/
 					Rect_x = x;
 					Rect_y = y;
 				}
 			}
 			break;
-		/*»æÖÆ´øÔ²µÄÏß*/
+		/*ç»˜åˆ¶å¸¦åœ†çš„çº¿*/
 		case LINE_WITH_CIRCLE:
 			if (x - 3 < DRAWING_BOARD_START_X || pre_x - 3 < DRAWING_BOARD_START_X
 				|| y - 3 < DRAWING_BOARD_START_Y
 				|| pre_y - 3 < DRAWING_BOARD_START_Y || y + 3 > DRAWING_BOARD_END_Y
 				|| pre_y + 3 > DRAWING_BOARD_END_Y)
 				break;
-			if (pre_x < 0 || pre_y < 0) // ĞÂµÄ±Ê¼£
+			if (pre_x < 0 || pre_y < 0) // æ–°çš„ç¬”è¿¹
 				PutPixel(x, y);
-			else { // ¼ÌĞøÉÏÒ»´ÎµÄ±Ê¼£
+			else { // ç»§ç»­ä¸Šä¸€æ¬¡çš„ç¬”è¿¹
 				LCD_DrawUniLine(pre_x, pre_y, x, y);
 				LCD_DrawFullCircle(x, y, 3);
 			}
 			break;
-		/*ÏğÆ¤¹¦ÄÜ*/
+		/*æ©¡çš®åŠŸèƒ½*/
 		case ERASER:
 			if (x - 15 < DRAWING_BOARD_START_X || x + 15 > DRAWING_BOARD_END_X
 				|| y + 15 > DRAWING_BOARD_END_Y
@@ -213,47 +213,47 @@ DrawingBoard_Draw_Graph(int16_t pre_x, int16_t pre_y, int16_t x, int16_t y,
 }
 
 /**
- * @brief  ÑÕÉ«°´Å¥µÄÃè»æº¯Êı
- * @param  °´Å¥Êı¾İ½á¹¹ÌåÖ¸Õë
+ * @brief  é¢œè‰²æŒ‰é’®çš„æç»˜å‡½æ•°
+ * @param  æŒ‰é’®æ•°æ®ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void Draw_Button_Color(void *btn) {
 	DrawingBoard_Button *ptr = (DrawingBoard_Button *)btn;
 	uint16_t colors1, colors2;
-	/*±£´æÖ®Ç°µÄÉ«²Ê²ÎÊı*/
+	/*ä¿å­˜ä¹‹å‰çš„è‰²å½©å‚æ•°*/
 	LCD_GetColors(&colors1, &colors2);
-	/*ÊÍ·Å°´¼ü*/
+	/*é‡Šæ”¾æŒ‰é”®*/
 	if (ptr->touch_flag == 0) {
-		/*±³¾°Îª¹¦ÄÜ¼üÏàÓ¦µÄÑÕÉ«*/
+		/*èƒŒæ™¯ä¸ºåŠŸèƒ½é”®ç›¸åº”çš„é¢œè‰²*/
 		LCD_SetColors(ptr->para, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
 	}
-	else {   /*°´¼ü°´ÏÂ*/
-		/*°×É«±³¾°*/
+	else {   /*æŒ‰é”®æŒ‰ä¸‹*/
+		/*ç™½è‰²èƒŒæ™¯*/
 		LCD_SetColors(COLOR_WHITE, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
 	}
-	/*°´Å¥±ß¿ò*/
+	/*æŒ‰é’®è¾¹æ¡†*/
 	LCD_SetColors(COLOR_BLACK, COLOR_WHITE);
 	LCD_DrawRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 		ptr->end_y - ptr->start_y);
-	/*¸´Ô­Ô­ÏÈµÄÉ«²Ê²ÎÊı*/
+	/*å¤åŸåŸå…ˆçš„è‰²å½©å‚æ•°*/
 	LCD_SetColors(colors1, colors2);
 }
 
 /**
- * @brief  ÇåÆÁ°´Å¥µÄÃè»æº¯Êı
- * @param  °´Å¥Êı¾İ½á¹¹ÌåÖ¸Õë
+ * @brief  æ¸…å±æŒ‰é’®çš„æç»˜å‡½æ•°
+ * @param  æŒ‰é’®æ•°æ®ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void Draw_Button_Clear(void *btn) {
 	DrawingBoard_Button *ptr = (DrawingBoard_Button *)btn;
 	uint16_t colors1, colors2;
-	/*±£´æÖ®Ç°µÄÉ«²Ê²ÎÊı*/
+	/*ä¿å­˜ä¹‹å‰çš„è‰²å½©å‚æ•°*/
 	LCD_GetColors(&colors1, &colors2);
-	/*ÊÍ·Å°´¼ü*/
+	/*é‡Šæ”¾æŒ‰é”®*/
 	if (ptr->touch_flag == 0) {
 		LCD_SetColors(COLOR_BUTTON_GREY, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
@@ -263,7 +263,7 @@ static void Draw_Button_Clear(void *btn) {
 		LCD_DispString_EN(ptr->start_y + 11,
 			ptr->start_x + (ptr->end_x - ptr->start_x - 24 * 2) / 2, (uint8_t *)"CLEAR");
 	}
-	else {   /*°´¼ü°´ÏÂ*/
+	else {   /*æŒ‰é”®æŒ‰ä¸‹*/
 		LCD_SetColors(COLOR_WHITE, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
@@ -272,25 +272,25 @@ static void Draw_Button_Clear(void *btn) {
 		LCD_DispString_EN(ptr->start_y + 11,
 			ptr->start_x + (ptr->end_x - ptr->start_x - 24 * 2) / 2, (uint8_t *)"CLEAR");
 	}
-	/*°´Å¥±ß¿ò*/
+	/*æŒ‰é’®è¾¹æ¡†*/
 	LCD_SetColors(COLOR_BLACK, COLOR_WHITE);
 	LCD_DrawRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 		ptr->end_y - ptr->start_y);
-	/*¸´Ô­Ô­ÏÈµÄÉ«²Ê²ÎÊı*/
+	/*å¤åŸåŸå…ˆçš„è‰²å½©å‚æ•°*/
 	LCD_SetColors(colors1, colors2);
 }
 
 /**
- * @brief  ÏğÆ¤²Á°´Å¥µÄÃè»æº¯Êı
- * @param  °´Å¥Êı¾İ½á¹¹ÌåÖ¸Õë
+ * @brief  æ©¡çš®æ“¦æŒ‰é’®çš„æç»˜å‡½æ•°
+ * @param  æŒ‰é’®æ•°æ®ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void Draw_Button_Eraser(void *btn) {
 	DrawingBoard_Button *ptr = (DrawingBoard_Button *)btn;
 	uint16_t colors1, colors2;
-	/*±£´æÖ®Ç°µÄÉ«²Ê²ÎÊı*/
+	/*ä¿å­˜ä¹‹å‰çš„è‰²å½©å‚æ•°*/
 	LCD_GetColors(&colors1, &colors2);
-	/*ÊÍ·Å°´¼ü*/
+	/*é‡Šæ”¾æŒ‰é”®*/
 	if (ptr->touch_flag == 0) {
 		LCD_SetColors(COLOR_BUTTON_GREY, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
@@ -300,7 +300,7 @@ static void Draw_Button_Eraser(void *btn) {
 		LCD_DispString_EN(ptr->start_y + 11,
 			ptr->start_x + (ptr->end_x - ptr->start_x - 24 * 2) / 2, (uint8_t *)"ERASER");
 	}
-	else {   /*°´¼ü°´ÏÂ*/
+	else {   /*æŒ‰é”®æŒ‰ä¸‹*/
 		LCD_SetColors(COLOR_WHITE, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
@@ -309,25 +309,25 @@ static void Draw_Button_Eraser(void *btn) {
 		LCD_DispString_EN(ptr->start_y + 11,
 			ptr->start_x + (ptr->end_x - ptr->start_x - 24 * 2) / 2, (uint8_t *)"ERASER");
 	}
-	/*°´Å¥±ß¿ò*/
+	/*æŒ‰é’®è¾¹æ¡†*/
 	LCD_SetColors(COLOR_BLACK, COLOR_WHITE);
 	LCD_DrawRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 		ptr->end_y - ptr->start_y);
-	/*¸´Ô­Ô­ÏÈµÄÉ«²Ê²ÎÊı*/
+	/*å¤åŸåŸå…ˆçš„è‰²å½©å‚æ•°*/
 	LCD_SetColors(colors1, colors2);
 }
 
 /**
- * @brief  ¾ØĞÎ°´Å¥µÄÃè»æº¯Êı
- * @param  °´Å¥Êı¾İ½á¹¹ÌåÖ¸Õë
+ * @brief  çŸ©å½¢æŒ‰é’®çš„æç»˜å‡½æ•°
+ * @param  æŒ‰é’®æ•°æ®ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void Draw_Button_Rect(void *btn) {
 	DrawingBoard_Button *ptr = (DrawingBoard_Button *)btn;
 	uint16_t colors1, colors2;
-	/*±£´æÖ®Ç°µÄÉ«²Ê²ÎÊı*/
+	/*ä¿å­˜ä¹‹å‰çš„è‰²å½©å‚æ•°*/
 	LCD_GetColors(&colors1, &colors2);
-	/*ÊÍ·Å°´¼ü*/
+	/*é‡Šæ”¾æŒ‰é”®*/
 	if (ptr->touch_flag == 0) {
 		LCD_SetColors(COLOR_BUTTON_GREY, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
@@ -337,7 +337,7 @@ static void Draw_Button_Rect(void *btn) {
 		LCD_DispString_EN(ptr->start_y + 11,
 			ptr->start_x + (ptr->end_x - ptr->start_x - 24 * 2) / 2, (uint8_t *)"RECT");
 	}
-	else {   /*°´¼ü°´ÏÂ*/
+	else {   /*æŒ‰é”®æŒ‰ä¸‹*/
 		LCD_SetColors(COLOR_WHITE, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
@@ -346,31 +346,31 @@ static void Draw_Button_Rect(void *btn) {
 		LCD_DispString_EN(ptr->start_y + 11,
 			ptr->start_x + (ptr->end_x - ptr->start_x - 24 * 2) / 2, (uint8_t *)"RECT");
 	}
-	/*°´Å¥±ß¿ò*/
+	/*æŒ‰é’®è¾¹æ¡†*/
 	LCD_SetColors(COLOR_BLACK, COLOR_WHITE);
 	LCD_DrawRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 		ptr->end_y - ptr->start_y);
-	/*¸´Ô­Ô­ÏÈµÄÉ«²Ê²ÎÊı*/
+	/*å¤åŸåŸå…ˆçš„è‰²å½©å‚æ•°*/
 	LCD_SetColors(colors1, colors2);
 }
 
 /**
- * @brief  ±ÊË¢°´Å¥µÄÃè»æº¯Êı
- * @param  °´Å¥Êı¾İ½á¹¹ÌåÖ¸Õë
+ * @brief  ç¬”åˆ·æŒ‰é’®çš„æç»˜å‡½æ•°
+ * @param  æŒ‰é’®æ•°æ®ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void Draw_Button_Shape(void *btn) {
 	DrawingBoard_Button *ptr = (DrawingBoard_Button *)btn;
 	uint16_t i;
 	uint16_t colors1, colors2;
-	/*±£´æÖ®Ç°µÄÉ«²Ê²ÎÊı*/
+	/*ä¿å­˜ä¹‹å‰çš„è‰²å½©å‚æ•°*/
 	LCD_GetColors(&colors1, &colors2);
-	/* ±³¾°ÑÕÉ« Ã»°´ÏÂÊ±Îª»ÒÉ«£¬°´ÏÂÊ±Îª°×É«*/
+	/* èƒŒæ™¯é¢œè‰² æ²¡æŒ‰ä¸‹æ—¶ä¸ºç°è‰²ï¼ŒæŒ‰ä¸‹æ—¶ä¸ºç™½è‰²*/
 	if (ptr->touch_flag == 0) {
 		LCD_SetColors(COLOR_BUTTON_GREY, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
-		/*»æÖÆ±ß¿ò¾ØĞÎ*/
+		/*ç»˜åˆ¶è¾¹æ¡†çŸ©å½¢*/
 		LCD_SetColors(COLOR_BLACK, COLOR_BUTTON_GREY);
 		LCD_DrawRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
@@ -379,13 +379,13 @@ static void Draw_Button_Shape(void *btn) {
 		LCD_SetColors(COLOR_WHITE, COLOR_WHITE);
 		LCD_DrawFullRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
-		/*»æÖÆ±ß¿ò¾ØĞÎ*/
+		/*ç»˜åˆ¶è¾¹æ¡†çŸ©å½¢*/
 		LCD_SetColors(COLOR_BLACK, COLOR_WHITE);
 		LCD_DrawRect(ptr->start_x, ptr->start_y, ptr->end_x - ptr->start_x,
 			ptr->end_y - ptr->start_y);
 	}
 	LCD_SetColors(COLOR_BLACK, COLOR_WHITE);
-	/*¸ù¾İ»­Ë¢ĞÎ×´Ãè»æ°´Å¥Í¼°¸*/
+	/*æ ¹æ®ç”»åˆ·å½¢çŠ¶æç»˜æŒ‰é’®å›¾æ¡ˆ*/
 	switch (ptr->para) {
 	case LINE_SINGLE_PIXCEL:
 		LCD_SetColors(COLOR_BLACK, COLOR_WHITE);
@@ -424,7 +424,7 @@ static void Draw_Button_Shape(void *btn) {
 			ptr->end_x - 20,
 			ptr->start_y + (ptr->end_y - ptr->start_y) / 2, 8);
 		break;
-	case RECT: /*»æÖÆ¾ØĞÎ°´Å¥*/
+	case RECT: /*ç»˜åˆ¶çŸ©å½¢æŒ‰é’®*/
 		LCD_SetColors(COLOR_WHITE, COLOR_BLACK);
 		LCD_DrawFullRect(ptr->start_x + ((ptr->end_x - ptr->start_x - 40) / 2),
 			ptr->start_y + ((ptr->end_y - ptr->start_y - 40 - 30) / 2), 40, 40);
@@ -434,7 +434,7 @@ static void Draw_Button_Shape(void *btn) {
 			ptr->start_x + (ptr->end_x - ptr->start_x - 24 * 2) / 2, (uint8_t *)"Rect");
 		break;
 		break;
-	case LINE_WITH_CIRCLE: /*»æÖÆ´øÔ²µÄÏß°´Å¥*/
+	case LINE_WITH_CIRCLE: /*ç»˜åˆ¶å¸¦åœ†çš„çº¿æŒ‰é’®*/
 		LCD_SetColors(COLOR_BLACK, COLOR_WHITE);
 		LCD_DrawUniLine(
 			ptr->start_x + 5, ptr->start_y + (ptr->end_y - ptr->start_y) / 2,
@@ -444,7 +444,7 @@ static void Draw_Button_Shape(void *btn) {
 			LCD_DrawFullCircle(ptr->start_x + 10 + i * 10,
 				ptr->start_y + (ptr->end_y - ptr->start_y) / 2, 3);
 		break;
-	case ERASER: /*»æÖÆÏğÆ¤éß°´Å¥*/
+	case ERASER: /*ç»˜åˆ¶æ©¡çš®æª«æŒ‰é’®*/
 		LCD_SetColors(COLOR_WHITE, COLOR_BLACK);
 		LCD_DrawFullRect(ptr->start_x + ((ptr->end_x - ptr->start_x - 40) / 2),
 			ptr->start_y + ((ptr->end_y - ptr->start_y - 40 - 30) / 2), 40, 40);
@@ -454,13 +454,13 @@ static void Draw_Button_Shape(void *btn) {
 			ptr->start_x + (ptr->end_x - ptr->start_x - 24 * 2) / 2, (uint8_t *)"ERASER");
 		break;
 	}
-	/*¸´Ô­Ô­ÏÈµÄÉ«²Ê²ÎÊı*/
+	/*å¤åŸåŸå…ˆçš„è‰²å½©å‚æ•°*/
 	LCD_SetColors(colors1, colors2);
 }
 
 /**
- * @brief  ÇĞ»»»­Ë¢ÑÕÉ«
- * @param  °´Å¥Êı¾İ½á¹¹ÌåÖ¸Õë
+ * @brief  åˆ‡æ¢ç”»åˆ·é¢œè‰²
+ * @param  æŒ‰é’®æ•°æ®ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void Select_Shape_Color(void *btn) {
@@ -472,8 +472,8 @@ static void Select_Shape_Color(void *btn) {
 }
 
 /**
- * @brief  ÇĞ»»»­Ë¢ÀàĞÍ
- * @param  °´Å¥Êı¾İ½á¹¹ÌåÖ¸Õë
+ * @brief  åˆ‡æ¢ç”»åˆ·ç±»å‹
+ * @param  æŒ‰é’®æ•°æ®ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void Select_Brush_Class(void *btn) {
@@ -482,8 +482,8 @@ static void Select_Brush_Class(void *btn) {
 }
 
 /**
- * @brief  ÇĞ»»»­Ë¢ÑÕÉ«
- * @param  °´Å¥Êı¾İ½á¹¹ÌåÖ¸Õë
+ * @brief  åˆ‡æ¢ç”»åˆ·é¢œè‰²
+ * @param  æŒ‰é’®æ•°æ®ç»“æ„ä½“æŒ‡é’ˆ
  * @retval None
  */
 static void Clear_DrawingBoard_Area(void *btn) {
@@ -494,19 +494,19 @@ static void Clear_DrawingBoard_Area(void *btn) {
 }
 
 /**
- * @brief  ³õÊ¼»¯°´Å¥²ÎÊı
+ * @brief  åˆå§‹åŒ–æŒ‰é’®å‚æ•°
  * @param  None
  * @retval None
  */
 static void DrawingBoard_Button_Init(void) {
-	/*³õÊ¼»¯°´Å¥²ÎÊı,ÓÉÓÚÌ«³¤ÁËËùÒÔÓÃºê¶¨Òå´úÌæ*/
+	/*åˆå§‹åŒ–æŒ‰é’®å‚æ•°,ç”±äºå¤ªé•¿äº†æ‰€ä»¥ç”¨å®å®šä¹‰ä»£æ›¿*/
 	DrawingBoard_BUTTON_INIT_CODE;
 }
 
 /**
- * @brief  ÔÚÁ½µãÖ®¼äÃè»æÏß
+ * @brief  åœ¨ä¸¤ç‚¹ä¹‹é—´æç»˜çº¿
  * @param
- * µÚÒ»¸öºÍµÚ¶ş¸ö²ÎÊıÎªÆğÊ¼µã×ø±ê£¬µÚÈı¸öºÍµÚËÄ¸öÎªÖÕÖ¹µã×ø±ê£¬µÚÎå¸öÎª¿í¶È
+ * ç¬¬ä¸€ä¸ªå’Œç¬¬äºŒä¸ªå‚æ•°ä¸ºèµ·å§‹ç‚¹åæ ‡ï¼Œç¬¬ä¸‰ä¸ªå’Œç¬¬å››ä¸ªä¸ºç»ˆæ­¢ç‚¹åæ ‡ï¼Œç¬¬äº”ä¸ªä¸ºå®½åº¦
  * @retval None
  */
 static void LCD_DrawUniLineCircle(uint16_t x1, uint16_t y1, uint16_t x2,
@@ -550,9 +550,9 @@ static void LCD_DrawUniLineCircle(uint16_t x1, uint16_t y1, uint16_t x2,
 		numpixels = deltay; /* There are more y-values than x-values */
 	}
 	for (curpixel = 0; curpixel <= numpixels; curpixel++) {
-		// ÅĞ¶Ï±ß½ç
-		if (x + thick > DRAWING_BOARD_END_X || x - thick < 0 || // Òº¾§×óÓÒ±ß½ç
-			y + thick > DRAWING_BOARD_END_Y || y - thick < 0) // Òº¾§ÉÏÏÂ±ß½ç
+		// åˆ¤æ–­è¾¹ç•Œ
+		if (x + thick > DRAWING_BOARD_END_X || x - thick < 0 || // æ¶²æ™¶å·¦å³è¾¹ç•Œ
+			y + thick > DRAWING_BOARD_END_Y || y - thick < 0) // æ¶²æ™¶ä¸Šä¸‹è¾¹ç•Œ
 			continue;
 		LCD_DrawFullCircle(x, y, thick); /* Draw the current pixel */
 		num += numadd;    /* Increase the numerator by the top of the fraction */

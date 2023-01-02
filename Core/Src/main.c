@@ -63,27 +63,27 @@ static void MPU_Config(void);
 void LCD_DISPLAY_ENABLE(void);
 void LCD_DISPLAY_DISABLE(void);
 
-uint32_t fontFlag = 0; /*������ʾ�ַ�ʱ�Ƿ�д�뱳����ɫ�ı���*/
-char strTouch[10] = { 0 }; /*��ǰ�������ַ���*/
+uint32_t fontFlag = 0; /*控制显示字符时是否写入背景颜色的变量*/
+char strTouch[10] = { 0 }; /*当前触摸点字符串*/
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 /**
- * @brief  �弶��Դ��ʼ��
+ * @brief  板级资源初始化
  * @param  None
  * @retval None
  */
 void bsp_init(void) {
-	LCD_DISPLAY_ENABLE();          /* ��ʾ������ʹ�� */
-	Adc_Init();                    /* ��ʼ�����败����ADC */
-	HAL_ADC_Start(&hadc3);         /* �������败����ADC */
-	HAL_TIM_Base_Start_IT(&htim6); /* �����ڲ���ʱ��6�����ڻ�ȡ������Ϣ */
-	HAL_TIM_Base_Start_IT(&htim17); /* �����ڲ���ʱ��17��������˸led */
-	LCD_Clear(LCD_COLOR565_RED);    /* ��ʾ����� */
-	LCD_SetFont(&Font8x8);          /* ����Ĭ������Ϊ8x8Ӣ������ */
-	DrawingBoard_Init();            /* ������Դ��ʼ������ť���� */
+	LCD_DISPLAY_ENABLE();          /* 显示屏背光使能 */
+	Adc_Init();                    /* 初始化电阻触摸屏ADC */
+	HAL_ADC_Start(&hadc3);         /* 启动电阻触摸屏ADC */
+	HAL_TIM_Base_Start_IT(&htim6); /* 启动内部定时器6，用于获取触摸信息 */
+	HAL_TIM_Base_Start_IT(&htim17); /* 启动内部定时器17，用于闪烁led */
+	LCD_Clear(LCD_COLOR565_RED);    /* 显示屏清空 */
+	LCD_SetFont(&Font8x8);          /* 设置默认字体为8x8英文字体 */
+	DrawingBoard_Init();            /* 画板资源初始化，按钮绘制 */
 }
 /* USER CODE END 0 */
 
@@ -123,36 +123,36 @@ int main(void) {
 	MX_ADC1_Init();
 	MX_TIM17_Init();
 	/* USER CODE BEGIN 2 */
-	bsp_init();         /* �弶��ʼ�� */
-	int32_t touchP[2];  /* ������¼ */
-	int32_t touchF = 0; /* ���������¼ */
-	strTouch[9] = '\n'; /* ���ڷ����������һλ�ǻ��� */
+	bsp_init();         /* 板级初始化 */
+	int32_t touchP[2];  /* 触摸记录 */
+	int32_t touchF = 0; /* 触摸情况记录 */
+	strTouch[9] = '\n'; /* 串口发送数据最后一位是换行 */
 	/* USER CODE END 2 */
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		/* USER CODE END WHILE */
 		/* USER CODE BEGIN 3 */
-		/*���ǵ�����ʱ�䣬ʵ�ʴ���������ϢƵ����С��50Hz*/
+		/*考虑到处理时间，实际处理触摸信息频率略小于50Hz*/
 		HAL_Delay(20);
 		if (port[0] < 0) {
 			if (touchF == 1) {
-				/* �������µ��Ͽ��Ĺ��� */
+				/* 发生按下到断开的过程 */
 				DrawingBoard_Button_Up(touchP[0], touchP[1]);
 			}
 			touchF = 0;
 		}
 		else {
 			if (touchF == 0) {
-				/* �����Ͽ������µĹ��� */
+				/* 发生断开到按下的过程 */
 			}
-			/*��ť���µ��û���ӿ�*/
+			/*按钮按下调用画板接口*/
 			DrawingBoard_Button_Down(touchP[0] < 0 ? port[0] : touchP[0],
 				touchP[1] < 0 ? port[1] : touchP[1], port[0],
 				port[1]);
 			touchF = 1;
 		}
-		/* ��¼������Ϣ */
+		/* 记录触摸信息 */
 		touchP[0] = port[0];
 		touchP[1] = port[1];
 	}
@@ -237,18 +237,18 @@ void PeriphCommonClock_Config(void) {
 /* USER CODE BEGIN 4 */
 
 /**
- * @brief  ��дprintf�ײ��ַ����������
- * @param  �ײ�����ַ�
- * @retval ����������ַ�
+ * @brief  重写printf底层字符串输出函数
+ * @param  底层输出字符
+ * @retval 返回输出的字符
  */
 int stdout_putchar(int ch) {
 	HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1,
-		0xFFFF); // UART���������λ���ݵĺ���
+		0xFFFF); // UART输出单个单位数据的函数
 	return ch;
 }
 
 /**
- * @brief  ʹ����ʾ��
+ * @brief  使能显示屏
  * @param  None
  * @retval None
  */
@@ -257,7 +257,7 @@ void LCD_DISPLAY_ENABLE(void) {
 }
 
 /**
- * @brief  ʧ����ʾ��
+ * @brief  失能显示屏
  * @param  None
  * @retval None
  */
@@ -266,15 +266,15 @@ void LCD_DISPLAY_DISABLE(void) {
 }
 
 /**
- * @brief  ��ʱ���жϻص�
- * @param  ��ʱ�����ƽṹ��ָ��
+ * @brief  定时器中断回调
+ * @param  定时器控制结构体指针
  * @retval None
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == &htim6)
-		touch_ad(); /*���õ��败�����ȡ����*/
+		touch_ad(); /*调用电阻触摸点获取函数*/
 	else if (htim == &htim17)
-		HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin); /*LED��˸*/
+		HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin); /*LED闪烁*/
 }
 
 /* USER CODE END 4 */

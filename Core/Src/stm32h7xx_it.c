@@ -172,10 +172,10 @@ void SysTick_Handler(void) {
   count += 1;
   if (count == 50) {
     if (port[0] > 0) {
-      /* 显示屏显示当前触摸点 */
+      /* 鏄剧ず灞忔樉绀哄綋鍓嶈Е鎽哥偣 */
       snprintf(strTouch, 9, "%03d-%03d", port[0], port[1]);
       LCD_DispString_EN(LCD_LINE_0, 480 / 2 - 30, (uint8_t *)strTouch);
-      /*串口发送触摸点信息*/
+      /*涓插彛鍙戦�佽Е鎽哥偣淇℃伅*/
       HAL_UART_Transmit(&huart1, (uint8_t *)strTouch, 10, 0xff);
     }
     count = 0;
