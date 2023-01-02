@@ -3,6 +3,7 @@
         "*.cjson": "jsonc",
         "*.wxss": "css",
         "*.wxs": "javascript",
-        "bsp_lcd.h": "c"
+        "bsp_lcd.h": "c",
+        "drawingboard.h": "c"
     }
 }

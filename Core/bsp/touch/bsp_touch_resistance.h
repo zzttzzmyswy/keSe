@@ -5,7 +5,7 @@
 
 void GPIO_AF_Set(GPIO_TypeDef *GPIOx, uint8_t BITx, uint8_t AFx);
 void GPIO_Set(GPIO_TypeDef *GPIOx, uint32_t BITx, uint32_t MODE, uint32_t OTYPE,
-              uint32_t OSPEED, uint32_t PUPD);
+	uint32_t OSPEED, uint32_t PUPD);
 void GPIO_Pin_Set(GPIO_TypeDef *GPIOx, uint16_t pinx, uint8_t status);
 uint8_t GPIO_Pin_Get(GPIO_TypeDef *GPIOx, uint16_t pinx);
 
