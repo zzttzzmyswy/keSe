@@ -1,30 +1,42 @@
 #include "bsp_touch_resistance.h"
 
-// GPIO复用设置
-// GPIOx:GPIOA~GPIOK.
-// BITx:0~15,代表IO引脚编号.
-// AFx:0~15,代表AF0~AF15.
-// AF0~15设置情况(这里仅是列出常用的,详细的请见STM32H743xx数据手册,Table 9~19):
-// AF0:MCO/SWD/SWCLK/RTC;        AF1:TIM1/2/TIM16/17/LPTIM1;
-// AF2:TIM3~5/TIM12/HRTIM1/SAI1;   AF3:TIM8/LPTIM2~5/HRTIM1/LPUART1;
-// AF4:I2C1~I2C4/TIM15/USART1;   AF5:SPI1~SPI6/CEC; AF6:SPI3/SAI1~3/UART4/I2C4;
-// AF7:SPI2/3/6/USART1~3/6/UART7/SDIO1; AF8:USART4/5/8/SPDIF/SAI2/4;
-// AF9;FDCAN1~2/TIM13/14/LCD/QSPI; AF10:USB_OTG1/2/SAI2/4/QSPI;
-// AF11:ETH/UART7/SDIO2/I2C4/COMP1/2; AF12:FMC/SDIO1/OTG2/LCD;
-// AF13:DCIM/DSI/LCD/COMP1/2;      AF14:LCD/UART5; AF15:EVENTOUT;
+uint16_t value_t[4] = {0}; /*ADC读取值*/
+uint32_t value_touch = 0;  /*判断是否按下值（按下力度值）*/
+int32_t port[2] = {0};     /*按下的坐标值，负数代表没有按下*/
+
+/**
+ * @brief  GPIO复用设置
+			 AF0~15设置情况(这里仅是列出常用的,详细的请见STM32H743xx数据手册,Table 9~19):
+			 AF0:MCO/SWD/SWCLK/RTC;        AF1:TIM1/2/TIM16/17/LPTIM1;
+			 AF2:TIM3~5/TIM12/HRTIM1/SAI1;   AF3:TIM8/LPTIM2~5/HRTIM1/LPUART1;
+			 AF4:I2C1~I2C4/TIM15/USART1;   AF5:SPI1~SPI6/CEC; AF6:SPI3/SAI1~3/UART4/I2C4;
+			 AF7:SPI2/3/6/USART1~3/6/UART7/SDIO1; AF8:USART4/5/8/SPDIF/SAI2/4;
+			 AF9;FDCAN1~2/TIM13/14/LCD/QSPI; AF10:USB_OTG1/2/SAI2/4/QSPI;
+			 AF11:ETH/UART7/SDIO2/I2C4/COMP1/2; AF12:FMC/SDIO1/OTG2/LCD;
+			 AF13:DCIM/DSI/LCD/COMP1/2;      AF14:LCD/UART5; AF15:EVENTOUT;
+ * @param  
+			GPIOx:GPIOA~GPIOK.				
+			BITx:0~15,代表IO引脚编号.
+			AFx:0~15,代表AF0~AF15.
+ * @retval None
+ */
 void GPIO_AF_Set(GPIO_TypeDef *GPIOx, uint8_t BITx, uint8_t AFx) {
   GPIOx->AFR[BITx >> 3] &= ~(0X0F << ((BITx & 0X07) * 4));
   GPIOx->AFR[BITx >> 3] |= (uint32_t)AFx << ((BITx & 0X07) * 4);
 }
 
-// GPIO通用设置
-// GPIOx:GPIOA~GPIOK.
-// BITx:0X0000~0XFFFF,位设置,每个位代表一个IO,第0位代表Px0,第1位代表Px1,依次类推.比如0X0101,代表同时设置Px0和Px8.
-// MODE:0~3;模式选择,0,输入(系统复位默认状态);1,普通输出;2,复用功能;3,模拟输入.
-// OTYPE:0/1;输出类型选择,0,推挽输出;1,开漏输出.
-// OSPEED:0~3;输出速度设置,0,低速;1,中速;2,快速;3,高速.
-// PUPD:0~3:上下拉设置,0,不带上下拉;1,上拉;2,下拉;3,保留.
-// 注意:在输入模式(普通输入/模拟输入)下,OTYPE和OSPEED参数无效!!
+/**
+ * @brief  GPIO通用设置
+ * 				注意:在输入模式(普通输入/模拟输入)下,OTYPE和OSPEED参数无效!!
+ * @param  
+				GPIOx:GPIOA~GPIOK.
+				BITx:0X0000~0XFFFF,位设置,每个位代表一个IO,第0位代表Px0,第1位代表Px1,依次类推.比如0X0101,代表同时设置Px0和Px8.
+				MODE:0~3;模式选择,0,输入(系统复位默认状态);1,普通输出;2,复用功能;3,模拟输入.
+				OTYPE:0/1;输出类型选择,0,推挽输出;1,开漏输出.
+				OSPEED:0~3;输出速度设置,0,低速;1,中速;2,快速;3,高速.
+				PUPD:0~3:上下拉设置,0,不带上下拉;1,上拉;2,下拉;3,保留.
+ * @retval None
+ */
 void GPIO_Set(GPIO_TypeDef *GPIOx, uint32_t BITx, uint32_t MODE, uint32_t OTYPE,
               uint32_t OSPEED, uint32_t PUPD) {
   uint32_t pinpos = 0, pos = 0, curpin = 0;
@@ -46,20 +58,29 @@ void GPIO_Set(GPIO_TypeDef *GPIOx, uint32_t BITx, uint32_t MODE, uint32_t OTYPE,
   }
 }
 
-// 设置GPIO某个引脚的输出状态
-// GPIOx:GPIOA~GPIOK.
-// pinx:引脚位置,范围:1<<0 ~ 1<<15
-// status:引脚状态(仅最低位有效),0,输出低电平;1,输出高电平
+/**
+ * @brief  设置GPIO某个引脚的输出状态
+ * @param  GPIOx:GPIOA~GPIOK.
+ * @param  pinx:引脚位置,范围:1<<0 ~ 1<<15
+ * @param  status:引脚状态(仅最低位有效),0,输出低电平;1,输出高电平
+ * @retval None
+ */
 void GPIO_Pin_Set(GPIO_TypeDef *GPIOx, uint16_t pinx, uint8_t status) {
   if (status & 0X01)
     GPIOx->BSRR = pinx; // 设置GPIOx的pinx为1
   else
     GPIOx->BSRR = pinx << 16; // 设置GPIOx的pinx为0
 }
-// 读取GPIO某个引脚的状态
-// GPIOx:GPIOA~GPIOK.
-// pinx:引脚位置,范围:1<<0 ~ 1<<15
-// 返回值:引脚状态,0,引脚低电平;1,引脚高电平
+
+/**
+ * @brief  初始化ADC
+	读取GPIO某个引脚的状态
+	GPIOx:GPIOA~GPIOK.
+	pinx:引脚位置,范围:1<<0 ~ 1<<15
+	返回值:引脚状态,0,引脚低电平;1,引脚高电平
+ * @param  pinx:引脚位置,范围:1<<0 ~ 1<<15
+ * @retval 引脚状态,0,引脚低电平;1,引脚高电平
+ */
 uint8_t GPIO_Pin_Get(GPIO_TypeDef *GPIOx, uint16_t pinx) {
   if (GPIOx->IDR & pinx)
     return 1; // pinx的状态为1
@@ -67,10 +88,11 @@ uint8_t GPIO_Pin_Get(GPIO_TypeDef *GPIOx, uint16_t pinx) {
     return 0; // pinx的状态为0
 }
 
-// 初始化ADC
-// 这里我们仅以规则通道为例
-// 我们默认仅开启ADC1_CH19P
-// 16位转换时间位:采样周期+8.5个ADC周期
+/**
+ * @brief  初始化ADC
+ * @param  None
+ * @retval None
+ */
 void Adc_Init(void) {
   // 先初始化IO口
   //   RCC->AHB1ENR|=1<<5;         //使能ADC1/2时钟
@@ -124,6 +146,11 @@ void Adc_Init(void) {
 // 获得ADC值
 // ch:通道值 0~19
 // 返回值:转换结果
+/**
+ * @brief  获得ADC值
+ * @param  ch:通道值 0~19
+ * @retval 转换结果
+ */
 uint16_t Get_Adc(uint8_t ch) {
   ADC1->PCSEL |= 1 << ch; // ADC转换通道预选择
   // 设置转换序列
@@ -134,10 +161,14 @@ uint16_t Get_Adc(uint8_t ch) {
     ;              // 等待转换结束
   return ADC1->DR; // 返回adc值
 }
-// 获取通道ch的转换值，取times次,然后平均
-// ch:通道编号
-// times:获取次数
-// 返回值:通道ch的times次转换结果平均值
+
+/**
+ * @brief  获取通道ch的转换值，取times次,然后平均
+ * @param  
+			ch:通道编号
+			times:获取次数
+ * @retval 通道ch的times次转换结果平均值
+ */
 uint16_t Get_Adc_Average(uint8_t ch, uint8_t times) {
   uint32_t temp_val = 0;
   uint8_t t;
@@ -146,16 +177,16 @@ uint16_t Get_Adc_Average(uint8_t ch, uint8_t times) {
   return temp_val / times;
 }
 
-// 进行一次触摸测量
-// 返回值为是否有有效触摸
-// 引脚定义：
-//   PB1_X+_ADC1-5
-//   PC4_X-_ADC1-4
-//   PC5_Y+_ADC1-8
-//   PA7_Y-_ADC1-7
-uint16_t value_t[4] = {0}; /*ADC读取值*/
-uint32_t value_touch = 0;  /*判断是否按下值（按下力度值）*/
-int32_t port[2] = {0};     /*按下的坐标值，负数代表没有按下*/
+/**
+ * @brief  进行一次触摸测量
+ * 引脚定义：
+ *  PB1_X+_ADC1-5
+ *  PC4_X-_ADC1-4
+ *  PC5_Y+_ADC1-8
+ *  PA7_Y-_ADC1-7
+ * @param  None
+ * @retval 返回值为是否有有效触摸
+ */
 uint32_t touch_ad(void) {
   // uint16_t value_t[4]={0};
   uint16_t temp = 0;

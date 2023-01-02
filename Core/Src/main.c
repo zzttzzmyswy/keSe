@@ -70,7 +70,12 @@ char strTouch[10] = {0}; /*当前触摸点字符串*/
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void bsp_init() {
+/**
+ * @brief  板级资源初始化
+ * @param  None
+ * @retval None
+ */
+void bsp_init(void) {
   LCD_DISPLAY_ENABLE();          /* 显示屏背光使能 */
   Adc_Init();                    /* 初始化电阻触摸屏ADC */
   HAL_ADC_Start(&hadc3);         /* 启动电阻触摸屏ADC */
@@ -140,11 +145,10 @@ int main(void) {
       if (touchF == 0) {
         /* 发生断开到按下的过程 */
       }
-      DrawingBoard_Button_Down(port[0], port[1]);
-      /*处理描绘轨迹，用于触摸画板 */
-      DrawingBoard_Draw_Graph(touchP[0] < 0 ? port[0] : touchP[0],
+			/*按钮按下调用画板接口*/
+      DrawingBoard_Button_Down(touchP[0] < 0 ? port[0] : touchP[0],
                               touchP[1] < 0 ? port[1] : touchP[1], port[0],
-                              port[1], &DrawingBoard_brush);
+                              port[1]);
       touchF = 1;
     }
     /* 记录触摸信息 */
@@ -231,21 +235,40 @@ void PeriphCommonClock_Config(void) {
 
 /* USER CODE BEGIN 4 */
 
-/*重写printf底层字符串输出函数*/
+/**
+ * @brief  重写printf底层字符串输出函数
+ * @param  底层输出字符
+ * @retval 返回输出的字符
+ */
 int stdout_putchar(int ch) {
   HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1,
                     0xFFFF); // UART输出单个单位数据的函数
   return ch;
 }
 
+/**
+ * @brief  使能显示屏
+ * @param  None
+ * @retval None
+ */
 void LCD_DISPLAY_ENABLE(void) {
   HAL_GPIO_WritePin(LTDC_BK_GPIO_Port, LTDC_BK_Pin, GPIO_PIN_SET);
 }
 
+/**
+ * @brief  失能显示屏
+ * @param  None
+ * @retval None
+ */
 void LCD_DISPLAY_DISABLE(void) {
   HAL_GPIO_WritePin(LTDC_BK_GPIO_Port, LTDC_BK_Pin, GPIO_PIN_RESET);
 }
 
+/**
+ * @brief  定时器中断回调
+ * @param  定时器控制结构体指针
+ * @retval None
+ */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   if (htim == &htim6)
     touch_ad(); /*调用电阻触摸点获取函数*/
