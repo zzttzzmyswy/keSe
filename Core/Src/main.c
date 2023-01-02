@@ -148,8 +148,7 @@ int main(void) {
 			}
 			/*按钮按下调用画板接口*/
 			DrawingBoard_Button_Down(touchP[0] < 0 ? port[0] : touchP[0],
-				touchP[1] < 0 ? port[1] : touchP[1], port[0],
-				port[1]);
+				touchP[1] < 0 ? port[1] : touchP[1], port[0], port[1]);
 			touchF = 1;
 		}
 		/* 记录触摸信息 */
