@@ -50,6 +50,7 @@
 *.ini
 
 # Other files
+*.log.*
 *.log
 *.build_log.htm
 *.cdb

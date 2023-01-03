@@ -76,6 +76,7 @@ char strTouch[10] = { 0 }; /*当前触摸点字符串*/
  * @retval None
  */
 void bsp_init(void) {
+	strTouch[9] = '\n'; /* 串口发送数据最后一位是换行 */
 	LCD_DISPLAY_ENABLE();          /* 显示屏背光使能 */
 	Adc_Init();                    /* 初始化电阻触摸屏ADC */
 	HAL_ADC_Start(&hadc3);         /* 启动电阻触摸屏ADC */
@@ -93,6 +94,8 @@ void bsp_init(void) {
  */
 int main(void) {
 	/* USER CODE BEGIN 1 */
+	int32_t touchP[2];  /* 触摸记录 */
+	int32_t touchF = 0; /* 触摸情况记录 */
 	/* USER CODE END 1 */
 	/* MPU Configuration--------------------------------------------------------*/
 	MPU_Config();
@@ -124,17 +127,14 @@ int main(void) {
 	MX_TIM17_Init();
 	/* USER CODE BEGIN 2 */
 	bsp_init();         /* 板级初始化 */
-	int32_t touchP[2];  /* 触摸记录 */
-	int32_t touchF = 0; /* 触摸情况记录 */
-	strTouch[9] = '\n'; /* 串口发送数据最后一位是换行 */
 	/* USER CODE END 2 */
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		/* USER CODE END WHILE */
 		/* USER CODE BEGIN 3 */
-		/*考虑到处理时间，实际处理触摸信息频率略小于50Hz*/
-		HAL_Delay(20);
+		/*考虑到处理时间，实际处理触摸信息频率略小于66Hz*/
+		HAL_Delay(15);
 		if (port[0] < 0) {
 			if (touchF == 1) {
 				/* 发生按下到断开的过程 */

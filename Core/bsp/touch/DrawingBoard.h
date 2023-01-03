@@ -101,16 +101,16 @@ typedef struct {
 #define DRAWING_BOARD_END_Y (LCD_PIXEL_HEIGHT - 1) /* 画板右下角Y坐标 */
 
 #define DrawingBoard_BUTTON_INIT_CODE { \
-		/*笔刷相关按钮*/                                  \
-		/*结构体参数如下*/                                    \
-		/*左上角开始x*/                                   \
-		/*左上角开始y*/                                   \
-		/*右下角x*/                                   \
-		/*右下角y*/                                   \
-		/*按钮参数*/                                  \
-		/*按钮绘制函数*/                                  \
-		/*按钮回调函数*/                                  \
-		/*橡皮檫*/                                    \
+		/*笔刷相关按钮*/\
+		/*结构体参数如下*/\
+		/*左上角开始x*/\
+		/*左上角开始y*/\
+		/*右下角x*/\
+		/*右下角y*/\
+		/*按钮参数*/\
+		/*按钮绘制函数*/\
+		/*按钮回调函数*/\
+		/*橡皮檫*/\
 		button[0].start_x = 0;\
 		button[0].start_y = BUTTON_HEIGHT * 0;\
 		button[0].end_x = BUTTON_WIDTH * 1;\
@@ -119,7 +119,7 @@ typedef struct {
 		button[0].touch_flag = 0;\
 		button[0].draw_btn = Draw_Button_Eraser;\
 		button[0].btn_command = Select_Brush_Class;\
-		/*矩形*/                                  \
+		/*矩形*/\
 		button[1].start_x = 0;\
 		button[1].start_y = BUTTON_HEIGHT * 1;\
 		button[1].end_x = BUTTON_WIDTH * 1;\
@@ -137,7 +137,7 @@ typedef struct {
 		button[2].touch_flag = 0;\
 		button[2].draw_btn = Draw_Button_Shape;\
 		button[2].btn_command = Select_Brush_Class;\
-		/*宽度为1的线*/                                   \
+		/*宽度为1的线*/\
 		button[3].start_x = 0;\
 		button[3].start_y = BUTTON_HEIGHT * 3;\
 		button[3].end_x = BUTTON_WIDTH * 1;\
@@ -146,7 +146,7 @@ typedef struct {
 		button[3].touch_flag = 0;\
 		button[3].draw_btn = Draw_Button_Shape;\
 		button[3].btn_command = Select_Brush_Class;\
-		/*宽度为2的线*/                                   \
+		/*宽度为2的线*/\
 		button[4].start_x = 0;\
 		button[4].start_y = BUTTON_HEIGHT * 4;\
 		button[4].end_x = BUTTON_WIDTH * 1;\
@@ -155,7 +155,7 @@ typedef struct {
 		button[4].touch_flag = 0;\
 		button[4].draw_btn = Draw_Button_Shape;\
 		button[4].btn_command = Select_Brush_Class;\
-		/*宽度为4的线*/                                   \
+		/*宽度为4的线*/\
 		button[5].start_x = 0;\
 		button[5].start_y = BUTTON_HEIGHT * 5;\
 		button[5].end_x = BUTTON_WIDTH * 1;\
@@ -164,7 +164,7 @@ typedef struct {
 		button[5].touch_flag = 0;\
 		button[5].draw_btn = Draw_Button_Shape;\
 		button[5].btn_command = Select_Brush_Class;\
-		/*宽度为6的线*/                                   \
+		/*宽度为6的线*/\
 		button[6].start_x = 0;\
 		button[6].start_y = BUTTON_HEIGHT * 6;\
 		button[6].end_x = BUTTON_WIDTH * 1;\
@@ -173,7 +173,7 @@ typedef struct {
 		button[6].touch_flag = 0;\
 		button[6].draw_btn = Draw_Button_Shape;\
 		button[6].btn_command = Select_Brush_Class;\
-		/*宽度为8的线*/                                   \
+		/*宽度为8的线*/\
 		button[7].start_x = 0;\
 		button[7].start_y = BUTTON_HEIGHT * 7;\
 		button[7].end_x = BUTTON_WIDTH * 1;\
@@ -182,7 +182,7 @@ typedef struct {
 		button[7].touch_flag = 0;\
 		button[7].draw_btn = Draw_Button_Shape;\
 		button[7].btn_command = Select_Brush_Class;\
-		/*宽度为16的线*/                                  \
+		/*宽度为16的线*/\
 		button[8].start_x = 0;\
 		button[8].start_y = BUTTON_HEIGHT * 8;\
 		button[8].end_x = BUTTON_WIDTH * 1;\
@@ -191,8 +191,8 @@ typedef struct {
 		button[8].touch_flag = 0;\
 		button[8].draw_btn = Draw_Button_Shape;\
 		button[8].btn_command = Select_Brush_Class;\
-		/*清屏和颜色按钮*/                                    \
-		/*清屏*/                                  \
+		/*清屏和颜色按钮*/\
+		/*清屏*/\
 		button[9].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[9].start_y = BUTTON_HEIGHT * 0;\
 		button[9].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -201,7 +201,7 @@ typedef struct {
 		button[9].touch_flag = 0;\
 		button[9].draw_btn = Draw_Button_Clear;\
 		button[9].btn_command = Clear_DrawingBoard_Area;\
-		/*红色*/                                  \
+		/*红色*/\
 		button[10].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[10].start_y = BUTTON_HEIGHT * 1;\
 		button[10].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -210,7 +210,7 @@ typedef struct {
 		button[10].touch_flag = 0;\
 		button[10].draw_btn = Draw_Button_Color;\
 		button[10].btn_command = Select_Shape_Color;\
-		/*绿色*/                                  \
+		/*绿色*/\
 		button[11].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[11].start_y = BUTTON_HEIGHT * 2;\
 		button[11].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -219,7 +219,7 @@ typedef struct {
 		button[11].touch_flag = 0;\
 		button[11].draw_btn = Draw_Button_Color;\
 		button[11].btn_command = Select_Shape_Color;\
-		/*蓝色*/                                  \
+		/*蓝色*/\
 		button[12].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[12].start_y = BUTTON_HEIGHT * 3;\
 		button[12].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -228,7 +228,7 @@ typedef struct {
 		button[12].touch_flag = 0;\
 		button[12].draw_btn = Draw_Button_Color;\
 		button[12].btn_command = Select_Shape_Color;\
-		/*紫色*/                                  \
+		/*紫色*/\
 		button[13].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[13].start_y = BUTTON_HEIGHT * 4;\
 		button[13].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -237,7 +237,7 @@ typedef struct {
 		button[13].touch_flag = 0;\
 		button[13].draw_btn = Draw_Button_Color;\
 		button[13].btn_command = Select_Shape_Color;\
-		/*黄色*/                                  \
+		/*黄色*/\
 		button[14].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[14].start_y = BUTTON_HEIGHT * 5;\
 		button[14].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -246,7 +246,7 @@ typedef struct {
 		button[14].touch_flag = 0;\
 		button[14].draw_btn = Draw_Button_Color;\
 		button[14].btn_command = Select_Shape_Color;\
-		/*青色*/                                  \
+		/*青色*/\
 		button[15].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[15].start_y = BUTTON_HEIGHT * 6;\
 		button[15].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -255,7 +255,7 @@ typedef struct {
 		button[15].touch_flag = 0;\
 		button[15].draw_btn = Draw_Button_Color;\
 		button[15].btn_command = Select_Shape_Color;\
-		/*黑色*/                                  \
+		/*黑色*/\
 		button[16].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[16].start_y = BUTTON_HEIGHT * 7;\
 		button[16].end_x = LCD_PIXEL_WIDTH - 1;\
@@ -264,12 +264,12 @@ typedef struct {
 		button[16].touch_flag = 0;\
 		button[16].draw_btn = Draw_Button_Color;\
 		button[16].btn_command = Select_Shape_Color;\
-		/*灰色*/                                  \
+		/*灰色*/\
 		button[17].start_x = LCD_PIXEL_WIDTH - BUTTON_WIDTH;\
 		button[17].start_y = BUTTON_HEIGHT * 8;\
 		button[17].end_x = LCD_PIXEL_WIDTH - 1;\
 		button[17].end_y = DRAWING_BOARD_END_Y;\
-		button[17].para = COLOR_GREY;\
+		button[17].para = COLOR_GREY2;\
 		button[17].touch_flag = 0;\
 		button[17].draw_btn = Draw_Button_Color;\
 		button[17].btn_command = Select_Shape_Color;}
