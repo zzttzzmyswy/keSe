@@ -154,6 +154,8 @@ int main(void) {
 		/* 记录触摸信息 */
 		touchP[0] = port[0];
 		touchP[1] = port[1];
+		/*每次执行完毕后led2变化一次*/
+		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin); /*LED闪烁*/
 	}
 	/* USER CODE END 3 */
 }

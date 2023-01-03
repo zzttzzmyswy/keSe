@@ -113,13 +113,13 @@ void Error_Handler(void);
 #define PIN14 1 << 14
 #define PIN15 1 << 15
 
-// GPIO设置专用宏定义
-#define GPIO_MODE_IN 0  // 普通输入模式
-#define GPIO_MODE_OUT 1 // 普通输出模式
+// GPIO设置专用宏
+#define GPIO_MODE_IN 0  // 输入
+#define GPIO_MODE_OUT 1 // 输出
 #define GPIO_MODE_AF 2  // AF功能模式
 #define GPIO_MODE_AIN 3 // 模拟输入模式
 
-#define GPIO_PUPD_NONE 0 // 不带上下拉
+#define GPIO_PUPD_NONE 0 // 不带上下
 #define GPIO_PUPD_PU 1   // 上拉
 #define GPIO_PUPD_PD 2   // 下拉
 #define GPIO_PUPD_RES 3  // 保留

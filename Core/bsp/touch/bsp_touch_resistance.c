@@ -230,7 +230,7 @@ uint32_t touch_ad(void) {
 	// 判断是否为有效按下 value_t[2]代表了触电3.3V方的电压
 	// value_t[1]代表了触电GND方的电压，当接触时两值应该相近
 	value_touch = value_t[2] / value_t[1];
-	if (value_touch < 20 && value_t[0] > 0xD00 && value_t[3] > 0x1000) {
+	if (value_touch < 15 && value_t[0] > 0xD00 && value_t[3] > 0x1000) {
 		port[0] = (double)(value_t[0] - 0xE00) / (0xF300 - 0xE00) * 480;
 		port[0] = port[0] <= 0 ? 1 : port[0] >= 479 ? 479 : port[0];
 		port[1] = (double)(value_t[3] - 0x1B00) / (0xD600 - 0x1B00) * 272;

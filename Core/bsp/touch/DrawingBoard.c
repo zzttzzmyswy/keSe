@@ -482,15 +482,20 @@ static void Select_Brush_Class(void *btn) {
 }
 
 /**
- * @brief  切换画刷颜色
+ * @brief  清屏
  * @param  按钮数据结构体指针
  * @retval None
  */
 static void Clear_DrawingBoard_Area(void *btn) {
+	uint16_t colors1, colors2;
+	/*保存之前的色彩参数*/
+	LCD_GetColors(&colors1, &colors2);
 	LCD_SetColors(COLOR_WHITE, COLOR_WHITE);
 	LCD_DrawFullRect(DRAWING_BOARD_START_X, DRAWING_BOARD_START_Y,
 		DRAWING_BOARD_END_X - (DRAWING_BOARD_START_X) + 1,
 		DRAWING_BOARD_END_Y - DRAWING_BOARD_START_Y + 1);
+	/*复原原先的色彩参数*/
+	LCD_SetColors(colors1, colors2);
 }
 
 /**
